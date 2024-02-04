@@ -1,0 +1,9 @@
+.Navbar {
+    background-color: #1e2022;
+}
+
+.Navlink {
+    color: #ffffff;
+    --bs-nav-link-hover-color: #f5793b;
+    text-align: left;
+}
