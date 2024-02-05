@@ -1,0 +1,19 @@
+.CardBody {
+    background-color: #1e2022;
+    color: #ffffff;
+    border-radius: 0.375rem;
+}
+
+.CardTitle {
+    color: #f5793b;
+}
+
+.FormControl:focus {
+    background-color: #f5793b;
+    border-color: #f5793b;
+}
+
+.ButtonPrimary:hover {
+    background-color: #ff8a65;
+    border-color: #ff8a65;
+}
