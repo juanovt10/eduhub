@@ -4,28 +4,31 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/eduhub-color-logo.png';
 import styles from '../styles/NavBar.module.css';
+import { NavLink } from 'react-router-dom';
 
 export const NavBar = () => {
     return (
         <Navbar expand="md" fixed="top" className={styles.Navbar}>
             <Container fluid>
-                <Navbar.Brand href="#">
-                    <img src={logo} alt="logo" height="45" />
-                </Navbar.Brand>
+                <NavLink to='/' >
+                    <Navbar.Brand href="#">
+                        <img src={logo} alt="logo" height="45" />
+                    </Navbar.Brand>
+                </NavLink>
                 <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll" className='justify-content-start text-left'>
+                <Navbar.Collapse id="navbarScroll" className='justify-content-start'>
                     <Nav>
-                        <Nav.Link className={styles.Navlink} href="#action1">Home</Nav.Link>
-                        <Nav.Link className={styles.Navlink}href="#action2">Courses</Nav.Link>
-                        <Nav.Link className={styles.Navlink}href="#action2">About</Nav.Link>
-                        <Nav.Link className={styles.Navlink}href="#action2">Contact</Nav.Link>
+                        <NavLink to='/' exact className={styles.Navlink} activeClassName={styles.Active}>Home</NavLink>
+                        <NavLink to='/courses' className={styles.Navlink} activeClassName={styles.Active}>Courses</NavLink>
+                        <NavLink to='/about' className={styles.Navlink} activeClassName={styles.Active}>About</NavLink>
+                        <NavLink to='/contact'  className={styles.Navlink} activeClassName={styles.Active}>Contact</NavLink>
                         
                     </Nav>
                 </Navbar.Collapse>
-                <Navbar.Collapse id="navbarScroll" className='justify-content-end text-left'>
+                <Navbar.Collapse id="navbarScroll" className='justify-content-end'>
                     <Nav className='text-right'>
-                        <Nav.Link className={styles.Navlink}href="#action2">Sign Up</Nav.Link>
-                        <Nav.Link className={styles.Navlink}href="#action2">Sign In</Nav.Link>
+                        <NavLink to='/signup' className={styles.Navlink} >Sign Up</NavLink>
+                        <NavLink to='/signin' className={styles.Navlink} >Sign In</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

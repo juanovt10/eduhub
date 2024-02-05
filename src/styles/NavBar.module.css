@@ -1,9 +1,17 @@
 .Navbar {
     background-color: #1e2022;
+    font-family: 'Raleway', sans-serif;
 }
 
 .Navlink {
     color: #ffffff;
-    --bs-nav-link-hover-color: #f5793b;
     text-align: left;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: all .3s ease;
+}
+
+.Navlink:hover,
+.Active {
+    color: #f5793b;
 }
