@@ -7,23 +7,22 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 
-const SignUpForm = () => {
+const SignInForm = () => {
 
-    const [signUpData, setSignUpData] = useState({
+    const [signInData, setSignInData] = useState({
         username: "",
-        password1: "",
-        password2: "",
+        password: "",
     });
 
-    const { username, password1, password2 } = signUpData; 
+    const { username, password } = signInData; 
 
     const [errors, setErrors] = useState({});
 
     const history = useHistory();
 
     const handleChange = (event) => {
-        setSignUpData({
-            ...signUpData,
+        setSignInData({
+            ...signInData,
             [event.target.name]: event.target.value,
         });
     };
@@ -31,8 +30,8 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('/dj-rest-auth/registration/', signUpData);
-            history.push('/signin');
+            await axios.post('/dj-rest-auth/login/', signInData);
+            history.push('/');
         } catch(err) {
             setErrors(err.response?.data);
         }
@@ -42,7 +41,7 @@ const SignUpForm = () => {
         <div className='d-flex justify-content-center align-items-center'>
             <Card>
                 <Card.Body className={styles.CardBody}>
-                    <Card.Title className={styles.CardTitle} >Sign Up</Card.Title>
+                    <Card.Title className={styles.CardTitle} >Sign In</Card.Title>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="username">
                             <Form.Control 
@@ -58,36 +57,22 @@ const SignUpForm = () => {
                             <Alert variant="warning" key={idx}>{message}</Alert>
                         )}
 
-                        <Form.Group controlId="password1" >
+                        <Form.Group controlId="password" >
                             <Form.Control 
                                 className={`mb-3 ${styles.FormControl}`}
                                 placeholder='password'
                                 type="password"
-                                name="password1" 
-                                value={password1}
+                                name="password" 
+                                value={password}
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                        {errors.password1?.map((message, idx) => 
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
-
-                        <Form.Group controlId="password2">
-                            <Form.Control 
-                                className={`mb-3 ${styles.FormControl}`}
-                                placeholder='confirm password'
-                                type="password"
-                                name="password2"
-                                value={password2}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        {errors.password2?.map((message, idx) => 
+                        {errors.password?.map((message, idx) => 
                             <Alert variant="warning" key={idx}>{message}</Alert>
                         )}
 
                         <Button className={styles.ButtonPrimary} type="submit">
-                            Sign Up
+                            Sign In
                         </Button>
                         {errors.non_field_errors?.map((message, idx) => 
                             <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
@@ -99,4 +84,4 @@ const SignUpForm = () => {
     )
 }
 
-export default SignUpForm
+export default SignInForm
