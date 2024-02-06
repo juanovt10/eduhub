@@ -5,13 +5,43 @@ import Navbar from 'react-bootstrap/Navbar';
 import logo from '../assets/eduhub-color-logo.png';
 import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
-import { useCurrentUser } from '../context/CurrentUserContext';
+import { useCurrentUser, useSetCurrentUser } from '../context/CurrentUserContext';
+import Avatar from './Avatar';
+import axios from 'axios';
 
 export const NavBar = () => {
     const currentUser = useCurrentUser();
+    const setCurrentUser = useSetCurrentUser();
+
+    const handleSignOut = async () => {
+        try {
+            await axios.post('/dj-rest-auth/logout/');
+            setCurrentUser(null);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     const loggedInIcons = (
         <>
-            {currentUser?.username}
+            <NavLink 
+                to='/' 
+                onClick={handleSignOut} 
+                className={styles.Navlink}
+            >
+                    Sign out
+            </NavLink>
+            <NavLink 
+                to={`/profiles/${currentUser?.profile_id}`}
+                onClick={() => {}} 
+                className={styles.Navlink}
+            >
+                <Avatar 
+                    src={currentUser?.profile_image}
+                    text="Profile"
+                    height={40}
+                />
+            </NavLink>
         </>
     )
     const loggedOutIcons = (
