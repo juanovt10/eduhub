@@ -32,9 +32,9 @@ const HeroSection = () => {
         <Carousel activeIndex={index} onSelect={handleSelect}>
             {heroSectionData.map((slide, i) => {
                 return (
-                    <Carousel.Item key={i} interval={3000}>
+                    <Carousel.Item key={i}>
                         <img 
-                            className='d-block w-100 img-fluid'
+                            className='d-block w-100'
                             src={slide.image}
                             alt="slider"
                         />

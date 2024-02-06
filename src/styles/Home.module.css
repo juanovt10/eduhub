@@ -1,0 +1,12 @@
+.hero {
+    background-image: url(../assets/images/alexander-grey-eMP4sYPJ9x0-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 400px;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

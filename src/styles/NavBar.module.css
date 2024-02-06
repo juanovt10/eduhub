@@ -7,7 +7,6 @@
 .Navlink {
     color: #ffffff;
     text-align: left;
-    text-decoration: none;
     padding: 5px 10px;
     transition: all .3s ease;
     display: flex;
@@ -18,4 +17,5 @@
 .Navlink:hover,
 .Active {
     color: #f5793b;
+    text-decoration: none;
 }
