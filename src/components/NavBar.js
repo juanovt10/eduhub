@@ -72,7 +72,7 @@ export const NavBar = () => {
                 <Navbar.Collapse id="navbarScroll" className='justify-content-start'>
                     <Nav>
                         <NavLink to='/' exact className={styles.Navlink} activeClassName={styles.Active}>Home</NavLink>
-                        <NavLink to='/courses' className={styles.Navlink} activeClassName={styles.Active}>Courses</NavLink>
+                        <NavLink to='/courses/create' className={styles.Navlink} activeClassName={styles.Active}>Courses</NavLink>
                         <NavLink to='/about' className={styles.Navlink} activeClassName={styles.Active}>About</NavLink>
                         <NavLink to='/contact'  className={styles.Navlink} activeClassName={styles.Active}>Contact</NavLink>
                         
