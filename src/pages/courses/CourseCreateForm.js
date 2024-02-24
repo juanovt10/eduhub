@@ -6,6 +6,9 @@ import {Button} from 'react-bootstrap';
 
 
 const CourseCreateForm = () => {
+
+
+
     return (
         <Form className='pt-5 px-5'>
 
@@ -18,57 +21,57 @@ const CourseCreateForm = () => {
 
             <Row>
                 <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Label>Descript</Form.Label>
+                    <Form.Label>Description</Form.Label>
                     <Form.Control as="textarea" placeholder="Enter your course description" />
                 </Form.Group>
             </Row>
 
-            <Row className="mb-3">
+            <Row>
                 <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Label>Image</Form.Label>
+                    <Form.File id="image-upload" accept="image/*" />
                 </Form.Group>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor" />
-            </Form.Group>
-
-            <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control />
-                </Form.Group>
-
+            <Row>
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>State</Form.Label>
+                    <Form.Label>Category</Form.Label>
                     <Form.Control as="select" defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
+                        <option>Tech</option>
+                        <option>Leadership</option>
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formGridZip">
-                    <Form.Label>Zip</Form.Label>
-                    <Form.Control />
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Duration</Form.Label>
+                    <Form.Control type="text" placeholder="Enter teh duration of your course" />
+                </Form.Group>
+
+
+            
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>price</Form.Label>
+                    <Form.Control type="number" placeholder="Enter teh cost of your course" />
                 </Form.Group>
             </Row>
 
-            <Form.Group className="mb-3" id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+            <Row>
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Video hours</Form.Label>
+                    <Form.Control type="number" placeholder="Enter the amount of video hours" />
+                </Form.Group>
 
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Tests</Form.Label>
+                    <Form.Control type="number" placeholder="Enter the amount of tests" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Articles</Form.Label>
+                    <Form.Control type="number" placeholder="Enter the amount of articles" />
+                </Form.Group>
+            </Row>
+        
             <Button variant="primary" type="submit">
                 Submit
             </Button>
