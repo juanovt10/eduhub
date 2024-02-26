@@ -7,6 +7,7 @@ import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import Home from './pages/home/Home';
 import CourseCreateForm from './pages/courses/CourseCreateForm';
+import CoursePage from './pages/courses/CoursePage';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
               <Route exact path='/' render={() => <Home />} />
               <Route exact path='/courses' render={() => <h1>Courses</h1>} />
               <Route exact path='/courses/create' render={() => <CourseCreateForm />} />
+              <Route exact path='/courses/:id' render={() => <CoursePage />} />
               <Route exact path='/about' render={() => <h1>About us</h1>} />
               <Route exact path='/contact' render={() => <h1>Contact</h1>} />
               <Route exact path='/signin' render={() => <SignInForm />} />
