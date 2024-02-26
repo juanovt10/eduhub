@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
+import CourseCard from './CourseCard';
 
 const CoursePage = (props) => {  
 
@@ -30,6 +31,12 @@ const CoursePage = (props) => {
             <Row>
                 <Col>
                     <CourseDetail {...course.results[0]} setCourses={setCourse}/>
+                </Col>
+                
+            </Row>
+            <Row>
+                <Col>
+                    <CourseCard {...course.results[0]} setCourses={setCourse}/> 
                 </Col>
             </Row>
         </div>

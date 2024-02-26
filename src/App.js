@@ -8,6 +8,7 @@ import SignInForm from './pages/auth/SignInForm';
 import Home from './pages/home/Home';
 import CourseCreateForm from './pages/courses/CourseCreateForm';
 import CoursePage from './pages/courses/CoursePage';
+import CoursesPage from './pages/courses/CoursesPage';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
           <div className={styles.Main} >
             <Switch>
               <Route exact path='/' render={() => <Home />} />
-              <Route exact path='/courses' render={() => <h1>Courses</h1>} />
+              <Route exact path='/courses' render={() => <CoursesPage />} />
               <Route exact path='/courses/create' render={() => <CourseCreateForm />} />
               <Route exact path='/courses/:id' render={() => <CoursePage />} />
               <Route exact path='/about' render={() => <h1>About us</h1>} />
