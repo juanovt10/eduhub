@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCurrentUser } from '../../context/CurrentUserContext'
-import { Col, Image, Row } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import styles from '../../styles/CourseDetail.module.css'
 import Rating from '../../components/Rating';
 
@@ -30,28 +30,49 @@ const CourseDetail = (props) => {
 
     return (
         <div>
-            <Row>
-                <Col className={styles.title}>
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                </Col>
-                <Col className={styles.title}>
-                    <Image src={image}/>
-                    <h5 className="mt-2">By: {owner}. Created on: {created_at}</h5>
-                </Col>
-            </Row>
-            <Row>
-                <Col className={styles.title}>
-                    <p><i class="fa-solid fa-video"></i> {video_hours} total video hours</p>
+            <Container>
+                <Row>
+                    <Col md={6} className={styles.title}>
+                        <h2>{title}</h2>
+                        <p>{description}</p>
+                    </Col>
+                    <Col md={6}>
+                        <Image className="d-none d-md-block" src={image} fluid/>
+                        <h5 className="mt-2">By: {owner}. Created on: {created_at}</h5>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={3}>
+                        <p><i class="fa-solid fa-video"></i> {video_hours} total video hours</p>
+                    </Col>
+                    <Col md={3}>
                     <p><i class="fa-brands fa-readme"></i> {article_count} total articles</p>
-                    <p><i class="fa-solid fa-pen-to-square"></i> {test_count} total tests</p>
-                    <Rating rating={overall_rating} ratings_count={ratings_count}/>
-                </Col>
-                <Col>
-                    <p>Price: ${price}</p>
-                    <p>Duration: {duration}</p>
-                </Col>
-            </Row>
+                    </Col>
+                    <Col md={3}>
+                        <p><i class="fa-solid fa-pen-to-square"></i> {test_count} total tests</p>
+                    </Col>
+                    <Col md={3}>
+                        <Rating rating={overall_rating} ratings_count={ratings_count}/>
+                    </Col>
+                </Row>
+                        
+                <Row>
+                    <Col md={6}>
+                        <p>Price: ${price}</p>
+                    </Col>
+                    <Col md={6}>
+                        <p>Duration: {duration}</p>
+                    </Col>
+                </Row>    
+                <Row>
+                    <Col className={styles.title}>
+                        <Button>Enroll</Button>
+                    </Col>
+                    <Col className={styles.title}>
+                        <Button>Add to wish list</Button>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }
