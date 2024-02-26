@@ -2,6 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { Button, ListGroup, Row, Col } from 'react-bootstrap';
 import Rating from '../../components/Rating';
+import styles from '../../styles/CourseCard.module.css';
 
 const CourseCard = (props) => {
     const {
@@ -26,9 +27,9 @@ const CourseCard = (props) => {
 
 
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card>
             <Card.Header>{category}</Card.Header>
-            <Card.Img variant="top" src={image} />
+            <Card.Img className={styles.Image} variant="top" src={image} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>

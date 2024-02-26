@@ -34,9 +34,9 @@ const CourseCreateForm = () => {
         category,
         duration,
         price,
-        video_hours,
-        test_count,
-        article_count,
+        videoHours,
+        testCount,
+        articleCount,
     } = courseData;
 
     const imageInput = useRef(null);
@@ -70,9 +70,9 @@ const CourseCreateForm = () => {
         formData.append('category', category)
         formData.append('duration', duration)
         formData.append('price', price)
-        formData.append('video_hours', video_hours)
-        formData.append('test_count', test_count)
-        formData.append('article_count', article_count)
+        formData.append('video_hours', videoHours)
+        formData.append('test_count', testCount)
+        formData.append('article_count', articleCount)
 
         try {
             const {data} = await axiosReq.post('/courses/', formData);
@@ -224,12 +224,12 @@ const CourseCreateForm = () => {
                     <Form.Label>Video hours</Form.Label>
                     <Form.Control
                         name="videoHours"
-                        value={video_hours}
+                        value={videoHours}
                         onChange={handleChange}
                         type="number"
                         placeholder="Enter the amount of video hours" />
                 </Form.Group>
-                {errors.video_hours?.map((message, idx) => (
+                {errors.videoHours?.map((message, idx) => (
                     <Alert variant="warning" key={idx}>
                         {message}
                     </Alert>
@@ -239,12 +239,12 @@ const CourseCreateForm = () => {
                     <Form.Label>Tests</Form.Label>
                     <Form.Control
                         name="testCount"
-                        value={test_count}
+                        value={testCount}
                         onChange={handleChange}
                         type="number"
                         placeholder="Enter the amount of tests" />
                 </Form.Group>
-                {errors.test_count?.map((message, idx) => (
+                {errors.testCount?.map((message, idx) => (
                     <Alert variant="warning" key={idx}>
                         {message}
                     </Alert>
@@ -254,12 +254,12 @@ const CourseCreateForm = () => {
                     <Form.Label>Articles</Form.Label>
                     <Form.Control
                         name="articleCount"
-                        value={article_count}
+                        value={articleCount}
                         onChange={handleChange}
                         type="number"
                         placeholder="Enter the amount of articles" />
                 </Form.Group>
-                {errors.article_count?.map((message, idx) => (
+                {errors.articleCount?.map((message, idx) => (
                     <Alert variant="warning" key={idx}>
                         {message}
                     </Alert>
