@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { Button, ListGroup, Row, Col } from 'react-bootstrap';
+import Rating from '../../components/Rating';
 
 const CourseCard = (props) => {
     const {
@@ -37,6 +38,7 @@ const CourseCard = (props) => {
             <ListGroup className="list-group-flush">
                 <ListGroup.Item>{price}</ListGroup.Item>
                 <ListGroup.Item>{duration}</ListGroup.Item>
+                <ListGroup.Item><Rating rating={overall_rating} ratings_count={ratings_count} /></ListGroup.Item>
             </ListGroup>
             <Card.Body>
                 <Row>
