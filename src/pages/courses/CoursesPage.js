@@ -13,7 +13,7 @@ const CoursesPage = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [categories, setCategories] = useState({});
     const [errors, setErrors] = useState({});
-    const [selectedCategories, setSelectedCategories] = useState({});
+    const [selectedCategories, setSelectedCategories] = useState([])
     const [selectedPrice, setSelectedPrice] = useState('');
     const [selectedResources, setSelectedResources] = useState({});
     const [selectedRating, setSelectedRating] = useState(0);
@@ -21,13 +21,12 @@ const CoursesPage = () => {
     const handleCategoryChange = (event) => {
         const { value, checked } = event.target;
 
-        setSelectedCategories(prev => {
-            if (checked) {
-                return [...prev, value]
-            } else {
-                return prev.filter(category => category !== value)
-            }
-        })
+        if (checked) {
+            setSelectedCategories(prev => [...prev, value])
+        } else {
+            setSelectedCategories(prev => prev.filter(category => category !== value));
+        }
+
     };
 
     const fetchCourses = async (filters = {}) => {
@@ -48,30 +47,6 @@ const CoursesPage = () => {
 
 
     useEffect(() => {
-        // const fetchCourses = async (filters = {}) => {
-        //     try {
-        //         let url = '/courses/';
-        //         const query = new URLSearchParams(filters).toString();
-        //         if (query) url += `?${query}`;
-
-        //         const {data} = await axiosReq.get('/courses/');
-        //         setCourses(data);
-        //         console.log(data.results)
-        //         setHasLoaded(true);
-        //     } catch(err) {
-        //         console.log(err)
-        //     }
-        // };
-        // const fetchCourses = async () => {
-        //     try {
-        //         const {data} = await axiosReq.get('/courses/');
-        //         setCourses(data);
-        //         console.log(data.results)
-        //         setHasLoaded(true);
-        //     } catch(err) {
-        //         console.log(err)
-        //     }
-        // };
 
         const fetchCategories = async () => {
             try {
@@ -94,8 +69,9 @@ const CoursesPage = () => {
         const filters = {}
 
         if (selectedCategories.length > 0) {
-            filters.categories = selectedCategories.join(',');
+            filters.category = selectedCategories.join(',');
         }
+        console.log(filters)
 
         fetchCourses(filters);
     }
@@ -112,7 +88,13 @@ const CoursesPage = () => {
                                 <Card.Body>
                                     <Card.Title>Categories</Card.Title>
                                     {Array.isArray(categories) && categories.map((cat, idx) => (
-                                        <Form.Check key={idx} value={cat.key} label={cat.value} onChange={handleCategoryChange}/>
+                                        <Form.Check 
+                                            key={idx} 
+                                            value={cat.key}
+                                            label={cat.value}
+                                            onChange={handleCategoryChange}
+                                            checked={selectedCategories.includes(cat.key)}
+                                        />
                                     ))}
                                     <Card.Title>Resources</Card.Title>
                                     <Form.Check label={<i class="fa-solid fa-video"></i>} />
