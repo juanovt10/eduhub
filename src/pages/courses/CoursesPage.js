@@ -3,9 +3,8 @@ import { Button, Col, Container, Form, FormCheck, Row } from 'react-bootstrap'
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseCard from './CourseCard';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
 import axios from 'axios';
-import Rating from '../../components/Rating';
+import Nav from 'react-bootstrap/Nav';
 
 
 const CoursesPage = () => {
@@ -17,6 +16,7 @@ const CoursesPage = () => {
     const [filterVideos, setFilterVideos] = useState(false);
     const [filterArticles, setFilterArticles] = useState(false);
     const [filterTests, setFilterTests] = useState(false);
+    const [sortKey, setSortKey] = useState('dafault')
 
     const handleCategoryChange = (event) => {
         const { value, checked } = event.target;
@@ -61,6 +61,20 @@ const CoursesPage = () => {
         fetchCategories();
     }, []);
 
+    const sortCourses = (key) => {
+        const sortedCourses = [...courses.results]
+
+        let sortParam = key;
+
+        if (key === 'rating') {
+            sortedCourses.sort((a, b) => b.overall_rating - a.overall_rating)
+        } else if (key === 'price') {
+            sortedCourses.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+        }
+
+        setCourses(sortedCourses);
+        setSortKey(key);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -86,6 +100,7 @@ const CoursesPage = () => {
     return (
         <div className='d-flex flex-column align-items-center justify-content-center'>
             <h1 className='text-center my-5'>Explore our courses</h1>
+            
             <Container>
                 <Row>
                     <Col md={3}>
@@ -126,6 +141,23 @@ const CoursesPage = () => {
                         </Card>
                     </Col>
                     <Col  md={9}>
+                    <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
+                        <Nav.Item>
+                            <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link>Rating</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => sortCourses('price')}>Price</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link>Created</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link>Enrrollments</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
                         {hasLoaded ? (
                             <Row>
                                 {courses.results?.length ? (
