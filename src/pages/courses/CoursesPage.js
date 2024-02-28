@@ -14,9 +14,9 @@ const CoursesPage = () => {
     const [categories, setCategories] = useState({});
     const [errors, setErrors] = useState({});
     const [selectedCategories, setSelectedCategories] = useState([])
-    const [selectedPrice, setSelectedPrice] = useState('');
-    const [selectedResources, setSelectedResources] = useState({});
-    const [selectedRating, setSelectedRating] = useState(0);
+    const [filterVideos, setFilterVideos] = useState(false);
+    const [filterArticles, setFilterArticles] = useState(false);
+    const [filterTests, setFilterTests] = useState(false);
 
     const handleCategoryChange = (event) => {
         const { value, checked } = event.target;
@@ -26,7 +26,6 @@ const CoursesPage = () => {
         } else {
             setSelectedCategories(prev => prev.filter(category => category !== value));
         }
-
     };
 
     const fetchCourses = async (filters = {}) => {
@@ -71,7 +70,15 @@ const CoursesPage = () => {
         if (selectedCategories.length > 0) {
             filters.category = selectedCategories.join(',');
         }
-        console.log(filters)
+        if (filterVideos) {
+            filters.has_videos = true;
+        }
+        if (filterArticles) {
+            filters.has_articles = true;
+        }
+        if (filterTests) {
+            filters.has_tests = true; 
+        }
 
         fetchCourses(filters);
     }
@@ -97,15 +104,21 @@ const CoursesPage = () => {
                                         />
                                     ))}
                                     <Card.Title>Resources</Card.Title>
-                                    <Form.Check label={<i class="fa-solid fa-video"></i>} />
-                                    <Form.Check label={<i class="fa-brands fa-readme"></i>} />
-                                    <Form.Check label={<i class="fa-solid fa-pen-to-square"></i>} />
-                                    <Card.Title>Ratings</Card.Title>
-                                    <Form.Check label={<Rating rating={5} />} />
-                                    <Form.Check label={<Rating rating={4} />} />
-                                    <Form.Check label={<Rating rating={3} />} />
-                                    <Form.Check label={<Rating rating={2} />} />
-                                    <Form.Check label={<Rating rating={1} />} />
+                                    <Form.Check
+                                        label={<i class="fa-solid fa-video"></i>}
+                                        checked={filterVideos}
+                                        onChange={e => setFilterVideos(e.target.checked)}
+                                    />
+                                    <Form.Check
+                                        label={<i class="fa-brands fa-readme"></i>}
+                                        checked={filterArticles}
+                                        onChange={e => setFilterArticles(e.target.checked)}
+                                    />
+                                    <Form.Check
+                                        label={<i class="fa-solid fa-pen-to-square"></i>}
+                                        checked={filterTests}
+                                        onChange={e => setFilterTests(e.target.checked)}
+                                    />
                                 </Card.Body>
                                 <Button type="reset">Reset filters</Button>
                                 <Button type="submit">Apply filters</Button>
