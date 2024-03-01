@@ -6,6 +6,7 @@ import CourseDetail from './CourseDetail';
 import CourseCard from './CourseCard';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import ReviewCard from '../reviews/ReviewCard';
 
 const CoursePage = (props) => {  
 
@@ -17,11 +18,21 @@ const CoursePage = (props) => {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{data: course}] = await Promise.all([
-                    axiosReq.get(`/courses/${id}`)
-                ])
-                setCourse({results: [course]})
-                console.log(course)
+                // const [{data: course}, {data: reviews}] = await Promise.all([
+                //     axiosReq.get(`/courses/${id}`),
+                //     axiosReq.get(`/ratings/?course=${id}`)
+                // ])
+                // setCourse({results: [course]})
+                // setReviews({results: reviews})
+
+                const [courseResponse, reviewsResponse] = await Promise.all([
+                    axiosReq.get(`/courses/${id}`),
+                    axiosReq.get(`/ratings/?course=${id}`)
+                ]);
+                const courseData = courseResponse.data
+                const reviewsData = reviewsResponse.data
+                setCourse({ results: [courseData]})
+                setReviews(reviewsData)
             } catch(err) {
 
             }
@@ -49,6 +60,24 @@ const CoursePage = (props) => {
                     ) : reviews.results?.length ? (
                         'Comments'
                     ) : null }             
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    {reviews.results?.length ? (
+                        reviews.results.map((review) => (
+                            <ReviewCard 
+                                key={review.id}
+                                title={review.title}
+                                owner={review.owner}
+                                rating={review.rating}
+                                content={review.content}
+                                profile_image={review.profile_image}
+                            />
+                        ))
+                    ) : (
+                        'No reviews yet'
+                    )}
                 </Col>
             </Row>
         </div>
