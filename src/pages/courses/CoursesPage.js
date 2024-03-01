@@ -5,11 +5,14 @@ import CourseCard from './CourseCard';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Nav from 'react-bootstrap/Nav';
+import Asset from '../../components/Asset';
+import Rating from '../../components/Rating';
 
 
 const CoursesPage = () => {
     const [courses, setCourses] = useState({ results: [] });
-    const [hasLoaded, setHasLoaded] = useState(false);
+    const [coursesHasLoaded, setCoursesHasLoaded] = useState(false);
+    const [categoriesHasLoaded, setCategoriesHasLoaded] = useState(false);
     const [categories, setCategories] = useState({});
     const [errors, setErrors] = useState({});
     const [selectedCategories, setSelectedCategories] = useState([])
@@ -17,6 +20,7 @@ const CoursesPage = () => {
     const [filterArticles, setFilterArticles] = useState(false);
     const [filterTests, setFilterTests] = useState(false);
     const [sortKey, setSortKey] = useState('default');
+    const [minRating, setMinRating] = useState(0);
 
 
     const handleCategoryChange = (event) => {
@@ -37,12 +41,13 @@ const CoursesPage = () => {
 
             const {data} = await axiosReq.get(url);
             setCourses(data);
-            console.log(data.results)
-            setHasLoaded(true);
         } catch(err) {
             console.log(err)
+        } finally {
+            setCoursesHasLoaded(true);
         }
     };
+
     
 
 
@@ -51,13 +56,15 @@ const CoursesPage = () => {
         const fetchCategories = async () => {
             try {
                 const response = await axios.get('https://eduhub-drf-api-8e84adf897cc.herokuapp.com/course-categories/');
-                setCategories(response.data);
+                setCategories(response.data.slice(1));
             } catch(err) {
                 setErrors(err.response?.data);
+            } finally {
+                setCategoriesHasLoaded(true);
             }
         };
 
-        setHasLoaded(false);
+        
         fetchCourses();
         fetchCategories();
     }, []);
@@ -70,8 +77,8 @@ const CoursesPage = () => {
         } else if (sortKey === 'price') {
             sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
         } else if (sortKey === 'creation') {
-            sortedCourses.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-        } else if (sortKey === 'enrrollments') {
+            sortedCourses.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        } else if (sortKey === 'enrollments') {
             sortedCourses.sort((a, b) => b.enrollments_count - a.enrollments_count)
         }
 
@@ -100,8 +107,23 @@ const CoursesPage = () => {
         if (filterTests) {
             filters.has_tests = true; 
         }
+        if (minRating) {
+            filters.min_rating = minRating;
+        }
 
+        setCoursesHasLoaded(false);
         fetchCourses(filters);
+    }
+
+    const handleFilterReset = () => {
+        setSelectedCategories([]);
+        setFilterVideos(false);
+        setFilterArticles(false);
+        setFilterTests(false);
+        setMinRating(0);
+
+        setCoursesHasLoaded(false);
+        fetchCourses({});
     }
 
     return (
@@ -113,6 +135,7 @@ const CoursesPage = () => {
                     <Col md={3}>
                         <Card>
                             <Card.Header as="h5">Filters</Card.Header>
+                            {categoriesHasLoaded ? (
                             <Form onSubmit={handleSubmit}>
                                 <Card.Body>
                                     <Card.Title>Categories</Card.Title>
@@ -141,10 +164,29 @@ const CoursesPage = () => {
                                         checked={filterTests}
                                         onChange={e => setFilterTests(e.target.checked)}
                                     />
+                                <Card.Title>Ratings</Card.Title>
+                                {[5, 4, 3, 2, 1].map((rating) => (
+                                    <Form.Check 
+                                        key={rating}
+                                        type='radio'
+                                        name='ratingFilter'
+                                        label={<Rating rating={rating}/>}
+                                        onChange={() => setMinRating(rating)}
+                                        checked={minRating === rating}
+                                    />
+                                ))}
                                 </Card.Body>
-                                <Button type="reset">Reset filters</Button>
+                                
+                                <Button onClick={handleFilterReset}>Reset filters</Button>
                                 <Button type="submit">Apply filters</Button>
                             </Form>
+                            ) : (
+                            <Row>
+                                <Col className='d-flex justify-content-center align-items-center my-4'>
+                                    <Asset spinner />
+                                </Col>
+                            </Row>
+                            )}
                         </Card>
                     </Col>
                     <Col  md={9}>
@@ -153,19 +195,19 @@ const CoursesPage = () => {
                             <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => sortCourses('rating')}><i class="fa-solid fa-star"></i> Mostly rated</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('rating')}><i class="fa-solid fa-star"></i> Highly rated</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link onClick={() => sortCourses('price')}><i class="fa-solid fa-hand-holding-dollar"></i> Lowest price</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => sortCourses('creation')}><i class="fa-solid fa-clock"></i> Creation date</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('creation')}><i class="fa-solid fa-clock"></i> Newest</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => sortCourses('enrrollments')}><i class="fa-solid fa-graduation-cap"></i> Enrrollments</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('enrollments')}><i class="fa-solid fa-graduation-cap"></i> Enrollments</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                        {hasLoaded ? (
+                        {coursesHasLoaded ? (
                             <Row>
                                 {courses.results?.length ? (
                                     courses.results.map(course => (
@@ -175,14 +217,22 @@ const CoursesPage = () => {
                                         
                                     ))
                                 ) : (
-                                    console.log("no results")
+                                <Row>
+                                    <Col className='mt-5'>
+                                        <Asset message="No results" />
+                                    </Col>
+                                </Row>
                                 )}
                             </Row>
                         ) : (
-                            console.log('Show spinner')
+                            <Row>
+                                <Col className='mt-5'>
+                                    <Asset spinner />
+                                </Col>
+                            </Row>
                         )}
                     </Col>
-                </Row>
+                </Row>                
             </Container>
         </div>
     )
