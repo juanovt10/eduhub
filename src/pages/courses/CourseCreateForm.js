@@ -13,7 +13,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 const CourseCreateForm = () => {
 
     const [errors, setErrors] = useState({});
-    const [categories, setCategories] = useState({});
+    const [categories, setCategories] = useState({}); 
 
     const [courseData, setCourseData] = useState({
         title:"",

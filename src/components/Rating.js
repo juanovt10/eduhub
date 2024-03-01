@@ -7,7 +7,7 @@ const Rating = (props) => {
     } = props
 
     const fullStar = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
+    const halfStar = rating % 1 >= 0.25;
     const emptyStars = 5 - fullStar - (halfStar ? 1 : 0);
 
     return (

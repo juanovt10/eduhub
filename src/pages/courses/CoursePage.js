@@ -4,11 +4,15 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
 import CourseCard from './CourseCard';
+import ReviewCreateForm from '../reviews/ReviewCreateForm';
+import { useCurrentUser } from '../../context/CurrentUserContext';
 
 const CoursePage = (props) => {  
 
     const { id } = useParams();
+    const currentUser = useCurrentUser();
     const [course, setCourse] = useState({ results: [] });
+    const [reviews, setReviews] = useState({ results: [] });
 
     useEffect(() => {
         const handleMount = async () => {
@@ -36,7 +40,15 @@ const CoursePage = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <CourseCard {...course.results[0]} setCourses={setCourse}/> 
+                    {currentUser ? (
+                        <ReviewCreateForm
+                            course={id}
+                            setCourse={setCourse}
+                            setReviews={setReviews}    
+                     />
+                    ) : reviews.results?.length ? (
+                        'Comments'
+                    ) : null }             
                 </Col>
             </Row>
         </div>
