@@ -23,7 +23,7 @@ const ReviewCard = (props) => {
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{content}</Card.Text>
-                <Rating rating={rating} ratings_count={0}/>
+                <Rating rating={rating} />
                 <Avatar 
                     src={profile_image}
                     text="Profile"

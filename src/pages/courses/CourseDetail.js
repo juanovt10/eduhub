@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useCurrentUser } from '../../context/CurrentUserContext'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import styles from '../../styles/CourseDetail.module.css'
 import Rating from '../../components/Rating';
+import { axiosRes } from '../../api/axiosDefaults';
+
 
 const CourseDetail = (props) => {
     const {
+        id,
         title,
         description,
         owner,
@@ -24,6 +27,37 @@ const CourseDetail = (props) => {
         ratings_count,
         enrollments_count,
     } = props
+
+    const [enrollment, setEnrollment] = useState(false)
+    const [wishList, setWishList] = useState(false)
+
+    const handleEnrollment = async (event) => {
+        try {
+            const response = await axiosRes.post('/enrollments/', {
+                course: id,
+            })
+
+            if (response.status === 200 || response.status === 201) {
+                setEnrollment(true);
+            }
+        } catch(err) {
+            console.log(err)
+        }       
+    }
+
+    const handleWishList = async (event) => {
+        try {
+            const response = await axiosRes.post('/wish_lists/', {
+                course: id,
+            })
+
+            if (response.status === 200 || response.status === 201) {
+                setWishList(true);
+            }
+        } catch(err) {
+            console.log(err)
+        }       
+    }
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
@@ -52,7 +86,7 @@ const CourseDetail = (props) => {
                         <p><i class="fa-solid fa-pen-to-square"></i> {test_count} total tests</p>
                     </Col>
                     <Col md={3}>
-                        <Rating rating={overall_rating} ratings_count={ratings_count}/>
+                        <Rating rating={overall_rating} /><span className="ml-1">({ratings_count})</span>
                     </Col>
                 </Row>
                         
@@ -66,10 +100,14 @@ const CourseDetail = (props) => {
                 </Row>    
                 <Row>
                     <Col className={styles.title}>
-                        <Button>Enroll</Button>
+                        {!enrollment && (
+                            <Button onClick={handleEnrollment}>Enroll <i class="fa-solid fa-graduation-cap"></i>+</Button>
+                        )}
                     </Col>
                     <Col className={styles.title}>
-                        <Button>Add to wish list</Button>
+                        {!wishList && (
+                            <Button onClick={handleWishList}>Add to wish list <i class="fa-solid fa-heart"></i>+</Button>
+                        )}
                     </Col>
                 </Row>
             </Container>

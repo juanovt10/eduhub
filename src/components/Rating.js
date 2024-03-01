@@ -1,10 +1,7 @@
 import React from 'react';
 
 const Rating = (props) => {
-    const {
-        rating = 0,
-        ratings_count = 0,
-    } = props
+    const {rating = 0 } = props
 
     const fullStar = Math.floor(rating);
     const halfStar = rating % 1 >= 0.25;
@@ -19,7 +16,6 @@ const Rating = (props) => {
             {[...Array(emptyStars)].fill().map((_, index) => (
                 <i class="fa-regular fa-star"></i>
             ))}
-            <span className="ml-1">({ratings_count})</span>
         </div>
     )
 }

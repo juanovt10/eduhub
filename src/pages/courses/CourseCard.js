@@ -39,7 +39,7 @@ const CourseCard = (props) => {
             <ListGroup className="list-group-flush">
                 <ListGroup.Item>{price}</ListGroup.Item>
                 <ListGroup.Item>{duration}</ListGroup.Item>
-                <ListGroup.Item><Rating rating={overall_rating} ratings_count={ratings_count} /></ListGroup.Item>
+                <ListGroup.Item><Rating rating={overall_rating} /><span className="ml-1">({ratings_count})</span></ListGroup.Item>
             </ListGroup>
             <Card.Body>
                 <Row>
