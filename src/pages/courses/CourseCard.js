@@ -3,9 +3,11 @@ import Card from 'react-bootstrap/Card';
 import { Button, ListGroup, Row, Col } from 'react-bootstrap';
 import Rating from '../../components/Rating';
 import styles from '../../styles/CourseCard.module.css';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CourseCard = (props) => {
     const {
+        id,
         title,
         description,
         owner,
@@ -24,7 +26,6 @@ const CourseCard = (props) => {
         ratings_count,
         enrollments_count,
     } = props
-
 
     return (
         <Card>
@@ -49,7 +50,7 @@ const CourseCard = (props) => {
                         {test_count > 0 ? <i class="fa-solid fa-pen-to-square"></i> : "" }  
                     </Col>
                     <Col xs={7} className='d-flex justify-content-center w-100'>
-                        <Button>Explore course</Button>
+                        <Link to={`/courses/${id}`}>Explore course</Link>
                     </Col>
                 </Row>                
             </Card.Body>
