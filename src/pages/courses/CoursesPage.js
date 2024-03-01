@@ -16,7 +16,8 @@ const CoursesPage = () => {
     const [filterVideos, setFilterVideos] = useState(false);
     const [filterArticles, setFilterArticles] = useState(false);
     const [filterTests, setFilterTests] = useState(false);
-    const [sortKey, setSortKey] = useState('dafault')
+    const [sortKey, setSortKey] = useState('default');
+
 
     const handleCategoryChange = (event) => {
         const { value, checked } = event.target;
@@ -61,19 +62,25 @@ const CoursesPage = () => {
         fetchCategories();
     }, []);
 
-    const sortCourses = (key) => {
+    const sortCourses = (sortKey) => {
         const sortedCourses = [...courses.results]
 
-        let sortParam = key;
-
-        if (key === 'rating') {
-            sortedCourses.sort((a, b) => b.overall_rating - a.overall_rating)
-        } else if (key === 'price') {
-            sortedCourses.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+        if (sortKey === 'rating') {
+            sortedCourses.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
+        } else if (sortKey === 'price') {
+            sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+        } else if (sortKey === 'creation') {
+            sortedCourses.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+        } else if (sortKey === 'enrrollments') {
+            sortedCourses.sort((a, b) => b.enrollments_count - a.enrollments_count)
         }
 
-        setCourses(sortedCourses);
-        setSortKey(key);
+        setCourses(prevCourses => ({
+            ...prevCourses,
+            results: sortedCourses
+        })); 
+        console.log(sortedCourses)
+        setSortKey(sortKey);
     }
 
     const handleSubmit = (event) => {
@@ -146,16 +153,16 @@ const CoursesPage = () => {
                             <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link>Rating</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('rating')}><i class="fa-solid fa-star"></i> Mostly rated</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => sortCourses('price')}>Price</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('price')}><i class="fa-solid fa-hand-holding-dollar"></i> Lowest price</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link>Created</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('creation')}><i class="fa-solid fa-clock"></i> Creation date</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link>Enrrollments</Nav.Link>
+                            <Nav.Link onClick={() => sortCourses('enrrollments')}><i class="fa-solid fa-graduation-cap"></i> Enrrollments</Nav.Link>
                         </Nav.Item>
                     </Nav>
                         {hasLoaded ? (
