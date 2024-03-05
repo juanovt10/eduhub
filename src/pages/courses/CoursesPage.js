@@ -48,9 +48,6 @@ const CoursesPage = () => {
         }
     };
 
-    
-
-
     useEffect(() => {
 
         const fetchCategories = async () => {

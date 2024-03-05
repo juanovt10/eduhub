@@ -7,6 +7,7 @@ import CourseCard from './CourseCard';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import ReviewCard from '../reviews/ReviewCard';
+import Asset from '../../components/Asset';
 
 const CoursePage = (props) => {  
 
@@ -14,18 +15,12 @@ const CoursePage = (props) => {
     const currentUser = useCurrentUser();
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
+    const [hasLoaded, setHasLoaded] = useState(false);
 
     useEffect(() => {
         const handleMount = async () => {
             try {
-                // const [{data: course}, {data: reviews}] = await Promise.all([
-                //     axiosReq.get(`/courses/${id}`),
-                //     axiosReq.get(`/ratings/?course=${id}`)
-                // ])
-                // setCourse({results: [course]})
-                // setReviews({results: reviews})
-
-                const [courseResponse, reviewsResponse] = await Promise.all([
+                    const [courseResponse, reviewsResponse] = await Promise.all([
                     axiosReq.get(`/courses/${id}`),
                     axiosReq.get(`/ratings/?course=${id}`)
                 ]);
@@ -34,7 +29,9 @@ const CoursePage = (props) => {
                 setCourse({ results: [courseData]})
                 setReviews(reviewsData)
             } catch(err) {
-
+                console.log(err)
+            } finally {
+                setHasLoaded(true);
             }
         };
 
@@ -43,43 +40,53 @@ const CoursePage = (props) => {
 
     return (
         <div>
-            <Row>
-                <Col>
-                    <CourseDetail {...course.results[0]} setCourses={setCourse}/>
-                </Col>
-                
-            </Row>
-            <Row>
-                <Col>
-                    {currentUser ? (
-                        <ReviewCreateForm
-                            course={id}
-                            setCourse={setCourse}
-                            setReviews={setReviews}    
-                     />
-                    ) : reviews.results?.length ? (
-                        'Comments'
-                    ) : null }             
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    {reviews.results?.length ? (
-                        reviews.results.map((review) => (
-                            <ReviewCard 
-                                key={review.id}
-                                title={review.title}
-                                owner={review.owner}
-                                rating={review.rating}
-                                content={review.content}
-                                profile_image={review.profile_image}
-                            />
-                        ))
-                    ) : (
-                        'No reviews yet'
-                    )}
-                </Col>
-            </Row>
+            {hasLoaded ? (
+            <>
+                <Row>
+                    <Col>
+                        <CourseDetail {...course.results[0]} setCourses={setCourse}/>
+                    </Col>
+                    
+                </Row>
+                <Row>
+                    <Col>
+                        {currentUser ? (
+                            <ReviewCreateForm
+                                course={id}
+                                setCourse={setCourse}
+                                setReviews={setReviews}    
+                        />
+                        ) : reviews.results?.length ? (
+                            'Comments'
+                        ) : null }             
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {reviews.results?.length ? (
+                            reviews.results.map((review) => (
+                                <ReviewCard 
+                                    key={review.id}
+                                    title={review.title}
+                                    owner={review.owner}
+                                    rating={review.rating}
+                                    content={review.content}
+                                    profile_image={review.profile_image}
+                                />
+                            ))
+                        ) : (
+                            'No reviews yet'
+                        )}
+                    </Col>
+                </Row>
+            </>
+            ) : (
+                <Row>
+                    <Col className='mt-5'>
+                        <Asset spinner/>
+                    </Col>
+                </Row>
+            )}
         </div>
     )
 }

@@ -9,6 +9,7 @@ import Home from './pages/home/Home';
 import CourseCreateForm from './pages/courses/CourseCreateForm';
 import CoursePage from './pages/courses/CoursePage';
 import CoursesPage from './pages/courses/CoursesPage';
+import ProfilePage from './pages/profiles/ProfilePage';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
               <Route exact path='/contact' render={() => <h1>Contact</h1>} />
               <Route exact path='/signin' render={() => <SignInForm />} />
               <Route exact path='/signup' render={() => <SignUpForm />} />
+              <Route exact path='/profiles/:id' render={() => <ProfilePage />} />
               <Route render={() => <p>Page not found!</p>} />
             </Switch>
           </div>

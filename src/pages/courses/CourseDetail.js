@@ -30,6 +30,7 @@ const CourseDetail = (props) => {
 
     const [enrollment, setEnrollment] = useState(false)
     const [wishList, setWishList] = useState(false)
+    console.log(props)
 
     const handleEnrollment = async (event) => {
         try {
