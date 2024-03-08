@@ -41,14 +41,16 @@ const ProfileCourses = () => {
 
 
         fetchCourses(filters)
-    }, [enrolledFilter, wishListFilter]);
+    }, [enrolledFilter, ]);
 
     const handleEnrollFilter = () => {
+        console.log('trigger enroll filter')
         setEnrolledFilter(true);
         setWishListFilter(false);
     }
 
     const handleWishListFilter = () => {
+        console.log('trigger wish list filter')
         setEnrolledFilter(false);
         setWishListFilter(true);
     }
