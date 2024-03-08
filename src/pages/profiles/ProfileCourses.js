@@ -41,13 +41,22 @@ const ProfileCourses = () => {
 
 
         fetchCourses(filters)
-    }, []);
+    }, [enrolledFilter, wishListFilter]);
 
+    const handleEnrollFilter = () => {
+        setEnrolledFilter(true);
+        setWishListFilter(false);
+    }
+
+    const handleWishListFilter = () => {
+        setEnrolledFilter(false);
+        setWishListFilter(true);
+    }
 
     return (
         <div>
-            <button onClick={() => {setEnrolledFilter(true)}}>Enrolled</button>
-            <button onClick={() => {setWishListFilter(true)}}>Wish listed</button>
+            <button onClick={handleEnrollFilter}>Enrolled</button>
+            <button onClick={handleWishListFilter}>Wish listed</button>
             {courses.results?.length && (
                 courses.results.map(course => (
                     <ul>

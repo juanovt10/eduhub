@@ -5,6 +5,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import Profile from './Profile';
 import { Col, Container, Row } from 'react-bootstrap';
 import ProfileCourses from './ProfileCourses';
+import ReviewCard from '../reviews/ReviewCard';
 
 
 const ProfilePage = () => {
@@ -12,17 +13,22 @@ const ProfilePage = () => {
     const { id } = useParams();
 
     const [profileData, setProfileData] = useState({});
+    const [profileReviews, setProfileReviews] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [profileResponse] = await Promise.all([
+                const [profileResponse, reviewsResponse] = await Promise.all([
                     axiosReq.get(`/profiles/${id}`),
-
+                    axiosReq.get(`/ratings/?owner=${id}`)
                 ])
                 const profileData = profileResponse.data
+                const profileReviews = reviewsResponse.data
                 setProfileData(profileData)
+                setProfileReviews(profileReviews)
                 console.log(profileData)
+                console.log(profileReviews.results)
+                
             } catch (error) {
                 console.log(error)
             }
@@ -40,14 +46,26 @@ const ProfilePage = () => {
                 <Col>
                     <ProfileCourses /> 
                 </Col>
+            </Row>
+            <Row>
                 <Col>
-                    Reviews placeholder    
+                    {profileReviews.results?.length ?(
+                        profileReviews.results.map((review) => (
+                            <ReviewCard 
+                                key={review.id}
+                                title={review.title}
+                                owner={review.owner}
+                                rating={review.rating}
+                                content={review.content}
+                                profile_image={review.profile_image}                            
+                            />
+                        ))
+                    ) : (
+                        <p>No reviews yet</p>
+                    )}
                 </Col>
             </Row>
         </Container>
-        // <div>
-        //     <Profile {...profileData.results[0]} setProfileData={setProfileData}/>
-        // </div>
     )
 }
 
