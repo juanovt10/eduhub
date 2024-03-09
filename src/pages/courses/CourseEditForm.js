@@ -11,6 +11,19 @@ const CourseEditForm = (props) => {
         ...props
     })
 
+    const { 
+        title,
+        description,
+        image,
+        category,
+        duration,
+        price,
+        video_hours,
+        test_count,
+        article_count,
+        id,
+    } = courseData;
+
     const imageInput = useRef(null);
     const history = useHistory();
 
@@ -25,10 +38,10 @@ const CourseEditForm = (props) => {
 
     const handleChangeImage = (e) => {
         if (e.target.files.length) {
-            URL.revokeObjectURL(courseData.image);
+            URL.revokeObjectURL(image);
             setCourseData({
                 ...courseData,
-                image: courseData.image,
+                image: URL.createObjectURL(e.target.files[0]),
             })
         }
     }
@@ -52,23 +65,22 @@ const CourseEditForm = (props) => {
 
         console.log('trigger submit')
 
-        formData.append('title', courseData.title)
-        formData.append('description', courseData.description)
-        formData.append('image', imageInput.current.files[0])
-        formData.append('category', courseData.category)
-        formData.append('duration', courseData.duration)
-        formData.append('price', courseData.price)
-        formData.append('video_hours', courseData.video_hours)
-        formData.append('test_count', courseData.test_count)
-        formData.append('article_count', courseData.article_ount)
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('category', category)
+        formData.append('duration', duration)
+        formData.append('price', price)
+        formData.append('video_hours', video_hours)
+        formData.append('test_count', test_count)
+        formData.append('article_count', article_count)
 
         if (imageInput?.current?.files[0]) {
             formData.append('image', imageInput.current.files[0])
         }
 
         try {
-            await axiosReq.put(`/courses/${courseData.id}/`, formData)
-            history.push(`/courses/${courseData.id}`)
+            await axiosReq.put(`/courses/${id}/`, formData)
+            history.push(`/courses/`)
             
         } catch (err) {
             console.log(err)
@@ -87,7 +99,7 @@ const CourseEditForm = (props) => {
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 name="title"
-                                value={courseData.title}
+                                value={title}
                                 onChange={handleChange}
                                 type="text"
                             />
@@ -99,7 +111,7 @@ const CourseEditForm = (props) => {
                             <Form.Label>Description</Form.Label>
                             <Form.Control
                                 name="description"
-                                value={courseData.description}
+                                value={description}
                                 onChange={handleChange}
                                 as="textarea"
                             />
@@ -108,10 +120,10 @@ const CourseEditForm = (props) => {
 
                     <Row>
                         <Form.Group as={Col} controlId="formGridEmail">
-                            {courseData.image ? (
+                            {image ? (
                                 <>
                                     <figure>
-                                        <Image src={courseData.image} rounded />
+                                        <Image src={image} rounded />
                                     </figure>
                                     <div>
                                         <Form.Label>Change image</Form.Label>
@@ -137,7 +149,7 @@ const CourseEditForm = (props) => {
                                 as="select"
                                 defaultValue=""
                                 name="category"
-                                value={courseData.category}
+                                value={category}
                                 onChange={handleChange}
                             >
                                 {Array.isArray(categories) && categories.map((cat, idx) => (
@@ -150,7 +162,7 @@ const CourseEditForm = (props) => {
                             <Form.Label>Duration</Form.Label>
                             <Form.Control
                                 name="duration"
-                                value={courseData.duration}
+                                value={duration}
                                 onChange={handleChange}
                                 type="text"
                             />
@@ -160,7 +172,7 @@ const CourseEditForm = (props) => {
                             <Form.Label>price</Form.Label>
                             <Form.Control
                                 name="price"
-                                value={courseData.price}
+                                value={price}
                                 onChange={handleChange}
                                 type="number"
                             />
@@ -171,8 +183,8 @@ const CourseEditForm = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Video hours</Form.Label>
                             <Form.Control
-                                name="videoHours"
-                                value={courseData.video_hours}
+                                name="video_hours"
+                                value={video_hours}
                                 onChange={handleChange}
                                 type="number"
                             />
@@ -181,8 +193,8 @@ const CourseEditForm = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Tests</Form.Label>
                             <Form.Control
-                                name="testCount"
-                                value={courseData.test_count}
+                                name="test_count"
+                                value={test_count}
                                 onChange={handleChange}
                                 type="number"
                             />
@@ -191,8 +203,8 @@ const CourseEditForm = (props) => {
                         <Form.Group as={Col}>
                             <Form.Label>Articles</Form.Label>
                             <Form.Control
-                                name="articleCount"
-                                value={courseData.article_count}
+                                name="article_count"
+                                value={article_count}
                                 onChange={handleChange}
                                 type="number"
                             />
