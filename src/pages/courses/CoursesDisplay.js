@@ -7,6 +7,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 const CoursesDisplay = ({ filters, sortKey }) => {
     const [coursesHasLoaded, setCoursesHasLoaded] = useState(false);
     const [courses, setCourses] = useState({ results: [] });
+    console.log(filters)
 
     const fetchCourses = async () => {
         try {
@@ -31,7 +32,6 @@ const CoursesDisplay = ({ filters, sortKey }) => {
 
     const sortCourses = (fetchedResults) => {
         const sortedCourses = [...fetchedResults]
-        console.log(sortKey)
 
         if (sortKey === 'rating') {
             sortedCourses.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))

@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import Profile from './Profile';
 import { Col, Container, Row } from 'react-bootstrap';
-import ProfileCourses from './ProfileCourses';
 import ReviewCard from '../reviews/ReviewCard';
+import CoursesDisplay from '../courses/CoursesDisplay';
+import Nav from 'react-bootstrap/Nav';
 
 
 const ProfilePage = () => {
@@ -14,6 +15,7 @@ const ProfilePage = () => {
 
     const [profileData, setProfileData] = useState({});
     const [profileReviews, setProfileReviews] = useState({});
+    const [profileCoursesFilter, setProfileCoursesFilter] = useState({enrolled: true})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,18 +35,37 @@ const ProfilePage = () => {
                 console.log(error)
             }
         }
-
         fetchData();
     }, [id])
+
+    const handleEnrollFilter = () => {
+        setProfileCoursesFilter({
+            enrolled: true,
+        })
+    }
+
+    const handleWishListFilter = () => {
+        setProfileCoursesFilter({
+            wish_listed: true,
+        })
+    }
 
     return (
         <Container className='mt-5'>
             <Row>
-                <Col>
+                <Col md={4}>
                     <Profile {...profileData} />      
                 </Col>
-                <Col>
-                    <ProfileCourses /> 
+                <Col md={8}>
+                    <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
+                        <Nav.Item>
+                            <Nav.Link onClick={handleEnrollFilter}><i class="fa-solid fa-graduation-cap"></i> Enrolled courses</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={handleWishListFilter}><i class="fa-solid fa-heart"></i> Wish List</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>
                 </Col>
             </Row>
             <Row>
