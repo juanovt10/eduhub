@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useCurrentUser } from '../../context/CurrentUserContext'
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row, Modal } from 'react-bootstrap';
 import styles from '../../styles/CourseDetail.module.css'
 import Rating from '../../components/Rating';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -27,10 +27,17 @@ const CourseDetail = (props) => {
         ratings_count,
         enrollments_count,
     } = props
+    
 
     const [enrollment, setEnrollment] = useState(false)
     const [wishList, setWishList] = useState(false)
-    console.log(props)
+    const [showEditModal, setShowEditModal] = useState(false)
+
+    const currentUser = useCurrentUser();
+    const is_owner = currentUser?.username === owner;
+
+    // const handelShowModal = () => setShowEditModal(true)
+    // const handleHideModal = () => setShowEditModal(false)
 
     const handleEnrollment = async (event) => {
         try {
@@ -60,8 +67,6 @@ const CourseDetail = (props) => {
         }       
     }
 
-    const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner;
 
     return (
         <div>
@@ -110,8 +115,14 @@ const CourseDetail = (props) => {
                             <Button onClick={handleWishList}>Add to wish list <i class="fa-solid fa-heart"></i>+</Button>
                         )}
                     </Col>
+                    {/* {is_owner && (
+                        <Col>
+                            <Button onClick={handelShowModal}>Edit course</Button>                       
+                        </Col>
+                    )} */}
                 </Row>
             </Container>
+
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Button, Container, Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
@@ -8,14 +8,20 @@ import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import ReviewCard from '../reviews/ReviewCard';
 import Asset from '../../components/Asset';
+import CourseEditForm from './CourseEditForm';
 
-const CoursePage = (props) => {  
+const CoursePage = () => {  
 
     const { id } = useParams();
     const currentUser = useCurrentUser();
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    
+
+    const handelShowModal = () => setShowEditModal(true)
+    const handleHideModal = () => setShowEditModal(false)
 
     useEffect(() => {
         const handleMount = async () => {
@@ -36,18 +42,25 @@ const CoursePage = (props) => {
         };
 
         handleMount();
-    }, [id])
+    }, [id]);
+
 
     return (
-        <div>
+        <Container>
             {hasLoaded ? (
             <>
                 <Row>
                     <Col>
                         <CourseDetail {...course.results[0]} setCourses={setCourse}/>
                     </Col>
-                    
                 </Row>
+                {course.results[0].is_owner && (
+                    <Row>
+                        <Col>
+                            <Button onClick={handelShowModal}>Edit course</Button>    
+                        </Col>
+                    </Row>
+                )}
                 <Row>
                     <Col>
                         {currentUser ? (
@@ -79,6 +92,9 @@ const CoursePage = (props) => {
                         )}
                     </Col>
                 </Row>
+                <Modal show={showEditModal} onHide={handleHideModal}>
+                    <CourseEditForm {...course.results[0]} />
+                </Modal>
             </>
             ) : (
                 <Row>
@@ -87,7 +103,7 @@ const CoursePage = (props) => {
                     </Col>
                 </Row>
             )}
-        </div>
+        </Container>
     )
 }
 
