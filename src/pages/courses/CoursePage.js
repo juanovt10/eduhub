@@ -34,6 +34,7 @@ const CoursePage = () => {
                 const reviewsData = reviewsResponse.data
                 setCourse({ results: [courseData]})
                 setReviews(reviewsData)
+                console.log(courseData)
             } catch(err) {
                 console.log(err)
             } finally {
