@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './App.module.css'
 import { NavBar } from './components/NavBar';
 // import Container from 'react-bootstrap/Container';
@@ -11,6 +12,7 @@ import CoursePage from './pages/courses/CoursePage';
 import CoursesPage from './pages/courses/CoursesPage';
 import ProfilePage from './pages/profiles/ProfilePage';
 import CreateProfileForm from './pages/profiles/CreateProfileForm';
+
 
 function App() {
 
