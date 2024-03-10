@@ -83,7 +83,7 @@ const ProfilePage = () => {
                         profileReviews.results.map((review) => (
                             <ReviewCard 
                                 key={review.id}
-                                fetchReviews={fetchProfileReviews}  
+                                fetchReviews={fetchProfileReviews} 
                                 {...review}               
                             />
                         ))

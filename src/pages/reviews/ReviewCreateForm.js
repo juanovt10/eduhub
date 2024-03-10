@@ -13,7 +13,9 @@ const ReviewCreateForm = (props) => {
         rating: 0,
     })
 
-    const { title, content, rating} = reviewData
+    console.log(course)
+
+    const { title, content, rating} = reviewData;
 
     const handleChange = (event) => {
         setReviewData({
@@ -48,7 +50,7 @@ const ReviewCreateForm = (props) => {
                 ],
             }));
         } catch(err) {
-            console.log(err)
+            console.log(err.response.data)
         }
     }
 

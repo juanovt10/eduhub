@@ -110,7 +110,7 @@ const CoursePage = () => {
                                 course={id}
                                 setCourse={setCourse}
                                 setReviews={setReviews}    
-                        />
+                            />
                         ) : reviews.results?.length ? (
                             'Comments'
                         ) : null }             
@@ -123,6 +123,8 @@ const CoursePage = () => {
                                 <ReviewCard 
                                     key={review.id}
                                     fetchReviews={reFetchCourseReviews}
+                                    setCourse={setCourse}
+                                    setReviews={setReviews}
                                     {...review}
                                 />
                             ))
