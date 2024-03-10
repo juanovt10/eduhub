@@ -32,6 +32,15 @@ const CoursePage = () => {
         }
     }
 
+    const reFetchCourseReviews = async () => {
+        try {
+            const response = await axiosReq.get(`/ratings/?course=${id}`)
+            setReviews(response.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -90,11 +99,8 @@ const CoursePage = () => {
                             reviews.results.map((review) => (
                                 <ReviewCard 
                                     key={review.id}
-                                    title={review.title}
-                                    owner={review.owner}
-                                    rating={review.rating}
-                                    content={review.content}
-                                    profile_image={review.profile_image}
+                                    fetchReviews={reFetchCourseReviews}
+                                    {...review}
                                 />
                             ))
                         ) : (

@@ -85,12 +85,6 @@ const ProfilePage = () => {
                                 key={review.id}
                                 fetchReviews={fetchProfileReviews}  
                                 {...review}               
-                                // id={review.id}
-                                // title={review.title}
-                                // owner={review.owner}
-                                // rating={review.rating}
-                                // content={review.content}
-                                // profile_image={review.profile_image}
                             />
                         ))
                     ) : (
