@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Button, Container, Modal } from 'react-bootstrap';
+import { Col, Row, Button, Container, Modal, Dropdown } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
-import CourseCard from './CourseCard';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import ReviewCard from '../reviews/ReviewCard';
 import Asset from '../../components/Asset';
 import CourseEditForm from './CourseEditForm';
+import CourseDelete from './CourseDelete';
 
 const CoursePage = () => {  
 
@@ -17,11 +17,17 @@ const CoursePage = () => {
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
-    
+    const [showModal, setShowModal] = useState({
+        showEditModal: false,
+        showDeleteModal: false,
+    })
 
-    const handelShowModal = () => setShowEditModal(true)
-    const handleHideModal = () => setShowEditModal(false)
+    const handleModalDisplay = (modalType, bool) => {
+        setShowModal((prevModals) => ({
+            ...prevModals,
+            [modalType]: bool,
+        }));
+    }
 
     const reFetchCourseData = async () => {
         try {
@@ -76,7 +82,24 @@ const CoursePage = () => {
                 {course.results[0].is_owner && (
                     <Row>
                         <Col>
-                            <Button onClick={handelShowModal}>Edit course</Button>    
+                            <Dropdown>
+                                <Dropdown.Toggle>
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item>
+                                        <Button onClick={() => handleModalDisplay('showEditModal', true)}>
+                                            Edit course
+                                        </Button>    
+                                    </Dropdown.Item>
+                                    <Dropdown.Item>
+                                        <Button onClick={() => handleModalDisplay('showDeleteModal', true)}>
+                                            Delete course
+                                        </Button>    
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </Col>
                     </Row>
                 )}
@@ -108,11 +131,17 @@ const CoursePage = () => {
                         )}
                     </Col>
                 </Row>
-                <Modal show={showEditModal} onHide={handleHideModal}>
+                <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
                     <CourseEditForm 
-                        onHide={handleHideModal}
+                        onHide={() => handleModalDisplay('showEditModal', false)}
                         refreshCourse={reFetchCourseData}
                         {...course.results[0]}
+                        />
+                </Modal>
+                <Modal show={showModal.showDeleteModal} onHide={() => handleModalDisplay('showDeleteModal', false)}>
+                    <CourseDelete 
+                        onHide={() => handleModalDisplay('showDeleteModal', false)}
+                        id={course.results[0].id}
                     />
                 </Modal>
             </>

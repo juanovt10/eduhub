@@ -25,8 +25,6 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
     const imageInput = useRef(null);
 
-    console.log(courseData)
-
     const handleChange = (e) => {
         setCourseData({
             ...courseData,
@@ -56,6 +54,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
         fetchCategories();
     }, []);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -213,7 +212,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
-                    <Button variant="danger" onClick={onHide}>
+                    <Button variant="warning" onClick={onHide}>
                         Discard Changes
                     </Button>
                 </Form>
