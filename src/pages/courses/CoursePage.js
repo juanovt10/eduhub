@@ -23,6 +23,15 @@ const CoursePage = () => {
     const handelShowModal = () => setShowEditModal(true)
     const handleHideModal = () => setShowEditModal(false)
 
+    const reFetchCourseData = async () => {
+        try {
+            const response = await axiosReq.get(`/courses/${id}`);
+            setCourse({ results: [response.data]})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -94,7 +103,11 @@ const CoursePage = () => {
                     </Col>
                 </Row>
                 <Modal show={showEditModal} onHide={handleHideModal}>
-                    <CourseEditForm {...course.results[0]} />
+                    <CourseEditForm 
+                        onHide={handleHideModal}
+                        refreshCourse={reFetchCourseData}
+                        {...course.results[0]}
+                    />
                 </Modal>
             </>
             ) : (

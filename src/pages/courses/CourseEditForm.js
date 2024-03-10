@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import { axiosReq } from '../../api/axiosDefaults';
  
-const CourseEditForm = (props) => {
+const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
     const [categories, setCategories] = useState({}); 
     const [courseData, setCourseData] = useState({
@@ -25,7 +24,6 @@ const CourseEditForm = (props) => {
     } = courseData;
 
     const imageInput = useRef(null);
-    const history = useHistory();
 
     console.log(courseData)
 
@@ -80,7 +78,8 @@ const CourseEditForm = (props) => {
 
         try {
             await axiosReq.put(`/courses/${id}/`, formData)
-            history.push(`/courses/`)
+            onHide();
+            refreshCourse();
             
         } catch (err) {
             console.log(err)
@@ -214,11 +213,11 @@ const CourseEditForm = (props) => {
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
+                    <Button variant="danger" onClick={onHide}>
+                        Discard Changes
+                    </Button>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary">Save changes</Button>
-            </Modal.Footer>
         </div>
     )
 }
