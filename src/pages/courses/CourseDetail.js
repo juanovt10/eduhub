@@ -115,11 +115,6 @@ const CourseDetail = (props) => {
                             <Button onClick={handleWishList}>Add to wish list <i class="fa-solid fa-heart"></i>+</Button>
                         )}
                     </Col>
-                    {/* {is_owner && (
-                        <Col>
-                            <Button onClick={handelShowModal}>Edit course</Button>                       
-                        </Col>
-                    )} */}
                 </Row>
             </Container>
 

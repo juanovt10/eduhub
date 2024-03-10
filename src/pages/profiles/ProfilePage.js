@@ -17,19 +17,28 @@ const ProfilePage = () => {
     const [profileReviews, setProfileReviews] = useState({});
     const [profileCoursesFilter, setProfileCoursesFilter] = useState({enrolled: true})
 
+    const fetchProfileReviews = async () => {
+        try {
+            const reviewsResponse = await axiosReq.get(`/ratings/?owner=${id}`);
+            const profileReviews = reviewsResponse.data
+            setProfileReviews(profileReviews)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [profileResponse, reviewsResponse] = await Promise.all([
+                const [profileResponse] = await Promise.all([
                     axiosReq.get(`/profiles/${id}`),
-                    axiosReq.get(`/ratings/?owner=${id}`)
+                    fetchProfileReviews(),
                 ])
                 const profileData = profileResponse.data
-                const profileReviews = reviewsResponse.data
                 setProfileData(profileData)
-                setProfileReviews(profileReviews)
+                
                 console.log(profileData)
-                console.log(profileReviews.results)
+
                 
             } catch (error) {
                 console.log(error)
@@ -74,11 +83,14 @@ const ProfilePage = () => {
                         profileReviews.results.map((review) => (
                             <ReviewCard 
                                 key={review.id}
-                                title={review.title}
-                                owner={review.owner}
-                                rating={review.rating}
-                                content={review.content}
-                                profile_image={review.profile_image}                            
+                                fetchReviews={fetchProfileReviews}  
+                                {...review}               
+                                // id={review.id}
+                                // title={review.title}
+                                // owner={review.owner}
+                                // rating={review.rating}
+                                // content={review.content}
+                                // profile_image={review.profile_image}
                             />
                         ))
                     ) : (
