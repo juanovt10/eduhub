@@ -5,11 +5,13 @@ import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import Asset from '../../components/Asset';
 
-const CreateProfileForm = () => {
+const CreateProfileForm = ({mode, fetchProfileData, onHide}) => {
 
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false);
+
+    console.log(mode)
 
     const { name, bio, image, dob } = profileData;
 
@@ -18,20 +20,19 @@ const CreateProfileForm = () => {
     const currentUser = useCurrentUser();
 
     const userId = currentUser?.profile_id
+    const fetchUserData = async () => {
+        try {
+            const response = await axiosReq.get(`/profiles/${userId}/`)
+            setProfileData(response.data)
+            console.log(response.data)
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setHasLoaded(true);
+        }
+    }
     
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axiosReq.get(`/profiles/${userId}/`)
-                setProfileData(response.data)
-                console.log(response.data)
-            } catch (err) {
-                console.log(err)
-            } finally {
-                setHasLoaded(true);
-            }
-        }
-        
         if (userId) {
             fetchUserData();
         }
@@ -68,7 +69,13 @@ const CreateProfileForm = () => {
                 `/profiles/${userId}/`,
                 formData
             )
-            history.push(`/profiles/${userId}/`)
+
+            if (mode.mode === 'create') {
+                history.push(`/profiles/${userId}/`)
+            } else {
+                fetchProfileData();
+                onHide();
+            }
         } catch (err) {
             console.log(err)
         }
@@ -78,7 +85,9 @@ const CreateProfileForm = () => {
         <div>
             {hasLoaded ? (
                 <>
-                    <h1>Thank you for joining Eduhub!</h1>
+                    {mode.mode === 'create' && (
+                        <h1>Thank you for joining Eduhub!</h1>
+                    )}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group>
                             <Form.Label>Name</Form.Label>

@@ -27,18 +27,22 @@ const ProfilePage = () => {
         }
     }
 
+    const fetchProfileData = async () => {
+        try {
+            const profileResponse = await axiosReq.get(`/profiles/${id}`)
+            setProfileData(profileResponse.data)
+        } catch (err) {
+            
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [profileResponse] = await Promise.all([
-                    axiosReq.get(`/profiles/${id}`),
+                await Promise.all([
+                    fetchProfileData(),
                     fetchProfileReviews(),
                 ])
-                const profileData = profileResponse.data
-                setProfileData(profileData)
-                
-                console.log(profileData)
-
                 
             } catch (error) {
                 console.log(error)
@@ -63,7 +67,7 @@ const ProfilePage = () => {
         <Container className='mt-5'>
             <Row>
                 <Col md={4}>
-                    <Profile {...profileData} />      
+                    <Profile fetchProfileData={fetchProfileData} {...profileData} />      
                 </Col>
                 <Col md={8}>
                     <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>

@@ -43,23 +43,23 @@ const ReviewCard = ({fetchReviews, setCourse, setReviews, ...props}) => {
                 <Card.Body>
                     {is_owner && (
                         <Dropdown>
-                                <Dropdown.Toggle>
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </Dropdown.Toggle>
+                            <Dropdown.Toggle>
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showEditModal', true)}>
-                                            Edit review
-                                        </Button>    
-                                    </Dropdown.Item>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showDeleteModal', true)}>
-                                            Delete review
-                                        </Button>    
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
+                                    <Button onClick={() => handleModalDisplay('showEditModal', true)}>
+                                        Edit review
+                                    </Button>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <Button onClick={() => handleModalDisplay('showDeleteModal', true)}>
+                                        Delete review
+                                    </Button>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     )}
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{content}</Card.Text>

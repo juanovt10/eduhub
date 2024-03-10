@@ -27,7 +27,7 @@ function App() {
               <Route exact path='/contact' render={() => <h1>Contact</h1>} />
               <Route exact path='/signin' render={() => <SignInForm />} />
               <Route exact path='/signup' render={() => <SignUpForm />} />
-              <Route exact path='/profiles/create' render={() => <CreateProfileForm />} />
+              <Route exact path='/profiles/create' render={() => <CreateProfileForm mode='create'/>} />
               <Route exact path='/profiles/:id' render={() => <ProfilePage />} />
               <Route render={() => <p>Page not found!</p>} />
             </Switch>
