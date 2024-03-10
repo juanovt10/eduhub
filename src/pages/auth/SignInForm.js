@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useSetCurrentUser } from '../../context/CurrentUserContext';
+import { axiosReq } from '../../api/axiosDefaults';
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser();
@@ -34,7 +35,19 @@ const SignInForm = () => {
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
             setCurrentUser(data.user)
-            history.push('/');
+
+            const newProfileId = data.user.profile_id
+
+            const profileResponse = await axiosReq.get(`/profiles/${newProfileId}/`)
+
+            const profileData = profileResponse.data
+            
+            if (profileData.bio === "") {
+                history.push('/profiles/create')
+            } else {
+                history.push('/');
+            }
+
         } catch(err) {
             setErrors(err.response?.data);
         }
