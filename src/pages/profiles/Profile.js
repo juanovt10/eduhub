@@ -3,10 +3,12 @@ import { Card, Row, Col, Image, Dropdown, Button, Modal, ModalBody } from 'react
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import CreateProfileForm from './CreateProfileForm';
+import ProfileDelete from './ProfileDelete';
 
 
 const Profile = ({fetchProfileData, ...props}) => {
     const {
+        id,
         owner,
         created_at,
         name,
@@ -120,7 +122,10 @@ const Profile = ({fetchProfileData, ...props}) => {
                 </Modal.Body>
             </Modal>
             <Modal show={showModal.showDeleteModal} onHide={() => handleModalDisplay('showDeleteModal', false)}>
-                delete modal
+               <ProfileDelete
+                    onHide={() => handleModalDisplay('showDeleteModal', false)}
+                    id={id}
+                />
             </Modal>
         </>
     )
