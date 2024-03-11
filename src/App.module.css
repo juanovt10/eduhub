@@ -1,5 +1,10 @@
 .Main {
-    padding-top: 70px;
+    padding-top: 65px;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
+}
+
+.background {
+    background: linear-gradient(135deg, #1e2022 0%, #1e2022 50%, #f5793b 100%);
+    color: white;
 }

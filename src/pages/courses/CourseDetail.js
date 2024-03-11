@@ -36,9 +36,6 @@ const CourseDetail = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 
-    // const handelShowModal = () => setShowEditModal(true)
-    // const handleHideModal = () => setShowEditModal(false)
-
     const handleEnrollment = async (event) => {
         try {
             const response = await axiosRes.post('/enrollments/', {

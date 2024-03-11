@@ -60,8 +60,8 @@ export const NavBar = () => {
         <Navbar expanded={expanded} expand="md" fixed="top" className={styles.Navbar}>
             <Container fluid>
                 <NavLink to='/' >
-                    <Navbar.Brand href="#">
-                        <img src={logo} alt="logo" height="45" />
+                    <Navbar.Brand className='d-flex align-items-center'>
+                        <img src={logo} alt="logo" style={{ height: '40px'}} />
                     </Navbar.Brand>
                 </NavLink>
                 <Navbar.Toggle

@@ -1,9 +1,26 @@
 import React from 'react';
-import { Card, Row, Col, Form, Button} from 'react-bootstrap';
+// import { Card, Row, Col, Form, Button} from 'react-bootstrap';
 import axios from 'axios';
 import Rating from '../../components/Rating';
 import Asset from '../../components/Asset';
 import { useEffect, useState } from 'react';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '../../@/components/ui/card'
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '../../@/components/ui/form'
 
 const CourseFilter = ({ onFiltersApplied }) => {
     const [selectedCategories, setSelectedCategories] = useState([])
@@ -76,61 +93,76 @@ const CourseFilter = ({ onFiltersApplied }) => {
 
 
     return (
-        <Card>
-            <Card.Header as="h5">Filters</Card.Header>
-            {categoriesHasLoaded ? (
-                <Form onSubmit={handleSubmit}>
-                    <Card.Body>
-                        <Card.Title>Categories</Card.Title>
-                        {Array.isArray(categories) && categories.map((cat, idx) => (
-                            <Form.Check
-                                key={idx}
-                                value={cat.key}
-                                label={cat.value}
-                                onChange={handleCategoryChange}
-                                checked={selectedCategories.includes(cat.key)}
-                            />
-                        ))}
-                        <Card.Title>Resources</Card.Title>
-                        <Form.Check
-                            label={<i className="fa-solid fa-video"></i>}
-                            checked={filterVideos}
-                            onChange={e => setFilterVideos(e.target.checked)}
-                        />
-                        <Form.Check
-                            label={<i className="fa-brands fa-readme"></i>}
-                            checked={filterArticles}
-                            onChange={e => setFilterArticles(e.target.checked)}
-                        />
-                        <Form.Check
-                            label={<i className="fa-solid fa-pen-to-square"></i>}
-                            checked={filterTests}
-                            onChange={e => setFilterTests(e.target.checked)}
-                        />
-                        <Card.Title>Ratings</Card.Title>
-                        {[5, 4, 3, 2, 1].map((rating) => (
-                            <Form.Check
-                                key={rating}
-                                type='radio'
-                                name='ratingFilter'
-                                label={<Rating rating={rating} />}
-                                onChange={() => setMinRating(rating)}
-                                checked={minRating === rating}
-                            />
-                        ))}
-                    </Card.Body>
 
-                    <Button onClick={handleFilterReset}>Reset filters</Button>
-                    <Button type="submit">Apply filters</Button>
-                </Form>
-            ) : (
-                <Row>
-                    <Col className='d-flex justify-content-center align-items-center my-4'>
-                        <Asset spinner />
-                    </Col>
-                </Row>
-            )}
+        <Card>
+            <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p>Card Content</p>
+            </CardContent>
+            <CardFooter>
+                <p>Card Footer</p>
+            </CardFooter>
         </Card>
+
+
+        // <Card>
+        //     <Card.Header as="h5">Filters</Card.Header>
+        //     {categoriesHasLoaded ? (
+        //         <Form onSubmit={handleSubmit}>
+        //             <Card.Body>
+        //                 <Card.Title>Categories</Card.Title>
+        //                 {Array.isArray(categories) && categories.map((cat, idx) => (
+        //                     <Form.Check
+        //                         key={idx}
+        //                         value={cat.key}
+        //                         label={cat.value}
+        //                         onChange={handleCategoryChange}
+        //                         checked={selectedCategories.includes(cat.key)}
+        //                     />
+        //                 ))}
+        //                 <Card.Title>Resources</Card.Title>
+        //                 <Form.Check
+        //                     label={<i className="fa-solid fa-video"></i>}
+        //                     checked={filterVideos}
+        //                     onChange={e => setFilterVideos(e.target.checked)}
+        //                 />
+        //                 <Form.Check
+        //                     label={<i className="fa-brands fa-readme"></i>}
+        //                     checked={filterArticles}
+        //                     onChange={e => setFilterArticles(e.target.checked)}
+        //                 />
+        //                 <Form.Check
+        //                     label={<i className="fa-solid fa-pen-to-square"></i>}
+        //                     checked={filterTests}
+        //                     onChange={e => setFilterTests(e.target.checked)}
+        //                 />
+        //                 <Card.Title>Ratings</Card.Title>
+        //                 {[5, 4, 3, 2, 1].map((rating) => (
+        //                     <Form.Check
+        //                         key={rating}
+        //                         type='radio'
+        //                         name='ratingFilter'
+        //                         label={<Rating rating={rating} />}
+        //                         onChange={() => setMinRating(rating)}
+        //                         checked={minRating === rating}
+        //                     />
+        //                 ))}
+        //             </Card.Body>
+
+        //             <Button onClick={handleFilterReset}>Reset filters</Button>
+        //             <Button type="submit">Apply filters</Button>
+        //         </Form>
+        //     ) : (
+        //         <Row>
+        //             <Col className='d-flex justify-content-center align-items-center my-4'>
+        //                 <Asset spinner />
+        //             </Col>
+        //         </Row>
+        //     )}
+        // </Card>
     )
 }
 

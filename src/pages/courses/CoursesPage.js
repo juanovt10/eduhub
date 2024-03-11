@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import CoursesDisplay from './CoursesDisplay';
 import CourseFilter from './CourseFilter';
 import CourseSorting from './CourseSorting';
+import styles from '../../styles/CoursesPage.module.css';
 
 
 const CoursesPage = () => {
@@ -18,7 +19,7 @@ const CoursesPage = () => {
     }
 
     return (
-        <div className='d-flex flex-column align-items-center justify-content-center'>
+        <div className={`d-flex flex-column align-items-center justify-content-center ${styles.courses_background}`}>
             <h1 className='text-center my-5'>Explore our courses</h1>
             <Container>
                 <Row>

@@ -17,7 +17,7 @@ import CreateProfileForm from './pages/profiles/CreateProfileForm';
 function App() {
 
   return (
-        <div>
+        <div className={styles.background}>
           <NavBar />
           <div className={styles.Main} >
             <Switch>
