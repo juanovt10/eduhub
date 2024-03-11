@@ -14,8 +14,10 @@ const ProfileDelete = ({onHide, id}) => {
 
     const handleDelete = async () => {
         try {
-            await axiosRes.delete(`/profiles/${id}/`);
-            await axios.post('/dj-rest-auth/logout/');
+            await Promise.all([
+                axiosRes.delete(`/profiles/${id}/`),
+                axios.post('/dj-rest-auth/logout/'),
+            ])
             setCurrentUser(null);
             history.push('/')
         } catch (err) {

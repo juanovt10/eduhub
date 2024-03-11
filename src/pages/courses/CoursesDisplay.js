@@ -38,7 +38,7 @@ const CoursesDisplay = ({ filters, sortKey }) => {
         } else if (sortKey === 'price') {
             sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
         } else if (sortKey === 'creation') {
-            sortedCourses.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            sortedCourses.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         } else if (sortKey === 'enrollments') {
             sortedCourses.sort((a, b) => b.enrollments_count - a.enrollments_count)
         }
