@@ -4,6 +4,7 @@ import axios from 'axios';
 import Rating from '../../components/Rating';
 import Asset from '../../components/Asset';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import {
     Card,
     CardContent,
@@ -30,6 +31,7 @@ const CourseFilter = ({ onFiltersApplied }) => {
     const [minRating, setMinRating] = useState(0);
     const [categories, setCategories] = useState({});
     const [categoriesHasLoaded, setCategoriesHasLoaded] = useState(false);
+    
     
     useEffect(() => {
         const fetchCategories = async () => {
