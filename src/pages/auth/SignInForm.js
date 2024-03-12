@@ -54,49 +54,89 @@ const SignInForm = () => {
     };
 
     return (
-        <div className='d-flex justify-content-center align-items-center'>
-            <Card>
-                <Card.Body className={styles.CardBody}>
-                    <Card.Title className={styles.CardTitle} >Sign In</Card.Title>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="username">
-                            <Form.Control 
-                                className={`mb-3 ${styles.FormControl}`} 
-                                type="text" 
-                                name="username"
-                                placeholder='Username'
-                                value={username}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        {errors.username?.map((message, idx) => 
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
+        <Card.Body>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="username">
+                    <Form.Control
+                        className={`mb-3 ${styles.FormControl}`}
+                        type="text"
+                        name="username"
+                        placeholder='Username'
+                        value={username}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+                {errors.username?.map((message, idx) =>
+                    <Alert variant="warning" key={idx}>{message}</Alert>
+                )}
 
-                        <Form.Group controlId="password" >
-                            <Form.Control 
-                                className={`mb-3 ${styles.FormControl}`}
-                                placeholder='password'
-                                type="password"
-                                name="password" 
-                                value={password}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        {errors.password?.map((message, idx) => 
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
+                <Form.Group controlId="password" >
+                    <Form.Control
+                        className={`mb-3 ${styles.FormControl}`}
+                        placeholder='password'
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+                {errors.password?.map((message, idx) =>
+                    <Alert variant="warning" key={idx}>{message}</Alert>
+                )}
 
-                        <Button className={styles.ButtonPrimary} type="submit">
-                            Sign In
-                        </Button>
-                        {errors.non_field_errors?.map((message, idx) => 
-                            <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
-                        )}
-                    </Form>
-                </Card.Body>
-            </Card>
-        </div>
+                <Button className={styles.ButtonPrimary} type="submit">
+                    Sign In
+                </Button>
+                {errors.non_field_errors?.map((message, idx) =>
+                    <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
+                )}
+            </Form>
+        </Card.Body>
+
+
+        // <div className='d-flex justify-content-center align-items-center'>
+        //     <Card>
+        //         <Card.Body className={styles.CardBody}>
+        //             <Card.Title className={styles.CardTitle} >Sign In</Card.Title>
+        //             <Form onSubmit={handleSubmit}>
+        //                 <Form.Group controlId="username">
+        //                     <Form.Control 
+        //                         className={`mb-3 ${styles.FormControl}`} 
+        //                         type="text" 
+        //                         name="username"
+        //                         placeholder='Username'
+        //                         value={username}
+        //                         onChange={handleChange}
+        //                     />
+        //                 </Form.Group>
+        //                 {errors.username?.map((message, idx) => 
+        //                     <Alert variant="warning" key={idx}>{message}</Alert>
+        //                 )}
+
+        //                 <Form.Group controlId="password" >
+        //                     <Form.Control 
+        //                         className={`mb-3 ${styles.FormControl}`}
+        //                         placeholder='password'
+        //                         type="password"
+        //                         name="password" 
+        //                         value={password}
+        //                         onChange={handleChange}
+        //                     />
+        //                 </Form.Group>
+        //                 {errors.password?.map((message, idx) => 
+        //                     <Alert variant="warning" key={idx}>{message}</Alert>
+        //                 )}
+
+        //                 <Button className={styles.ButtonPrimary} type="submit">
+        //                     Sign In
+        //                 </Button>
+        //                 {errors.non_field_errors?.map((message, idx) => 
+        //                     <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
+        //                 )}
+        //             </Form>
+        //         </Card.Body>
+        //     </Card>
+        // </div>
     )
 }
 

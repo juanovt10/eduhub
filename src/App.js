@@ -12,6 +12,7 @@ import CoursePage from './pages/courses/CoursePage';
 import CoursesPage from './pages/courses/CoursesPage';
 import ProfilePage from './pages/profiles/ProfilePage';
 import CreateProfileForm from './pages/profiles/CreateProfileForm';
+import Authenticator from './pages/auth/Authenticator';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route exact path='/courses/:id' render={() => <CoursePage />} />
               <Route exact path='/about' render={() => <h1>About us</h1>} />
               <Route exact path='/contact' render={() => <h1>Contact</h1>} />
+              <Route exact path='/auth' render={() => <Authenticator />} />
               <Route exact path='/signin' render={() => <SignInForm />} />
               <Route exact path='/signup' render={() => <SignUpForm />} />
               <Route exact path='/profiles/create' render={() => <CreateProfileForm mode='create'/>} />
