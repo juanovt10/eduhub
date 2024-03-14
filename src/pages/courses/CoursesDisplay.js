@@ -69,6 +69,9 @@ const CoursesDisplay = ({ filters, sortKey }) => {
                     )}
                 </Row>
             ) : (
+                
+
+
                 <Row>
                     <Col className='mt-5'>
                         <Asset spinner />

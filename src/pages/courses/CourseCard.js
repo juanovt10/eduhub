@@ -1,9 +1,10 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-import { Button, ListGroup, Row, Col } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Col } from 'react-bootstrap';
 import Rating from '../../components/Rating';
 import styles from '../../styles/CourseCard.module.css';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const CourseCard = (props) => {
     const {
@@ -53,9 +54,30 @@ const CourseCard = (props) => {
                     <Rating rating={overall_rating} /> ({ratings_count})
                 </div>
                 <div className='d-flex justify-content-evenly'>
-                    {video_hours > 0 && <i className="fa-solid fa-video" title="Video Hours"></i>}
-                    {article_count > 0 && <i className="fa-brands fa-readme" title="Articles"></i>}
-                    {test_count > 0 && <i className="fa-solid fa-pen-to-square" title="Tests"></i>}
+                    {video_hours > 0 &&
+                        <OverlayTrigger
+                            placement='top'
+                            overlay={<Tooltip>{video_hours} {video_hours > 1 ? "video hours" : 'video hour'}</Tooltip>}
+                        >
+                            <i className="fa-solid fa-video" title="Video Hours"></i>
+                        </OverlayTrigger>
+                    }
+                    {article_count > 0 && 
+                        <OverlayTrigger
+                            placement='top'
+                            overlay={<Tooltip>{article_count} {article_count > 1 ? 'articles' : 'article'}</Tooltip>}
+                        >
+                            <i className="fa-brands fa-readme" title="Articles"></i>
+                        </OverlayTrigger>
+                    }
+                    {test_count > 0 && 
+                        <OverlayTrigger
+                            placement='top'
+                            overlay={<Tooltip>{test_count} {test_count > 1 ? 'tests' : 'test'}</Tooltip>}
+                        >
+                            <i className="fa-solid fa-pen-to-square" title="Tests"></i>
+                        </OverlayTrigger>  
+                    }
                 </div>
             </Card.Body>
             <Card.Footer className="text-center">
