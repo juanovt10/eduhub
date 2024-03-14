@@ -7,13 +7,19 @@
 }
 
 .Card {
-    background: rgba(255, 255, 255, 0.2); /* White background with 20% opacity */
-    border-radius: 10px; /* Rounded corners */
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: Light white border for better definition */
-    backdrop-filter: blur(10px); /* Blur the background */
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    width: 0rem;
-    min-width: 250px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 10px 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-top: none; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo {
@@ -22,7 +28,7 @@
     text-align: center;
 }
 
-.tabContainer {
+.formContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,12 +47,41 @@
 }
 
 .tabsHeader {
-    padding: 0 0.75rem;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-.tab {
-    margin: 0;
+.tabs {
+    background: rgba(255, 255, 255, 0.2);
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: none;
+    margin-bottom: 0;
     padding: 0;
-    border-radius: 10px;
+    width: 250px;
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;
 }
+
+.tabContainer {
+    width: 250px;
+}
+
+.tabs a {
+    color: #f5793b;
+    font-weight: 700;
+    width: 50%;
+    border-radius: none;
+}
+
+/* .tabs a:focus {
+    background-color: red;
+    font-weight: 700;
+    width: 50%;
+    border-radius: none;
+} */
 

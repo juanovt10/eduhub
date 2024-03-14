@@ -9,10 +9,12 @@ import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import logo from '../../assets/eduhub-color-logo.png'
+import Asset from '../../components/Asset';
 
 
 const SignUpForm = () => {
 
+    const [startLoading, setStartLoading] = useState(false);
     const [signUpData, setSignUpData] = useState({
         username: "",
         password1: "",
@@ -35,68 +37,76 @@ const SignUpForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setStartLoading(true)
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData);
-            history.push('/signin');
+            history.push('/auth', { fromSignup: true });
         } catch(err) {
+            setStartLoading(false);
             setErrors(err.response?.data);
         }
     };
 
     return (
-        <Card.Body className={styles.tabContainer}>
-            <img src={logo} alt="logo" className={styles.logo} />
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="username">
-                    <Form.Control
-                        className={`mb-3 ${styles.FormControl}`}
-                        type="text"
-                        name="username"
-                        placeholder='Username'
-                        value={username}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                {errors.username?.map((message, idx) =>
-                    <Alert variant="warning" key={idx}>{message}</Alert>
-                )}
+        <Card className={styles.Card}>
+            <Card.Body className={styles.formContainer}>
+                <img src={logo} alt="logo" className={styles.logo} />
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="username">
+                        <Form.Control
+                            className={`mb-3 ${styles.FormControl}`}
+                            type="text"
+                            name="username"
+                            placeholder='Username'
+                            value={username}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    {errors.username?.map((message, idx) =>
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    )}
 
-                <Form.Group controlId="password1" >
-                    <Form.Control
-                        className={`mb-3 ${styles.FormControl}`}
-                        placeholder='password'
-                        type="password"
-                        name="password1"
-                        value={password1}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                {errors.password1?.map((message, idx) =>
-                    <Alert variant="warning" key={idx}>{message}</Alert>
-                )}
+                    <Form.Group controlId="password1" >
+                        <Form.Control
+                            className={`mb-3 ${styles.FormControl}`}
+                            placeholder='password'
+                            type="password"
+                            name="password1"
+                            value={password1}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    {errors.password1?.map((message, idx) =>
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    )}
 
-                <Form.Group controlId="password2">
-                    <Form.Control
-                        className={`mb-3 ${styles.FormControl}`}
-                        placeholder='confirm password'
-                        type="password"
-                        name="password2"
-                        value={password2}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                {errors.password2?.map((message, idx) =>
-                    <Alert variant="warning" key={idx}>{message}</Alert>
-                )}
+                    <Form.Group controlId="password2">
+                        <Form.Control
+                            className={`mb-3 ${styles.FormControl}`}
+                            placeholder='confirm password'
+                            type="password"
+                            name="password2"
+                            value={password2}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    {errors.password2?.map((message, idx) =>
+                        <Alert variant="warning" key={idx}>{message}</Alert>
+                    )}
 
-                <Button className={styles.button} type="submit">
-                    Sign Up
-                </Button>
-                {errors.non_field_errors?.map((message, idx) =>
-                    <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
-                )}
-            </Form>
-        </Card.Body>
+                    <Button className={styles.button} type="submit">
+                        {!startLoading ? (
+                            "Sign Up"
+                        ) : (
+                            <Asset spinner size='sm' />
+                        )}
+                    </Button>
+                    {errors.non_field_errors?.map((message, idx) =>
+                        <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
+                    )}
+                </Form>
+            </Card.Body>
+        </Card>
         // <div>
         //     <Card className={styles.CardBody}>
         //         <Card.Body>

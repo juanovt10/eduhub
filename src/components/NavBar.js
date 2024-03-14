@@ -49,8 +49,7 @@ export const NavBar = () => {
     )
     const loggedOutIcons = (
         <>
-            <NavLink to='/signup' className={styles.Navlink} >Sign Up</NavLink>
-            <NavLink to='/signin' className={styles.Navlink} >Sign In</NavLink>
+            <NavLink to='/auth' className={styles.Navlink} >Join us!</NavLink>
         </>
     );
         
