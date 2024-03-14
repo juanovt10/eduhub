@@ -1,0 +1,31 @@
+.progressBarContainer {
+    position: relative;
+    width: 100%;
+}
+    
+.progressBarCustom {
+    height: 1.5rem;
+    background-color: black;
+}
+
+.progressBarCustom .progress-bar {
+    background-color: red !important; /* Set your custom color */
+}
+
+    
+.progressLabel {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.labelContainer {
+    width: 30%;
+    text-align: left;
+}
+  

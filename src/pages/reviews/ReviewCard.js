@@ -30,9 +30,6 @@ const ReviewCard = ({fetchReviews, setCourse, setReviews, ...props}) => {
         content,
     } = props
 
-    const handelShowModal = () => setShowEditModal(true)
-    const handleHideModal = () => setShowEditModal(false)
-
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 

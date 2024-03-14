@@ -1,3 +1,7 @@
+.progress-bar {
+  background-color: red !important; /* Set your custom color */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -114,7 +114,6 @@ const CourseDetail = (props) => {
                     </Col>
                 </Row>
             </Container>
-
         </div>
     )
 }

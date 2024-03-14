@@ -9,6 +9,8 @@ import ReviewCard from '../reviews/ReviewCard';
 import Asset from '../../components/Asset';
 import CourseEditForm from './CourseEditForm';
 import CourseDelete from './CourseDelete';
+import ReviewsOverview from '../reviews/ReviewsOverview';
+import Rating from '../../components/Rating';
 
 const CoursePage = () => {  
 
@@ -112,12 +114,21 @@ const CoursePage = () => {
                                 setReviews={setReviews}    
                             />
                         ) : reviews.results?.length ? (
-                            'Comments'
+                            'NOT LOGGED IT -> TO FINISH'
                         ) : null }             
                     </Col>
                 </Row>
+                
+                <h4 className='m-0'>Reviews</h4>
+                <div className='d-flex my-2'>
+                    <Rating rating={course.results[0].overall_rating}/>
+                    <span className='ml-2'>{course.results[0].ratings_count} reviews</span>        
+                </div>
                 <Row>
-                    <Col>
+                    <Col md={4} lg={5}>
+                        <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
+                    </Col>
+                    <Col md={8} lg={7}>
                         {reviews.results?.length ? (
                             reviews.results.map((review) => (
                                 <ReviewCard 
