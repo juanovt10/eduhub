@@ -7,14 +7,24 @@ import styles from '../../styles/Review.module.css';
 import {Dropdown, DropdownButton} from 'react-bootstrap';
 import {
     DropdownMenu,
-    DropdownMenuCheckboxItem,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '../../@/components/ui/dropdown-menu';
 import {Button} from '../../@/components/ui/button';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetFooter,
+    SheetTitle,
+    SheetTrigger,
+} from "../../@/components/ui/sheet";
+import { Input } from '../../@/components/ui/input';
+import { Label } from '../../@/components/ui/label';
+import ReviewEditForm from './ReviewEditForm';
 
 const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
 
@@ -49,6 +59,8 @@ const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
         }));
     }
 
+    const [isSheetOpen, setSheetOpen] = useState(false);
+
     const ratingNames = {
         5: 'Excelent',
         4: 'Good',
@@ -72,17 +84,64 @@ const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
                         </div>
                     </div>
                     {is_owner && (
-                        <div>
-                            <DropdownMenu >
-                                <DropdownMenuTrigger asChild className={styles.dropdown}>
-                                    <Button variant="outline" className={`px-3 ${styles.dropdownSymbol}`}><i class="fa-solid fa-ellipsis"></i></Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className={`w-56 ${styles.dropdownMenu}`}>
-                                    <DropdownMenuItem className={styles.dropdownItem}><i class="fa-solid fa-pen"></i><span className='ml-1'>Edit</span></DropdownMenuItem>
-                                    <DropdownMenuItem className={styles.dropdownItem}><i class="fa-solid fa-trash"></i><span className='ml-1'>Edit</span></DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
+                        <>
+                            <div>
+                                <DropdownMenu >
+                                    <DropdownMenuTrigger asChild className={styles.dropdown}>
+                                        <Button variant="outline" className={`px-3 ${styles.dropdownSymbol}`}><i class="fa-solid fa-ellipsis"></i></Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className={`w-56 ${styles.dropdownMenu}`}>
+                                        <DropdownMenuItem className={styles.dropdownItem} onSelect={() => setSheetOpen(true)}><i class="fa-solid fa-trash"></i><span className='ml-1'>Edit</span></DropdownMenuItem>
+                                        <DropdownMenuItem className={styles.dropdownItem}><i class="fa-solid fa-trash"></i><span className='ml-1'>Delete</span></DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </div>
+
+
+
+                            {/* <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+                                <SheetContent className={styles.sheetContainer} side={'right'}>
+                                    <SheetHeader>
+                                        <SheetTitle>Edit profile</SheetTitle>
+                                        <SheetDescription>
+                                            Make changes to your profile here. Click save when you're done.
+                                        </SheetDescription>
+                                    </SheetHeader>
+                                    <div className="grid gap-4 py-4">
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <Label htmlFor="name" className="text-right">
+                                                Name
+                                            </Label>
+                                            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <Label htmlFor="username" className="text-right">
+                                                Username
+                                            </Label>
+                                            <Input id="username" value="@peduarte" className="col-span-3" />
+                                        </div>
+                                    </div>
+                                    <SheetFooter>
+                                        <SheetClose asChild>
+                                            <Button type="submit">Save changes</Button>
+                                        </SheetClose>
+                                    </SheetFooter>
+                                </SheetContent>
+                            </Sheet> */}
+
+
+
+                            <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+                                <ReviewEditForm fetchReviews={fetchReviews} {...props} />
+                            </Sheet>
+
+
+
+                        </>
+
+
+
+
                     )}
                 </Col>
             </Row>

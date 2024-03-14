@@ -1,12 +1,27 @@
 import React, { useState } from 'react'
-import { Form, Modal, Button } from 'react-bootstrap'
+// import { Form, Modal, Button } from 'react-bootstrap'
+import { Form, Button} from 'react-bootstrap'
 import RatingInput from '../../components/RatingInput'
 import { axiosRes } from '../../api/axiosDefaults'
+// import {Button} from '../../@/components/ui/button';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetFooter,
+    SheetTitle,
+    SheetTrigger,
+} from "../../@/components/ui/sheet";
+import { Input } from '../../@/components/ui/input';
+import { Label } from '../../@/components/ui/label';
+import styles from '../../styles/ReviewEdit.module.css'
 
-const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
+// const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
+const ReviewEditForm = ({fetchReviews, ...props}) => {
 
     const [reviewData, setReviewData] = useState({...props})
-
     const {id, title, rating, content} = reviewData;
 
     console.log(id)
@@ -32,7 +47,6 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
                 rating,
             });
             fetchReviews();
-            onHide();
         } catch (err) {
             console.log(err)
         }
@@ -41,37 +55,85 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
 
     return (
-        <div>
-            <Modal.Header closeButton>
-                <Modal.Title>Edit review</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                        <Form.Control 
-                            name='title'
-                            value={title}
-                            onChange={handleChange}
-                            type='text'
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control 
-                            name='content'
-                            value={content}
-                            onChange={handleChange}
-                            type='text'
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <RatingInput rating={rating} setRating={handleRatingChange} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </Modal.Body>
-        </div>
+        <SheetContent className={styles.sheetContainer} side={'right'}>
+            <SheetHeader>
+                <SheetTitle className={styles.sheetTitle}>Edit review</SheetTitle>
+            </SheetHeader>
+            <Form onSubmit={handleSubmit} className={styles.sheetForm}>
+                <Form.Group>
+                    <Form.Control
+                        name='title'
+                        value={title}
+                        onChange={handleChange}
+                        type='text'
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control
+                        name='content'
+                        value={content}
+                        onChange={handleChange}
+                        as='textarea'
+                        rows={3}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <RatingInput rating={rating} setRating={handleRatingChange} />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </SheetContent>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <div>
+//  <Modal.Header closeButton>
+//                 <Modal.Title>Edit review</Modal.Title>
+//             </Modal.Header>
+//             <Modal.Body>
+//                 <Form onSubmit={handleSubmit}>
+//                     <Form.Group>
+//                         <Form.Control 
+//                             name='title'
+//                             value={title}
+//                             onChange={handleChange}
+//                             type='text'
+//                         />
+//                     </Form.Group>
+//                     <Form.Group>
+//                         <Form.Control 
+//                             name='content'
+//                             value={content}
+//                             onChange={handleChange}
+//                             type='text'
+//                         />
+//                     </Form.Group>
+//                     <Form.Group>
+//                         <RatingInput rating={rating} setRating={handleRatingChange} />
+//                     </Form.Group>
+//                     <Button variant="primary" type="submit">
+//                         Submit
+//                     </Button>
+//                 </Form>
+//             </Modal.Body> */}
+//         </div>
     )
 }
 

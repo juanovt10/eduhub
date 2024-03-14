@@ -1,0 +1,19 @@
+.sheetContainer {
+    background-color: #082641;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    
+}
+
+.sheetTitle {
+    color: white;
+    font-size: 30px;
+}
+
+.sheetForm {
+    width: 95%;
+}
