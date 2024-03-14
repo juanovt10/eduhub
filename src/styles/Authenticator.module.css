@@ -46,6 +46,12 @@
     border: 1px solid #f5793b;
 }
 
+.button:focus {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+    box-shadow: inset 0 3px 5px #ff9254;
+}
+
 .tabsHeader {
     padding-left: 0;
     padding-right: 0;
@@ -78,10 +84,8 @@
     border-radius: none;
 }
 
-/* .tabs a:focus {
-    background-color: red;
-    font-weight: 700;
-    width: 50%;
-    border-radius: none;
-} */
+.successAlert {
+    width: 90%;
+    margin-top: 1rem;
+}
 

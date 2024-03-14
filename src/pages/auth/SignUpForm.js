@@ -12,7 +12,7 @@ import logo from '../../assets/eduhub-color-logo.png'
 import Asset from '../../components/Asset';
 
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSignUpSuccess }) => {
 
     const [startLoading, setStartLoading] = useState(false);
     const [signUpData, setSignUpData] = useState({
@@ -40,10 +40,12 @@ const SignUpForm = () => {
         setStartLoading(true)
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData);
-            history.push('/auth', { fromSignup: true });
+            onSignUpSuccess();
         } catch(err) {
             setStartLoading(false);
             setErrors(err.response?.data);
+        } finally {
+            setStartLoading(false);
         }
     };
 
@@ -107,63 +109,6 @@ const SignUpForm = () => {
                 </Form>
             </Card.Body>
         </Card>
-        // <div>
-        //     <Card className={styles.CardBody}>
-        //         <Card.Body>
-        //             <Card.Title className={styles.CardTitle} >Sign Up</Card.Title>
-        //             <Form onSubmit={handleSubmit}>
-        //                 <Form.Group controlId="username">
-        //                     <Form.Control 
-        //                         className={`mb-3 ${styles.FormControl}`} 
-        //                         type="text" 
-        //                         name="username"
-        //                         placeholder='Username'
-        //                         value={username}
-        //                         onChange={handleChange}
-        //                     />
-        //                 </Form.Group>
-        //                 {errors.username?.map((message, idx) => 
-        //                     <Alert variant="warning" key={idx}>{message}</Alert>
-        //                 )}
-
-        //                 <Form.Group controlId="password1" >
-        //                     <Form.Control 
-        //                         className={`mb-3 ${styles.FormControl}`}
-        //                         placeholder='password'
-        //                         type="password"
-        //                         name="password1" 
-        //                         value={password1}
-        //                         onChange={handleChange}
-        //                     />
-        //                 </Form.Group>
-        //                 {errors.password1?.map((message, idx) => 
-        //                     <Alert variant="warning" key={idx}>{message}</Alert>
-        //                 )}
-
-        //                 <Form.Group controlId="password2">
-        //                     <Form.Control 
-        //                         className={`mb-3 ${styles.FormControl}`}
-        //                         placeholder='confirm password'
-        //                         type="password"
-        //                         name="password2"
-        //                         value={password2}
-        //                         onChange={handleChange}
-        //                     />
-        //                 </Form.Group>
-        //                 {errors.password2?.map((message, idx) => 
-        //                     <Alert variant="warning" key={idx}>{message}</Alert>
-        //                 )}
-
-        //                 <Button className={styles.ButtonPrimary} type="submit">
-        //                     Sign Up
-        //                 </Button>
-        //                 {errors.non_field_errors?.map((message, idx) => 
-        //                     <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
-        //                 )}
-        //             </Form>
-        //         </Card.Body>
-        //     </Card>
-        // </div>
     )
 }
 

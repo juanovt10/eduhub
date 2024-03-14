@@ -11,7 +11,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import logo from '../../assets/eduhub-color-logo.png'
 import Asset from '../../components/Asset';
 
-const SignInForm = () => {
+const SignInForm = ({ showSuccess, dismissSuccess}) => {
     const setCurrentUser = useSetCurrentUser();
 
     const [startLoading, setStartLoading] = useState(false);
@@ -61,6 +61,16 @@ const SignInForm = () => {
     
     return (
         <Card className={styles.Card}>
+            {showSuccess && (
+                <Alert 
+                    variant="success"
+                    onClose={dismissSuccess} 
+                    dismissible
+                    className={styles.successAlert}
+                >
+                    Thank you for signing up! Please sign in to continue.
+                </Alert>
+            )}
             <Card.Body className={styles.formContainer}>
                 <img src={logo} alt="logo" className={styles.logo} />
                 <Form onSubmit={handleSubmit}>

@@ -4,38 +4,32 @@ import Tabs from 'react-bootstrap/Tabs'
 import styles from "../../styles/Authenticator.module.css";
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const Authenticator = () => {
 
-    const location = useLocation();
-    const [key, setKey] = useState('signup')
-    const [trigger, setTrigger] = useState(location.state?.fromSignup)
+    const [activeTab, setActiveTab] = useState('signup');
+    const [showSuccess, setShowSuccess] = useState(false);
 
-    useEffect(() => {
-        if (location.state?.fromSignup) {
-            setKey('signin')
-        } else {
-            setKey('signup')
-        }
-
-        setTrigger(location.state?.fromSignup)
-    }, [trigger])
+    const handleSignUpSuccess = () => {
+        setActiveTab('signin');
+        setShowSuccess(true);
+    }
 
     return (
         <div className={styles.DivContainer}>
             <Tabs
-                defaultActiveKey={key}
+                activeKey={activeTab}
+                onSelect={(k) => setActiveTab(k)}
                 id="fill-tab-example"
                 className={styles.tabs}
                 fill
             >
                 <Tab eventKey="signup" title="Sign Up" className={styles.tabContainer}>
-                    <SignUpForm />
+                    <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
                 </Tab>
                 <Tab eventKey="signin" title="Sign In" className={styles.tabContainer}>
-                    <SignInForm />
+                    <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>
                 </Tab>
             </Tabs>
         </div>
