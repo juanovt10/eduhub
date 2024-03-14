@@ -1,7 +1,6 @@
 .Navbar {
-    background-color: #1e2022;
     font-family: 'Raleway', sans-serif;
-    border-bottom: 1px solid #e6e6e6;
+    background-color: rgba(8, 38, 65, 0.8);
 }
 
 .Navlink {

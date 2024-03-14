@@ -16,7 +16,7 @@ const HeroSectionOpt2 = () => {
                 <Col>
                     <h1>Empower your team, Elevate Your Success</h1>
                     <p className='text-left text-violet-300'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper viverra nam libero justo laoreet sit amet. Purus sit amet luctus venenatis lectus magna fringilla</p>
-                    <Accordion type="single" collapsible>
+                    <Accordion type="multiple" collapsible>
                         <AccordionItem value="item-1">
                             <AccordionTrigger>Is it accessible?</AccordionTrigger>
                             <AccordionContent>

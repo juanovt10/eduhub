@@ -2,10 +2,14 @@
     padding-top: 65px;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .background {
-    background: linear-gradient(135deg, #1e2022 0%, #1e2022 50%, #f5793b 100%);
+    background: radial-gradient(circle, #1e2022 30%, #082641 100%);
     color: white;
 }
 

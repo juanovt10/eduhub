@@ -19,19 +19,19 @@ const CoursesPage = () => {
     }
 
     return (
-        <div className={`d-flex flex-column align-items-center justify-content-center ${styles.courses_background}`}>
-            <h1 className='text-center my-5'>Explore our courses</h1>
-            <Container>
+        <div className={`d-flex flex-column align-items-center justify-content-center`}>
+            <h1 className={`text-center ${styles.pageTitle}`}>Explore our courses</h1>
+            <div className='mx-5'>
                 <Row>
                     <Col md={3}>
                         <CourseFilter onFiltersApplied={handleFiltersApplied} />
                     </Col>
-                    <Col  md={9}>
-                        <CourseSorting onSortingApplied={handleSorting}/>
+                    <Col md={9}>
+                        <CourseSorting onSortingApplied={handleSorting} />
                         <CoursesDisplay filters={filters} sortKey={sortKey} />
                     </Col>
                 </Row>                
-            </Container>
+            </div>
         </div>
     )
 }
