@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import styles from '../../styles/SignUpForm.module.css'
+import styles from '../../styles/Authenticator.module.css'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useSetCurrentUser } from '../../context/CurrentUserContext';
-import { axiosReq } from '../../api/axiosDefaults';
+import { axiosReq } from '../../api/axiosDefaults'; 
+import logo from '../../assets/eduhub-color-logo.png'
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser();
@@ -54,7 +55,8 @@ const SignInForm = () => {
     };
 
     return (
-        <Card.Body>
+        <Card.Body className={styles.tabContainer}>
+            <img src={logo} alt="logo" className={styles.logo} />
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="username">
                     <Form.Control
@@ -84,7 +86,7 @@ const SignInForm = () => {
                     <Alert variant="warning" key={idx}>{message}</Alert>
                 )}
 
-                <Button className={styles.ButtonPrimary} type="submit">
+                <Button className={styles.button} type="submit">
                     Sign In
                 </Button>
                 {errors.non_field_errors?.map((message, idx) =>

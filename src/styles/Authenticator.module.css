@@ -15,3 +15,38 @@
     width: 0rem;
     min-width: 250px;
 }
+
+.logo {
+    height: 40px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tabContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    width: 100%;
+    background-color: #f5793b;
+    border: 1px solid #f5793b;
+}
+
+.button:hover {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+}
+
+.tabsHeader {
+    padding: 0 0.75rem;
+}
+
+.tab {
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+}
+

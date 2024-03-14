@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import styles from '../../styles/SignUpForm.module.css'
+// import styles from '../../styles/SignUpForm.module.css'
+import styles from '../../styles/Authenticator.module.css'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import logo from '../../assets/eduhub-color-logo.png'
 
 
 const SignUpForm = () => {
@@ -42,8 +44,8 @@ const SignUpForm = () => {
     };
 
     return (
-        <Card.Body>
-            {/* <Card.Title className={styles.CardTitle} >Sign Up</Card.Title> */}
+        <Card.Body className={styles.tabContainer}>
+            <img src={logo} alt="logo" className={styles.logo} />
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="username">
                     <Form.Control
@@ -87,7 +89,7 @@ const SignUpForm = () => {
                     <Alert variant="warning" key={idx}>{message}</Alert>
                 )}
 
-                <Button className={styles.ButtonPrimary} type="submit">
+                <Button className={styles.button} type="submit">
                     Sign Up
                 </Button>
                 {errors.non_field_errors?.map((message, idx) =>
