@@ -11,6 +11,7 @@ import CourseEditForm from './CourseEditForm';
 import CourseDelete from './CourseDelete';
 import ReviewsOverview from '../reviews/ReviewsOverview';
 import Rating from '../../components/Rating';
+import Review from '../reviews/Review';
 
 const CoursePage = () => {  
 
@@ -125,19 +126,26 @@ const CoursePage = () => {
                     <span className='ml-2'>{course.results[0].ratings_count} reviews</span>        
                 </div>
                 <Row>
-                    <Col md={4} lg={5}>
+                    <Col md={4} lg={5} className='mb-5'>
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
                     </Col>
                     <Col md={8} lg={7}>
                         {reviews.results?.length ? (
                             reviews.results.map((review) => (
-                                <ReviewCard 
+                                <Review 
                                     key={review.id}
                                     fetchReviews={reFetchCourseReviews}
                                     setCourse={setCourse}
                                     setReviews={setReviews}
                                     {...review}
                                 />
+                                // <ReviewCard 
+                                //     key={review.id}
+                                //     fetchReviews={reFetchCourseReviews}
+                                //     setCourse={setCourse}
+                                //     setReviews={setReviews}
+                                //     {...review}
+                                // />
                             ))
                         ) : (
                             'No reviews yet'
