@@ -1,11 +1,15 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+
 
 const CourseSorting = ({ onSortingApplied }) => {
+
     return (
         <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
             <Nav.Item>
-                <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
+                <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i> <i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link onClick={() => onSortingApplied('rating')}><i class="fa-solid fa-star"></i> Highly rated</Nav.Link>

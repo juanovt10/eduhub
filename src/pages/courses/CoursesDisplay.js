@@ -53,13 +53,12 @@ const CoursesDisplay = ({ filters, sortKey }) => {
     return (
         <div>
             {coursesHasLoaded ? (
-                <Row>
+                <Row >
                     {courses.results?.length ? (
                         courses.results.map(course => (
-                            <Col className='mb-3' md={4} key={course.id}>
+                            <Col xs={12} md={6} lg={4} className='d-flex justify-content-center p-0' key={course.id}>
                                 <CourseCard {...course} setCourses={setCourses} />
                             </Col>
-
                         ))
                     ) : (
                         <Row>

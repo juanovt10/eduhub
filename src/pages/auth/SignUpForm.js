@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-// import styles from '../../styles/SignUpForm.module.css'
 import styles from '../../styles/Authenticator.module.css'
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 import logo from '../../assets/eduhub-color-logo.png'
 import Asset from '../../components/Asset';
 
@@ -24,9 +21,6 @@ const SignUpForm = ({ onSignUpSuccess }) => {
     const { username, password1, password2 } = signUpData; 
 
     const [errors, setErrors] = useState({});
-
-    const history = useHistory();
-    const form = useForm();
 
     const handleChange = (event) => {
         setSignUpData({
@@ -96,7 +90,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     )}
 
-                    <Button className={styles.button} type="submit">
+                    <Button className={styles.buttonPrimary} type="submit">
                         {!startLoading ? (
                             "Sign Up"
                         ) : (

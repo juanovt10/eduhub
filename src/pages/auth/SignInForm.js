@@ -102,7 +102,7 @@ const SignInForm = ({ showSuccess, dismissSuccess}) => {
                         <Alert variant="warning" key={idx}>{message}</Alert>
                     )}
 
-                    <Button className={styles.button} type="submit">
+                    <Button className={styles.buttonPrimary} type="submit">
                         {!startLoading ? (
                             "Sign In"
                         ) : (

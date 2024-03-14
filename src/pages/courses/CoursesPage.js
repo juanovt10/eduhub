@@ -23,10 +23,10 @@ const CoursesPage = () => {
             <h1 className={`text-center ${styles.pageTitle}`}>Explore our courses</h1>
             <div className='mx-5'>
                 <Row>
-                    <Col md={3}>
+                    <Col sm={4} md={3} className='d-none d-sm-block'>
                         <CourseFilter onFiltersApplied={handleFiltersApplied} />
                     </Col>
-                    <Col md={9}>
+                    <Col sm={8} md={9}>
                         <CourseSorting onSortingApplied={handleSorting} />
                         <CoursesDisplay filters={filters} sortKey={sortKey} />
                     </Col>

@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Button, ListGroup, Row, Col } from 'react-bootstrap';
 import Rating from '../../components/Rating';
 import styles from '../../styles/CourseCard.module.css';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CourseCard = (props) => {
     const {
@@ -27,33 +27,40 @@ const CourseCard = (props) => {
         enrollments_count,
     } = props
 
+    const history = useHistory();
+
+    const goToCourse = () => {
+        history.push(`/courses/${id}`);
+    }
+
     return (
-        <Card>
-            <Card.Header>{category}</Card.Header>
-            <Card.Img className={styles.Image} variant="top" src={image} />
+
+        <Card className={styles.CompactCard}>
+            <div className={styles.CardImageContainer}>
+                <Card.Img className={styles.Image} variant="top" src={image} />
+                <div className={styles.CategoryLabel}>{category}</div>
+            </div>
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                    {description}
+                <Card.Text className={styles.CompactDescription}>
+                    {description.length > 50 ? `${description.substring(0, 50)}...` : description}
                 </Card.Text>
+                <div className={styles.CourseDetails}>
+                    <span>${price}</span>
+                    <span>{enrollments_count} Enrollments</span>
+                </div>
+                <div className='d-flex justify-content-center align-items-center my-3'>
+                    <Rating rating={overall_rating} /> ({ratings_count})
+                </div>
+                <div className='d-flex justify-content-evenly'>
+                    {video_hours > 0 && <i className="fa-solid fa-video" title="Video Hours"></i>}
+                    {article_count > 0 && <i className="fa-brands fa-readme" title="Articles"></i>}
+                    {test_count > 0 && <i className="fa-solid fa-pen-to-square" title="Tests"></i>}
+                </div>
             </Card.Body>
-            <ListGroup className="list-group-flush">
-                <ListGroup.Item>{price}</ListGroup.Item>
-                <ListGroup.Item>{duration}</ListGroup.Item>
-                <ListGroup.Item><Rating rating={overall_rating} /><span className="ml-1">({ratings_count})</span></ListGroup.Item>
-            </ListGroup>
-            <Card.Body>
-                <Row>
-                    <Col xs={5} className='d-flex justify-content-between align-items-center'>
-                        {video_hours > 0 ? <i class="fa-solid fa-video"></i> : "" }
-                        {article_count > 0 ? <i class="fa-brands fa-readme"></i> : "" }
-                        {test_count > 0 ? <i class="fa-solid fa-pen-to-square"></i> : "" }  
-                    </Col>
-                    <Col xs={7} className='d-flex justify-content-center w-100'>
-                        <Link to={`/courses/${id}`}>Explore course</Link>
-                    </Col>
-                </Row>                
-            </Card.Body>
+            <Card.Footer className="text-center">
+                <Button onClick={goToCourse} className={styles.buttonPrimary}>Explore Course</Button>
+            </Card.Footer>
         </Card>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs'
+import Tabs from 'react-bootstrap/Tabs';
 import styles from "../../styles/Authenticator.module.css";
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
