@@ -15,7 +15,7 @@ const RatingInput = ({ rating, setRating }) => {
     }
 
     return (
-        <div>
+        <div className='d-flex'>
             <div>
                 {[1, 2, 3, 4, 5].map((star) => (
                     <i
@@ -27,7 +27,7 @@ const RatingInput = ({ rating, setRating }) => {
                 ))}
             </div>
             {rating && (
-                <div className='mt-2'>
+                <div className='ml-2'>
                     <strong>{ratingNames[rating]}</strong>
                 </div>
             )}

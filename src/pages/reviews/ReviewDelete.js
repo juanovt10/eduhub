@@ -1,6 +1,13 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { axiosRes } from '../../api/axiosDefaults'
+import {
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+} from "../../@/components/ui/sheet";
+import styles from '../../styles/ReviewEdit.module.css'
 
 const ReviewDelete = ({onHide, fetchReviews, setCourse, setReviews, id}) => {
 
@@ -31,18 +38,16 @@ const ReviewDelete = ({onHide, fetchReviews, setCourse, setReviews, id}) => {
     }
 
     return (
-        <div>
-            <Modal.Header closeButton>
-                <Modal.Title>Delete review?</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                Are you sure you want to delete the review?
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant='primary' onClick={onHide}>No!!!</Button>
-                <Button variant='danger' onClick={handleDelete}>Yes, Delete review</Button>
-            </Modal.Footer>
-        </div>
+        <SheetContent className={styles.sheetContainer} side={'right'}>
+            <SheetHeader>
+                <SheetTitle className={styles.sheetTitle}>Delete review</SheetTitle>
+            </SheetHeader>
+            <SheetDescription>
+                Are you sure you want to delete your review?
+            </SheetDescription>
+            <Button variant='primary' onClick={onHide}>No!!!</Button>
+            <Button variant='danger' onClick={handleDelete}>Yes, Delete review</Button>
+        </SheetContent>
     )
 }
 
