@@ -130,22 +130,20 @@ const CoursePage = () => {
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
                     </Col>
                     <Col md={8} lg={7}>
+                        <ReviewCreateForm
+                            course={id}
+                            setCourse={setCourse}
+                            setReviews={setReviews}
+                        />
                         {reviews.results?.length ? (
                             reviews.results.map((review) => (
-                                <Review 
+                                <Review
                                     key={review.id}
                                     fetchReviews={reFetchCourseReviews}
                                     setCourse={setCourse}
                                     setReviews={setReviews}
                                     {...review}
                                 />
-                                // <ReviewCard 
-                                //     key={review.id}
-                                //     fetchReviews={reFetchCourseReviews}
-                                //     setCourse={setCourse}
-                                //     setReviews={setReviews}
-                                //     {...review}
-                                // />
                             ))
                         ) : (
                             'No reviews yet'
