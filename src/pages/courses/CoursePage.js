@@ -97,7 +97,7 @@ const CoursePage = () => {
                 <Row>
                     <Col md={6} className='d-flex flex-column justify-content-center align-items-center'>
                         <h2>{courseData.title}</h2>
-                        <p>{courseData.title}</p>
+                        <p>{courseData.description}</p>
                     </Col>
                     <Col md={5}>
                         <Image src={courseData.image} fluid/>

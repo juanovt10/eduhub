@@ -6,13 +6,15 @@
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    width: 1000px;
-    max-width: none;
 }
 
-.editSheetContainer {
-    width: 1000px;
+.editCourseSheetContainer {
+    width: 100%;
+    max-width: none;
+    padding-top: 32rem;
+    overflow-y: auto;
 }
+
 
 .sheetTitle {
     color: white;
@@ -21,4 +23,25 @@
 
 .sheetForm {
     width: 95%;
+}
+
+.sheetEditCourseForm {
+    width: 90%;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+    .editCourseSheetContainer {
+        padding-top: 15rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .editCourseSheetContainer {
+        padding-top: 40rem;
+    }
+
+    .sheetEditCourseForm {
+        padding-bottom: 8rem;
+    }
 }

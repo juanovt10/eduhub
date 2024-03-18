@@ -97,12 +97,12 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
     }
 
     return (
-        <SheetContent className={`${styles.sheetContainer}`} side={'right'}>
+        <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
             <SheetHeader>
                 <SheetTitle className={styles.sheetTitle}>Edit Course</SheetTitle>
             </SheetHeader>
 
-            <Form onSubmit={handleSubmit}>
+            <Form className={styles.sheetEditCourseForm} onSubmit={handleSubmit}>
                 <Row>
                     <Form.Group as={Col}>
                         <Form.Label>Title</Form.Label>
