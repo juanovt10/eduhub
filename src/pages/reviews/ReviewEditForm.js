@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Form, Button} from 'react-bootstrap'
 import RatingInput from '../../components/RatingInput'
 import { axiosRes } from '../../api/axiosDefaults'
-// import {Button} from '../../@/components/ui/button';
 import {
     Sheet,
     SheetContent,
@@ -18,7 +17,7 @@ import { Input } from '../../@/components/ui/input';
 import { Label } from '../../@/components/ui/label';
 import styles from '../../styles/ReviewEdit.module.css'
 
-// const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
+
 const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
     const [reviewData, setReviewData] = useState({...props})

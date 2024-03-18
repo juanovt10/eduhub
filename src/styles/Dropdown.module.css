@@ -1,0 +1,21 @@
+.dropdown {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.dropdownSymbol {
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+.dropdownMenu {
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    margin: auto 10px;
+}
+
+.dropdownItem {
+    display: flex;
+    justify-content: center;
+}

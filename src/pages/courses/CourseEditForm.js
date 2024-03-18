@@ -2,6 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { axiosReq } from '../../api/axiosDefaults';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetFooter,
+    SheetTitle,
+    SheetTrigger,
+} from "../../@/components/ui/sheet";
+import styles from '../../styles/ReviewEdit.module.css'
  
 const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
@@ -86,138 +97,138 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
     }
 
     return (
-        <div>
-            <Modal.Header closeButton>
-                <Modal.Title>Edit Course: </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmit}>
-                    <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control
-                                name="title"
-                                value={title}
-                                onChange={handleChange}
-                                type="text"
-                            />
-                        </Form.Group>
-                    </Row>
+        <SheetContent className={`${styles.sheetContainer}`} side={'right'}>
+            <SheetHeader>
+                <SheetTitle className={styles.sheetTitle}>Edit Course</SheetTitle>
+            </SheetHeader>
 
-                    <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control
-                                name="description"
-                                value={description}
-                                onChange={handleChange}
-                                as="textarea"
-                            />
-                        </Form.Group>
-                    </Row>
+            <Form onSubmit={handleSubmit}>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            name="title"
+                            value={title}
+                            onChange={handleChange}
+                            type="text"
+                        />
+                    </Form.Group>
+                </Row>
 
-                    <Row>
-                        <Form.Group as={Col} controlId="formGridEmail">
-                            {image ? (
-                                <>
-                                    <figure>
-                                        <Image src={image} rounded />
-                                    </figure>
-                                    <div>
-                                        <Form.Label>Change image</Form.Label>
-                                    </div>
-                                </>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            name="description"
+                            value={description}
+                            onChange={handleChange}
+                            as="textarea"
+                        />
+                    </Form.Group>
+                </Row>
 
-                            ) : (
-                                <Form.Label>Image</Form.Label>
-                            )}
-                            <Form.File
-                                id="image-upload"
-                                accept="image/*"
-                                onChange={handleChangeImage}
-                                ref={imageInput}
-                            />
-                        </Form.Group>
-                    </Row>
+                <Row>
+                    <Form.Group as={Col} controlId="formGridEmail">
+                        {image ? (
+                            <>
+                                <figure>
+                                    <Image src={image} rounded />
+                                </figure>
+                                <div>
+                                    <Form.Label>Change image</Form.Label>
+                                </div>
+                            </>
 
-                    <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Category</Form.Label>
-                            <Form.Control
-                                as="select"
-                                defaultValue=""
-                                name="category"
-                                value={category}
-                                onChange={handleChange}
-                            >
-                                {Array.isArray(categories) && categories.map((cat, idx) => (
-                                    <option key={idx} value={cat.key}>{cat.value}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
+                        ) : (
+                            <Form.Label>Image</Form.Label>
+                        )}
+                        <Form.File
+                            id="image-upload"
+                            accept="image/*"
+                            onChange={handleChangeImage}
+                            ref={imageInput}
+                        />
+                    </Form.Group>
+                </Row>
 
-                        <Form.Group as={Col}>
-                            <Form.Label>Duration</Form.Label>
-                            <Form.Control
-                                name="duration"
-                                value={duration}
-                                onChange={handleChange}
-                                type="text"
-                            />
-                        </Form.Group>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Category</Form.Label>
+                        <Form.Control
+                            as="select"
+                            defaultValue=""
+                            name="category"
+                            value={category}
+                            onChange={handleChange}
+                        >
+                            {Array.isArray(categories) && categories.map((cat, idx) => (
+                                <option key={idx} value={cat.key}>{cat.value}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
 
-                        <Form.Group as={Col}>
-                            <Form.Label>price</Form.Label>
-                            <Form.Control
-                                name="price"
-                                value={price}
-                                onChange={handleChange}
-                                type="number"
-                            />
-                        </Form.Group>
-                    </Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Duration</Form.Label>
+                        <Form.Control
+                            name="duration"
+                            value={duration}
+                            onChange={handleChange}
+                            type="text"
+                        />
+                    </Form.Group>
 
-                    <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Video hours</Form.Label>
-                            <Form.Control
-                                name="video_hours"
-                                value={video_hours}
-                                onChange={handleChange}
-                                type="number"
-                            />
-                        </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>price</Form.Label>
+                        <Form.Control
+                            name="price"
+                            value={price}
+                            onChange={handleChange}
+                            type="number"
+                        />
+                    </Form.Group>
+                </Row>
 
-                        <Form.Group as={Col}>
-                            <Form.Label>Tests</Form.Label>
-                            <Form.Control
-                                name="test_count"
-                                value={test_count}
-                                onChange={handleChange}
-                                type="number"
-                            />
-                        </Form.Group>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Video hours</Form.Label>
+                        <Form.Control
+                            name="video_hours"
+                            value={video_hours}
+                            onChange={handleChange}
+                            type="number"
+                        />
+                    </Form.Group>
 
-                        <Form.Group as={Col}>
-                            <Form.Label>Articles</Form.Label>
-                            <Form.Control
-                                name="article_count"
-                                value={article_count}
-                                onChange={handleChange}
-                                type="number"
-                            />
-                        </Form.Group>
-                    </Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Tests</Form.Label>
+                        <Form.Control
+                            name="test_count"
+                            value={test_count}
+                            onChange={handleChange}
+                            type="number"
+                        />
+                    </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                    <Button variant="warning" onClick={onHide}>
-                        Discard Changes
-                    </Button>
-                </Form>
-            </Modal.Body>
-        </div>
+                    <Form.Group as={Col}>
+                        <Form.Label>Articles</Form.Label>
+                        <Form.Control
+                            name="article_count"
+                            value={article_count}
+                            onChange={handleChange}
+                            type="number"
+                        />
+                    </Form.Group>
+                </Row>
+
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+                <Button variant="warning" onClick={onHide}>
+                    Discard Changes
+                </Button>
+            </Form>
+        </SheetContent>
+
     )
 }
 

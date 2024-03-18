@@ -1,8 +1,4 @@
 .reviewContainer {
-    /* background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); */
     width: 100%;
     padding: 10px;
     border-bottom: 1px solid white;
@@ -36,27 +32,4 @@
     box-shadow: inset 0 3px 5px rgba(255, 146, 84, 0.5);
     box-shadow: inset 0 3px 5px #ff9254;
 }
-
-.dropdown {
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.dropdownSymbol {
-    font-size: 20px;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-}
-
-.dropdownMenu {
-    font-size: 20px;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    margin: auto 10px;
-}
-
-.dropdownItem {
-    display: flex;
-    justify-content: center;
-}
-
 

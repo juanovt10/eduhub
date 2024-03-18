@@ -4,16 +4,10 @@ import { useCurrentUser } from '../../context/CurrentUserContext';
 import Rating from '../../components/Rating';
 import { Row, Col } from 'react-bootstrap';
 import styles from '../../styles/Review.module.css';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '../../@/components/ui/dropdown-menu';
-import {Button} from '../../@/components/ui/button';
 import { Sheet } from "../../@/components/ui/sheet";
 import ReviewEditForm from './ReviewEditForm';
 import ReviewDelete from './ReviewDelete';
+import Dropdown from '../../components/Dropdown';
 
 const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
 
@@ -68,15 +62,11 @@ const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
                     {is_owner && (
                         <>
                             <div>
-                                <DropdownMenu >
-                                    <DropdownMenuTrigger asChild className={styles.dropdown}>
-                                        <Button variant="outline" className={`px-3 ${styles.dropdownSymbol}`}><i class="fa-solid fa-ellipsis"></i></Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className={`w-56 ${styles.dropdownMenu}`}>
-                                        <DropdownMenuItem className={styles.dropdownItem} onSelect={() => handleSheetDisplay('showEditSheet', true)}><i class="fa-solid fa-pen"></i><span className='ml-1'>Edit</span></DropdownMenuItem>
-                                        <DropdownMenuItem className={styles.dropdownItem} onSelect={() => handleSheetDisplay('showDeleteSheet', true)}><i class="fa-solid fa-trash"></i><span className='ml-1'>Delete</span></DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                                <Dropdown 
+                                    handleSelect={handleSheetDisplay}
+                                    actionTypes={['showEditSheet', 'showDeleteSheet']}
+                                    entity='review'
+                                />
                             </div>
                             <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
                                 <ReviewEditForm onHide={() => handleSheetDisplay('showEditSheet', false)} fetchReviews={fetchReviews} {...props} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Button, Container, Modal, Dropdown, ButtonGroup } from 'react-bootstrap';
+import { Col, Row, Button, Container, Modal, ButtonGroup, Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
@@ -12,6 +12,9 @@ import ReviewsOverview from '../reviews/ReviewsOverview';
 import Rating from '../../components/Rating';
 import Review from '../reviews/Review';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import CourseActions from './CourseActions';
+import Dropdown from '../../components/Dropdown';
+import { Sheet } from "../../@/components/ui/sheet";
 
 const CoursePage = () => {  
 
@@ -24,8 +27,17 @@ const CoursePage = () => {
         showEditModal: false,
         showDeleteModal: false,
     })
+    const [showSheet, setShowSheet] = useState({
+        showEditSheet: false,
+        showDeleteSheet: false
+    })
 
-    console.log(course)
+    const handleSheetDisplay = (sheetType, bool) => {
+        setShowSheet((prevSheet) => ({
+            ...prevSheet,
+            [sheetType]: bool,
+        }))
+    }
 
     const handleModalDisplay = (modalType, bool) => {
         setShowModal((prevModals) => ({
@@ -74,41 +86,54 @@ const CoursePage = () => {
         handleMount();
     }, [id]);
 
+    console.log(course.results[0])
+
+    const courseData = course.results[0]
 
     return (
-        <Container>
+        <Container className='mt-5'>
             {hasLoaded ? (
             <>
                 <Row>
-                    <Col>
-                        <CourseDetail {...course.results[0]} setCourses={setCourse}/>
+                    <Col md={6} className='d-flex flex-column justify-content-center align-items-center'>
+                        <h2>{courseData.title}</h2>
+                        <p>{courseData.title}</p>
+                    </Col>
+                    <Col md={5}>
+                        <Image src={courseData.image} fluid/>
+                    </Col>
+                    <Col md={1}>
+                        {course.results[0].is_owner && (
+                            <>
+                                <Dropdown 
+                                    handleSelect={handleSheetDisplay}
+                                    actionTypes={['showEditSheet', 'showDeleteSheet']}
+                                    entity='course'
+                                />
+
+                                <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
+                                    <CourseEditForm 
+                                        onHide={() => handleSheetDisplay('showEditSheet', false)}
+                                        refreshCourse={reFetchCourseData}
+                                        {...courseData}
+                                    />
+                                </Sheet>
+                                <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
+                                    <CourseDelete 
+                                        onHide={() => handleSheetDisplay('showDeleteSheet', false)}
+                                        id={courseData.id}
+                                    />
+                                </Sheet>
+                            
+                            </>
+                        )}
+
+
+                        {/* <CourseActions courseId={courseData.id}/> */}
                     </Col>
                 </Row>
-                {course.results[0].is_owner && (
-                    <Row>
-                        <Col>
-                            <Dropdown>
-                                <Dropdown.Toggle>
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showEditModal', true)}>
-                                            Edit course
-                                        </Button>    
-                                    </Dropdown.Item>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showDeleteModal', true)}>
-                                            Delete course
-                                        </Button>    
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Col>
-                    </Row>
-                )}
-                
+            
                 <h4 className='m-0'>Reviews</h4>
                 <div className='d-flex my-2'>
                     <Rating rating={course.results[0].overall_rating}/>
@@ -120,14 +145,12 @@ const CoursePage = () => {
                     </Col>
                     <Col md={8} lg={7}>
                         {currentUser ? (
-                            course.results.rating_id ? (
+                            !courseData.rating_id && (
                                 <ReviewCreateForm
                                     course={id}
                                     setCourse={setCourse}
                                     setReviews={setReviews}
                                 />   
-                            ) : (
-                                null
                             )
                         ) : (
                             <div className='ml-3'>
@@ -150,7 +173,12 @@ const CoursePage = () => {
                         )}
                     </Col>
                 </Row>
-                <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
+
+
+
+
+
+                {/* <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
                     <CourseEditForm 
                         onHide={() => handleModalDisplay('showEditModal', false)}
                         refreshCourse={reFetchCourseData}
@@ -162,7 +190,7 @@ const CoursePage = () => {
                         onHide={() => handleModalDisplay('showDeleteModal', false)}
                         id={course.results[0].id}
                     />
-                </Modal>
+                </Modal> */}
             </>
             ) : (
                 <Row>
