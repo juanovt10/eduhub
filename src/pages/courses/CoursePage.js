@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Button, Container, Modal, Dropdown } from 'react-bootstrap';
+import { Col, Row, Button, Container, Modal, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import CourseDetail from './CourseDetail';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
-import ReviewCard from '../reviews/ReviewCard';
 import Asset from '../../components/Asset';
 import CourseEditForm from './CourseEditForm';
 import CourseDelete from './CourseDelete';
 import ReviewsOverview from '../reviews/ReviewsOverview';
 import Rating from '../../components/Rating';
 import Review from '../reviews/Review';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const CoursePage = () => {  
 
@@ -24,6 +24,8 @@ const CoursePage = () => {
         showEditModal: false,
         showDeleteModal: false,
     })
+
+    console.log(course)
 
     const handleModalDisplay = (modalType, bool) => {
         setShowModal((prevModals) => ({
@@ -106,19 +108,6 @@ const CoursePage = () => {
                         </Col>
                     </Row>
                 )}
-                <Row>
-                    <Col>
-                        {currentUser ? (
-                            <ReviewCreateForm
-                                course={id}
-                                setCourse={setCourse}
-                                setReviews={setReviews}    
-                            />
-                        ) : reviews.results?.length ? (
-                            'NOT LOGGED IT -> TO FINISH'
-                        ) : null }             
-                    </Col>
-                </Row>
                 
                 <h4 className='m-0'>Reviews</h4>
                 <div className='d-flex my-2'>
@@ -130,11 +119,22 @@ const CoursePage = () => {
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
                     </Col>
                     <Col md={8} lg={7}>
-                        <ReviewCreateForm
-                            course={id}
-                            setCourse={setCourse}
-                            setReviews={setReviews}
-                        />
+                        {currentUser ? (
+                            course.results.rating_id ? (
+                                <ReviewCreateForm
+                                    course={id}
+                                    setCourse={setCourse}
+                                    setReviews={setReviews}
+                                />   
+                            ) : (
+                                null
+                            )
+                        ) : (
+                            <div className='ml-3'>
+                                <h5>To leave a review you must sign in</h5>
+                                <Button><Link to='/auth'>Sign Up</Link></Button>  
+                            </div>
+                        )}
                         {reviews.results?.length ? (
                             reviews.results.map((review) => (
                                 <Review

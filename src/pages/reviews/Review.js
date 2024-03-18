@@ -17,7 +17,6 @@ import ReviewDelete from './ReviewDelete';
 
 const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
 
-    console.log(props)
     const {
         id,
         title,
@@ -28,6 +27,7 @@ const Review = ({fetchReviews, setCourse, setReviews, ...props}) => {
         updated_at,
         created_at,
     } = props
+
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 

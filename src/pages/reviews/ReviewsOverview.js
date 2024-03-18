@@ -9,10 +9,6 @@ const ReviewsOverview = ({reviews, ...props}) => {
         ratings_count,
     } = props
 
-    console.log(overall_rating)
-    console.log(ratings_count)
-    console.log(reviews)
-
     const reviewsPerRating = (rating) => {
         return reviews.filter(review => review.rating === rating).length;
     }

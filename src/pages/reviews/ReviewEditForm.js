@@ -24,8 +24,6 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
     const [reviewData, setReviewData] = useState({...props})
     const {id, title, rating, content} = reviewData;
 
-    console.log(id)
-
     const handleChange = (e) => {
         setReviewData({
             ...reviewData,
