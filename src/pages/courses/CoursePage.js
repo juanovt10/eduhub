@@ -166,7 +166,7 @@ const CoursePage = () => {
 
                 <div className='mb-5'>
                     {!courseData.is_owner && (
-                        <CourseActions courseId={courseData.id}/>
+                        <CourseActions id={courseData.id}/>
                     )}
                 </div>
 
