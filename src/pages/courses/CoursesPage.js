@@ -4,11 +4,15 @@ import CoursesDisplay from './CoursesDisplay';
 import CourseFilter from './CourseFilter';
 import CourseSorting from './CourseSorting';
 import styles from '../../styles/CoursesPage.module.css';
+import { useCurrentUser } from '../../context/CurrentUserContext';
 
 
 const CoursesPage = () => {
     const [sortKey, setSortKey] = useState('default');
     const [filters, setFilters] = useState({});
+    const currentUser = useCurrentUser();
+
+    console.log(currentUser)
     
     const handleFiltersApplied = (newFilters) => {
         setFilters(newFilters);

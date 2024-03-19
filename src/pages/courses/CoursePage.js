@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row, Button, Container, Modal, ButtonGroup, Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
-import CourseDetail from './CourseDetail';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import Asset from '../../components/Asset';
@@ -17,6 +16,7 @@ import Dropdown from '../../components/Dropdown';
 import { Sheet } from "../../@/components/ui/sheet";
 import styles from "../../styles/CoursePage.module.css";
 
+
 const CoursePage = () => {  
 
     const { id } = useParams();
@@ -24,10 +24,6 @@ const CoursePage = () => {
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [showModal, setShowModal] = useState({
-        showEditModal: false,
-        showDeleteModal: false,
-    })
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
         showDeleteSheet: false
@@ -38,13 +34,6 @@ const CoursePage = () => {
             ...prevSheet,
             [sheetType]: bool,
         }))
-    }
-
-    const handleModalDisplay = (modalType, bool) => {
-        setShowModal((prevModals) => ({
-            ...prevModals,
-            [modalType]: bool,
-        }));
     }
 
     const reFetchCourseData = async () => {
@@ -85,7 +74,7 @@ const CoursePage = () => {
         };
 
         handleMount();
-    }, [id]);
+    }, [course]);
 
     console.log(course.results[0])
 
@@ -125,7 +114,6 @@ const CoursePage = () => {
                                         id={courseData.id}
                                     />
                                 </Sheet>
-                            
                             </>
                         )}
                     </Col>
@@ -165,8 +153,18 @@ const CoursePage = () => {
                 </Row>
 
                 <div className='mb-5'>
-                    {!courseData.is_owner && (
+                    {!currentUser ? (
+                        <>
+                            <p>To enroll, add to wish list or leave a review, please sign in</p>
+                            <Button><Link to='/auth'>Sign Up</Link></Button> 
+                        </>
+                    ) : !courseData.is_owner ? (
                         <CourseActions id={courseData.id}/>
+                    ) : (
+                        <>
+                            <p>You create this course, so you are not able to enroll or add to wish list</p>
+                            <Button><Link to='/course'>Explore courses</Link></Button> 
+                        </>
                     )}
                 </div>
 
@@ -182,7 +180,7 @@ const CoursePage = () => {
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
                     </Col>
                     <Col md={8} lg={7}>
-                        {currentUser ? (
+                        {currentUser && (
                             !courseData.rating_id && (
                                 <ReviewCreateForm
                                     course={id}
@@ -190,11 +188,6 @@ const CoursePage = () => {
                                     setReviews={setReviews}
                                 />   
                             )
-                        ) : (
-                            <div className='ml-3'>
-                                <h5>To leave a review you must sign in</h5>
-                                <Button><Link to='/auth'>Sign Up</Link></Button>  
-                            </div>
                         )}
                         {reviews.results?.length ? (
                             reviews.results.map((review) => (
@@ -211,24 +204,6 @@ const CoursePage = () => {
                         )}
                     </Col>
                 </Row>
-
-
-
-
-
-                {/* <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
-                    <CourseEditForm 
-                        onHide={() => handleModalDisplay('showEditModal', false)}
-                        refreshCourse={reFetchCourseData}
-                        {...course.results[0]}
-                        />
-                </Modal>
-                <Modal show={showModal.showDeleteModal} onHide={() => handleModalDisplay('showDeleteModal', false)}>
-                    <CourseDelete 
-                        onHide={() => handleModalDisplay('showDeleteModal', false)}
-                        id={course.results[0].id}
-                    />
-                </Modal> */}
             </>
             ) : (
                 <Row>

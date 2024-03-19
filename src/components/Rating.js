@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Rating = (props) => {
     const {rating = 0 } = props
