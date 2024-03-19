@@ -1,5 +1,4 @@
 .CompactCard {
-    max-width: 300px;
     width: 100%;
     min-width: 250px; 
     margin: 15px;
@@ -9,6 +8,8 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: #ffffff;
+    padding: 2rem 2.5rem;
+    height: auto;
 }
 
 .isInstructor {

@@ -24,18 +24,6 @@ const Profile = ({fetchProfileData, ...props}) => {
         wish_list_count,
     } = props
 
-    const [showModal, setShowModal] = useState({
-        showEditModal: false,
-        showDeleteModal: false,
-    })
-
-    const handleModalDisplay = (modalType, bool) => {
-        setShowModal((prevModals) => ({
-            ...prevModals,
-            [modalType]: bool,
-        }));
-    }
-
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
         showDeleteSheet: false
@@ -50,22 +38,23 @@ const Profile = ({fetchProfileData, ...props}) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-    console.log(is_instructor)
     
 
     return (
         <>
-            <Card className={`px-3 py-3 ${styles.CompactCard}`}>
+            <Card className={styles.CompactCard}>
                 <Row>
                     {is_instructor ? (
                         <Col className='text-left'>
                             <i class="fa-solid fa-graduation-cap"></i>
                         </Col>
                     ) : (
-                        <Col className='text-left'>
-                            {/* Need to add functionality */}
-                            <Button><i class="fa-solid fa-graduation-cap"></i></Button> 
-                        </Col>
+                        is_owner && (
+                            <Col className='text-left'>
+                                {/* Need to add functionality */}
+                                <Button><i class="fa-solid fa-graduation-cap"></i></Button> 
+                            </Col>
+                        )
                     )}
                     {is_owner && (
                         <Col className='text-right'>
@@ -130,7 +119,7 @@ const Profile = ({fetchProfileData, ...props}) => {
             </Card>
 
 
-            <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
+            {/* <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
                 <Modal.Header>
                     <Modal.Title>Edit profile? {name}</Modal.Title>
                 </Modal.Header>
@@ -147,7 +136,7 @@ const Profile = ({fetchProfileData, ...props}) => {
                     onHide={() => handleModalDisplay('showDeleteModal', false)}
                     id={id}
                 />
-            </Modal>
+            </Modal> */}
         </>
     )
 }

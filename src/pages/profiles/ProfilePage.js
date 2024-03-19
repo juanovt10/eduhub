@@ -66,44 +66,54 @@ const ProfilePage = () => {
         })
     }
 
+    const handleReviewFilter = () => {
+        setProfileCoursesFilter({
+            wish_listed: false,
+            enrolled: false
+        })
+    }
+
     console.log(profileReviews.results)
+    console.log(currentUser)
 
     return (
         <Container className='mt-5'>
             <Row>
-                <Col md={6}>
+                <Col lg={profileData.is_owner ? 5 : 12} className='d-flex justify-content-center'>
                     <Profile fetchProfileData={fetchProfileData} {...profileData} />      
                 </Col>
-                <Col md={6}>
-                    <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
-                        <Nav.Item>
-                            <Nav.Link onClick={handleEnrollFilter}><i class="fa-solid fa-graduation-cap"></i> Enrolled courses</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link onClick={handleWishListFilter}><i class="fa-solid fa-heart"></i> Wish List</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                    <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    {profileReviews.results?.length ? (
-                        <>
-                            <h3>Your reviews</h3>
-                            {profileReviews.results.map((review) => (
-                                <Review
+                {profileData.is_owner && (
+                    <Col lg={7}>
+                        <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
+                            <Nav.Item>
+                                <Nav.Link onClick={handleEnrollFilter}><i class="fa-solid fa-graduation-cap"></i> Enrolled courses</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link onClick={handleWishListFilter}><i class="fa-solid fa-heart"></i> Wish List</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link onClick={handleReviewFilter}><i class="fa-solid fa-star"></i> Reviews</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        {profileCoursesFilter.wish_listed || profileCoursesFilter.enrolled ? (
+                            <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>                        
+                        ) : profileReviews.results?.length ? (
+                                <>
+                                    {profileReviews.results.map((review) => (
+                                        <Review
                                         key={review.id}
                                         fetchReviews={fetchProfileReviews}
                                         profile
                                         {...review}
-                                />
-                            ))}
-                        </>
-                    ) : (
-                        <p>No reviews yet</p>
-                    )}
+                                        />
+                                        ))}
+                                </>
+                            ) : (
+                                <h3>No reviews yet</h3>
+                        )
+                        }
                 </Col>
+                )}
             </Row>
         </Container>
     )
