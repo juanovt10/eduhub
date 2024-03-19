@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Image, Dropdown, Button, Modal, ModalBody } from 'react-bootstrap';
+import { Card, Row, Col, Image, Button, Modal, ModalBody } from 'react-bootstrap';
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import CreateProfileForm from './CreateProfileForm';
 import ProfileDelete from './ProfileDelete';
 import styles from "../../styles/Profile.module.css";
+import Dropdown from '../../components/Dropdown';
+import { Sheet } from "../../@/components/ui/sheet";
 
 
 const Profile = ({fetchProfileData, ...props}) => {
@@ -34,6 +36,18 @@ const Profile = ({fetchProfileData, ...props}) => {
         }));
     }
 
+    const [showSheet, setShowSheet] = useState({
+        showEditSheet: false,
+        showDeleteSheet: false
+    })
+
+    const handleSheetDisplay = (sheetType, bool) => {
+        setShowSheet((prevSheet) => ({
+            ...prevSheet,
+            [sheetType]: bool,
+        }))
+    }
+
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
     console.log(is_instructor)
@@ -55,24 +69,21 @@ const Profile = ({fetchProfileData, ...props}) => {
                     )}
                     {is_owner && (
                         <Col className='text-right'>
-                            <Dropdown>
-                                <Dropdown.Toggle>
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </Dropdown.Toggle>
+                            <Dropdown
+                                handleSelect={handleSheetDisplay}
+                                actionTypes={['showEditSheet', 'showDeleteSheet']}
+                                entity='profile'
+                            />
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showEditModal', true)}>
-                                            Edit profile
-                                        </Button>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item>
-                                        <Button onClick={() => handleModalDisplay('showDeleteModal', true)}>
-                                            Delete profile
-                                        </Button>
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
+
+                            </Sheet>
+                            <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
+                                <ProfileDelete 
+                                    onHide={() => handleSheetDisplay('showDeleteSheet', false)}
+                                    id={id}
+                                />
+                            </Sheet>
                         </Col>
                     )}
                 </Row>
@@ -107,8 +118,8 @@ const Profile = ({fetchProfileData, ...props}) => {
 
                 <Row>
                     <Col>
-                        {/* <p>{bio}</p> */}
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui nunc mattis enim ut tellus. Pharetra sit amet aliquam id. Dictum non consectetur a erat. Pulvinar mattis nunc sed blandit libero.</p>
+                        {/* <p className='text-justify'>{bio}</p> */}
+                        <p className='text-justify'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui nunc mattis enim ut tellus. Pharetra sit amet aliquam id. Dictum non consectetur a erat. Pulvinar mattis nunc sed blandit libero.</p>
                     </Col>
                 </Row>
                 <Row className="mt-3">

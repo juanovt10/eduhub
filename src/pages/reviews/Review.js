@@ -83,15 +83,17 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
                             </div>
                             {is_owner && (
                                 <>
-                                    <div>
-                                        <Dropdown 
-                                            handleSelect={handleSheetDisplay}
-                                            actionTypes={['showEditSheet', 'showDeleteSheet']}
-                                            entity='review'
-                                        />
-                                    </div>
+                                    <Dropdown 
+                                        handleSelect={handleSheetDisplay}
+                                        actionTypes={['showEditSheet', 'showDeleteSheet']}
+                                        entity='review'
+                                    />
                                     <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
-                                        <ReviewEditForm onHide={() => handleSheetDisplay('showEditSheet', false)} fetchReviews={fetchReviews} {...props} />
+                                        <ReviewEditForm
+                                            onHide={() => handleSheetDisplay('showEditSheet', false)}
+                                            fetchReviews={fetchReviews}
+                                            {...props}
+                                        />
                                     </Sheet>
                                     <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}> 
                                         <ReviewDelete
