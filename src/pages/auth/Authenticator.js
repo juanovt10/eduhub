@@ -8,7 +8,6 @@ import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Asset from '../../components/Asset';
 
-
 const Authenticator = () => {
 
     const [activeTab, setActiveTab] = useState('signup');
@@ -47,7 +46,6 @@ const Authenticator = () => {
     }
 
     return (
-        
         <div className={styles.DivContainer}>
             <Tabs
                 activeKey={activeTab}

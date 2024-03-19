@@ -1,11 +1,17 @@
 import React from 'react'
-// import HeroSection from './HeroSection'
-import HeroSectionOpt2 from './HeroSectionOpt2'
+import HeroSection from './HeroSection'
+import HomeFeatureCourses from './HomeFeatureCourses'
+import HomeFAQs from './HomeFAQs'
+import HomeAbout from './HomeAbout'
 
 const Home = () => {
     return (
-        // <HeroSection />
-        <HeroSectionOpt2 />
+        <>
+            <HeroSection />
+            <HomeFeatureCourses />
+            <HomeAbout />
+            <HomeFAQs />
+        </>
     )
 }
 
