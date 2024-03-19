@@ -8,7 +8,8 @@ import { useCurrentUser } from '../../context/CurrentUserContext';
 
 const CourseActions = (id) => {
 
-    const [startLoading, setStartLoading] = useState(false);
+    const [startLoadingEnroll, setStartLoadingEnroll] = useState(false);
+    const [startLoadingWishList, setStartLoadingWishList] = useState(false);
     const [courseEnrollments, setCourseEnrollments] = useState([]);
     const [courseWishList, setCourseWishList] = useState([]);
 
@@ -34,7 +35,7 @@ const CourseActions = (id) => {
     }
 
     const handleEnrollment = async () => {
-        setStartLoading(true);
+        setStartLoadingEnroll(true);
         try {
             const response = await axiosRes.post('/enrollments/', {
                 course: courseId,
@@ -48,7 +49,7 @@ const CourseActions = (id) => {
     }
 
     const handleWishList = async () => {
-        setStartLoading(true);
+        setStartLoadingWishList(true);
         try {
             const response = await axiosRes.post('/wish_lists/', {
                 course: courseId,
@@ -72,12 +73,12 @@ const CourseActions = (id) => {
     return (
         <Row className={styles.courseActionsContainer}>
             <Col xs={12} sm={6} className='mb-3 m-md-0 d-flex aling-items-center justify-content-center'>
-                {!currentUserWishListed && (
+                {!currentUserWishListed && !isCurrentUserEnrolled && (
                     <Card className={styles.Card}>
                     <Card.Body>
                         <Card.Title>Save it for later!</Card.Title>
                         <Button className={styles.buttonSecondary} onClick={handleWishList}>
-                            {!startLoading ? (
+                            {!startLoadingWishList ? (
                                 <>
                                     Add to wish list <i class="fa-solid fa-heart"></i>+                                
                                 </>
@@ -95,7 +96,7 @@ const CourseActions = (id) => {
                     <Card.Body>
                         <Card.Title>Start learning now!</Card.Title>
                         <Button className={styles.buttonPrimary} onClick={handleEnrollment}>
-                            {!startLoading ? (
+                            {!startLoadingEnroll ? (
                                 <>
                                     Enroll <i class="fa-solid fa-graduation-cap"></i>
                                 </>

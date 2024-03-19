@@ -51,6 +51,7 @@
 }
 
 .buttonSecondary {
+    width: 100%;
     background-color: #00BCD4;
     border: 1px solid #00BCD4;
 }
