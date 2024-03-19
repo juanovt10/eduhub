@@ -4,6 +4,7 @@ import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import CreateProfileForm from './CreateProfileForm';
 import ProfileDelete from './ProfileDelete';
+import styles from "../../styles/Profile.module.css";
 
 
 const Profile = ({fetchProfileData, ...props}) => {
@@ -16,6 +17,9 @@ const Profile = ({fetchProfileData, ...props}) => {
         dob,
         image,
         is_instructor,
+        enrollments_count,
+        ratings_count,
+        wish_list_count,
     } = props
 
     const [showModal, setShowModal] = useState({
@@ -35,15 +39,18 @@ const Profile = ({fetchProfileData, ...props}) => {
     console.log(is_instructor)
     
 
-
-
     return (
         <>
-            <Card className='px-3 py-3'>
+            <Card className={`px-3 py-3 ${styles.CompactCard}`}>
                 <Row>
-                    {is_instructor && (
+                    {is_instructor ? (
                         <Col className='text-left'>
                             <i class="fa-solid fa-graduation-cap"></i>
+                        </Col>
+                    ) : (
+                        <Col className='text-left'>
+                            {/* Need to add functionality */}
+                            <Button><i class="fa-solid fa-graduation-cap"></i></Button> 
                         </Col>
                     )}
                     {is_owner && (
@@ -69,38 +76,39 @@ const Profile = ({fetchProfileData, ...props}) => {
                         </Col>
                     )}
                 </Row>
-                <Row>
-                    <Col>
-                        <hr />
-                    </Col>
-                    <Col>
-                        <Avatar
-                            src={image}
-                            height={100}
-                        />
-                    </Col>
-                    <Col>
-                        <hr />
-                    </Col>
+                <Row className='my-3'>
+                    <Avatar
+                        src={image}
+                        height={70}
+                        text={`@${owner}`}
+                    />
                 </Row>
                 <Row>
                     <Col className='text-center'>
-                        <h4>{owner}</h4>
+                        <h4>{name}</h4>
                     </Col>
                 </Row>
-                <Row>
-                    <Col className='text-center'>
-                        <h2>{name}</h2>
-                    </Col>
-                </Row>
+
+                <div className={`my-3 ${styles.dataContainer}`}>
+                    <div>
+                        <strong>{enrollments_count}</strong>
+                        <strong>Enrollments</strong>
+                    </div>
+
+                    <div>
+                        <strong>{ratings_count}</strong>
+                        <strong>Reviews</strong>
+                    </div>
+                    <div>
+                        <strong>{wish_list_count}</strong>
+                        <strong>Wish List</strong>
+                    </div>
+                </div>
+
                 <Row>
                     <Col>
-                        <p>{bio}</p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <p>{dob}</p>
+                        {/* <p>{bio}</p> */}
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui nunc mattis enim ut tellus. Pharetra sit amet aliquam id. Dictum non consectetur a erat. Pulvinar mattis nunc sed blandit libero.</p>
                     </Col>
                 </Row>
                 <Row className="mt-3">
@@ -109,6 +117,8 @@ const Profile = ({fetchProfileData, ...props}) => {
                     </Col>
                 </Row>
             </Card>
+
+
             <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
                 <Modal.Header>
                     <Modal.Title>Edit profile? {name}</Modal.Title>

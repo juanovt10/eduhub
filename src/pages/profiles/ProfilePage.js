@@ -37,6 +37,8 @@ const ProfilePage = () => {
         }
     }
 
+    console.log(profileData)
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -69,10 +71,10 @@ const ProfilePage = () => {
     return (
         <Container className='mt-5'>
             <Row>
-                <Col md={4}>
+                <Col md={6}>
                     <Profile fetchProfileData={fetchProfileData} {...profileData} />      
                 </Col>
-                <Col md={8}>
+                <Col md={6}>
                     <Nav fill variant="tabs" defaultActiveKey="/home" className='mb-2'>
                         <Nav.Item>
                             <Nav.Link onClick={handleEnrollFilter}><i class="fa-solid fa-graduation-cap"></i> Enrolled courses</Nav.Link>
@@ -86,21 +88,18 @@ const ProfilePage = () => {
             </Row>
             <Row>
                 <Col>
-                    {profileReviews.results?.length ?(
-                        profileReviews.results.map((review) => (
-
-                            <Review
-                                    key={review.id}
-                                    fetchReviews={fetchProfileReviews}
-                                    profile
-                                    {...review}
+                    {profileReviews.results?.length ? (
+                        <>
+                            <h3>Your reviews</h3>
+                            {profileReviews.results.map((review) => (
+                                <Review
+                                        key={review.id}
+                                        fetchReviews={fetchProfileReviews}
+                                        profile
+                                        {...review}
                                 />
-                            // <ReviewCard 
-                            //     key={review.id}
-                            //     fetchReviews={fetchProfileReviews} 
-                            //     {...review}               
-                            // />
-                        ))
+                            ))}
+                        </>
                     ) : (
                         <p>No reviews yet</p>
                     )}

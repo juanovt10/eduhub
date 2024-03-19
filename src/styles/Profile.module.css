@@ -1,0 +1,33 @@
+.CompactCard {
+    max-width: 300px;
+    width: 100%;
+    min-width: 250px; 
+    margin: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+}
+
+.isInstructor {
+    color: gold;
+}
+
+.dataContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dataContainer div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dataContainer p {
+    margin: 0;
+}
