@@ -64,6 +64,15 @@ const Profile = ({fetchProfileData, ...props}) => {
                                 entity='profile'
                             />
 
+
+                            <CreateProfileForm 
+                                open={showSheet.showEditSheet}
+                                onOpenChange={setShowSheet}
+                                mode='edit'
+                                fetchProfileData={fetchProfileData}
+                                onHide={() => handleSheetDisplay('showEditSheet', false)}
+                            />
+
                             <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
 
                             </Sheet>

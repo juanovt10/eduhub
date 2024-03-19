@@ -79,7 +79,7 @@ const ProfilePage = () => {
     return (
         <Container className='mt-5'>
             <Row>
-                <Col lg={profileData.is_owner ? 5 : 12} className='d-flex justify-content-center'>
+                <Col lg={profileData.is_owner ? 5 : 12} className='d-flex mb-3 justify-content-center'>
                     <Profile fetchProfileData={fetchProfileData} {...profileData} />      
                 </Col>
                 {profileData.is_owner && (
@@ -101,12 +101,12 @@ const ProfilePage = () => {
                                 <>
                                     {profileReviews.results.map((review) => (
                                         <Review
-                                        key={review.id}
-                                        fetchReviews={fetchProfileReviews}
-                                        profile
-                                        {...review}
+                                            key={review.id}
+                                            fetchReviews={fetchProfileReviews}
+                                            profile
+                                            {...review}
                                         />
-                                        ))}
+                                    ))}
                                 </>
                             ) : (
                                 <h3>No reviews yet</h3>

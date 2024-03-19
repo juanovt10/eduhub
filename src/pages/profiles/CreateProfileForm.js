@@ -4,8 +4,19 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import Asset from '../../components/Asset';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetFooter,
+    SheetTitle,
+    SheetTrigger,
+} from "../../@/components/ui/sheet";
+import styles from '../../styles/ReviewEdit.module.css'
 
-const CreateProfileForm = ({mode, fetchProfileData, onHide}) => {
+const CreateProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) => {
 
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({});
@@ -82,8 +93,83 @@ const CreateProfileForm = ({mode, fetchProfileData, onHide}) => {
     }
 
     return (
-        <div>
-            {hasLoaded ? (
+        <>
+            <Sheet open={open} onOpenChange={onOpenChange}>
+                {hasLoaded ? (
+                    <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'left'}>
+                        <SheetHeader>
+                            {mode.mode === 'create' ? (
+                                <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
+                            ) : (
+                                <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
+                            )}
+                        </SheetHeader>
+                        <Form className={styles.sheetEditCourseForm} onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control 
+                                    name='name'
+                                    value={name}
+                                    onChange={handleChange}
+                                    type='text'
+                                    placeholder='enter your preferred name'
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Bio</Form.Label>
+                                <Form.Control 
+                                    name='bio'
+                                    value={bio}
+                                    onChange={handleChange}
+                                    as='textarea'
+                                    placeholder='enter your preferred name'
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>date of birth</Form.Label>
+                                <Form.Control 
+                                    name='dob'
+                                    value={dob || ""}
+                                    onChange={handleChange}
+                                    type='date'
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                {image ? (
+                                    <>
+                                        <figure>
+                                            <Image src={image} rounded />
+                                        </figure>
+                                        <div>
+                                            <Form.Label>Change image</Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label>Image</Form.Label>
+                                )}
+                                <Form.File 
+                                    id='image-upload'
+                                    accpet='image/*'
+                                    onChange={handleChangeImage}
+                                    ref={imageInput}
+                                />
+                            </Form.Group>
+                            <Button variant='primary' type='submit'>
+                                Submit
+                            </Button>
+                        </Form>
+                    </SheetContent>
+
+                ) : (
+                    <Row>
+                        <Col className='mt-5'>
+                            <Asset spinner />
+                        </Col>
+                    </Row>
+                )}
+            </Sheet>
+
+            {/* {hasLoaded ? (
                 <>
                     {mode.mode === 'create' && (
                         <h1>Thank you for joining Eduhub!</h1>
@@ -149,8 +235,8 @@ const CreateProfileForm = ({mode, fetchProfileData, onHide}) => {
                         <Asset spinner />
                     </Col>
                 </Row>
-            )}
-        </div>
+            )} */}
+        </>
     )
 }
 
