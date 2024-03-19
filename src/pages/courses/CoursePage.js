@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import CourseActions from './CourseActions';
 import Dropdown from '../../components/Dropdown';
 import { Sheet } from "../../@/components/ui/sheet";
+import styles from "../../styles/CoursePage.module.css";
 
 const CoursePage = () => {  
 
@@ -95,15 +96,15 @@ const CoursePage = () => {
             {hasLoaded ? (
             <>
                 <Row>
-                    <Col md={6} className='d-flex flex-column justify-content-center align-items-center'>
+                    <Col xs={11} md={6} className='d-flex flex-column justify-content-center align-items-center'>
                         <h2>{courseData.title}</h2>
                         <p>{courseData.description}</p>
                     </Col>
-                    <Col md={5}>
+                    <Col className='d-none d-md-block' md={5}>
                         <Image src={courseData.image} fluid/>
                     </Col>
-                    <Col md={1}>
-                        {course.results[0].is_owner && (
+                    <Col xs={1} md={1}>
+                        {courseData.is_owner && (
                             <>
                                 <Dropdown 
                                     handleSelect={handleSheetDisplay}
@@ -127,18 +128,55 @@ const CoursePage = () => {
                             
                             </>
                         )}
-
-
-                        {/* <CourseActions courseId={courseData.id}/> */}
                     </Col>
                 </Row>
 
-            
-                <h4 className='m-0'>Reviews</h4>
-                <div className='d-flex my-2'>
-                    <Rating rating={course.results[0].overall_rating}/>
-                    <span className='ml-2'>{course.results[0].ratings_count} reviews</span>        
+                <Row className={`mb-5 ${styles.courseInfoContainer}`}>
+                    <Col>
+                        <Row className='d-flex justify-content-center align-items-center'>
+                            <Col>
+                                <h3><i class="fa-solid fa-video"></i></h3> 
+                            </Col>
+                            <Col>
+                                <h5>{courseData.video_hours} video {courseData.video_hours > 1 ? "hours" : "hour"}hours</h5>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col>
+                        <Row className='d-flex justify-content-center align-items-center'>
+                            <Col>
+                                <h3><i class="fa-brands fa-readme"></i></h3> 
+                            </Col>
+                            <Col>
+                                <h5>{courseData.article_count} {courseData.article_count > 1 ? "articles" : "article"}</h5>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col>
+                        <Row className='d-flex justify-content-start align-items-center'>
+                            <Col>
+                                <h3><i class="fa-solid fa-pen-to-square"></i></h3> 
+                            </Col>
+                            <Col>
+                                <h5>{courseData.test_count} {courseData.test_count > 1 ? "tests" : "test"}</h5>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+
+                <div className='mb-5'>
+                    {!courseData.is_owner && (
+                        <CourseActions courseId={courseData.id}/>
+                    )}
                 </div>
+
+                <Row>
+                    <h4 className='m-0'>Reviews</h4>
+                    <div className='d-flex my-2'>
+                        <Rating rating={course.results[0].overall_rating}/>
+                        <span className='ml-2'>{course.results[0].ratings_count} reviews</span>        
+                    </div>
+                </Row>
                 <Row>
                     <Col md={4} lg={5} className='mb-5'>
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>

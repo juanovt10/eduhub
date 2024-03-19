@@ -1,0 +1,18 @@
+.courseInfoContainer {
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    color: #333;
+}
+
+.courseInfoContainer h3 {
+    font-size: 24px;
+}
+
+.courseInfoContainer h5 {
+    font-size: 16px;
+}
+
+
+
+
