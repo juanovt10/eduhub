@@ -110,8 +110,7 @@ const ProfilePage = () => {
                                 </>
                             ) : (
                                 <h3>No reviews yet</h3>
-                        )
-                        }
+                        )}
                 </Col>
                 )}
             </Row>

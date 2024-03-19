@@ -7,16 +7,12 @@ import Asset from '../../components/Asset';
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
-    SheetClose,
-    SheetFooter,
     SheetTitle,
-    SheetTrigger,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
 
-const CreateProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) => {
+const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) => {
 
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({});
@@ -81,7 +77,7 @@ const CreateProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide})
                 formData
             )
 
-            if (mode.mode === 'create') {
+            if (mode === 'create') {
                 history.push(`/profiles/${userId}/`)
             } else {
                 fetchProfileData();
@@ -98,7 +94,7 @@ const CreateProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide})
                 {hasLoaded ? (
                     <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'left'}>
                         <SheetHeader>
-                            {mode.mode === 'create' ? (
+                            {mode === 'create' ? (
                                 <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
                             ) : (
                                 <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
@@ -168,76 +164,8 @@ const CreateProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide})
                     </Row>
                 )}
             </Sheet>
-
-            {/* {hasLoaded ? (
-                <>
-                    {mode.mode === 'create' && (
-                        <h1>Thank you for joining Eduhub!</h1>
-                    )}
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control 
-                                name='name'
-                                value={name}
-                                onChange={handleChange}
-                                type='text'
-                                placeholder='enter your preferred name'
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Bio</Form.Label>
-                            <Form.Control 
-                                name='bio'
-                                value={bio}
-                                onChange={handleChange}
-                                as='textarea'
-                                placeholder='enter your preferred name'
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>date of birth</Form.Label>
-                            <Form.Control 
-                                name='dob'
-                                value={dob || ""}
-                                onChange={handleChange}
-                                type='date'
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            {image ? (
-                                <>
-                                    <figure>
-                                        <Image src={image} rounded />
-                                    </figure>
-                                    <div>
-                                        <Form.Label>Change image</Form.Label>
-                                    </div>
-                                </>
-                            ) : (
-                                <Form.Label>Image</Form.Label>
-                            )}
-                            <Form.File 
-                                id='image-upload'
-                                accpet='image/*'
-                                onChange={handleChangeImage}
-                                ref={imageInput}
-                            />
-                        </Form.Group>
-                        <Button variant='primary' type='submit'>
-                            Submit
-                        </Button>
-                    </Form>
-                </>                
-            ) : (
-                <Row>
-                    <Col className='mt-5'>
-                        <Asset spinner />
-                    </Col>
-                </Row>
-            )} */}
         </>
     )
 }
 
-export default CreateProfileForm
+export default EditProfileForm

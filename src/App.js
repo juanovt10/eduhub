@@ -12,8 +12,8 @@ import CourseCreateForm from './pages/courses/CourseCreateForm';
 import CoursePage from './pages/courses/CoursePage';
 import CoursesPage from './pages/courses/CoursesPage';
 import ProfilePage from './pages/profiles/ProfilePage';
-import CreateProfileForm from './pages/profiles/CreateProfileForm';
 import Authenticator from './pages/auth/Authenticator';
+import CreateProfile from './pages/profiles/CreateProfile';
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
               <Route exact path='/auth' render={() => <Authenticator />} />
               <Route exact path='/signin' render={() => <SignInForm />} />
               <Route exact path='/signup' render={() => <SignUpForm />} />
-              <Route exact path='/profiles/create' render={() => <CreateProfileForm mode='create'/>} />
+              <Route exact path='/profiles/create' render={() => <CreateProfile />} />
               <Route exact path='/profiles/:id' render={() => <ProfilePage />} />
               <Route render={() => <p>Page not found!</p>} />
             </Switch>

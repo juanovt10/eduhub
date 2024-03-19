@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Card, Row, Col, Image, Button, Modal, ModalBody } from 'react-bootstrap';
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
-import CreateProfileForm from './CreateProfileForm';
 import ProfileDelete from './ProfileDelete';
 import styles from "../../styles/Profile.module.css";
 import Dropdown from '../../components/Dropdown';
 import { Sheet } from "../../@/components/ui/sheet";
+import EditProfileForm from './EditProfileForm';
 
 
 const Profile = ({fetchProfileData, ...props}) => {
@@ -65,7 +65,7 @@ const Profile = ({fetchProfileData, ...props}) => {
                             />
 
 
-                            <CreateProfileForm 
+                            <EditProfileForm 
                                 open={showSheet.showEditSheet}
                                 onOpenChange={setShowSheet}
                                 mode='edit'

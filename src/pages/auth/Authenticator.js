@@ -4,19 +4,50 @@ import Tabs from 'react-bootstrap/Tabs';
 import styles from "../../styles/Authenticator.module.css";
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
+import { useCurrentUser } from '../../context/CurrentUserContext';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Asset from '../../components/Asset';
 
 
 const Authenticator = () => {
 
     const [activeTab, setActiveTab] = useState('signup');
     const [showSuccess, setShowSuccess] = useState(false);
+    const currentUser = useCurrentUser();
+    const history = useHistory();
+    const [isInitialCheckDone, setIsInitialCheckDone] = useState(false);
 
     const handleSignUpSuccess = () => {
         setActiveTab('signin');
         setShowSuccess(true);
     }
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsInitialCheckDone(true)
+        }, 3000)
+
+        return () => clearTimeout(timer);
+    }, [])
+
+    useEffect(() => {
+        if (currentUser !== undefined) { 
+            if (currentUser) {
+                history.push('/');
+            }
+        }
+    }, [currentUser, isInitialCheckDone, history]);
+
+    console.log(currentUser)
+
+    if (!isInitialCheckDone) {
+        return (
+            <Asset spinner />
+        )
+    }
+
     return (
+        
         <div className={styles.DivContainer}>
             <Tabs
                 activeKey={activeTab}
