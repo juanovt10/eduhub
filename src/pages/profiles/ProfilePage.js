@@ -7,6 +7,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import ReviewCard from '../reviews/ReviewCard';
 import CoursesDisplay from '../courses/CoursesDisplay';
 import Nav from 'react-bootstrap/Nav';
+import Review from '../reviews/Review';
 
 
 const ProfilePage = () => {
@@ -63,6 +64,8 @@ const ProfilePage = () => {
         })
     }
 
+    console.log(profileReviews.results)
+
     return (
         <Container className='mt-5'>
             <Row>
@@ -85,11 +88,18 @@ const ProfilePage = () => {
                 <Col>
                     {profileReviews.results?.length ?(
                         profileReviews.results.map((review) => (
-                            <ReviewCard 
-                                key={review.id}
-                                fetchReviews={fetchProfileReviews} 
-                                {...review}               
-                            />
+
+                            <Review
+                                    key={review.id}
+                                    fetchReviews={fetchProfileReviews}
+                                    profile
+                                    {...review}
+                                />
+                            // <ReviewCard 
+                            //     key={review.id}
+                            //     fetchReviews={fetchProfileReviews} 
+                            //     {...review}               
+                            // />
                         ))
                     ) : (
                         <p>No reviews yet</p>

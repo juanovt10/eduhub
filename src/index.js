@@ -6,12 +6,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CurrentUserProvider } from './context/CurrentUserContext';
+import { CourseTitleProvider } from './context/CourseTitleContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <App />
+        <CourseTitleProvider>
+          <App />
+        </CourseTitleProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,
