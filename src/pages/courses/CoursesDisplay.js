@@ -4,7 +4,7 @@ import CourseCard from './CourseCard';
 import Asset from '../../components/Asset';
 import { axiosReq } from '../../api/axiosDefaults';
 
-const CoursesDisplay = ({ filters, sortKey }) => {
+const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
     const [coursesHasLoaded, setCoursesHasLoaded] = useState(false);
     const [courses, setCourses] = useState({ results: [] });
     console.log(filters)
@@ -55,7 +55,7 @@ const CoursesDisplay = ({ filters, sortKey }) => {
             {coursesHasLoaded ? (
                 <Row >
                     {courses.results?.length ? (
-                        courses.results.map(course => (
+                        courses.results.slice(0, isHomePage ? 3 : courses.results.length).map(course => (
                             <Col xs={12} md={6} lg={4} className='d-flex justify-content-center p-0' key={course.id}>
                                 <CourseCard {...course} setCourses={setCourses} />
                             </Col>

@@ -1,6 +1,7 @@
 .Navbar {
     font-family: 'Raleway', sans-serif;
     background-color: rgba(8, 38, 65, 0.8);
+    height: 70px;
 }
 
 .Navlink {
