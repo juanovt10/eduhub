@@ -9,6 +9,8 @@ import { useCurrentUser, useSetCurrentUser } from '../context/CurrentUserContext
 import Avatar from './Avatar';
 import axios from 'axios';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -41,7 +43,6 @@ export const NavBar = () => {
             >
                 <Avatar 
                     src={currentUser?.profile_image}
-                    text="Profile"
                     height={40}
                 />
             </NavLink>
@@ -70,10 +71,13 @@ export const NavBar = () => {
                 />
                 <Navbar.Collapse id="navbarScroll" className='justify-content-start'>
                     <Nav>
-                        <NavLink to='/' exact className={styles.Navlink} activeClassName={styles.Active}>Home</NavLink>
+
+                        <Button className={styles.buttonPrimary}><Link to='/courses' className={styles.links} >Explore our courses</Link></Button>
+
+                        {/* <NavLink to='/' exact className={styles.Navlink} activeClassName={styles.Active}>Home</NavLink>
                         <NavLink to='/courses' className={styles.Navlink} activeClassName={styles.Active}>Courses</NavLink>
                         <NavLink to='/about' className={styles.Navlink} activeClassName={styles.Active}>About</NavLink>
-                        <NavLink to='/contact'  className={styles.Navlink} activeClassName={styles.Active}>Contact</NavLink>
+                        <NavLink to='/contact'  className={styles.Navlink} activeClassName={styles.Active}>Contact</NavLink> */}
                         
                     </Nav>
                 </Navbar.Collapse>

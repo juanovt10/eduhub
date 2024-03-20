@@ -39,28 +39,26 @@ const Authenticator = () => {
 
     console.log(currentUser)
 
-    if (!isInitialCheckDone) {
-        return (
-            <Asset spinner />
-        )
-    }
-
     return (
         <div className={styles.DivContainer}>
-            <Tabs
-                activeKey={activeTab}
-                onSelect={(k) => setActiveTab(k)}
-                id="fill-tab-example"
-                className={styles.tabs}
-                fill
-            >
-                <Tab eventKey="signup" title="Sign Up" className={styles.tabContainer}>
-                    <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
-                </Tab>
-                <Tab eventKey="signin" title="Sign In" className={styles.tabContainer}>
-                    <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>
-                </Tab>
-            </Tabs>
+            {!isInitialCheckDone ? (
+                <Asset spinner />
+            ) : (
+                <Tabs
+                    activeKey={activeTab}
+                    onSelect={(k) => setActiveTab(k)}
+                    id="fill-tab-example"
+                    className={styles.tabs}
+                    fill
+                >
+                    <Tab eventKey="signup" title="Sign Up" className={styles.tabContainer}>
+                        <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
+                    </Tab>
+                    <Tab eventKey="signin" title="Sign In" className={styles.tabContainer}>
+                        <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>
+                    </Tab>
+                </Tabs>
+            )}
         </div>
     )
 }

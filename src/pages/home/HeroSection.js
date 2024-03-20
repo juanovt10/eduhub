@@ -7,7 +7,7 @@ const HeroSection = () => {
     return (
         <div className={styles.hero}>
             <h1 className={styles.heroTitle}>Master by Teaching</h1> 
-            <p className='text-justify'>
+            <p w>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae.
             </p>
             <div>

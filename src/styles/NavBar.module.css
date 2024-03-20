@@ -1,7 +1,6 @@
 .Navbar {
     font-family: 'Raleway', sans-serif;
     background-color: rgba(8, 38, 65, 0.8);
-    height: 70px;
 }
 
 .Navlink {
@@ -18,4 +17,44 @@
 .Active {
     color: #f5793b;
     text-decoration: none;
+}
+
+.buttonPrimary {
+    width: 100%;
+    background-color: #f5793b;
+    border: 1px solid #f5793b;
+    margin-left: 1rem;
+}
+
+.buttonPrimary:hover {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+}
+
+.buttonPrimary:active,
+.buttonPrimary:focus,
+.buttonPrimary:focus-visible  {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+    box-shadow: inset 0 3px 5px #ff9254;
+}
+
+.buttonPrimary:not(:disabled):not(.disabled):active,
+.buttonPrimary:not(:disabled):not(.disabled).active,
+.show > .buttonPrimary.dropdown-toggle {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+    border-color: #f5793b;
+    box-shadow: inset 0 3px 5px rgba(255, 146, 84, 0.5);
+    box-shadow: inset 0 3px 5px #ff9254;
+}
+
+.links {
+    color: #ffffff;
+    text-align: left;
+}
+
+.links:hover {
+    text-decoration: none;
+    color: white;
 }
