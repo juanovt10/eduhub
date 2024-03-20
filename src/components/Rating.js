@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const Rating = (props) => {
-    const {rating = 0 } = props
+    const rating = Math.max(0, Math.min(props.rating, 5))
 
     const fullStar = Math.floor(rating);
     const halfStar = rating % 1 >= 0.25;
