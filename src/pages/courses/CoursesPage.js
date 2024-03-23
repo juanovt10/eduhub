@@ -40,7 +40,7 @@ const CoursesPage = () => {
     return (
         <div className={styles.pageContainer}>
             <h1 className={styles.pageTitle}>Our courses</h1>
-            <div className='mx-5'>
+            <div className={styles.contentContainer}>
                 <Row>
                     <Col sm={4} lg={3} className='d-none d-sm-block'>
                         <CourseFilter onFiltersApplied={handleFiltersApplied} onHide={() => {}} />
@@ -49,6 +49,8 @@ const CoursesPage = () => {
                         <div className='d-none d-sm-block w-100'>
                             <CourseSorting onSortingApplied={handleSorting} onHide={() => {}} />
                         </div>
+
+
                         <div className={`${styles.tabContainer} d-flex d-sm-none`}>
                             <div 
                                 className={`ml-4 ${styles.actionDiv}`}
@@ -83,6 +85,7 @@ const CoursesPage = () => {
                                 </SheetContent>
                             </Sheet>
                         </div>
+                        
                         <CoursesDisplay filters={filters} sortKey={sortKey} />
                     </Col>
                 </Row>                

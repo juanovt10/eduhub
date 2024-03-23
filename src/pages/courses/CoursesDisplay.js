@@ -48,20 +48,24 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
         setCourses(prevCourses => ({
             ...prevCourses,
             results: sortedCourses
-        })); 
+        }));
     }
+
+    const coursesLength = courses.results.length;
+    const placeholdersNeeded = isHomePage ? (3 - coursesLength % 3) % 3 : 0;
+
 
     return (
         <div>
             {coursesHasLoaded ? (
-                <Row >
+                <Row className='justify-content-flex-start'>
                     {courses.results?.length ? (
                         courses.results.slice(0, isHomePage ? 3 : courses.results.length).map(course => (
                             <Col
                                 xs={12}
                                 md={6}
                                 lg={4}
-                                className={`d-flex justify-content-center p-0 ${isHomePage ? styles.thirdHomeCourse : ""}`} key={course.id}
+                                className={`d-flex justify-content-center flex-wrap p-0 ${isHomePage ? styles.thirdHomeCourse : ""}`} key={course.id}
                             >
                                 <CourseCard {...course} setCourses={setCourses} />
                             </Col>
@@ -82,6 +86,8 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
                     </Col>
                 </Row>
             )}
+
+
         </div>
     )
 }

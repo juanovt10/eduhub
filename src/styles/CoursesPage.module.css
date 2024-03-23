@@ -6,6 +6,10 @@
     min-height: 100vh;
 }
 
+.contentContainer {
+    width: 90vw;
+}
+
 .pageTitle {
     font-size: 3rem;
     text-align: center;
