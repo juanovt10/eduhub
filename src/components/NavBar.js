@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { axiosReq } from '../api/axiosDefaults';
+import { useCurrentUser, useSetCurrentUser } from '../context/CurrentUserContext';
+import { NavLink } from 'react-router-dom';
+import Avatar from './Avatar';
+import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
+import logo from '../assets/eduhub-color-logo.png';
+import styles from '../styles/NavBar.module.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo from '../assets/eduhub-color-logo.png';
-import styles from '../styles/NavBar.module.css';
-import { NavLink } from 'react-router-dom';
-import { useCurrentUser, useSetCurrentUser } from '../context/CurrentUserContext';
-import Avatar from './Avatar';
-import axios from 'axios';
-import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 export const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
 
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
+
+    const [profileData, setProfileData] = useState({});
 
     const handleSignOut = async () => {
         try {
@@ -27,24 +31,52 @@ export const NavBar = () => {
         }
     }
 
+    useEffect(() => {
+        const getProfileData = async () => {
+            if (currentUser?.profile_id) {
+                try {
+                    const userProfileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}`);
+                    setProfileData(userProfileResponse.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+        };
+        getProfileData();
+    }, [currentUser]);
+
     const loggedInIcons = (
         <>
-            <NavLink 
+            {profileData.is_instructor && (
+
+                <NavLink to='/courses/create' className={`mx-2 ${styles.Navlink}`}>
+                    <Button className={styles.buttonSecondary}>Create Course</Button>
+                </NavLink>
+            )}
+
+            <NavLink
                 to='/' 
                 onClick={handleSignOut} 
                 className={styles.Navlink}
             >
-                    Sign out
+                    <span className='mr-2'><i class="fa-solid fa-right-from-bracket"></i></span> Sign out 
             </NavLink>
             <NavLink 
                 to={`/profiles/${currentUser?.profile_id}`}
                 onClick={() => {}} 
                 className={styles.Navlink}
             >
-                <Avatar 
-                    src={currentUser?.profile_image}
-                    height={40}
-                />
+                <OverlayTrigger 
+                    placement='bottom'
+                    overlay={<Tooltip>{'Your Profile'}</Tooltip>}    
+                >
+                    <span>
+                        <Avatar 
+                            src={currentUser?.profile_image}
+                            height={40}
+                        />
+                    </span>
+                </OverlayTrigger>
             </NavLink>
         </>
     )
@@ -53,8 +85,6 @@ export const NavBar = () => {
             <NavLink to='/auth' className={styles.Navlink} >Join us!</NavLink>
         </>
     );
-        
-
 
     return (
         <Navbar expanded={expanded} expand="md" fixed="top" className={styles.Navbar}>
@@ -69,20 +99,11 @@ export const NavBar = () => {
                     onClick={() => setExpanded(!expanded)} 
                     aria-controls="navbarScroll"
                 />
-                <Navbar.Collapse id="navbarScroll" className='justify-content-start'>
-                    <Nav>
-
-                        <Button className={styles.buttonPrimary}><Link to='/courses' className={styles.links} >Explore our courses</Link></Button>
-
-                        {/* <NavLink to='/' exact className={styles.Navlink} activeClassName={styles.Active}>Home</NavLink>
-                        <NavLink to='/courses' className={styles.Navlink} activeClassName={styles.Active}>Courses</NavLink>
-                        <NavLink to='/about' className={styles.Navlink} activeClassName={styles.Active}>About</NavLink>
-                        <NavLink to='/contact'  className={styles.Navlink} activeClassName={styles.Active}>Contact</NavLink> */}
-                        
-                    </Nav>
-                </Navbar.Collapse>
                 <Navbar.Collapse id="navbarScroll" className='justify-content-end'>
                     <Nav className='text-right'>
+                        <NavLink  to='/courses' className={styles.Navlink}>
+                            <Button className={styles.buttonPrimary}>Explore our courses</Button>   
+                        </NavLink>
                         {currentUser ? loggedInIcons : loggedOutIcons}
                     </Nav>
                 </Navbar.Collapse>
