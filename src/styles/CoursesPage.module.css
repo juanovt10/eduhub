@@ -31,3 +31,16 @@
 .actionDiv {
     padding: 10px;
 }
+
+.sheetContainer {
+    max-height: 100vh;
+    background-color: #082641;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow-y: auto;
+    padding-top: 10rem;
+}

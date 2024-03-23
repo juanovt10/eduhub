@@ -13,7 +13,7 @@ import {
 } from "../../@/components/ui/accordion";
 
 
-const CourseFilter = ({ onFiltersApplied }) => {
+const CourseFilter = ({ onFiltersApplied, onHide }) => {
     const [selectedCategories, setSelectedCategories] = useState([])
     const [filterVideos, setFilterVideos] = useState(false);
     const [filterArticles, setFilterArticles] = useState(false);
@@ -50,10 +50,11 @@ const CourseFilter = ({ onFiltersApplied }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        onHide();
+        
         const filters = {}
-
-
+        
+        
         if (selectedCategories.length > 0) {
             filters.category = selectedCategories.join(',');
         }
@@ -69,11 +70,12 @@ const CourseFilter = ({ onFiltersApplied }) => {
         if (minRating) {
             filters.min_rating = minRating;
         }
-
+        
         onFiltersApplied(filters);
     }
 
     const handleFilterReset = () => {
+        onHide();
         setSelectedCategories([]);
         setFilterVideos(false);
         setFilterArticles(false);
@@ -90,21 +92,6 @@ const CourseFilter = ({ onFiltersApplied }) => {
                 <Form onSubmit={handleSubmit}>
                     <Card.Body>
                         <Accordion type="multiple" collapsible className='mb-3'>
-                            <AccordionItem value='item-1'>
-                                <AccordionTrigger className={styles.AccordionCategory}>Categories</AccordionTrigger>
-                                <AccordionContent>
-                                    {Array.isArray(categories) && categories.map((cat, idx) => (
-                                        <Form.Check
-                                            key={idx}
-                                            value={cat.key}
-                                            label={cat.value}
-                                            onChange={handleCategoryChange}
-                                            checked={selectedCategories.includes(cat.key)}
-                                        />
-                                    ))}
-                                </AccordionContent>
-                            </AccordionItem>
-
                             <AccordionItem value='item-2'>
                                 <AccordionTrigger className={styles.AccordionCategory}>Resources</AccordionTrigger>
                                 <AccordionContent>
@@ -125,6 +112,21 @@ const CourseFilter = ({ onFiltersApplied }) => {
                                     />
                                 </AccordionContent>
                             </AccordionItem >
+
+                            <AccordionItem value='item-1'>
+                                <AccordionTrigger className={styles.AccordionCategory}>Categories</AccordionTrigger>
+                                <AccordionContent>
+                                    {Array.isArray(categories) && categories.map((cat, idx) => (
+                                        <Form.Check
+                                            key={idx}
+                                            value={cat.key}
+                                            label={cat.value}
+                                            onChange={handleCategoryChange}
+                                            checked={selectedCategories.includes(cat.key)}
+                                        />
+                                    ))}
+                                </AccordionContent>
+                            </AccordionItem>
 
                             <AccordionItem value='item-3'>
                                 <AccordionTrigger className={styles.AccordionCategory}>Ratings</AccordionTrigger>

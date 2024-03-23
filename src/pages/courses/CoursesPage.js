@@ -5,18 +5,36 @@ import CourseSorting from './CourseSorting';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import styles from '../../styles/CoursesPage.module.css';
+import { 
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+} from "../../@/components/ui/sheet";
 
 
 const CoursesPage = () => {
     const [sortKey, setSortKey] = useState('default');
     const [filters, setFilters] = useState({});
+    const [showSheet, setShowSheet] = useState({
+        showFilterSheet: false,
+        showSortSheet: false
+    })
+
+    const handleSheetDisplay = (sheetType, bool) => {
+        setShowSheet((prevSheet) => ({
+            ...prevSheet,
+            [sheetType]: bool,
+        }))
+    }
     
     const handleFiltersApplied = (newFilters) => {
         setFilters(newFilters);
     }
 
     const handleSorting = (newSortKey) => {
-        setSortKey(newSortKey)
+        setSortKey(newSortKey);
     }
 
     return (
@@ -25,22 +43,45 @@ const CoursesPage = () => {
             <div className='mx-5'>
                 <Row>
                     <Col sm={4} lg={3} className='d-none d-sm-block'>
-                        <CourseFilter onFiltersApplied={handleFiltersApplied} />
+                        <CourseFilter onFiltersApplied={handleFiltersApplied} onHide={() => {}} />
                     </Col>
                     <Col sm={8} lg={9} className='d-flex flex-column align-items-center'>
                         <div className='d-none d-sm-block w-100'>
-                            <CourseSorting onSortingApplied={handleSorting} />
+                            <CourseSorting onSortingApplied={handleSorting} onHide={() => {}} />
                         </div>
                         <div className={`${styles.tabContainer} d-flex d-sm-none`}>
-                            <div className={`ml-4 ${styles.actionDiv}`}> 
+                            <div 
+                                className={`ml-4 ${styles.actionDiv}`}
+                                onClick={() => handleSheetDisplay('showFilterSheet', true)}
+                            > 
                                 <span className='mr-2'><i class="fa-solid fa-filter"></i></span>Filter
                             </div>
-                            <div className={`mr-4 ${styles.actionDiv}`}>
+                            <div 
+                                className={`mr-4 ${styles.actionDiv}`}
+                                onClick={() => handleSheetDisplay('showSortSheet', true)}
+                            >
                                 <span className='mr-2'>
                                     <i class="fa-solid fa-arrow-down"></i> <i class="fa-solid fa-arrow-up"></i>
                                 </span>
                                 Sort by
                             </div>
+
+                            <Sheet open={showSheet.showFilterSheet} onOpenChange={setShowSheet}>
+                                <SheetContent className={styles.sheetContainer} side={'left'}>
+                                    <CourseFilter 
+                                        onFiltersApplied={handleFiltersApplied}
+                                        onHide={() => handleSheetDisplay('showFilterSheet', false)}
+                                    />
+                                </SheetContent>
+                            </Sheet>
+                            <Sheet open={showSheet.showSortSheet} onOpenChange={setShowSheet}>
+                                <SheetContent className={styles.sheetContainer} side={'right'}>
+                                    <CourseSorting 
+                                        onSortingApplied={handleSorting}
+                                        onHide={() => handleSheetDisplay('showSortSheet', false)}
+                                    />                                    
+                                </SheetContent>
+                            </Sheet>
                         </div>
                         <CoursesDisplay filters={filters} sortKey={sortKey} />
                     </Col>

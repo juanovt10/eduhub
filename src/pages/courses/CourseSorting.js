@@ -3,12 +3,13 @@ import Nav from 'react-bootstrap/Nav';
 import styles from '../../styles/CourseSorting.module.css';
 
 
-const CourseSorting = ({ onSortingApplied }) => {
+const CourseSorting = ({ onSortingApplied, onHide }) => {
     const [activeKey, setActiveKey] = useState("");
 
     const handleSorting = (key) => {
         setActiveKey(key);
         onSortingApplied(key);
+        onHide();
     }
 
     return (
