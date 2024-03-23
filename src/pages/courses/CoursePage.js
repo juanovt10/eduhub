@@ -81,7 +81,7 @@ const CoursePage = () => {
     const courseData = course.results[0]
 
     return (
-        <Container className='mt-5'>
+        <Container className={styles.mainContainer}>
             {hasLoaded ? (
             <>
                 <Row>
@@ -90,7 +90,9 @@ const CoursePage = () => {
                         <p>{courseData.description}</p>
                     </Col>
                     <Col className='d-none d-md-block' md={5}>
-                        <Image src={courseData.image} fluid/>
+                        <div className={styles.imageWrapper}>
+                            <Image src={courseData.image} fluid/>
+                        </div>
                     </Col>
                     <Col xs={1} md={1}>
                         {courseData.is_owner && (
@@ -206,7 +208,7 @@ const CoursePage = () => {
                 </Row>
             </>
             ) : (
-                <Row>
+                <Row className={styles.loaderContainer}>
                     <Col className='mt-5'>
                         <Asset spinner/>
                     </Col>
