@@ -13,8 +13,8 @@ const CourseSorting = ({ onSortingApplied }) => {
 
     return (
         <Nav fill variant="tabs" defaultActiveKey="/home" className={`mb-2 ${styles.tabContainer}`}>
-            <Nav.Item>
-                <Nav.Link disabled><i class="fa-solid fa-arrow-down"></i> <i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
+            <Nav.Item className={styles.disabledTab}>
+                <Nav.Link disabled ><i class="fa-solid fa-arrow-down"></i> <i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
             </Nav.Item>
             <Nav.Item className={`${styles.tab} ${activeKey === 'rating' ? styles.activeLink : styles.inactiveLink}`} >
                 <Nav.Link 

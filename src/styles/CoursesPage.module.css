@@ -18,3 +18,16 @@
         font-size: 2rem;
     }
 }
+
+.tabContainer {
+    background: rgba(255, 255, 255, 0.2);
+    width: 80vw;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.actionDiv {
+    padding: 10px;
+}

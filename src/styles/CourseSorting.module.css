@@ -5,6 +5,10 @@
     border-radius: 10px;
 }
 
+.disabledTab {
+    color: #fff;
+}
+
 .tabContainer a {
     color: #fff;
     border: 1px solid transparent;

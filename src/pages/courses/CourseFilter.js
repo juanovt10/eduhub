@@ -83,16 +83,13 @@ const CourseFilter = ({ onFiltersApplied }) => {
         onFiltersApplied({});
     }
 
-
     return (
-
         <Card className={styles.Card}>
             <Card.Header as="h5">Filters</Card.Header>
             {categoriesHasLoaded ? (
                 <Form onSubmit={handleSubmit}>
                     <Card.Body>
                         <Accordion type="multiple" collapsible className='mb-3'>
-
                             <AccordionItem value='item-1'>
                                 <AccordionTrigger className={styles.AccordionCategory}>Categories</AccordionTrigger>
                                 <AccordionContent>
