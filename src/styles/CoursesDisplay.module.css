@@ -1,0 +1,9 @@
+@media (min-width: 768px) and (max-width: 992px) {
+    /* Target only the third course on the homepage */
+    .thirdHomeCourse:nth-child(3) {
+        margin-top: 20px; /* Adjust as needed for spacing */
+        /* Center the course card */
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

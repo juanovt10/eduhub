@@ -10,12 +10,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
 
-.heroTitle {
+.hero h1 {
     font-size: 3rem;
     text-align: center;
+}
+
+.hero p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
 }
 
 .buttonPrimary {
@@ -80,6 +95,11 @@
 .links:hover {
     text-decoration: none;
     color: white;
+}
+
+.about {
+    padding-top: 70px;
+    margin-top: -70px;
 }
 
 .FAQ {

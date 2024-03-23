@@ -13,16 +13,16 @@ const HomeFAQs = () => {
 
     return (
         <div>
-            <h2 className='text-center'>FAQs</h2>
+            <h2>FAQs</h2>
             <Accordion type="single" collapsible className='mb-3'>
                 <AccordionItem value='item-1'>
                     <AccordionTrigger className={styles.FAQ}>How can I become an instructor?</AccordionTrigger>
                     <AccordionContent>
                         <p>
                             To become an instructor, sign up for a user account and apply
-                            for instructor status in your profile settings. 
-                            We'll ask for some additional information to ensure you meet our instructor criteria,
-                            and you'll hear back from us within 3-5 business days.
+                            for instructor status by clicking the<strong className='mx-1'><i class="fa-solid fa-graduation-cap"></i></strong>
+                            icon in your profile page. We'll ask for some additional information to ensure
+                            you meet our instructor criteria, and you'll hear back from us within 3-5 business days.
                         </p>
                     </AccordionContent>
                 </AccordionItem>
@@ -33,7 +33,7 @@ const HomeFAQs = () => {
                         <p>
                             We're working hard to launch our Learning Management System (LMS)
                             and expect it to be available by the end of the year. Stay tuned for updates
-                            and announcements in our newsletters and on our homepage.
+                            and announcements on our homepage.
                         </p>
                     </AccordionContent>
                 </AccordionItem >
@@ -56,6 +56,19 @@ const HomeFAQs = () => {
                             Enrolling in a course is simple. Once you've found a course you're interested in,
                             click on the 'Enroll' button on the course page. If you're not already logged in,
                             you'll be prompted to do so.
+                        </p>
+                    </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value='item-5'>
+                    <AccordionTrigger className={styles.FAQ}>
+                        How can I interact with other students?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <p>
+                            Currently, interaction is possible only through course reviews.
+                            However, with the launch of our LMS, there will be forums and group
+                            activities designed to enhance the experience for both students and
+                            instructors.
                         </p>
                     </AccordionContent>
                 </AccordionItem>
