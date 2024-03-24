@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { axiosRes } from '../../api/axiosDefaults'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import { Modal, Button } from 'react-bootstrap'
@@ -9,12 +9,16 @@ import {
     SheetTitle,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
+import Asset from '../../components/Asset';
 
-const CourseDelete = ({onHide, id}) => {
+const CourseDelete = ({id}) => {
 
+    const [startLoading, setStartLoading] = useState(false);
     const history = useHistory();
+    
 
     const handleDelete = async () => {
+        setStartLoading(true);
         try {
             await axiosRes.delete(`/courses/${id}/`)
             history.push('/courses/')
@@ -32,8 +36,13 @@ const CourseDelete = ({onHide, id}) => {
             <SheetDescription>
                 Are you sure you want to delete your course?
             </SheetDescription>
-            <Button variant='primary' onClick={onHide}>No!!!</Button>
-            <Button variant='danger' onClick={handleDelete}>Yes, Delete course</Button>
+            <Button variant='danger' onClick={handleDelete}>
+                {!startLoading ? (
+                    'Yes, delete course'
+                ) : (
+                    <Asset spinner size='sm'/>
+                )}
+            </Button>
         </SheetContent>
     )
 }

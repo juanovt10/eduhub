@@ -144,10 +144,7 @@ const CoursePage = () => {
                                     />
                                 </Sheet>
                                 <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
-                                    <CourseDelete 
-                                        onHide={() => handleSheetDisplay('showDeleteSheet', false)}
-                                        id={courseData.id}
-                                    />
+                                    <CourseDelete id={courseData.id} />
                                 </Sheet>
                             </>
                         )}
