@@ -18,34 +18,22 @@ const CourseSorting = ({ onSortingApplied, onHide }) => {
                 <Nav.Link disabled ><i class="fa-solid fa-arrow-down"></i> <i class="fa-solid fa-arrow-up"></i> Sort By:</Nav.Link>
             </Nav.Item>
             <Nav.Item className={`${styles.tab} ${activeKey === 'rating' ? styles.activeLink : styles.inactiveLink}`} >
-                <Nav.Link 
-                    onClick={() => handleSorting('rating')}
-                    className={activeKey === 'rating' ? styles.activeLink : styles.inactiveLink}
-                    >
+                <Nav.Link onClick={() => handleSorting('rating')}>
                         <i class="fa-solid fa-star"></i> Highly rated
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={activeKey === 'price' ? styles.activeLink : styles.inactiveLink}>
-                <Nav.Link
-                    onClick={() => handleSorting('price')}
-                    className={activeKey === 'price' ? styles.activeLink : styles.inactiveLink}
-                    >
+                <Nav.Link onClick={() => handleSorting('price')}>
                         <i class="fa-solid fa-hand-holding-dollar"></i> Lowest price
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={activeKey === 'creation' ? styles.activeLink : styles.inactiveLink}>
-                <Nav.Link 
-                    onClick={() => handleSorting('creation')}
-                    className={activeKey === 'creation' ? styles.activeLink : styles.inactiveLink}
-                    >
+                <Nav.Link onClick={() => handleSorting('creation')}>
                         <i class="fa-solid fa-clock"></i> Newest
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={activeKey === 'enrollments' ? styles.activeLink : styles.inactiveLink}>
-                <Nav.Link 
-                    onClick={() => handleSorting('enrollments')}
-                    className={activeKey === 'enrollments' ? styles.activeLink : styles.inactiveLink}
-                >
+                <Nav.Link onClick={() => handleSorting('enrollments')}>
                     <i class="fa-solid fa-graduation-cap"></i> Enrollments
                 </Nav.Link>
             </Nav.Item>

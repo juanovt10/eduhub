@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Image, Button, Modal, ModalBody } from 'react-bootstrap';
+import { Card, Row, Col, Image, Button, Modal, ModalBody, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import ProfileDelete from './ProfileDelete';
@@ -45,9 +45,14 @@ const Profile = ({fetchProfileData, ...props}) => {
             <Card className={styles.CompactCard}>
                 <Row>
                     {is_instructor ? (
-                        <Col className='text-left'>
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </Col>
+                        <Col className='d-flex align-items-center'>
+                            <OverlayTrigger
+                                placement='bottom'
+                                overlay={<Tooltip>{'This user is an instructor'}</Tooltip>}
+                            >
+                                <span className={styles.isInstructor}><i class="fa-solid fa-graduation-cap"></i></span>
+                            </OverlayTrigger>
+                        </Col>  
                     ) : (
                         is_owner && (
                             <Col className='text-left'>
@@ -64,7 +69,6 @@ const Profile = ({fetchProfileData, ...props}) => {
                                 entity='profile'
                             />
 
-
                             <EditProfileForm 
                                 open={showSheet.showEditSheet}
                                 onOpenChange={setShowSheet}
@@ -77,10 +81,7 @@ const Profile = ({fetchProfileData, ...props}) => {
 
                             </Sheet>
                             <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
-                                <ProfileDelete 
-                                    onHide={() => handleSheetDisplay('showDeleteSheet', false)}
-                                    id={id}
-                                />
+                                <ProfileDelete id={id} />
                             </Sheet>
                         </Col>
                     )}
@@ -126,26 +127,6 @@ const Profile = ({fetchProfileData, ...props}) => {
                     </Col>
                 </Row>
             </Card>
-
-
-            {/* <Modal show={showModal.showEditModal} onHide={() => handleModalDisplay('showEditModal', false)}>
-                <Modal.Header>
-                    <Modal.Title>Edit profile? {name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CreateProfileForm
-                        mode='edit'
-                        fetchProfileData={fetchProfileData}
-                        onHide={() => handleModalDisplay('showEditModal', false)}
-                    />
-                </Modal.Body>
-            </Modal>
-            <Modal show={showModal.showDeleteModal} onHide={() => handleModalDisplay('showDeleteModal', false)}>
-               <ProfileDelete
-                    onHide={() => handleModalDisplay('showDeleteModal', false)}
-                    id={id}
-                />
-            </Modal> */}
         </>
     )
 }

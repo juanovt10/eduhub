@@ -1,0 +1,41 @@
+.mainContainer {
+    min-height: 100vh;
+    margin-top: 7rem;
+}
+
+.tabContainer {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.tabContainer a {
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.tabContainer a:link,
+.tabContainer a:visited {
+    color: #fff;
+}
+
+.tabContainer a:hover,
+.tabContainer a::after,
+.tabContainer a::before,
+.tabContainer a:focus {
+    color: #fff;
+    border-radius: 10px;
+}
+
+.activeLink {
+    background-color: rgba(169, 169, 169, 0.5);
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.inactiveLink {
+    background-color: transparent;
+}
