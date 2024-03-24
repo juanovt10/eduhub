@@ -117,19 +117,10 @@ const CoursePage = () => {
                             </Alert.Link>       
                         </Alert>
                     )}
-                <Row>
-                    <Col xs={11} md={6} className='d-flex flex-column justify-content-center align-items-center'>
-                        <h2>{courseData.title}</h2>
-                        <p>{courseData.description}</p>
-                    </Col>
-                    <Col className='d-none d-md-block' md={5}>
-                        <div className={styles.imageWrapper}>
-                            <Image src={courseData.image} fluid/>
-                        </div>
-                    </Col>
-                    <Col xs={1} md={1}>
+                <Row className='justify-content-between'>
+                    <Col xs={12} md={7} className='d-flex flex-column justify-content-center w-100'>
                         {courseData.is_owner && (
-                            <>
+                            <div className={styles.editCourseDropdown}>
                                 <Dropdown 
                                     handleSelect={handleSheetDisplay}
                                     actionTypes={['showEditSheet', 'showDeleteSheet']}
@@ -146,8 +137,21 @@ const CoursePage = () => {
                                 <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
                                     <CourseDelete id={courseData.id} />
                                 </Sheet>
-                            </>
+                            </div>
                         )}
+                        <div>
+                            <h2 className='text-center'>{courseData.title}</h2>
+                            <p className='text-justify'>{courseData.description}</p>
+                        </div>
+                    </Col>
+                    <Col xs={12} md={5} className='d-flex justify-content-center align-items-center'>
+                        <figure className='m-0' >
+                            <Image 
+                                src={courseData.image}
+                                className={styles.image}
+                                fluid
+                            />
+                        </figure>
                     </Col>
                 </Row>
 
@@ -228,12 +232,14 @@ const CoursePage = () => {
                     </Col>
                     <Col md={12} lg={7}>
                         {currentUser && (
-                            !courseData.rating_id  && (
-                                <ReviewCreateForm
-                                    course={id}
-                                    setCourse={setCourse}
-                                    setReviews={setReviews}
-                                />   
+                            !courseData.rating_id && (
+                                !courseData.is_owner && (
+                                    <ReviewCreateForm
+                                        course={id}
+                                        setCourse={setCourse}
+                                        setReviews={setReviews}
+                                    />   
+                                )
                             )
                         )}
                         {reviews.results?.length ? (
@@ -247,7 +253,9 @@ const CoursePage = () => {
                                 />
                             ))
                         ) : (
-                            'No reviews yet'
+                            <div className={`my-4 ${styles.noReviewsDiv}`}>
+                                <p className='m-0'>No reviews yet</p>
+                            </div>
                         )}
                     </Col>
                 </Row>

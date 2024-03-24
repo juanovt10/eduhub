@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button } from 'react-bootstrap'
 import { axiosRes } from '../../api/axiosDefaults'
 import {
     SheetContent,
@@ -8,10 +8,14 @@ import {
     SheetTitle,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
+import Asset from '../../components/Asset';
 
-const ReviewDelete = ({onHide, fetchReviews, setCourse, setReviews, id}) => {
+const ReviewDelete = ({fetchReviews, setCourse, setReviews, id}) => {
+
+    const [startedLoading, setStartedLoading] = useState(false);
 
     const handleDelete = async () => {
+        setStartedLoading(true);
         try {
             await axiosRes.delete(`/ratings/${id}/`)
             if (setCourse) {
@@ -45,8 +49,13 @@ const ReviewDelete = ({onHide, fetchReviews, setCourse, setReviews, id}) => {
             <SheetDescription>
                 Are you sure you want to delete your review?
             </SheetDescription>
-            <Button variant='primary' onClick={onHide}>No!!!</Button>
-            <Button variant='danger' onClick={handleDelete}>Yes, Delete review</Button>
+            <Button variant='danger' onClick={handleDelete}>
+                {!startedLoading ? (
+                    'Yes, Delete review'
+                ) : (
+                    <Asset spinner size='sm' />
+                )}
+            </Button>
         </SheetContent>
     )
 }

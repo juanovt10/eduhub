@@ -69,3 +69,20 @@
     color: white;
     text-align: center;
 }
+
+.image {
+    max-height: 50vh;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.noReviewsDiv {
+    text-align: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 2rem 0;
+}
+
+.editCourseDropdown {
+    margin-bottom: 75px;
+}

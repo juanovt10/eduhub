@@ -97,7 +97,6 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
                                     </Sheet>
                                     <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}> 
                                         <ReviewDelete
-                                            onHide={() => handleSheetDisplay('showDeleteSheet', false)}
                                             fetchReviews={fetchReviews}
                                             setCourse={setCourse}
                                             setReviews={setReviews}

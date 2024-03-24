@@ -28,7 +28,7 @@ const CourseDelete = ({id}) => {
     }
 
     return (
-        <SheetContent className={styles.sheetContainer} side={'right'}>
+        <SheetContent className={styles.sheetContainer} side={'left'}>
             <SheetHeader>
                 <SheetTitle className={styles.sheetTitle}>Delete course?</SheetTitle>
             </SheetHeader>

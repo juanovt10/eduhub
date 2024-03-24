@@ -100,7 +100,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
     }
 
     return (
-        <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
+        <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'left'}>
             <SheetHeader>
                 <SheetTitle className={styles.sheetTitle}>Edit Course</SheetTitle>
             </SheetHeader>
@@ -215,7 +215,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
                 <Button className={`mr-2 ${styles.buttonPrimary}`} type="submit">
                     {!startedLoading ? (
-                        'Submit'
+                        'Save changes'
                     ) : (
                         <Asset spinner size='sm' />
                     )}

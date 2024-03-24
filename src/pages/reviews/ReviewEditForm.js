@@ -16,12 +16,16 @@ import {
 import { Input } from '../../@/components/ui/input';
 import { Label } from '../../@/components/ui/label';
 import styles from '../../styles/ReviewEdit.module.css'
+import Asset from '../../components/Asset';
 
 
 const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
     const [reviewData, setReviewData] = useState({...props})
+    const [startedLoading, setStartedLoading] = useState(false);
+
     const {id, title, rating, content} = reviewData;
+
 
     const handleChange = (e) => {
         setReviewData({
@@ -36,6 +40,7 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setStartedLoading(true);
 
         try {
             await axiosRes.put(`/ratings/${id}/`, {
@@ -79,8 +84,12 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
                 <Form.Group>
                     <RatingInput rating={rating} setRating={handleRatingChange} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button className={`w-100 ${styles.buttonPrimary}`} type="submit">
+                    {!startedLoading ? (
+                        'Edit review'
+                    ) : (
+                        <Asset spinner size='sm' />
+                    )}
                 </Button>
             </Form>
         </SheetContent>
