@@ -1,6 +1,7 @@
 .mainContainer {
     min-height: 100vh;
     margin-top: 7rem;
+    margin-bottom: 3rem;
 }
 
 .tabContainer {

@@ -17,8 +17,7 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false);
-
-    console.log(mode)
+    const [submitLoader, setSubmitLoader] = useState(false);
 
     const { name, bio, image, dob } = profileData;
 
@@ -91,19 +90,19 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
     return (
         <>
             <Sheet open={open} onOpenChange={onOpenChange}>
-                {hasLoaded ? (
-                    <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'left'}>
-                        <SheetHeader>
-                            {mode === 'create' ? (
-                                <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
-                            ) : (
-                                <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
-                            )}
-                        </SheetHeader>
+                <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
+                    <SheetHeader>
+                        {mode === 'create' ? (
+                            <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
+                        ) : (
+                            <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
+                        )}
+                    </SheetHeader>
+                    {hasLoaded ? (
                         <Form className={styles.sheetEditCourseForm} onSubmit={handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='name'
                                     value={name}
                                     onChange={handleChange}
@@ -113,28 +112,19 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Bio</Form.Label>
-                                <Form.Control 
+                                <Form.Control
                                     name='bio'
                                     value={bio}
                                     onChange={handleChange}
                                     as='textarea'
-                                    placeholder='enter your preferred name'
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>date of birth</Form.Label>
-                                <Form.Control 
-                                    name='dob'
-                                    value={dob || ""}
-                                    onChange={handleChange}
-                                    type='date'
+                                    placeholder='enter your profile description'
                                 />
                             </Form.Group>
                             <Form.Group>
                                 {image ? (
                                     <>
                                         <figure>
-                                            <Image src={image} rounded />
+                                            <Image src={image} className={styles.image} rounded />
                                         </figure>
                                         <div>
                                             <Form.Label>Change image</Form.Label>
@@ -143,26 +133,33 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
                                 ) : (
                                     <Form.Label>Image</Form.Label>
                                 )}
-                                <Form.File 
+                                <Form.File
                                     id='image-upload'
                                     accpet='image/*'
                                     onChange={handleChangeImage}
                                     ref={imageInput}
                                 />
                             </Form.Group>
-                            <Button variant='primary' type='submit'>
-                                Submit
+                            <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type='submit'>
+                                {!submitLoader ? (
+                                    'Edit profile'
+                                ) : (
+                                    <Asset spinner size='sm' />
+                                )}
+                            </Button>
+                            <Button className={styles.buttonSecondary} onClick={onHide}>
+                                Discard changes
                             </Button>
                         </Form>
-                    </SheetContent>
 
-                ) : (
-                    <Row>
-                        <Col className='mt-5'>
-                            <Asset spinner />
-                        </Col>
-                    </Row>
-                )}
+                    ) : (
+                        <Row>
+                            <Col className='mt-5'>
+                                <Asset spinner />
+                            </Col>
+                        </Row>
+                    )}
+                </SheetContent>
             </Sheet>
         </>
     )

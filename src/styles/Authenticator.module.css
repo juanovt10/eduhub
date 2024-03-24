@@ -15,7 +15,7 @@
     border-top: none; 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    width: 100%;
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,8 +86,25 @@
     border-radius: 10px 10px 0 0;
 }
 
-.tabContainer {
-    width: 250px;
+.tabs a {
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.tabs a:link,
+.tabs a:visited {
+    color: #fff;
+}
+
+.tabs a:hover,
+.tabs a::after,
+.tabs a::before,
+.tabs a:focus {
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: none;
 }
 
 .tabs a {
@@ -100,5 +117,22 @@
 .successAlert {
     width: 90%;
     margin-top: 1rem;
+}
+
+.linkDiv {
+    background-color: transparent;
+    color: darkblue;
+}
+
+.signUp {
+    border-radius: 10px 0 0 0 ;
+}
+
+.signIn {
+    border-radius: 0 10px 0 0 ;
+}
+
+.activeLink {
+    background-color: red;
 }
 

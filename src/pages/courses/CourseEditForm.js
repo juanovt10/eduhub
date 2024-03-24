@@ -213,7 +213,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                     </Form.Group>
                 </Row>
 
-                <Button className={`mr-2 ${styles.buttonPrimary}`} type="submit">
+                <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type="submit">
                     {!startedLoading ? (
                         'Save changes'
                     ) : (

@@ -8,6 +8,7 @@ import CoursesDisplay from '../courses/CoursesDisplay';
 import Nav from 'react-bootstrap/Nav';
 import Review from '../reviews/Review';
 import styles from '../../styles/ProfilePage.module.css'
+import Asset from '../../components/Asset';
 
 
 const ProfilePage = () => {
@@ -17,6 +18,8 @@ const ProfilePage = () => {
     const [profileData, setProfileData] = useState({});
     const [profileReviews, setProfileReviews] = useState({});
     const [profileCoursesFilter, setProfileCoursesFilter] = useState({enrolled: true});
+    const [profileLoader, setProfileLoader] = useState(false);
+
 
     const fetchProfileReviews = async () => {
         try {
@@ -29,11 +32,14 @@ const ProfilePage = () => {
     }
 
     const fetchProfileData = async () => {
+        setProfileLoader(true);
         try {
             const profileResponse = await axiosReq.get(`/profiles/${id}`)
             setProfileData(profileResponse.data)
         } catch (err) {
-            
+            console.log(err)
+        } finally {
+            setProfileLoader(false);
         }
     }
 
@@ -78,53 +84,64 @@ const ProfilePage = () => {
 
     return (
         <Container className={styles.mainContainer}>
-            <Row>
-                <Col xs={12} className='d-flex mb-3'>
-                    <Profile fetchProfileData={fetchProfileData} {...profileData} />      
-                </Col>
-                {profileData.is_owner && (
-                    <Col lg={12}>
-                        <Nav fill variant="tabs" defaultActiveKey="/home" className={`mb-2 ${styles.tabContainer}`}>
-                            {profileData.is_instructor && (
-                                <Nav.Item>
-                                    <Nav.Link onClick={() => {}}><i class="fa-solid fa-person-chalkboard"></i> Your courses</Nav.Link>
-                                </Nav.Item>
-                            )}
-                            <Nav.Item className={profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
-                                <Nav.Link onClick={handleEnrollFilter}>
-                                    <i class="fa-solid fa-graduation-cap"></i> Enrolled courses
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className={profileCoursesFilter.wish_listed ? styles.activeLink : styles.inactiveLink}>
-                                <Nav.Link onClick={handleWishListFilter}>
-                                    <i class="fa-solid fa-heart"></i> Wish List
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item className={!profileCoursesFilter.wish_listed && !profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
-                                <Nav.Link onClick={handleReviewFilter}>
-                                    <i class="fa-solid fa-star"></i> Reviews
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                        {profileCoursesFilter.wish_listed || profileCoursesFilter.enrolled ? (
-                            <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>                        
-                        ) : profileReviews.results?.length ? (
-                            <>
-                                {profileReviews.results.map((review) => (
-                                    <Review
-                                        key={review.id}
-                                        fetchReviews={fetchProfileReviews}
-                                        profile
-                                        {...review}
-                                    />
-                                ))}
-                            </>
-                        ) : (
-                            <h3>No reviews yet</h3>
-                        )}
+            {!profileLoader ? (
+                <Row>
+                    <Col xs={12} className='d-flex mb-3 justify-contents-center align-items-center'>
+                            <Profile fetchProfileData={fetchProfileData} {...profileData} />      
+
                     </Col>
-                )}
-            </Row>
+                    {profileData.is_owner ? (
+                        <Col lg={12}>
+                            <Nav fill variant="tabs" defaultActiveKey="/home" className={`mb-2 ${styles.tabContainer}`}>
+                                {profileData.is_instructor && (
+                                    <Nav.Item>
+                                        <Nav.Link onClick={() => {}}><i class="fa-solid fa-person-chalkboard"></i> Your courses</Nav.Link>
+                                    </Nav.Item>
+                                )}
+                                <Nav.Item className={profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
+                                    <Nav.Link onClick={handleEnrollFilter}>
+                                        <i class="fa-solid fa-graduation-cap"></i> Enrolled courses
+                                    </Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item className={profileCoursesFilter.wish_listed ? styles.activeLink : styles.inactiveLink}>
+                                    <Nav.Link onClick={handleWishListFilter}>
+                                        <i class="fa-solid fa-heart"></i> Wish List
+                                    </Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item className={!profileCoursesFilter.wish_listed && !profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
+                                    <Nav.Link onClick={handleReviewFilter}>
+                                        <i class="fa-solid fa-star"></i> Reviews
+                                    </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                            {profileCoursesFilter.wish_listed || profileCoursesFilter.enrolled ? (
+                                <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>                        
+                            ) : profileReviews.results?.length ? (
+                                <>
+                                    {profileReviews.results.map((review) => (
+                                        <Review
+                                            key={review.id}
+                                            fetchReviews={fetchProfileReviews}
+                                            profile
+                                            {...review}
+                                        />
+                                    ))}
+                                </>
+                            ) : (
+                                <h3>No reviews yet</h3>
+                            )}
+                        </Col>
+                    ) : profileData.is_instructor && (
+                        <p>Display course projects where th eprofile is the owner</p>
+                    )}
+                </Row>
+            ) : (
+                <Row>
+                    <Col className='mt-5'>
+                        <Asset spinner />
+                    </Col>
+                </Row>
+            )}
         </Container>
     )
 }
