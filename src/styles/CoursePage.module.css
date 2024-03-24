@@ -6,8 +6,7 @@
 .courseInfoContainer {
     text-align: center;
     width: 100%;
-    background-color: white;
-    color: #333;
+    color: white;
 }
 
 .courseInfoContainer h3 {
@@ -34,5 +33,39 @@
     object-fit: contain;
 }
 
+.courseDataIcon {
+    font-size: 2rem;
+}
+
+.courseDataItem {
+    text-align: left;
+}
 
 
+.courseDataItem * {
+    margin: 0;
+}
+
+.courseOwner {
+    font-size: 1.3rem;
+}
+
+.alertBtn {
+    text-decoration: underline;
+}
+
+.Card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    min-width: 250px;
+    color: white;
+    text-align: center;
+}

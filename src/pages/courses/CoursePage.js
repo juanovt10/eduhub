@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Button, Container, Modal, ButtonGroup, Image } from 'react-bootstrap';
+import { Col, Row, Button, Container, Modal, ButtonGroup, Image, Alert, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
@@ -24,6 +24,7 @@ const CoursePage = () => {
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [ownerAlert, setOwnerAlert] =  useState(true);
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
         showDeleteSheet: false
@@ -77,13 +78,45 @@ const CoursePage = () => {
     }, [course]);
 
     console.log(course.results[0])
+    console.log(currentUser)
 
     const courseData = course.results[0]
+
 
     return (
         <Container className={styles.mainContainer}>
             {hasLoaded ? (
-            <>
+                <>
+                    {currentUser && courseData.is_owner && ownerAlert ? (
+                        <Alert variant='warning' onClose={() => setOwnerAlert(false)} dismissible>
+                            You are the owner of this course, you can{" "}
+                            <Alert.Link
+                                onClick={() => {
+                                    handleSheetDisplay('showEditSheet', true);
+                                    setOwnerAlert(false);
+                                }}
+                            >
+                                edit
+                            </Alert.Link>
+                            {" "}or{" "}  
+                            <Alert.Link
+                                onClick={() => {
+                                    handleSheetDisplay('showDeleteSheet', true);
+                                    setOwnerAlert(false);
+                                }}
+                            >
+                                delete
+                            </Alert.Link>
+                            {" "}the course, but you cannot leave a review, enroll or add it to your wish list.
+                        </Alert>
+                    ) : !currentUser && (
+                        <Alert variant='danger' onClose={() => setOwnerAlert(false)} dismissible>
+                            To enroll, add to wish list or leave a review please{" "}
+                            <Alert.Link as={Link} to='/auth'>
+                                signin.
+                            </Alert.Link>       
+                        </Alert>
+                    )}
                 <Row>
                     <Col xs={11} md={6} className='d-flex flex-column justify-content-center align-items-center'>
                         <h2>{courseData.title}</h2>
@@ -121,52 +154,67 @@ const CoursePage = () => {
                     </Col>
                 </Row>
 
+                <Row className='my-3'>
+                    <span className={styles.courseOwner}>Created by: {courseData.owner}</span>
+                </Row>
+
                 <Row className={`mb-5 ${styles.courseInfoContainer}`}>
-                    <Col>
-                        <Row className='d-flex justify-content-center align-items-center'>
-                            <Col>
-                                <h3><i class="fa-solid fa-video"></i></h3> 
-                            </Col>
-                            <Col>
-                                <h5>{courseData.video_hours} video {courseData.video_hours > 1 ? "hours" : "hour"}hours</h5>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col>
-                        <Row className='d-flex justify-content-center align-items-center'>
-                            <Col>
-                                <h3><i class="fa-brands fa-readme"></i></h3> 
-                            </Col>
-                            <Col>
-                                <h5>{courseData.article_count} {courseData.article_count > 1 ? "articles" : "article"}</h5>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col>
-                        <Row className='d-flex justify-content-start align-items-center'>
-                            <Col>
-                                <h3><i class="fa-solid fa-pen-to-square"></i></h3> 
-                            </Col>
-                            <Col>
-                                <h5>{courseData.test_count} {courseData.test_count > 1 ? "tests" : "test"}</h5>
-                            </Col>
-                        </Row>
+
+                    {courseData.video_hours > 0 && (
+                        <Col className='d-flex align-items-center'>
+                            <div className={`mr-2 ${styles.courseDataIcon}`}>
+                                <i class="fa-solid fa-video"></i> 
+                            </div>
+                            <div className={styles.courseDataItem}>
+                                <p>{courseData.video_hours}</p>
+                                <p>video {courseData.video_hours > 1 ? "hours" : "hour"}</p>
+                            </div>
+                        </Col>
+                    )}
+
+                    {courseData.article_count > 0 && (
+                        <Col className='d-flex align-items-center'>
+                            <div className={`mr-2 ${styles.courseDataIcon}`}>
+                                <i class="fa-brands fa-readme"></i>
+                            </div>
+                            <div className={styles.courseDataItem}>
+                                <p>{courseData.article_count}</p>
+                                <p>{courseData.article_count > 1 ? "articles" : "article"}</p>
+                            </div>
+                        </Col>
+                    )}
+
+
+                    {courseData.test_count > 0 && (
+                        <Col className='d-flex align-items-center'>
+                            <div className={`mr-2 ${styles.courseDataIcon}`}>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div className={styles.courseDataItem}>
+                                <p>{courseData.test_count}</p>
+                                <p>{courseData.test_count > 1 ? "tests" : "test"}</p>
+                            </div>
+                        </Col>
+                    )}
+
+                    <Col className='d-flex align-items-center'>
+                        <div className={`mr-2 ${styles.courseDataIcon}`}>
+                            <i class="fa-solid fa-euro-sign"></i>
+                        </div>
+                        <span>{courseData.price}</span>
                     </Col>
                 </Row>
 
                 <div className='mb-5'>
                     {!currentUser ? (
-                        <>
-                            <p>To enroll, add to wish list or leave a review, please sign in</p>
-                            <Button><Link to='/auth'>Sign Up</Link></Button> 
-                        </>
-                    ) : !courseData.is_owner ? (
+                        <Card className={styles.Card}>
+                            <Card.Body>
+                                <p>Regsiter o enroll, add to wish list or leave a review for this course</p>
+                                <Button><Link to='/auth'>Sign Up</Link></Button> 
+                            </Card.Body>
+                        </Card>
+                    ) : !courseData.is_owner && (
                         <CourseActions id={courseData.id}/>
-                    ) : (
-                        <>
-                            <p>You create this course, so you are not able to enroll or add to wish list</p>
-                            <Button><Link to='/course'>Explore courses</Link></Button> 
-                        </>
                     )}
                 </div>
 
@@ -178,12 +226,12 @@ const CoursePage = () => {
                     </div>
                 </Row>
                 <Row>
-                    <Col md={4} lg={5} className='mb-5'>
+                    <Col md={12} lg={5} className='mb-5'>
                         <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
                     </Col>
-                    <Col md={8} lg={7}>
+                    <Col md={12} lg={7}>
                         {currentUser && (
-                            !courseData.rating_id && (
+                            !courseData.rating_id  && (
                                 <ReviewCreateForm
                                     course={id}
                                     setCourse={setCourse}

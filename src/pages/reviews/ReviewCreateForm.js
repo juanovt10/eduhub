@@ -3,32 +3,18 @@ import { Form, Col, Row, Alert, Button } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import RatingInput from '../../components/RatingInput';
 import styles from '../../styles/Review.module.css';
-import Avatar from '../../components/Avatar';
-import { useCurrentUser } from '../../context/CurrentUserContext';
-import { axiosReq } from '../../api/axiosDefaults';
+import Asset from '../../components/Asset';
 
 
 const ReviewCreateForm = (props) => {
     const { course, setCourse, setReviews } = props
-    const currentUser = useCurrentUser();
-    const [userData, setUserData] = useState({});
+    const [startLoadingSubmition, setStartLoadingSubmition] = useState(false);
     const [errors, setErrors] = useState({});
     const [reviewData, setReviewData] = useState({
         title: "",
         content: "",
         rating: 0,
     })
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            const userDataResponse = await axiosReq.get(`/profiles/${currentUser.pk}`)
-            console.log(userDataResponse.data)
-            setUserData(userDataResponse.data)
-        }
-
-        fetchUserData();
-    }, [])
-
 
     const { title, content, rating} = reviewData;
 
@@ -45,6 +31,7 @@ const ReviewCreateForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setStartLoadingSubmition(true);
         try {
             const { data } = await axiosRes.post('/ratings/', {
                 title,
@@ -69,24 +56,10 @@ const ReviewCreateForm = (props) => {
         }
     }
 
-
     return (
         <div className={styles.reviewContainer}>
             <Row>
-                <Col>
-                <div className='d-flex align-items-center justify-content-start'>
-                        <Avatar
-                            src={userData.image}
-                            height={40}
-                        />
-                        <div>
-                            <h5 className='m-0'>{userData.owner}</h5>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <h5>Let us know what you think about teh course!</h5>
+                <h5 className='mb-3'>Let us know what you think about the course!</h5>
                 <Form onSubmit={handleSubmit}>
                     <Row>
                         <Form.Group as={Col}>
@@ -106,13 +79,12 @@ const ReviewCreateForm = (props) => {
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
-                            <Form.Label>Content</Form.Label>
                             <Form.Control 
                                 name="content"
                                 value={content}
                                 onChange={handleChange}
                                 as="textarea"
-                                placeholder="Enter course title" />
+                                placeholder="Enter your review" />
                         </Form.Group>
                         {errors.content?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
@@ -121,8 +93,8 @@ const ReviewCreateForm = (props) => {
                         ))}
                     </Row>
                     <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Rating</Form.Label>
+                        <Form.Group as={Col} className='d-flex'>
+                            <Form.Label className='mr-2'>Your rating:</Form.Label>
                             <RatingInput rating={rating} setRating={handleRatingChange} />
                         </Form.Group>
                         {errors.rating?.map((message, idx) => (
@@ -131,8 +103,12 @@ const ReviewCreateForm = (props) => {
                             </Alert>
                         ))}
                     </Row>
-                    <Button variant="primary" type="submit">
-                        Submit
+                    <Button className={styles.buttonPrimary} type="submit">
+                        {!startLoadingSubmition ? (
+                            "Submit"
+                        ) : (
+                            <Asset spinner size='sm'/>
+                        )}
                     </Button>
                 </Form>
             </Row>

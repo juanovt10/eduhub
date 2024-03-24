@@ -1,31 +1,31 @@
 .reviewContainer {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     border-bottom: 1px solid white;
 }
 
-.buttonPrimary button {
+.buttonPrimary {
     width: 100%;
     background-color: #f5793b;
     border: 1px solid #f5793b;
 }
 
-.buttonPrimary button:hover {
+.buttonPrimary:hover {
     background-color: #ff9254;
     border: 1px solid #f5793b;
 }
 
-.buttonPrimary button:active,
-.buttonPrimary button:focus,
-.buttonPrimary button:focus-visible  {
+.buttonPrimary:active,
+.buttonPrimary:focus,
+.buttonPrimary:focus-visible  {
     background-color: #ff9254;
     border: 1px solid #f5793b;
     box-shadow: inset 0 3px 5px #ff9254;
 }
 
-.buttonPrimary button:not(:disabled):not(.disabled):active,
-.buttonPrimary button:not(:disabled):not(.disabled).active,
-.show > .buttonPrimary button.dropdown-toggle {
+.buttonPrimary:not(:disabled):not(.disabled):active,
+.buttonPrimary:not(:disabled):not(.disabled).active,
+.show > .buttonPrimary.dropdown-toggle {
     background-color: #ff9254;
     border: 1px solid #f5793b;
     border-color: #f5793b;
