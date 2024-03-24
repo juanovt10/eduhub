@@ -8,10 +8,16 @@
     z-index: 10000;
 }
 
+.image {
+    max-height: 40vh;
+    max-width: 40vw;
+    object-fit: contain;
+}
+
 .editCourseSheetContainer {
     width: 100%;
     max-width: none;
-    padding-top: 32rem;
+    padding-top: 20rem;
     overflow-y: auto;
 }
 
@@ -27,21 +33,65 @@
 
 .sheetEditCourseForm {
     width: 90%;
-    padding-bottom: 5rem;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 576px) {
     .editCourseSheetContainer {
-        padding-top: 15rem;
+        padding-top: 25rem;
     }
 }
 
-@media (min-width: 992px) {
-    .editCourseSheetContainer {
-        padding-top: 40rem;
-    }
+.buttonPrimary {
+    background-color: #f5793b;
+    border: 1px solid #f5793b;
+}
 
-    .sheetEditCourseForm {
-        padding-bottom: 8rem;
-    }
+.buttonPrimary:hover {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+}
+
+.buttonPrimary:active,
+.buttonPrimary:focus,
+.buttonPrimary:focus-visible  {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+    box-shadow: inset 0 3px 5px #ff9254;
+}
+
+.buttonPrimary:not(:disabled):not(.disabled):active,
+.buttonPrimary:not(:disabled):not(.disabled).active,
+.show > .buttonPrimary.dropdown-toggle {
+    background-color: #ff9254;
+    border: 1px solid #f5793b;
+    border-color: #f5793b;
+    box-shadow: inset 0 3px 5px rgba(255, 146, 84, 0.5);
+    box-shadow: inset 0 3px 5px #ff9254;
+}
+
+.buttonSecondary {
+    background-color: #00BCD4;
+    border: 1px solid #00BCD4;
+}
+
+.buttonSecondary:hover {
+    background-color: #0097A7;
+    border: 1px solid #00BCD4;
+}
+
+.buttonSecondary:active,
+.buttonSecondary:focus,
+.buttonSecondary:focus-visible  {
+    background-color: #0097A7;
+    border: 1px solid #00BCD4;
+    box-shadow: inset 0 3px 5px #0097A7;
+}
+
+.buttonSecondary:not(:disabled):not(.disabled):active,
+.buttonSecondary:not(:disabled):not(.disabled).active,
+.show > .buttonSecondary.dropdown-toggle {
+    background-color: #0097A7;
+    border: 1px solid #00BCD4;
+    border-color: #00BCD4;
+    box-shadow: inset 0 3px 5px #0097A7;
 }

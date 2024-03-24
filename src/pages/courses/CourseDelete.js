@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { axiosRes } from '../../api/axiosDefaults'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
-import { Modal, Button } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 import {
     SheetContent,
     SheetDescription,
@@ -20,12 +20,11 @@ const CourseDelete = ({id}) => {
     const handleDelete = async () => {
         setStartLoading(true);
         try {
-            await axiosRes.delete(`/courses/${id}/`)
-            history.push('/courses/')
+            await axiosRes.delete(`/courses/${id}/`);
+            history.push('/courses/');
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-
     }
 
     return (

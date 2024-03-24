@@ -13,10 +13,12 @@ import {
     SheetTrigger,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
+import Asset from '../../components/Asset';
  
 const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
     const [categories, setCategories] = useState({}); 
+    const [startedLoading, setStartedLoading] = useState(false);
     const [courseData, setCourseData] = useState({
         ...props
     })
@@ -69,6 +71,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setStartedLoading(true);
         const formData = new FormData();
 
         console.log('trigger submit')
@@ -132,7 +135,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                         {image ? (
                             <>
                                 <figure>
-                                    <Image src={image} rounded />
+                                    <Image src={image} className={styles.image} rounded />
                                 </figure>
                                 <div>
                                     <Form.Label>Change image</Form.Label>
@@ -165,16 +168,6 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                                 <option key={idx} value={cat.key}>{cat.value}</option>
                             ))}
                         </Form.Control>
-                    </Form.Group>
-
-                    <Form.Group as={Col}>
-                        <Form.Label>Duration</Form.Label>
-                        <Form.Control
-                            name="duration"
-                            value={duration}
-                            onChange={handleChange}
-                            type="text"
-                        />
                     </Form.Group>
 
                     <Form.Group as={Col}>
@@ -220,10 +213,14 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                     </Form.Group>
                 </Row>
 
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button className={`mr-2 ${styles.buttonPrimary}`} type="submit">
+                    {!startedLoading ? (
+                        'Submit'
+                    ) : (
+                        <Asset spinner size='sm' />
+                    )}
                 </Button>
-                <Button variant="warning" onClick={onHide}>
+                <Button className={styles.buttonSecondary} onClick={onHide}>
                     Discard Changes
                 </Button>
             </Form>
