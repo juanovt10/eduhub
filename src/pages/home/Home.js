@@ -4,7 +4,6 @@ import HomeFeatureCourses from './HomeFeatureCourses'
 import HomeFAQs from './HomeFAQs'
 import HomeAbout from './HomeAbout'
 import styles from "../../styles/Home.module.css"
-import { useCurrentUser } from '../../context/CurrentUserContext'
 
 const Home = () => {
 

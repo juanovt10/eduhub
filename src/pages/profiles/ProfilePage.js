@@ -75,12 +75,20 @@ const ProfilePage = () => {
     const handleReviewFilter = () => {
         setProfileCoursesFilter({
             wish_listed: false,
-            enrolled: false
+            enrolled: false, 
+            owner_username: '',
+        })
+    }
+
+    const handleIsOwnerFilter = () => {
+        setProfileCoursesFilter({
+            owner_username: profileData.owner,
         })
     }
 
     console.log(profileReviews.results)
     console.log(currentUser)
+    console.log(profileData.owner)
 
     return (
         <Container className={styles.mainContainer}>
@@ -94,8 +102,8 @@ const ProfilePage = () => {
                         <Col lg={12}>
                             <Nav fill variant="tabs" defaultActiveKey="/home" className={`mb-2 ${styles.tabContainer}`}>
                                 {profileData.is_instructor && (
-                                    <Nav.Item>
-                                        <Nav.Link onClick={() => {}}><i class="fa-solid fa-person-chalkboard"></i> Your courses</Nav.Link>
+                                    <Nav.Item className={profileCoursesFilter.owner_username ? styles.activeLink : styles.inactiveLink}>
+                                        <Nav.Link onClick={handleIsOwnerFilter}><i class="fa-solid fa-person-chalkboard"></i> Your courses</Nav.Link>
                                     </Nav.Item>
                                 )}
                                 <Nav.Item className={profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
@@ -108,13 +116,13 @@ const ProfilePage = () => {
                                         <i class="fa-solid fa-heart"></i> Wish List
                                     </Nav.Link>
                                 </Nav.Item>
-                                <Nav.Item className={!profileCoursesFilter.wish_listed && !profileCoursesFilter.enrolled ? styles.activeLink : styles.inactiveLink}>
+                                <Nav.Item className={!profileCoursesFilter.wish_listed && !profileCoursesFilter.enrolled && !profileCoursesFilter.owner_username ? styles.activeLink : styles.inactiveLink}>
                                     <Nav.Link onClick={handleReviewFilter}>
                                         <i class="fa-solid fa-star"></i> Reviews
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>
-                            {profileCoursesFilter.wish_listed || profileCoursesFilter.enrolled ? (
+                            {profileCoursesFilter.wish_listed || profileCoursesFilter.enrolled || profileCoursesFilter.owner_username  ? (
                                 <CoursesDisplay filters={profileCoursesFilter} sortKey={'default'}/>                        
                             ) : profileReviews.results?.length ? (
                                 <>
