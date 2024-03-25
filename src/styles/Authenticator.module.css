@@ -87,32 +87,32 @@
 }
 
 .tabs a {
-    color: #fff;
     border: 1px solid transparent;
     border-radius: 10px;
-    transition: border-color 0.3s ease;
 }
 
 .tabs a:link,
 .tabs a:visited {
-    color: #fff;
+    color: grey;
 }
 
-.tabs a:hover,
 .tabs a::after,
 .tabs a::before,
 .tabs a:focus {
     color: #fff;
-    border-radius: 10px;
+    border-radius: none;
     box-shadow: none;
+    border: none;
 }
 
-.tabs a {
-    color: #f5793b;
-    font-weight: 700;
-    width: 50%;
-    border-radius: none;
+.tabs a:hover {
+    color: #fff;
+    border-radius: 0 0 0 0;
+    box-shadow: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.3);
 }
+
 
 .successAlert {
     width: 90%;
@@ -120,8 +120,12 @@
 }
 
 .linkDiv {
-    background-color: transparent;
-    color: darkblue;
+    background: rgba(0, 0, 0, 0.3); 
+}
+
+.linkDiv:hover {
+    border-radius: none;
+    border: none;
 }
 
 .signUp {
@@ -133,6 +137,12 @@
 }
 
 .activeLink {
-    background-color: red;
+    background-color: transparent;
+}
+
+
+.activeLink a:link,
+.activeLink a:visited {
+    color: white;
 }
 

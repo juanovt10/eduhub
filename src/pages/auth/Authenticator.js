@@ -50,18 +50,14 @@ const Authenticator = () => {
                     <Nav fill variant="tabs" defaultActiveKey="/home" className={styles.tabs}>
                         <Nav.Item className={`${styles.linkDiv} ${styles.signUp} ${activeTab === 'signup' ? styles.activeLink : ''}`}>
                             <Nav.Link
-                                eventKey='signup'
                                 onClick={() => setActiveTab('signup')}
-                                className={activeTab === 'signup' ? styles.activeLink : ''}
                             >
                                 Sign up
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className={`${styles.linkDiv} ${styles.signIn} ${activeTab === 'signin' ? styles.activeLink : ''}`}>
                             <Nav.Link
-                                eventKey='signin'
-                                onClick={() => setActiveTab('signin')}
-                                className={`${activeTab === 'signin' ? styles.activeLink : ''}`} 
+                                onClick={() => setActiveTab('signin')} 
                             >
                                 Sign in
                             </Nav.Link>
