@@ -23,21 +23,19 @@ const Authenticator = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setIsInitialCheckDone(true)
-        }, 3000)
+            setIsInitialCheckDone(true);
+        }, 3000);
 
         return () => clearTimeout(timer);
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (currentUser !== undefined) { 
             if (currentUser) {
                 history.push('/');
-            }
-        }
+            };
+        };
     }, [currentUser, isInitialCheckDone, history]);
-
-    console.log(currentUser)
 
     return (
         <div className={styles.DivContainer}>

@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { axiosRes } from '../../api/axiosDefaults'
+import React, { useState } from 'react';
+import { axiosRes } from '../../api/axiosDefaults';
+import Asset from '../../components/Asset';
+import Button from 'react-bootstrap/Button';
 import {
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
-import styles from '../../styles/ReviewEdit.module.css'
-import Asset from '../../components/Asset';
+import styles from '../../styles/ReviewEdit.module.css';
 
 const ReviewDelete = ({fetchReviews, setCourse, setReviews, id}) => {
 
@@ -17,29 +17,29 @@ const ReviewDelete = ({fetchReviews, setCourse, setReviews, id}) => {
     const handleDelete = async () => {
         setStartedLoading(true);
         try {
-            await axiosRes.delete(`/ratings/${id}/`)
+            await axiosRes.delete(`/ratings/${id}/`);
             if (setCourse) {
                 setCourse(prevCourse => ({
                     results: [{
                         ...prevCourse.results[0],
                         ratings_count: prevCourse.results[0].ratings_count -1
                     }]
-                }))
-            }
+                }));
+            };
 
             if (setReviews) {
                 setReviews(prevReviews => ({
                     ...prevReviews,
                     results: prevReviews.results.filter(review => review.id !== id),
-                }))
-            }
+                }));
+            };
 
 
             fetchReviews();
         } catch (err) {
-            console.log(err)
-        }
-    }
+            console.log(err);
+        };
+    };
 
     return (
         <SheetContent className={styles.sheetContainer} side={'right'}>

@@ -1,42 +1,34 @@
 import React, { useState } from 'react'
-// import { Form, Modal, Button } from 'react-bootstrap'
-import { Form, Button} from 'react-bootstrap'
-import RatingInput from '../../components/RatingInput'
 import { axiosRes } from '../../api/axiosDefaults'
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetClose,
-    SheetFooter,
-    SheetTitle,
-    SheetTrigger,
-} from "../../@/components/ui/sheet";
-import { Input } from '../../@/components/ui/input';
-import { Label } from '../../@/components/ui/label';
-import styles from '../../styles/ReviewEdit.module.css'
+import RatingInput from '../../components/RatingInput'
 import Asset from '../../components/Asset';
+import Form from 'react-bootstrap/Form'; 
+import Button from 'react-bootstrap/Button'; 
+import {
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+} from "../../@/components/ui/sheet";
+import styles from '../../styles/ReviewEdit.module.css';
 
 
 const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
-    const [reviewData, setReviewData] = useState({...props})
+    const [reviewData, setReviewData] = useState({...props});
     const [startedLoading, setStartedLoading] = useState(false);
 
     const {id, title, rating, content} = reviewData;
-
 
     const handleChange = (e) => {
         setReviewData({
             ...reviewData,
             [e.target.name]: e.target.value,
-        })
-    }
+        });
+    };
 
     const handleRatingChange = (newRating) =>{
-        setReviewData({ ...reviewData, rating: newRating})
-    }
+        setReviewData({ ...reviewData, rating: newRating});
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,13 +42,11 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
             });
             fetchReviews();
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {            
             onHide();
-        }
-    }
-
-
+        };
+    };
 
     return (
         <SheetContent className={styles.sheetContainer} side={'right'}>
@@ -64,14 +54,6 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
                 <SheetTitle className={styles.sheetTitle}>Edit review</SheetTitle>
             </SheetHeader>
             <Form onSubmit={handleSubmit} className={styles.sheetForm}>
-                <Form.Group>
-                    <Form.Control
-                        name='title'
-                        value={title}
-                        onChange={handleChange}
-                        type='text'
-                    />
-                </Form.Group>
                 <Form.Group>
                     <Form.Control
                         name='content'

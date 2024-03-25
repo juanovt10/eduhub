@@ -7,13 +7,13 @@ const useClickOutsideToggle = () => {
         const handleClickOutside = (event) => {
             if (ref.current && !ref.current.contains(event.target)) {
                 setExpanded(false);
-            }
-        }
+            };
+        };
 
         document.addEventListener('mouseup', handleClickOutside);
         return () => {
             document.removeEventListener('mouseup', handleClickOutside);
-        }
+        };
     }, [ref]);
 
     return {expanded, setExpanded, ref};

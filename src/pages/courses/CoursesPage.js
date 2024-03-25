@@ -8,9 +8,6 @@ import styles from '../../styles/CoursesPage.module.css';
 import { 
     Sheet,
     SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
 } from "../../@/components/ui/sheet";
 
 
@@ -20,22 +17,22 @@ const CoursesPage = () => {
     const [showSheet, setShowSheet] = useState({
         showFilterSheet: false,
         showSortSheet: false
-    })
+    });
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
             ...prevSheet,
             [sheetType]: bool,
-        }))
-    }
+        }));
+    };
     
     const handleFiltersApplied = (newFilters) => {
         setFilters(newFilters);
-    }
+    };
 
     const handleSorting = (newSortKey) => {
         setSortKey(newSortKey);
-    }
+    };
 
     return (
         <div className={styles.pageContainer}>

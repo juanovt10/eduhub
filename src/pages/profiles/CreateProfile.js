@@ -6,26 +6,23 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 const CreateProfile = () => {
     const [showSheet, setShowSheet] = useState({
         showEditSheet: true,
-    })
+    });
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
             ...prevSheet,
             [sheetType]: bool,
-        }))
-    }
+        }));
+    };
 
     const currentUser = useCurrentUser();
     const history = useHistory();
 
     useEffect(() => {
         if (!currentUser) {
-            history.push('/auth')
-        }
-    }, [currentUser, history])
-
-
-    console.log(currentUser)
+            history.push('/auth');
+        };
+    }, [currentUser, history]);
 
     return currentUser ? (
         <EditProfileForm 

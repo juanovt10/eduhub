@@ -1,21 +1,17 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'; 
-import { Form, Image } from 'react-bootstrap';
-import {Row} from 'react-bootstrap';
-import {Col} from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
-import {Button} from 'react-bootstrap';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
 import { axiosReq } from '../../api/axiosDefaults';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 import {
-    Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
-    SheetClose,
-    SheetFooter,
     SheetTitle,
-    SheetTrigger,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
 
@@ -37,7 +33,7 @@ const CourseCreateForm = ({onHide}) => {
         videoHours:"",
         testCount:"",
         articleCount:"",
-    })
+    });
 
     const { 
         title,
@@ -68,34 +64,34 @@ const CourseCreateForm = ({onHide}) => {
             setCourseData({
                 ...courseData,
                 image: URL.createObjectURL(event.target.files[0]),
-            })
-        }
-    }
+            });
+        };
+    };
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const formData = new FormData();
 
-        formData.append('title', title)
-        formData.append('description', description)
-        formData.append('image', imageInput.current.files[0])
-        formData.append('category', category)
-        formData.append('duration', duration)
-        formData.append('price', price)
-        formData.append('video_hours', videoHours)
-        formData.append('test_count', testCount)
-        formData.append('article_count', articleCount)
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('image', imageInput.current.files[0]);
+        formData.append('category', category);
+        formData.append('duration', duration);
+        formData.append('price', price);
+        formData.append('video_hours', videoHours);
+        formData.append('test_count', testCount);
+        formData.append('article_count', articleCount);
 
         try {
             const {data} = await axiosReq.post('/courses/', formData);
-            history.push(`/courses/${data.id}`)
+            history.push(`/courses/${data.id}`);
         } catch(err) {
-            console.log(err)
+            console.log(err);
             if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
-            }
-        }
-    }
+                setErrors(err.response?.data);
+            };
+        };
+    };
 
 
     useEffect(() => {
@@ -105,7 +101,7 @@ const CourseCreateForm = ({onHide}) => {
                 setCategories(response.data);
             } catch(err) {
                 setErrors(err.response?.data);
-            }
+            };
         };
 
         fetchCategories();

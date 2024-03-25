@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Form, Image, Row, Col, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Asset from '../../components/Asset';
+import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import {
-    Sheet,
     SheetContent,
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
 
-const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) => {
+const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
 
     const [errors, setErrors] = useState({});
     const [profileData, setProfileData] = useState({});
@@ -28,21 +31,21 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
     const userId = currentUser?.profile_id
     const fetchUserData = async () => {
         try {
-            const response = await axiosReq.get(`/profiles/${userId}/`)
-            setProfileData(response.data)
-            console.log(response.data)
+            const response = await axiosReq.get(`/profiles/${userId}/`);
+            setProfileData(response.data);
+            console.log(response.data);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {
             setHasLoaded(true);
-        }
-    }
+        };
+    };
     
     useEffect(() => {
         if (userId) {
             fetchUserData();
-        }
-    }, [userId])
+        };
+    }, [userId]);
 
     const handleChange = (e) => {
         setProfileData({
@@ -57,35 +60,35 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
             setProfileData({
                 ...profileData,
                 image: URL.createObjectURL(e.target.files[0])
-            })
-        }
-    }
+            });
+        };
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
 
-        formData.append('name', name)
-        formData.append('bio', bio)
-        formData.append('image', imageInput.current.files[0])
-        formData.append('dob', dob)
+        formData.append('name', name);
+        formData.append('bio', bio);
+        formData.append('image', imageInput.current.files[0]);
+        formData.append('dob', dob);
 
         try {
             const {data} = await axiosReq.put(
                 `/profiles/${userId}/`,
                 formData
-            )
+            );
 
             if (mode === 'create') {
-                history.push(`/profiles/${userId}/`)
+                history.push(`/profiles/${userId}/`);
             } else {
                 fetchProfileData();
                 onHide();
-            }
+            };
         } catch (err) {
             console.log(err)
-        }
-    }
+        };
+    };
 
     return (
         <>

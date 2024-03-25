@@ -24,8 +24,8 @@ const CourseDelete = ({id}) => {
             history.push('/courses/');
         } catch (err) {
             console.log(err);
-        }
-    }
+        };
+    };
 
     return (
         <SheetContent className={styles.sheetContainer} side={'left'}>

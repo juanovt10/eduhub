@@ -1,5 +1,5 @@
-import React from 'react'
-import Spinner from 'react-bootstrap/Spinner'
+import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Asset = ({spinner, message, size}) => {
     return (

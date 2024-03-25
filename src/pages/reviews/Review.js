@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import Avatar from '../../components/Avatar';
+import { axiosReq } from '../../api/axiosDefaults';
+import { useCourseTitles } from '../../context/CourseTitleContext';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import Avatar from '../../components/Avatar';
 import Rating from '../../components/Rating';
-import { Row, Col } from 'react-bootstrap';
-import styles from '../../styles/Review.module.css';
-import { Sheet } from "../../@/components/ui/sheet";
 import ReviewEditForm from './ReviewEditForm';
 import ReviewDelete from './ReviewDelete';
 import Dropdown from '../../components/Dropdown';
-import { axiosReq } from '../../api/axiosDefaults';
-import { useCourseTitles } from '../../context/CourseTitleContext';
 import Asset from '../../components/Asset';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Sheet } from "../../@/components/ui/sheet";
+import styles from '../../styles/Review.module.css';
 
 const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
 
     const {
         id,
         course,
-        title,
         owner,
         rating,
         profile_image,
         content,
         updated_at,
         created_at,
-    } = props
+    } = props;
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
@@ -32,16 +32,16 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
         showDeleteSheet: false
-    })
+    });
     const [courseTitle, setCourseTitle] = useState('');
-    const [titleHasLoaded, setTitleHasLoaded] = useState(false)
+    const [titleHasLoaded, setTitleHasLoaded] = useState(false);
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
             ...prevSheet,
             [sheetType]: bool,
-        }))
-    }
+        }));
+    };
 
     const ratingNames = {
         5: 'Excelent',
@@ -49,21 +49,21 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
         3: 'Average',
         2: 'Poor',
         1: 'Terrible',
-    }
+    };
 
     useEffect(() => {
         if (profile) {
             const fetchTitle = async () => {
                 const title = await getCourseTitle(course, axiosReq);
-                setCourseTitle(title)
+                setCourseTitle(title);
                 setTitleHasLoaded(true);
-            }
+            };
 
             fetchTitle();
         } else {
             setTitleHasLoaded(true);
-        }
-    }, [course, profile, getCourseTitle])
+        };
+    }, [course, profile, getCourseTitle]);
 
     return (
         <div className={styles.reviewContainer}>

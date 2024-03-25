@@ -13,7 +13,7 @@ const RatingInput = ({ rating, setRating }) => {
         2: 'Poor',
         1: 'Terrible',
         0: null,
-    }
+    };
 
     return (
         <div className='d-flex'>

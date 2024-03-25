@@ -3,12 +3,14 @@ import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import Profile from './Profile';
-import { Col, Container, Row } from 'react-bootstrap';
 import CoursesDisplay from '../courses/CoursesDisplay';
-import Nav from 'react-bootstrap/Nav';
 import Review from '../reviews/Review';
-import styles from '../../styles/ProfilePage.module.css'
 import Asset from '../../components/Asset';
+import Nav from 'react-bootstrap/Nav';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import styles from '../../styles/ProfilePage.module.css';
 
 
 const ProfilePage = () => {
@@ -24,26 +26,24 @@ const ProfilePage = () => {
     const fetchProfileReviews = async () => {
         try {
             const reviewsResponse = await axiosReq.get(`/ratings/?owner=${id}`);
-            const profileReviews = reviewsResponse.data
-            setProfileReviews(profileReviews)
+            const profileReviews = reviewsResponse.data;
+            setProfileReviews(profileReviews);
         } catch (err) {
-            console.log(err)
-        }
-    }
+            console.log(err);
+        };
+    };
 
     const fetchProfileData = async () => {
         setProfileLoader(true);
         try {
-            const profileResponse = await axiosReq.get(`/profiles/${id}`)
-            setProfileData(profileResponse.data)
+            const profileResponse = await axiosReq.get(`/profiles/${id}`);
+            setProfileData(profileResponse.data);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {
             setProfileLoader(false);
-        }
-    }
-
-    console.log(profileData)
+        };
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,44 +51,40 @@ const ProfilePage = () => {
                 await Promise.all([
                     fetchProfileData(),
                     fetchProfileReviews(),
-                ])
-                
-            } catch (error) {
-                console.log(error)
-            }
-        }
+                ]);
+            } catch (err) {
+                console.log(err)
+            };
+        };
+
         fetchData();
-    }, [id])
+    }, [id]);
 
     const handleEnrollFilter = () => {
         setProfileCoursesFilter({
             enrolled: true,
-        })
-    }
+        });
+    };
 
     const handleWishListFilter = () => {
         setProfileCoursesFilter({
             wish_listed: true,
-        })
-    }
+        });
+    };
 
     const handleReviewFilter = () => {
         setProfileCoursesFilter({
             wish_listed: false,
             enrolled: false, 
             owner_username: '',
-        })
-    }
+        });
+    };
 
     const handleIsOwnerFilter = () => {
         setProfileCoursesFilter({
             owner_username: profileData.owner,
-        })
-    }
-
-    console.log(profileReviews.results)
-    console.log(currentUser)
-    console.log(profileData.owner)
+        });
+    };
 
     return (
         <Container className={styles.mainContainer}>

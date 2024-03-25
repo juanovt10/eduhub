@@ -1,19 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { axiosReq } from '../../api/axiosDefaults';
+import Asset from '../../components/Asset';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 import {
-    Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
-    SheetClose,
-    SheetFooter,
     SheetTitle,
-    SheetTrigger,
 } from "../../@/components/ui/sheet";
 import styles from '../../styles/ReviewEdit.module.css'
-import Asset from '../../components/Asset';
  
 const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
@@ -21,7 +20,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
     const [startedLoading, setStartedLoading] = useState(false);
     const [courseData, setCourseData] = useState({
         ...props
-    })
+    });
 
     const { 
         title,
@@ -42,8 +41,8 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
         setCourseData({
             ...courseData,
             [e.target.name]: e.target.value,
-        })
-    }
+        });
+    };
 
     const handleChangeImage = (e) => {
         if (e.target.files.length) {
@@ -51,9 +50,9 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
             setCourseData({
                 ...courseData,
                 image: URL.createObjectURL(e.target.files[0]),
-            })
-        }
-    }
+            });
+        };
+    };
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -61,8 +60,8 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                 const response = await axios.get('https://eduhub-drf-api-8e84adf897cc.herokuapp.com/course-categories/');
                 setCategories(response.data);
             } catch(err) {
-                console.log(err)
-            }
+                console.log(err);
+            };
         };
 
         fetchCategories();
@@ -74,30 +73,30 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
         setStartedLoading(true);
         const formData = new FormData();
 
-        console.log('trigger submit')
+        console.log('trigger submit');
 
-        formData.append('title', title)
-        formData.append('description', description)
-        formData.append('category', category)
-        formData.append('duration', duration)
-        formData.append('price', price)
-        formData.append('video_hours', video_hours)
-        formData.append('test_count', test_count)
-        formData.append('article_count', article_count)
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('category', category);
+        formData.append('duration', duration);
+        formData.append('price', price);
+        formData.append('video_hours', video_hours);
+        formData.append('test_count', test_count);
+        formData.append('article_count', article_count);
 
         if (imageInput?.current?.files[0]) {
-            formData.append('image', imageInput.current.files[0])
-        }
+            formData.append('image', imageInput.current.files[0]);
+        };
 
         try {
-            await axiosReq.put(`/courses/${id}/`, formData)
+            await axiosReq.put(`/courses/${id}/`, formData);
             onHide();
             refreshCourse();
             
         } catch (err) {
-            console.log(err)
-        }
-    }
+            console.log(err);
+        };
+    };
 
     return (
         <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'left'}>

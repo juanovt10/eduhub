@@ -10,7 +10,7 @@ const CourseSorting = ({ onSortingApplied, onHide }) => {
         setActiveKey(key);
         onSortingApplied(key);
         onHide();
-    }
+    };
 
     return (
         <Nav fill variant="tabs" defaultActiveKey="/home" className={`mb-2 ${styles.tabContainer}`}>

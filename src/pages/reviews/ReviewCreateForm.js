@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Col, Row, Alert, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { axiosRes } from '../../api/axiosDefaults';
 import RatingInput from '../../components/RatingInput';
-import styles from '../../styles/Review.module.css';
 import Asset from '../../components/Asset';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import styles from '../../styles/Review.module.css';
 
 
 const ReviewCreateForm = (props) => {
-    const { course, setCourse, setReviews } = props
+    const { course, setCourse, setReviews } = props;
     const [startLoadingSubmition, setStartLoadingSubmition] = useState(false);
     const [errors, setErrors] = useState({});
     const [reviewData, setReviewData] = useState({
         title: "",
         content: "",
         rating: 0,
-    })
+    });
 
     const { title, content, rating} = reviewData;
 
@@ -23,7 +27,7 @@ const ReviewCreateForm = (props) => {
             ...reviewData,
             [event.target.name]: event.target.value,
         });
-    }
+    };
 
     const handleRatingChange = (newRating) => {
         setReviewData({ ...reviewData, rating: newRating});
@@ -52,9 +56,9 @@ const ReviewCreateForm = (props) => {
                 ],
             }));
         } catch(err) {
-            console.log(err.response.data)
-        }
-    }
+            console.log(err.response.data);
+        };
+    };
 
     return (
         <div className={styles.reviewContainer}>

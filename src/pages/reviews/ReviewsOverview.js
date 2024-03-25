@@ -1,17 +1,14 @@
-import React from 'react'
-import { ProgressBar } from 'react-bootstrap'
-import styles from '../../styles/RatingsOverview.module.css'
+import React from 'react';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import styles from '../../styles/RatingsOverview.module.css';
 
 const ReviewsOverview = ({reviews, ...props}) => {
 
-    const {
-        overall_rating,
-        ratings_count,
-    } = props
+    const { ratings_count } = props;
 
     const reviewsPerRating = (rating) => {
         return reviews.filter(review => review.rating === rating).length;
-    }
+    };
 
     const value = {
         5: 'Excelent',
@@ -19,8 +16,7 @@ const ReviewsOverview = ({reviews, ...props}) => {
         3: 'Average',
         2: 'Poor',
         1: 'Terrible',
-    }
-
+    };
 
     return (
         <div>

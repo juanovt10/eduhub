@@ -1,10 +1,12 @@
-import { ColorWheelIcon } from '@radix-ui/react-icons';
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Image, Row, Modal, Card } from 'react-bootstrap';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
-import styles from "../../styles/CourseActions.module.css";
-import Asset from '../../components/Asset';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import Asset from '../../components/Asset';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import styles from "../../styles/CourseActions.module.css";
 
 const CourseActions = (id) => {
 
@@ -13,7 +15,7 @@ const CourseActions = (id) => {
     const [courseEnrollments, setCourseEnrollments] = useState([]);
     const [courseWishList, setCourseWishList] = useState([]);
 
-    const courseId = id.id
+    const courseId = id.id;
     const currentUser = useCurrentUser();
 
     const fetchActionsData = async () => { 
@@ -24,51 +26,51 @@ const CourseActions = (id) => {
             ]);
             setCourseEnrollments(enrollmentResponse.data.results.filter(
                 enrollment => enrollment.course === courseId
-            ))
+            ));
             setCourseWishList(wishListResponse.data.results.filter(
                 wishList => wishList.course === courseId
-            ))
+            ));
 
         } catch (err) {
             console.log(err)
-        }   
-    }
+        };
+    };
 
     const handleEnrollment = async () => {
         setStartLoadingEnroll(true);
         try {
             const response = await axiosRes.post('/enrollments/', {
                 course: courseId,
-            })
+            });
             if (response.status === 200 || response.status === 201) {
                 fetchActionsData();
-            }
+            };
         } catch(err) {
             console.log(err.response.data)
-        }       
-    }
+        };       
+    };
 
     const handleWishList = async () => {
         setStartLoadingWishList(true);
         try {
             const response = await axiosRes.post('/wish_lists/', {
                 course: courseId,
-            })
+            });
 
             if (response.status === 200 || response.status === 201) {
                 fetchActionsData();
-            }
+            };
         } catch(err) {
             console.log(err)
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         fetchActionsData();
-    }, [courseEnrollments, courseWishList])
+    }, [courseEnrollments, courseWishList]);
 
     const isCurrentUserEnrolled = courseEnrollments.some(enrollment => enrollment.owner === currentUser.username);
-    const currentUserWishListed = courseWishList.some(wishList => wishList.owner === currentUser.username)
+    const currentUserWishListed = courseWishList.some(wishList => wishList.owner === currentUser.username);
 
     return (
         <Row className={styles.courseActionsContainer}>

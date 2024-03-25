@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import Asset from '../../components/Asset';
+import logo from '../../assets/eduhub-color-logo.png'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import styles from '../../styles/Authenticator.module.css'
-import axios from 'axios';
-import { Alert } from 'react-bootstrap';
-import logo from '../../assets/eduhub-color-logo.png'
-import Asset from '../../components/Asset';
+import Alert from 'react-bootstrap/Alert';
 
 
 const SignUpForm = ({ onSignUpSuccess }) => {
@@ -31,7 +31,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setStartLoading(true)
+        setStartLoading(true);
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData);
             onSignUpSuccess();

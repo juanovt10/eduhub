@@ -1,9 +1,11 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card';
-import { Button, OverlayTrigger, Tooltip, Col } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Rating from '../../components/Rating';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import styles from '../../styles/CourseCard.module.css';
-import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const CourseCard = (props) => {
@@ -11,28 +13,22 @@ const CourseCard = (props) => {
         id,
         title,
         description,
-        owner,
         image,
         category,
-        duration,
-        created_at,
         price,
         video_hours,
         test_count,
         article_count,
-        profile_id,
-        profile_image,
         overall_rating,
-        rating_id,
         ratings_count,
         enrollments_count,
-    } = props
+    } = props;
 
     const history = useHistory();
 
     const goToCourse = () => {
         history.push(`/courses/${id}`);
-    }
+    };
 
     return (
 

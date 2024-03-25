@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { axiosReq } from '../../api/axiosDefaults'; 
+import { useSetCurrentUser } from '../../context/CurrentUserContext';
+import { useHistory } from 'react-router-dom';
+import Asset from '../../components/Asset';
+import logo from '../../assets/eduhub-color-logo.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import styles from '../../styles/Authenticator.module.css'
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
-import { useSetCurrentUser } from '../../context/CurrentUserContext';
-import { axiosReq } from '../../api/axiosDefaults'; 
-import logo from '../../assets/eduhub-color-logo.png'
-import Asset from '../../components/Asset';
+import styles from '../../styles/Authenticator.module.css';
+import Alert from 'react-bootstrap/Alert';
 
 const SignInForm = ({ showSuccess, dismissSuccess}) => {
     const setCurrentUser = useSetCurrentUser();
@@ -38,27 +38,27 @@ const SignInForm = ({ showSuccess, dismissSuccess}) => {
         setStartLoading(true);
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', signInData);
-            setCurrentUser(data.user)
+            setCurrentUser(data.user);
 
-            const newProfileId = data.user.profile_id
+            const newProfileId = data.user.profile_id;
 
-            const profileResponse = await axiosReq.get(`/profiles/${newProfileId}/`)
+            const profileResponse = await axiosReq.get(`/profiles/${newProfileId}/`);
 
-            const profileData = profileResponse.data
+            const profileData = profileResponse.data;
             
             if (!profileData.bio) {
                 history.push({
                     pathname: '/',
                     state: { openProfileSheet: true }
-                })
+                });
             } else {
                 history.push('/');
-            }
+            };
 
         } catch(err) {
             setStartLoading(false);
             setErrors(err.response?.data);
-        }
+        };
 
     };
     

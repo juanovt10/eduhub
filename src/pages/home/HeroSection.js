@@ -1,6 +1,6 @@
-import Button from 'react-bootstrap/Button';
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import Button from 'react-bootstrap/Button';
 import styles from '../../styles/Home.module.css';
 
 const HeroSection = () => {

@@ -30,14 +30,14 @@ export const NavBar = () => {
     const [showSheet, setShowSheet] = useState({
         showCourseSheet: false,
         showProfileSheet: false,
-    })
+    });
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
             ...prevSheet,
             [sheetType]: bool,
-        }))
-    }
+        }));
+    };
 
 
     const handleSignOut = async () => {
@@ -46,8 +46,8 @@ export const NavBar = () => {
             setCurrentUser(null);
         } catch(err) {
             console.log(err);
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         const getProfileData = async () => {
@@ -67,8 +67,8 @@ export const NavBar = () => {
         if (location.state?.openProfileSheet) {
             handleSheetDisplay('showProfileSheet', true);
             history.replace({ ...location, state: {}});
-        }
-    }, [location, history])
+        };
+    }, [location, history]);
 
     const loggedInIcons = (
         <>
@@ -126,7 +126,7 @@ export const NavBar = () => {
                 </OverlayTrigger>
             </NavLink>
         </>
-    )
+    );
     const loggedOutIcons = (
         <>
             <NavLink to='/auth' className={styles.Navlink} >Join us!</NavLink>

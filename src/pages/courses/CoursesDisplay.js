@@ -9,7 +9,6 @@ import styles from '../../styles/CoursesDisplay.module.css';
 const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
     const [coursesHasLoaded, setCoursesHasLoaded] = useState(false);
     const [courses, setCourses] = useState({ results: [] });
-    console.log(filters)
 
     const fetchCourses = async () => {
         try {
@@ -21,35 +20,35 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
             setCourses(data);
             sortCourses(data.results);
         } catch(err) {
-            console.log(err)
+            console.log(err);
         } finally {
             setCoursesHasLoaded(true);
-        }
+        };
     };
 
     useEffect(() => {
         setCoursesHasLoaded(false);
         fetchCourses();
-    }, [filters, sortKey])
+    }, [filters, sortKey]);
 
     const sortCourses = (fetchedResults) => {
-        const sortedCourses = [...fetchedResults]
+        const sortedCourses = [...fetchedResults];
 
         if (sortKey === 'rating') {
-            sortedCourses.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
+            sortedCourses.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0));
         } else if (sortKey === 'price') {
-            sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+            sortedCourses.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         } else if (sortKey === 'creation') {
-            sortedCourses.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+            sortedCourses.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
         } else if (sortKey === 'enrollments') {
-            sortedCourses.sort((a, b) => b.enrollments_count - a.enrollments_count)
-        }
+            sortedCourses.sort((a, b) => b.enrollments_count - a.enrollments_count);
+        };
 
         setCourses(prevCourses => ({
             ...prevCourses,
             results: sortedCourses
         }));
-    }
+    };
     
     return (
         <div>

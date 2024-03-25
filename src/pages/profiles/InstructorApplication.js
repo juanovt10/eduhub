@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Image, Row, Col, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { axiosReq } from '../../api/axiosDefaults';
+import Asset from '../../components/Asset';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import {
-    Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
-import { axiosReq } from '../../api/axiosDefaults';
-import Asset from '../../components/Asset';
 import styles from '../../styles/ReviewEdit.module.css'
 
-const InstructorApplication = ({applicationSubmitted, onApplicationSubmit, onHide, id}) => {
+const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHide }) => {
 
-    const [applicationData, setApplicationData] = useState({content: ""})
+    const [applicationData, setApplicationData] = useState({content: ""});
     const [startedLoading, setStartedLoading] = useState(false);
 
     const handleChange = (event) => {
@@ -32,13 +32,13 @@ const InstructorApplication = ({applicationSubmitted, onApplicationSubmit, onHid
             await axiosReq.post('/instructor_apply/', { application_text: content });
             setStartedLoading(false);
         } catch (err) {
-            console.log(err)
+            console.log(err);
             setStartedLoading(false);
         } finally {            
             onApplicationSubmit();
             onHide();
-        }
-    }
+        };
+    };
 
     return (
         <SheetContent className={styles.sheetContainer} side={'left'}>

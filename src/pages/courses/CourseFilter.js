@@ -1,20 +1,23 @@
-import React from 'react';
-import { Card, Row, Col, Form, Button} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Rating from '../../components/Rating';
 import Asset from '../../components/Asset';
-import { useEffect, useState } from 'react';
-import styles from '../../styles/CourseFilter.module.css';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "../../@/components/ui/accordion";
+import styles from '../../styles/CourseFilter.module.css';
 
 
 const CourseFilter = ({ onFiltersApplied, onHide }) => {
-    const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [filterVideos, setFilterVideos] = useState(false);
     const [filterArticles, setFilterArticles] = useState(false);
     const [filterTests, setFilterTests] = useState(false);
@@ -32,7 +35,7 @@ const CourseFilter = ({ onFiltersApplied, onHide }) => {
                 console.log(err)
             } finally {
                 setCategoriesHasLoaded(true);
-            }
+            };
         };
 
         fetchCategories();
@@ -42,37 +45,37 @@ const CourseFilter = ({ onFiltersApplied, onHide }) => {
         const { value, checked } = event.target;
 
         if (checked) {
-            setSelectedCategories(prev => [...prev, value])
+            setSelectedCategories(prev => [...prev, value]);
         } else {
             setSelectedCategories(prev => prev.filter(category => category !== value));
-        }
+        };
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         onHide();
         
-        const filters = {}
+        const filters = {};
         
         
         if (selectedCategories.length > 0) {
             filters.category = selectedCategories.join(',');
-        }
+        };
         if (filterVideos) {
             filters.has_videos = true;
-        }
+        };
         if (filterArticles) {
             filters.has_articles = true;
-        }
+        };
         if (filterTests) {
             filters.has_tests = true; 
-        }
+        };
         if (minRating) {
             filters.min_rating = minRating;
-        }
+        };
         
         onFiltersApplied(filters);
-    }
+    };
 
     const handleFilterReset = () => {
         onHide();

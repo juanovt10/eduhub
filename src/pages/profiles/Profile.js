@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Row, Col, Image, Button, Modal, ModalBody, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import Avatar from '../../components/Avatar';
+import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../context/CurrentUserContext';
+import Avatar from '../../components/Avatar';
 import ProfileDelete from './ProfileDelete';
-import styles from "../../styles/Profile.module.css";
 import Dropdown from '../../components/Dropdown';
-import { Sheet } from "../../@/components/ui/sheet";
 import EditProfileForm from './EditProfileForm';
 import InstructorApplication from './InstructorApplication';
-import { axiosReq } from '../../api/axiosDefaults';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+import { Sheet } from "../../@/components/ui/sheet";
+import styles from "../../styles/Profile.module.css";
 
 
 const Profile = ({fetchProfileData, ...props}) => {
@@ -31,29 +36,29 @@ const Profile = ({fetchProfileData, ...props}) => {
         showEditSheet: false,
         showDeleteSheet: false,
         showApplicationSheet: false,
-    })
+    });
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
             ...prevSheet,
             [sheetType]: bool,
-        }))
-    }
+        }));
+    };
 
     useEffect(() => {
         const checkApplicationStatus = async () => {
             try {
-                const applicationsResponse = await axiosReq.get('/instructor_apply/')
-                setExistingApplications(applicationsResponse.data.results)
-                const applied = applicationsResponse.data.results.some(app => app.owner === id)
+                const applicationsResponse = await axiosReq.get('/instructor_apply/');
+                setExistingApplications(applicationsResponse.data.results);
+                const applied = applicationsResponse.data.results.some(app => app.owner === id);
                 setApplicationSubmitted(applied);
             } catch (err) {
-                console.log(err)
-            }
-        }
+                console.log(err);
+            };
+        };
 
         checkApplicationStatus();
-    }, [])
+    }, []);
 
     const handleApplicationSubmit = () => {
         setApplicationSubmitted(true);
@@ -61,9 +66,7 @@ const Profile = ({fetchProfileData, ...props}) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-
-    console.log(applicationSubmitted)
-
+    
     return (
         <>
             <Card className={styles.CompactCard}>
@@ -153,8 +156,7 @@ const Profile = ({fetchProfileData, ...props}) => {
 
                 <Row>
                     <Col>
-                        {/* <p className='text-justify'>{bio}</p> */}
-                        <p className='text-justify'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui nunc mattis enim ut tellus. Pharetra sit amet aliquam id. Dictum non consectetur a erat. Pulvinar mattis nunc sed blandit libero.</p>
+                        <p className='text-justify'>{bio}</p>
                     </Col>
                 </Row>
                 <Row className="mt-3">
