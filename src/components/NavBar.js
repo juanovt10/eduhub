@@ -13,22 +13,24 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-} from "../@/components/ui/sheet";
+import { Sheet } from "../@/components/ui/sheet";
 import CourseCreateForm from '../pages/courses/CourseCreateForm';
+import EditProfileForm from '../pages/profiles/EditProfileForm';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const location = useLocation();
+    const history = useHistory();
 
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
     const [profileData, setProfileData] = useState({});
-    const [showSheet, setShowSheet] = useState({showCreateSheet: false})
+    const [showSheet, setShowSheet] = useState({
+        showCourseSheet: false,
+        showProfileSheet: false,
+    })
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
@@ -61,28 +63,42 @@ export const NavBar = () => {
         getProfileData();
     }, [currentUser]);
 
+    useEffect(() => {
+        if (location.state?.openProfileSheet) {
+            handleSheetDisplay('showProfileSheet', true);
+            history.replace({ ...location, state: {}});
+        }
+    }, [location, history])
+
     const loggedInIcons = (
         <>
             {profileData.is_instructor && (
                 <>
-                    {/* <NavLink to='/courses/create' className={`mx-2 ${styles.Navlink}`}>
-                        <Button className={styles.buttonSecondary}>Create Course</Button>
-                    </NavLink> */}
                     <div className={`mx-2 ${styles.Navlink}`}>
                         <Button 
                             className={`${styles.buttonSecondary}`}
-                            onClick={() => handleSheetDisplay('showCreateSheet', true)}
+                            onClick={() => handleSheetDisplay('showCourseSheet', true)}
                         >
                             Create Course
                         </Button>
                     </div>
-                    <Sheet open={showSheet.showCreateSheet} onOpenChange={setShowSheet}>
+                    <Sheet open={showSheet.showCourseSheet} onOpenChange={setShowSheet}>
                         <CourseCreateForm 
-                            onHide={() => handleSheetDisplay('showCreateSheet', false)}
+                            onHide={() => handleSheetDisplay('showCourseSheet', false)}
                         />
                     </Sheet>
                 </>
+            )}
 
+            {!profileData.bio && (
+                <Sheet open={showSheet.showProfileSheet} onOpenChange={setShowSheet}>
+                    <EditProfileForm
+                        open={showSheet.showProfileSheet}
+                        onOpenChange={setShowSheet}
+                        mode='create'
+                        onHide={() => handleSheetDisplay('showProfileSheet', false)}
+                    />
+                </Sheet>
             )}
 
             <NavLink

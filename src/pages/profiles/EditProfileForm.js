@@ -89,78 +89,76 @@ const EditProfileForm = ({open, onOpenChange, mode, fetchProfileData, onHide}) =
 
     return (
         <>
-            <Sheet open={open} onOpenChange={onOpenChange}>
-                <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
-                    <SheetHeader>
-                        {mode === 'create' ? (
-                            <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
-                        ) : (
-                            <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
-                        )}
-                    </SheetHeader>
-                    {hasLoaded ? (
-                        <Form className={styles.sheetEditCourseForm} onSubmit={handleSubmit}>
-                            <Form.Group>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                    name='name'
-                                    value={name}
-                                    onChange={handleChange}
-                                    type='text'
-                                    placeholder='enter your preferred name'
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Bio</Form.Label>
-                                <Form.Control
-                                    name='bio'
-                                    value={bio}
-                                    onChange={handleChange}
-                                    as='textarea'
-                                    placeholder='enter your profile description'
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                {image ? (
-                                    <>
-                                        <figure>
-                                            <Image src={image} className={styles.image} rounded />
-                                        </figure>
-                                        <div>
-                                            <Form.Label>Change image</Form.Label>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Form.Label>Image</Form.Label>
-                                )}
-                                <Form.File
-                                    id='image-upload'
-                                    accpet='image/*'
-                                    onChange={handleChangeImage}
-                                    ref={imageInput}
-                                />
-                            </Form.Group>
-                            <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type='submit'>
-                                {!submitLoader ? (
-                                    'Edit profile'
-                                ) : (
-                                    <Asset spinner size='sm' />
-                                )}
-                            </Button>
-                            <Button className={styles.buttonSecondary} onClick={onHide}>
-                                Discard changes
-                            </Button>
-                        </Form>
-
+            <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
+                <SheetHeader>
+                    {mode === 'create' ? (
+                        <SheetTitle className={styles.sheetTitle}>Thank you for joining Eduhub!</SheetTitle>
                     ) : (
-                        <Row>
-                            <Col className='mt-5'>
-                                <Asset spinner />
-                            </Col>
-                        </Row>
+                        <SheetTitle className={styles.sheetTitle}>Edit Profile</SheetTitle>
                     )}
-                </SheetContent>
-            </Sheet>
+                </SheetHeader>
+                {hasLoaded ? (
+                    <Form className={styles.sheetEditCourseForm} onSubmit={handleSubmit}>
+                        <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                name='name'
+                                value={name}
+                                onChange={handleChange}
+                                type='text'
+                                placeholder='enter your preferred name'
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Bio</Form.Label>
+                            <Form.Control
+                                name='bio'
+                                value={bio}
+                                onChange={handleChange}
+                                as='textarea'
+                                placeholder='enter your profile description'
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            {image ? (
+                                <>
+                                    <figure>
+                                        <Image src={image} className={styles.image} rounded />
+                                    </figure>
+                                    <div>
+                                        <Form.Label>Change image</Form.Label>
+                                    </div>
+                                </>
+                            ) : (
+                                <Form.Label>Image</Form.Label>
+                            )}
+                            <Form.File
+                                id='image-upload'
+                                accpet='image/*'
+                                onChange={handleChangeImage}
+                                ref={imageInput}
+                            />
+                        </Form.Group>
+                        <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type='submit'>
+                            {!submitLoader ? (
+                                'Edit profile'
+                            ) : (
+                                <Asset spinner size='sm' />
+                            )}
+                        </Button>
+                        <Button className={styles.buttonSecondary} onClick={onHide}>
+                            Discard changes
+                        </Button>
+                    </Form>
+
+                ) : (
+                    <Row>
+                        <Col className='mt-5'>
+                            <Asset spinner />
+                        </Col>
+                    </Row>
+                )}
+            </SheetContent>
         </>
     )
 }

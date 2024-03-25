@@ -46,8 +46,11 @@ const SignInForm = ({ showSuccess, dismissSuccess}) => {
 
             const profileData = profileResponse.data
             
-            if (profileData.bio === "") {
-                history.push('/profiles/create')
+            if (!profileData.bio) {
+                history.push({
+                    pathname: '/',
+                    state: { openProfileSheet: true }
+                })
             } else {
                 history.push('/');
             }
