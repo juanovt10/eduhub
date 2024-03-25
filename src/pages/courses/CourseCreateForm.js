@@ -7,10 +7,22 @@ import { Alert } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetFooter,
+    SheetTitle,
+    SheetTrigger,
+} from "../../@/components/ui/sheet";
+import styles from '../../styles/ReviewEdit.module.css'
 
 
 
-const CourseCreateForm = () => {
+
+const CourseCreateForm = ({onHide}) => {
 
     const [errors, setErrors] = useState({});
     const [categories, setCategories] = useState({}); 
@@ -101,175 +113,170 @@ const CourseCreateForm = () => {
 
     return (
        
-        <Form className='pt-5 px-5' onSubmit={handleSubmit}>
-            <Row>
-                <Form.Group as={Col}>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control 
-                        name="title"
-                        value={title}
-                        onChange={handleChange}
-                        type="text"
-                        placeholder="Enter course title" />
-                </Form.Group>
-                {errors.title?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Row>
+        <SheetContent className={`${styles.sheetContainer} ${styles.editCourseSheetContainer}`} side={'right'}>
+            <SheetHeader>
+                <SheetTitle className={styles.sheetTitle}>Create course</SheetTitle>
+            </SheetHeader>
 
-            <Row>
-                <Form.Group as={Col}>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        name="description"
-                        value={description}
-                        onChange={handleChange}
-                        as="textarea"
-                        placeholder="Enter your course description" />
-                </Form.Group>
-                {errors.description?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Row>
+            <Form className='pt-5 px-5' onSubmit={handleSubmit}>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control 
+                            name="title"
+                            value={title}
+                            onChange={handleChange}
+                            type="text"
+                            placeholder="Enter course title" />
+                    </Form.Group>
+                    {errors.title?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Row>
 
-            <Row>
-                <Form.Group as={Col} controlId="formGridEmail">
-                    {image ? (
-                        <>
-                            <figure>
-                                <Image src={image} rounded />
-                            </figure>
-                            <div>
-                                <Form.Label>Change image</Form.Label>
-                            </div>
-                        </>
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            name="description"
+                            value={description}
+                            onChange={handleChange}
+                            as="textarea"
+                            placeholder="Enter your course description" />
+                    </Form.Group>
+                    {errors.description?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Row>
 
-                    ) : (
-                        <Form.Label>Image</Form.Label>
-                    )}
-                    <Form.File 
-                        id="image-upload"
-                        accept="image/*"
-                        onChange={handleChangeImage}
-                        ref={imageInput}
-                    />
-                </Form.Group>
-                {errors.image?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Row>
+                <Row>
+                    <Form.Group as={Col} controlId="formGridEmail">
+                        {image ? (
+                            <>
+                                <figure>
+                                    <Image src={image} className={styles.image} rounded />
+                                </figure>
+                                <div>
+                                    <Form.Label>Change image</Form.Label>
+                                </div>
+                            </>
 
-            <Row>
-                <Form.Group as={Col}>
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control 
-                        as="select"
-                        defaultValue=""
-                        name="category"
-                        value={category}
-                        onChange={handleChange}
-                    >
-                        {Array.isArray(categories) && categories.map((cat, idx) => (
-                            <option key={idx} value={cat.key}>{cat.value}</option>
-                        ))}
-                    </Form.Control>
-                </Form.Group>
-                {errors.category?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
+                        ) : (
+                            <Form.Label>Image</Form.Label>
+                        )}
+                        <Form.File 
+                            id="image-upload"
+                            accept="image/*"
+                            onChange={handleChangeImage}
+                            ref={imageInput}
+                        />
+                    </Form.Group>
+                    {errors.image?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Row>
 
-                <Form.Group as={Col}>
-                    <Form.Label>Duration</Form.Label>
-                    <Form.Control
-                        name="duration"
-                        value={duration}
-                        onChange={handleChange}
-                        type="text"
-                        placeholder="Enter teh duration of your course" />
-                </Form.Group>
-                {errors.duration?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Category</Form.Label>
+                        <Form.Control 
+                            as="select"
+                            defaultValue=""
+                            name="category"
+                            value={category}
+                            onChange={handleChange}
+                        >
+                            {Array.isArray(categories) && categories.map((cat, idx) => (
+                                <option key={idx} value={cat.key}>{cat.value}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                    {errors.category?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+              
+                    <Form.Group as={Col}>
+                        <Form.Label>price</Form.Label>
+                        <Form.Control
+                            name="price"
+                            value={price}
+                            onChange={handleChange}
+                            type="number"
+                            placeholder="Enter teh cost of your course" />
+                    </Form.Group>
+                    {errors.price?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Row>
 
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Video hours</Form.Label>
+                        <Form.Control
+                            name="videoHours"
+                            value={videoHours}
+                            onChange={handleChange}
+                            type="number"
+                            placeholder="Enter the amount of video hours" />
+                    </Form.Group>
+                    {errors.videoHours?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
 
+                    <Form.Group as={Col}>
+                        <Form.Label>Tests</Form.Label>
+                        <Form.Control
+                            name="testCount"
+                            value={testCount}
+                            onChange={handleChange}
+                            type="number"
+                            placeholder="Enter the amount of tests" />
+                    </Form.Group>
+                    {errors.testCount?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+
+                    <Form.Group as={Col}>
+                        <Form.Label>Articles</Form.Label>
+                        <Form.Control
+                            name="articleCount"
+                            value={articleCount}
+                            onChange={handleChange}
+                            type="number"
+                            placeholder="Enter the amount of articles" />
+                    </Form.Group>
+                    {errors.articleCount?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
+                </Row>
             
-                <Form.Group as={Col}>
-                    <Form.Label>price</Form.Label>
-                    <Form.Control
-                        name="price"
-                        value={price}
-                        onChange={handleChange}
-                        type="number"
-                        placeholder="Enter teh cost of your course" />
-                </Form.Group>
-                {errors.price?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Row>
-
-            <Row>
-                <Form.Group as={Col}>
-                    <Form.Label>Video hours</Form.Label>
-                    <Form.Control
-                        name="videoHours"
-                        value={videoHours}
-                        onChange={handleChange}
-                        type="number"
-                        placeholder="Enter the amount of video hours" />
-                </Form.Group>
-                {errors.videoHours?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-
-                <Form.Group as={Col}>
-                    <Form.Label>Tests</Form.Label>
-                    <Form.Control
-                        name="testCount"
-                        value={testCount}
-                        onChange={handleChange}
-                        type="number"
-                        placeholder="Enter the amount of tests" />
-                </Form.Group>
-                {errors.testCount?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-
-                <Form.Group as={Col}>
-                    <Form.Label>Articles</Form.Label>
-                    <Form.Control
-                        name="articleCount"
-                        value={articleCount}
-                        onChange={handleChange}
-                        type="number"
-                        placeholder="Enter the amount of articles" />
-                </Form.Group>
-                {errors.articleCount?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                        {message}
-                    </Alert>
-                ))}
-            </Row>
-        
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                <Button className={styles.buttonPrimary} type="submit">
+                    Submit
+                </Button>
+                <Button 
+                    className={styles.buttonSecondary}
+                    onClick={onHide}    
+                >
+                    discard changes
+                </Button>
+            </Form>
+        </SheetContent>
     )
 }
 

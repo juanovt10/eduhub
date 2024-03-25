@@ -13,6 +13,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+} from "../@/components/ui/sheet";
+import CourseCreateForm from '../pages/courses/CourseCreateForm';
 
 export const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -21,6 +28,15 @@ export const NavBar = () => {
     const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
     const [profileData, setProfileData] = useState({});
+    const [showSheet, setShowSheet] = useState({showCreateSheet: false})
+
+    const handleSheetDisplay = (sheetType, bool) => {
+        setShowSheet((prevSheet) => ({
+            ...prevSheet,
+            [sheetType]: bool,
+        }))
+    }
+
 
     const handleSignOut = async () => {
         try {
@@ -48,10 +64,25 @@ export const NavBar = () => {
     const loggedInIcons = (
         <>
             {profileData.is_instructor && (
+                <>
+                    {/* <NavLink to='/courses/create' className={`mx-2 ${styles.Navlink}`}>
+                        <Button className={styles.buttonSecondary}>Create Course</Button>
+                    </NavLink> */}
+                    <div className={`mx-2 ${styles.Navlink}`}>
+                        <Button 
+                            className={`${styles.buttonSecondary}`}
+                            onClick={() => handleSheetDisplay('showCreateSheet', true)}
+                        >
+                            Create Course
+                        </Button>
+                    </div>
+                    <Sheet open={showSheet.showCreateSheet} onOpenChange={setShowSheet}>
+                        <CourseCreateForm 
+                            onHide={() => handleSheetDisplay('showCreateSheet', false)}
+                        />
+                    </Sheet>
+                </>
 
-                <NavLink to='/courses/create' className={`mx-2 ${styles.Navlink}`}>
-                    <Button className={styles.buttonSecondary}>Create Course</Button>
-                </NavLink>
             )}
 
             <NavLink
