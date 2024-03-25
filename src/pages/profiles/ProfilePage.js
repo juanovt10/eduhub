@@ -140,7 +140,10 @@ const ProfilePage = () => {
                             )}
                         </Col>
                     ) : profileData.is_instructor && (
-                        <p>Display course projects where th eprofile is the owner</p>
+                        <>
+                            <h3 className='mt-3'>{profileData.owner}'s courses</h3>
+                            <CoursesDisplay filters={{owner_username: profileData.owner}} sortKey={'default'}/>                  
+                        </>
                     )}
                 </Row>
             ) : (
