@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 import styles from "../../styles/Authenticator.module.css";
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
@@ -66,43 +64,7 @@ const Authenticator = () => {
                     {activeTab === 'signup' && <SignUpForm onSignUpSuccess={handleSignUpSuccess} /> }
                     {activeTab === 'signin' && <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>}
                 </>
-
-                // <Tabs
-                //     activeKey={activeTab}
-                //     onSelect={(k) => setActiveTab(k)}
-                //     id="fill-tab-example"
-                //     className={styles.tabs}
-                //     fill
-                // >
-                //     <Tab eventKey="signup" title="Sign Up" className={styles.tabContainer}>
-                //         <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
-                //     </Tab>
-                //     <Tab eventKey="signin" title="Sign In" className={styles.tabContainer}>
-                //         <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>
-                //     </Tab>
-                // </Tabs>
             )}
-
-
-        {/* <div className={styles.DivContainer}>
-            {!isInitialCheckDone ? (
-                <Asset spinner />
-            ) : (
-                <Tabs
-                    activeKey={activeTab}
-                    onSelect={(k) => setActiveTab(k)}
-                    id="fill-tab-example"
-                    className={styles.tabs}
-                    fill
-                >
-                    <Tab eventKey="signup" title="Sign Up" className={styles.tabContainer}>
-                        <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
-                    </Tab>
-                    <Tab eventKey="signin" title="Sign In" className={styles.tabContainer}>
-                        <SignInForm showSuccess={showSuccess} dismissSuccess={() => setShowSuccess(false)}/>
-                    </Tab>
-                </Tabs>
-            )} */}
         </div>
     )
 }

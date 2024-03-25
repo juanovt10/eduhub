@@ -50,11 +50,7 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
             results: sortedCourses
         }));
     }
-
-    const coursesLength = courses.results.length;
-    const placeholdersNeeded = isHomePage ? (3 - coursesLength % 3) % 3 : 0;
-
-
+    
     return (
         <div>
             {coursesHasLoaded ? (

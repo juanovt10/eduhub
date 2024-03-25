@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Image, Button, Modal, ModalBody, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../context/CurrentUserContext';
@@ -7,6 +7,8 @@ import styles from "../../styles/Profile.module.css";
 import Dropdown from '../../components/Dropdown';
 import { Sheet } from "../../@/components/ui/sheet";
 import EditProfileForm from './EditProfileForm';
+import InstructorApplication from './InstructorApplication';
+import { axiosReq } from '../../api/axiosDefaults';
 
 
 const Profile = ({fetchProfileData, ...props}) => {
@@ -16,7 +18,6 @@ const Profile = ({fetchProfileData, ...props}) => {
         created_at,
         name,
         bio,
-        dob,
         image,
         is_instructor,
         enrollments_count,
@@ -24,9 +25,12 @@ const Profile = ({fetchProfileData, ...props}) => {
         wish_list_count,
     } = props
 
+    const [applicationSubmitted, setApplicationSubmitted] = useState(false);
+    const [exisitingApplications, setExistingApplications] = useState([]);
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
-        showDeleteSheet: false
+        showDeleteSheet: false,
+        showApplicationSheet: false,
     })
 
     const handleSheetDisplay = (sheetType, bool) => {
@@ -36,9 +40,29 @@ const Profile = ({fetchProfileData, ...props}) => {
         }))
     }
 
+    useEffect(() => {
+        const checkApplicationStatus = async () => {
+            try {
+                const applicationsResponse = await axiosReq.get('/instructor_apply/')
+                setExistingApplications(applicationsResponse.data.results)
+                const applied = applicationsResponse.data.results.some(app => app.owner === id)
+                setApplicationSubmitted(applied);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        checkApplicationStatus();
+    }, [])
+
+    const handleApplicationSubmit = () => {
+        setApplicationSubmitted(true);
+    }
+
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-    
+
+    console.log(applicationSubmitted)
 
     return (
         <>
@@ -55,10 +79,24 @@ const Profile = ({fetchProfileData, ...props}) => {
                         </Col>  
                     ) : (
                         is_owner && (
-                            <Col className='text-left'>
-                                {/* Need to add functionality */}
-                                <Button><i class="fa-solid fa-graduation-cap"></i></Button> 
-                            </Col>
+                            <>
+                                <Col className='text-left'>
+                                    <Button
+                                        className={styles.buttonSecondary}
+                                        onClick={() => handleSheetDisplay('showApplicationSheet', true)}
+                                    >
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </Button>
+                                </Col>
+                                <Sheet open={showSheet.showApplicationSheet} onOpenChange={setShowSheet}>
+                                    <InstructorApplication 
+                                        applicationSubmitted={applicationSubmitted}
+                                        onApplicationSubmit={handleApplicationSubmit}
+                                        onHide={() => handleSheetDisplay('showApplicationSheet', false)}
+                                    />
+                                </Sheet>
+                            
+                            </>
                         )
                     )}
                     {is_owner && (
@@ -69,16 +107,14 @@ const Profile = ({fetchProfileData, ...props}) => {
                                 entity='profile'
                             />
 
-                            <EditProfileForm 
-                                open={showSheet.showEditSheet}
-                                onOpenChange={setShowSheet}
-                                mode='edit'
-                                fetchProfileData={fetchProfileData}
-                                onHide={() => handleSheetDisplay('showEditSheet', false)}
-                            />
-
                             <Sheet open={showSheet.showEditSheet} onOpenChange={setShowSheet}>
-
+                                <EditProfileForm 
+                                    open={showSheet.showEditSheet}
+                                    onOpenChange={setShowSheet}
+                                    mode='edit'
+                                    fetchProfileData={fetchProfileData}
+                                    onHide={() => handleSheetDisplay('showEditSheet', false)}
+                                />
                             </Sheet>
                             <Sheet open={showSheet.showDeleteSheet} onOpenChange={setShowSheet}>
                                 <ProfileDelete id={id} />
