@@ -8,6 +8,11 @@
     color: #ffffff;
 }
 
+.cardTitle {
+    color: #f5793b;
+    font-weight: 700;
+}
+
 .AccordionCategory {
     font-size: 20px;
 }
@@ -76,4 +81,34 @@
     border: 1px solid #00BCD4;
     border-color: #00BCD4;
     box-shadow: inset 0 3px 5px #0097A7;
+}
+
+.sheetContainer {
+    background-color: #082641;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.sheetTitle {
+    color: white;
+    font-size: 30px;
+}
+
+.sheetForm {
+    width: 95%;
+}
+
+.editCourseSheetContainer {
+    width: 100%;
+    max-width: none;
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+
+.filterAccordion {
+    overflow-y: auto;
 }

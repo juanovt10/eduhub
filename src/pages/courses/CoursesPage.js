@@ -66,18 +66,18 @@ const CoursesPage = () => {
                             </div>
 
                             <Sheet open={showSheet.showFilterSheet} onOpenChange={setShowSheet}>
-                                <SheetContent className={styles.sheetContainer} side={'left'}>
-                                    <CourseFilter 
-                                        onFiltersApplied={handleFiltersApplied}
-                                        onHide={() => handleSheetDisplay('showFilterSheet', false)}
-                                    />
-                                </SheetContent>
+                                <CourseFilter 
+                                    onFiltersApplied={handleFiltersApplied}
+                                    onHide={() => handleSheetDisplay('showFilterSheet', false)}
+                                    mobile
+                                />
                             </Sheet>
                             <Sheet open={showSheet.showSortSheet} onOpenChange={setShowSheet}>
                                 <SheetContent className={styles.sheetContainer} side={'right'}>
                                     <CourseSorting 
                                         onSortingApplied={handleSorting}
                                         onHide={() => handleSheetDisplay('showSortSheet', false)}
+                                        mobile
                                     />                                    
                                 </SheetContent>
                             </Sheet>

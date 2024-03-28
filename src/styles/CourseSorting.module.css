@@ -6,7 +6,8 @@
 }
 
 .disabledTab {
-    color: #fff;
+    color: #f5793b;
+    font-weight: 700;
 }
 
 .tabContainer a {
