@@ -161,7 +161,106 @@ The course model contains the author as a foreign key representing the user that
 
 #### Course (detail) page 
 
-- The course page is design to display all the i
+- The course page is design to display all the relevant information about the course, including the complete description, reviews, resourses data and enrollments. 
+
+![courseDetailLg](/src/assets/images-readme/courseDetailLg.png)
+![courseDetailSm1](/src/assets/images-readme/courseDetailSm1.png)
+![courseDetailSm2](/src/assets/images-readme/courseDetailSm2.png)
+
+- Restrictions are applied to users that are not logged in. Threfore, a warning alert is displayed to inform the user if they want to take any action in the course they need to register first. 
+
+![courseDetailLoggoutAlert](/src/assets/images-readme/courseDetailLoggedOutAlert.png)
+
+- The owner of the course also has an alert stating that they are the owners and where they cannot place a review, enroll nor add to wish list, they can edit or delete the course. 
+
+![courseDetailOwnerAlert](/src/assets/images-readme/courseDetailOwnerAlert.png)
+
+- Even if the user does not use the links in the alert to edit or delete the course. There is an dropdown action menu on the top-left that allows the owner to open the edit course form or delete course. 
+
+![courseOwnerActions](/src/assets/images-readme/courseOwnerActions.png)
+
+- When clicking the delete course action, a form opens confirming the course deletion action. 
+
+![courseDelete](/src/assets/images-readme/courseDelete.png)
+
+- When the user selects the edit course. A form similar to the create course form is displayed with the fields populated with the exisiting course information. 
+
+![editCourseLg](/src/assets/images-readme/editCourseLg.png)
+![editCourseSm](/src/assets/images-readme/editCourseSm.png)
+
+- If the user is logged in and is not the owner of the course, two options are displayed: add to wish list and enrollment.
+
+![courseActions](/src/assets/images-readme/courseActions.png)
+
+- If the user decides to add the course to the wish list, a feedback card will appear as soon the wish list request is processed stating that the course was successfully added to their wish list, where they can chekc in theri profile or they can enroll to the course straight away.
+
+![wishListFeedback](/src/assets/images-readme/wishListFeedback.png)
+
+- In the case the user decides to enroll direclty to the course, a similar card is displayed, but in this case there won't be any option to add the course to the wish list. The reson behind this is that if a user enrolls to a course they had in their wish list, this course is deleted from their wish list and added to their enrollments.
+
+![enrollmentFeedback](/src/assets/images-readme/enrollmentFeedback.png)
+
+- Another key feature of the course page is the reviews section. This is splited into three secions, the reviews overview, the reviews and the review create form. 
+    - Reviews overview displays the overall rating of the course, the total rewview count and 5 progress bars displaying how many reviews the course have in each specific rating.
+
+    ![reviewOverview](/src/assets/images-readme/reviewOverview.png)
+
+    - The review create form is displayed next to the reviews overview if the user has not place a review on that course 
+
+    ![reviewForm](/src/assets/images-readme/reviewForm.png)
+
+    - All reviews are then displayed in the course seciton. The review includes the avatar of the user, user username, when the review was created and the review information.
+
+    ![reviews](/src/assets/images-readme/reviews.png)
+
+    - Similar to the course actions, each review will display the action menu to their owner. This menu is the same as the one for the courses, it can edit or delete the review. 
+
+    ![reviewEdit](/src/assets/images-readme/reviewEdit.png)
+    ![reviewDelete](/src/assets/images-readme/reviewDelete.png)
+
+    - As it was done for the courses, the reviews are also paginated to avoid high loading times. If a course has more than 10 reviews, a button will be displayed to allow the user to load more reviews. 
+
+    ![reviewPagination](/src/assets/images-readme/reviewPagination.png)
+
+
+#### Registration
+- When the users are not logged in, they have varius limitations in the website, such as not being able to have a personalized profile nor take any actions on the courses. Threfore, in the navbar it is displayed a button "Join us" that will redirect the user to the authentication page. 
+
+- The authentication page contains the sign up and sign in forms. The sign up form requests the user a unique username a password and to confirm the password. 
+
+![signUp](/src/assets/images-readme/signUp.png)
+
+- If the user does not fill the fields correctly, alerts will be displayed to provide feedback to the user.
+
+![signUpAlerts](/src/assets/images-readme/signUpAlerts.png)
+
+- In the sign in form, the user is requested to input their credentials to log in.
+
+![signIn](/src/assets/images-readme/signIn.png)
+
+- Similar to the sign up form, if the user credentails are not valid, alerts are displayed. 
+
+![signInAlerts](/src/assets/images-readme/signInAlerts.png)
+
+- When the user signs up, it is redirected to the sign in form but a success alert is displayed to inform the user that the registration process was successful. 
+
+![signUpSuccess](/src/assets/images-readme/signUpSuccess.png)
+
+
+#### User profile 
+
+
+
+
+
+
+    
+
+
+
+
+
+
 
 
 
