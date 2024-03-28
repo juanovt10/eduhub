@@ -13,7 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
-import styles from '../../styles/ReviewEdit.module.css'
+import styles from '../../styles/ProfileEdit.module.css'
 
 const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
 
@@ -22,7 +22,7 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [submitLoader, setSubmitLoader] = useState(false);
 
-    const { name, bio, image, dob } = profileData;
+    const { name, bio, image } = profileData;
 
     const imageInput = useRef(null);
     const history = useHistory();
@@ -36,6 +36,9 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
             console.log(response.data);
         } catch (err) {
             console.log(err);
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            };
         } finally {
             setHasLoaded(true);
         };
@@ -71,7 +74,6 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
         formData.append('name', name);
         formData.append('bio', bio);
         formData.append('image', imageInput.current.files[0]);
-        formData.append('dob', dob);
 
         try {
             const {data} = await axiosReq.put(
@@ -82,7 +84,6 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
             if (mode === 'create') {
                 onHide();
                 history.push(`/profiles/${userId}/`);
-                fetchProfileData();
             } else {
                 fetchProfileData();
                 onHide();
@@ -115,7 +116,7 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Bio</Form.Label>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control
                                 name='bio'
                                 value={bio}
@@ -144,16 +145,18 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                                 ref={imageInput}
                             />
                         </Form.Group>
-                        <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type='submit'>
-                            {!submitLoader ? (
-                                'Edit profile'
-                            ) : (
-                                <Asset spinner size='sm' />
-                            )}
-                        </Button>
-                        <Button className={styles.buttonSecondary} onClick={onHide}>
-                            Discard changes
-                        </Button>
+                        <div className='d-flex justify-content-center'>
+                            <Button className={`mr-2 ${styles.buttonSecondary}`} onClick={onHide}>
+                                Discard changes
+                            </Button>
+                            <Button className={`${styles.buttonPrimary}`} type='submit'>
+                                {!submitLoader ? (
+                                    'Edit profile'
+                                ) : (
+                                    <Asset spinner size='sm' />
+                                )}
+                            </Button>
+                        </div>
                     </Form>
 
                 ) : (
