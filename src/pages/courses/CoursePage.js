@@ -17,8 +17,6 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { Sheet } from "../../@/components/ui/sheet";
 import styles from "../../styles/CoursePage.module.css";
 
@@ -157,7 +155,9 @@ const CoursePage = () => {
                 </Row>
 
                 <Row className='my-3'>
-                    <span className={styles.courseOwner}>Created by: {courseData.owner}</span>
+                    <span className={styles.courseOwner}>
+                        Created by: <Link className={styles.ownerLink} to={`/profiles/${courseData.profile_id}`}>{courseData.owner}</Link>
+                    </span>
                 </Row>
 
                 <Row className={`mb-5 ${styles.courseInfoContainer}`}>
@@ -208,14 +208,7 @@ const CoursePage = () => {
                 </Row>
 
                 <div className='mb-5'>
-                    {!currentUser ? (
-                        <Card className={styles.Card}>
-                            <Card.Body>
-                                <p>Regsiter o enroll, add to wish list or leave a review for this course</p>
-                                <Button><Link to='/auth'>Sign Up</Link></Button> 
-                            </Card.Body>
-                        </Card>
-                    ) : !courseData.is_owner && (
+                    {currentUser && !courseData.is_owner && (
                         <CourseActions id={courseData.id}/>
                     )}
                 </div>

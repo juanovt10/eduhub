@@ -86,3 +86,14 @@
 .editCourseDropdown {
     margin-bottom: 75px;
 }
+
+.ownerLink {
+    text-decoration: none;
+    transition: all .3s ease;
+    color: #fff;
+}
+
+.ownerLink:hover {
+    text-decoration: none;
+    color: #f5793b;
+}

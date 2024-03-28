@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Sheet } from "../../@/components/ui/sheet";
 import styles from '../../styles/Review.module.css';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
 
@@ -20,6 +21,7 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
         course,
         owner,
         rating,
+        profile_id,
         profile_image,
         content,
         updated_at,
@@ -77,7 +79,11 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
                                     height={40}
                                 />
                                 <div>
-                                    <h5 className='m-0'>{owner}</h5>
+                                    <h5 className='m-0'>
+                                        <Link className={styles.ownerLink} to={`/profiles/${profile_id}`}>
+                                            {owner}
+                                        </Link>
+                                    </h5>
                                     <p className='m-0'>{!updated_at ? created_at : updated_at}</p>
                                 </div>
                             </div>

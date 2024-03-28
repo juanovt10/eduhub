@@ -18,28 +18,21 @@ Additionally, after signin up to the platform you have a profile page where you 
 
 ### Site Purpose
 
-
 ### Audience
 
 ### Current User Goals
 
 ### Future User Goals
 
-
 ## Design
-
 
 ### Color scheme
 
-
 ### Typography
-
 
 ### Imagery
 
-
 ### Agile methodology
-
 
 ### Wireframes
 
