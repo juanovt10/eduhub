@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import styles from '../../styles/RatingsOverview.module.css';
+import { axiosReq } from '../../api/axiosDefaults';
 
-const ReviewsOverview = ({reviews, ...props}) => {
+const ReviewsOverview = ({reviews, totalReviews, courseId}) => {
+    const [ratingsOverview, setRatingsOverview] = useState([]);
 
-    const { ratings_count } = props;
+    useEffect(() => {
+        const fetchRatingsOverview = async () => {
+            try {
+                const response = await axiosReq.get(`/ratings/stats/${courseId}`)
+                console.log(response.data)
+                setRatingsOverview(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
 
-    const reviewsPerRating = (rating) => {
-        return reviews.filter(review => review.rating === rating).length;
-    };
+        fetchRatingsOverview();
+    }, [courseId])
+
 
     const value = {
         5: 'Excelent',
@@ -20,18 +31,20 @@ const ReviewsOverview = ({reviews, ...props}) => {
 
     return (
         <div>
-            {Array.from({ length: 5}, (_, i) => 5 - i).map(rating => {
-                const count = reviewsPerRating(rating);
-                const percentage = ratings_count > 0 ? (count / ratings_count) * 100 : 0;
+            {Object.entries(value).reverse().map(([rating, label]) => {
+                const ratingData = ratingsOverview.find((item) => item.rating.toString() === rating);
+                const count = ratingData ? ratingData.count : 0;
+                const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
+
                 return (
                     <div key={rating} className='d-flex align-items-center'>
-                        <div className={styles.labelContainer}>{value[rating]}</div>
+                        <div className={styles.labelContainer}>{label}</div>
                         <div className={`mx-2 my-1 ${styles.progressBarContainer}`}>
                             <ProgressBar now={percentage} variant='info' className={styles.progressBarCustom} />
                         </div>
                         <span>({count})</span>
                     </div>
-                )
+                );
             })}
         </div>
     )

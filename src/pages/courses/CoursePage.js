@@ -226,7 +226,7 @@ const CoursePage = () => {
                 </Row>
                 <Row>
                     <Col md={12} lg={5} className='mb-5'>
-                        <ReviewsOverview reviews={reviews.results} {...course.results[0]}/>
+                        <ReviewsOverview reviews={reviews.results} totalReviews={course.results[0].ratings_count} courseId={course.results[0].id} />
                     </Col>
                     <Col md={12} lg={7}>
                         {currentUser && (
