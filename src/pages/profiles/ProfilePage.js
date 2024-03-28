@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
+import { fetchMoreData } from '../../utils/utils';
 import Profile from './Profile';
 import CoursesDisplay from '../courses/CoursesDisplay';
 import Review from '../reviews/Review';
 import Asset from '../../components/Asset';
 import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -21,6 +23,7 @@ const ProfilePage = () => {
     const [profileReviews, setProfileReviews] = useState({});
     const [profileCoursesFilter, setProfileCoursesFilter] = useState({enrolled: true});
     const [profileLoader, setProfileLoader] = useState(false);
+    const [moreReviewsHasLoaded, setMoreReviewsHasLoaded] = useState(false);
 
 
     const fetchProfileReviews = async () => {
@@ -89,6 +92,7 @@ const ProfilePage = () => {
     return (
         <Container className={styles.mainContainer}>
             {!profileLoader ? (
+
                 <Row>
                     <Col xs={12} className='d-flex mb-3 justify-contents-center align-items-center'>
                             <Profile fetchProfileData={fetchProfileData} {...profileData} />      
@@ -130,6 +134,22 @@ const ProfilePage = () => {
                                             {...review}
                                         />
                                     ))}
+                                    {profileReviews.next && (
+                                        <div className='my-5 d-flex justify-content-center align-items-center'>
+                                            <Button
+                                                onClick={() => fetchMoreData(profileReviews, setProfileReviews,
+                                                    () => setMoreReviewsHasLoaded(true),
+                                                    () => setMoreReviewsHasLoaded(false))}
+                                                className={`${styles.buttonPrimary}`}
+                                            >
+                                                {!moreReviewsHasLoaded ? (
+                                                    'Load more reviews'
+                                                ) : (
+                                                    <Asset spinner size='sm' />
+                                                )}
+                                            </Button>
+                                        </div>
+                                    )}
                                 </>
                             ) : (
                                 <h3>No reviews yet</h3>
@@ -142,6 +162,7 @@ const ProfilePage = () => {
                         </>
                     )}
                 </Row>
+                
             ) : (
                 <Row>
                     <Col className='mt-5'>
