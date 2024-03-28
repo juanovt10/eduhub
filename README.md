@@ -121,6 +121,39 @@ The course model contains the author as a foreign key representing the user that
 
 #### Courses Page
 
+- The courses page is design to display all the available courses in the website in Card layouts to briefly describe the course information. 
+
+![coursesLg](/src/assets/images-readme/coursesLg.png)
+![coursesSm](/src/assets/images-readme/coursesSm.png)
+
+- The course page has the feature to filter the courses in three categories: available resources (videos, articles or tests), course categories and ratings. The user can choose as many filters as desired, when the filters are applied, the course page fetch the courses with the specified filters. When the filters are restarted the course page fetches all courses again. 
+
+![filterCard](/src/assets/images-readme/filterCard.png)
+![filterSheet](/src/assets/images-readme/filterSheet.png)
+
+- The course page has the feature to sort courses in 4 categories: rating, enrollment count, price and newest. When a sorting option is clicked, the page fetches the courses depending on the optioned selected and keeps the tab 'on' to provide feedback to the user what sorting has been applied. 
+
+![sortingCard](/src/assets/images-readme/sortingCard.png)
+![sortingSheet](/src/assets/images-readme/sortingSheet.png)
+
+- Each course is displayed in a card layout. The card contains the image of the course, title, a part of the description, the price, enrollment count, resources available and a link to explore the course in detail. The resources are layed out as icons, but they have an overlay trigger so when the user hovers or tabs the icon it displays the amount of resources available. 
+
+![courseCard](/src/assets/images-readme/courseCard.png)
+
+- As the API is design to fetch a limit amount of data to avoid high loading times, a button to display further resutls is added at the bottom of the courses to fetch further results. 
+
+![coursesPagination](/src/assets/images-readme/coursesPagination.png)
+
+#### Create course 
+
+
+
+
+#### Course (detail) page 
+
+
+
+
 
 ### Future Features
 

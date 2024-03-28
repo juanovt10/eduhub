@@ -13,7 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
-import styles from '../../styles/ReviewEdit.module.css'
+import styles from '../../styles/CreateCourse.module.css';
 
 
 
@@ -114,10 +114,10 @@ const CourseCreateForm = ({onHide}) => {
                 <SheetTitle className={styles.sheetTitle}>Create course</SheetTitle>
             </SheetHeader>
 
-            <Form className='pt-5 px-5' onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className={styles.sheetForm}>
                 <Row>
                     <Form.Group as={Col}>
-                        <Form.Label>Title</Form.Label>
+                        <Form.Label className='d-none'>Title</Form.Label>
                         <Form.Control 
                             name="title"
                             value={title}
@@ -134,7 +134,7 @@ const CourseCreateForm = ({onHide}) => {
 
                 <Row>
                     <Form.Group as={Col}>
-                        <Form.Label>Description</Form.Label>
+                        <Form.Label className='d-none'>Description</Form.Label>
                         <Form.Control
                             name="description"
                             value={description}
@@ -150,19 +150,21 @@ const CourseCreateForm = ({onHide}) => {
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Group as={Col}>
                         {image ? (
                             <>
                                 <figure>
                                     <Image src={image} className={styles.image} rounded />
                                 </figure>
                                 <div>
-                                    <Form.Label>Change image</Form.Label>
+                                    <Form.Label className='d-none'>Change image</Form.Label>
                                 </div>
                             </>
 
                         ) : (
-                            <Form.Label>Image</Form.Label>
+                            <>
+                                <Form.Label className='d-none'>Image</Form.Label>
+                            </>
                         )}
                         <Form.File 
                             id="image-upload"
@@ -179,8 +181,8 @@ const CourseCreateForm = ({onHide}) => {
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col}>
-                        <Form.Label>Category</Form.Label>
+                    <Form.Group as={Col} xs={12} sm={6}>
+                        <Form.Label className='d-none'>Category</Form.Label>
                         <Form.Control 
                             as="select"
                             defaultValue=""
@@ -199,14 +201,14 @@ const CourseCreateForm = ({onHide}) => {
                         </Alert>
                     ))}
               
-                    <Form.Group as={Col}>
-                        <Form.Label>price</Form.Label>
+                    <Form.Group as={Col} xs={12} sm={6}>
+                        <Form.Label className='d-none'>price</Form.Label>
                         <Form.Control
                             name="price"
                             value={price}
                             onChange={handleChange}
                             type="number"
-                            placeholder="Enter teh cost of your course" />
+                            placeholder="Enter the cost of your course" />
                     </Form.Group>
                     {errors.price?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
@@ -216,8 +218,8 @@ const CourseCreateForm = ({onHide}) => {
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col}>
-                        <Form.Label>Video hours</Form.Label>
+                    <Form.Group as={Col} xs={12} sm={4}>
+                        <Form.Label className='d-none'>Video hours</Form.Label>
                         <Form.Control
                             name="videoHours"
                             value={videoHours}
@@ -231,8 +233,8 @@ const CourseCreateForm = ({onHide}) => {
                         </Alert>
                     ))}
 
-                    <Form.Group as={Col}>
-                        <Form.Label>Tests</Form.Label>
+                    <Form.Group as={Col} xs={12} sm={4}>
+                        <Form.Label className='d-none'>Tests</Form.Label>
                         <Form.Control
                             name="testCount"
                             value={testCount}
@@ -246,8 +248,8 @@ const CourseCreateForm = ({onHide}) => {
                         </Alert>
                     ))}
 
-                    <Form.Group as={Col}>
-                        <Form.Label>Articles</Form.Label>
+                    <Form.Group as={Col} xs={12} sm={4}>
+                        <Form.Label className='d-none'>Articles</Form.Label>
                         <Form.Control
                             name="articleCount"
                             value={articleCount}
@@ -261,16 +263,18 @@ const CourseCreateForm = ({onHide}) => {
                         </Alert>
                     ))}
                 </Row>
-            
-                <Button className={styles.buttonPrimary} type="submit">
-                    Submit
-                </Button>
-                <Button 
-                    className={styles.buttonSecondary}
-                    onClick={onHide}    
-                >
-                    discard changes
-                </Button>
+
+                <div className='d-flex'>
+                    <Button 
+                        className={styles.buttonSecondary}
+                        onClick={onHide}    
+                    >
+                        Discard changes
+                    </Button>
+                    <Button className={`mr-3 ${styles.buttonPrimary}`} type="submit">
+                        Create course!
+                    </Button>
+                </div>
             </Form>
         </SheetContent>
     )
