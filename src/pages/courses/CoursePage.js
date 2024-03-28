@@ -63,24 +63,29 @@ const CoursePage = () => {
         };
     };
 
+    const reFetchCourseReviewData = async () => {
+        try {
+            const response = await axiosReq.get(`/ratings/stats/${id}`)
+            setReviewsOverview(response.data);
+        } catch (err) {
+            console.log(err)
+        };
+    };
+
+    const afterReviewSubmit = async () => {
+        await Promise.all([
+            reFetchCourseData(),
+            reFetchCourseReviews(),
+            reFetchCourseReviewData(),
+        ])
+    };
+
     useEffect(() => {
         const handleMount = async () => {
             try {
-                    const [
-                        courseResponse,
-                        reviewsResponse,
-                        reviewsOverviewResponse
-                    ] = await Promise.all([
-                    axiosReq.get(`/courses/${id}`),
-                    axiosReq.get(`/ratings/?course=${id}`),
-                    axiosReq.get(`/ratings/stats/${id}`)
+                await Promise.all([
+                    afterReviewSubmit()
                 ]);
-                const courseData = courseResponse.data;
-                const reviewsData = reviewsResponse.data;
-                const reviewsOverviewData = reviewsOverviewResponse.data;
-                setCourse({ results: [courseData]});
-                setReviews(reviewsData);
-                setReviewsOverview(reviewsOverviewData)
             } catch(err) {
                 console.log(err);
             } finally {
@@ -170,6 +175,7 @@ const CoursePage = () => {
                     <span className={styles.courseOwner}>
                         Created by: <Link className={styles.ownerLink} to={`/profiles/${courseData.profile_id}`}>{courseData.owner}</Link>
                     </span>
+                    <span className={styles.courseOwner}>on {courseData.profile_id}</span>
                 </Row>
 
                 <Row className={`mb-5 ${styles.courseInfoContainer}`}>
@@ -244,6 +250,7 @@ const CoursePage = () => {
                                         course={id}
                                         setCourse={setCourse}
                                         setReviews={setReviews}
+                                        afterSubmit={afterReviewSubmit}
                                     />   
                                 )
                             )

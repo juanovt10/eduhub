@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import styles from '../../styles/Review.module.css';
 
 
-const ReviewCreateForm = (props) => {
+const ReviewCreateForm = ({afterSubmit, ...props}) => {
     const { course, setCourse, setReviews } = props;
     const [startLoadingSubmition, setStartLoadingSubmition] = useState(false);
     const [errors, setErrors] = useState({});
@@ -53,6 +53,10 @@ const ReviewCreateForm = (props) => {
                 },
                 ],
             }));
+            if(afterSubmit){
+                console.log('aftersubmit triggered')                
+                afterSubmit();
+            }
         } catch(err) {
             console.log(err.response.data);
         };

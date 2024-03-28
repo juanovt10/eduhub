@@ -9,9 +9,13 @@ import {
     Sheet,
     SheetContent,
 } from "../../@/components/ui/sheet";
+import { useCurrentUser } from '../../context/CurrentUserContext';
 
 
 const CoursesPage = () => {
+
+    const currentUser = useCurrentUser();
+    console.log(currentUser?.username)
     const [sortKey, setSortKey] = useState('default');
     const [filters, setFilters] = useState({});
     const [showSheet, setShowSheet] = useState({

@@ -146,8 +146,18 @@ The course model contains the author as a foreign key representing the user that
 
 #### Create course 
 
+- The create course feature is only available to users that have instructor status. As creating courses is one of the primary features of the website, instructor users can easily create courses regardless of their locaiton withing the website as the sheet containing the create courses form is embbeded in the navbar. 
 
+![signInInstructorNavBar](/src/assets/images-readme/navBarSignInInstructor.png)
 
+- The instructor will have to input all fields if they want to create a course. These include: title, description, image, cateogory (from a dropdown), cost, video hours, article count and test count. 
+
+![createCourseLg](/src/assets/images-readme/createCourseLg.png)
+![createCourseSm](/src/assets/images-readme/createCourseSm.png)
+
+- If for whatever reason the user does not fill the fields correctly, the form will not be submitted and the alerts will be displayed indicating the field issue. 
+
+![createCourseAlerts](/src/assets/images-readme/createCourseAlerts.png)
 
 #### Course (detail) page 
 

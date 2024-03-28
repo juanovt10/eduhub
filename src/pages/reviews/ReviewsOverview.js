@@ -13,6 +13,9 @@ const ReviewsOverview = ({ reviewsOverview, totalReviews }) => {
         1: 'Terrible',
     };
 
+    useEffect(() => {}, [reviewsOverview])
+    
+
     return (
         <div>
             {Object.entries(value).reverse().map(([rating, label]) => {

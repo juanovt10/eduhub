@@ -17,17 +17,15 @@
 .editCourseSheetContainer {
     width: 100%;
     max-width: none;
-    padding-top: 15rem;
+    padding-top: 35rem;
     overflow-y: auto;
 }
 
 @media (min-width: 576px) {
     .editCourseSheetContainer {
-        padding-top: 3rem;
+        padding-top: 20rem;
     }
 }
-
-
 
 .sheetTitle {
     color: white;

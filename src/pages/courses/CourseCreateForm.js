@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Asset from '../../components/Asset';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
@@ -22,6 +23,7 @@ const CourseCreateForm = ({onHide}) => {
 
     const [errors, setErrors] = useState({});
     const [categories, setCategories] = useState({}); 
+    const [startedLoading, setStartedLoading] = useState(false);
 
     const [courseData, setCourseData] = useState({
         title:"",
@@ -50,7 +52,6 @@ const CourseCreateForm = ({onHide}) => {
     const imageInput = useRef(null);
     const history = useHistory();
 
-
     const handleChange = (event) => {
         setCourseData({
             ...courseData,
@@ -70,6 +71,7 @@ const CourseCreateForm = ({onHide}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setStartedLoading(true);
         const formData = new FormData();
 
         formData.append('title', title);
@@ -85,12 +87,29 @@ const CourseCreateForm = ({onHide}) => {
         try {
             const {data} = await axiosReq.post('/courses/', formData);
             history.push(`/courses/${data.id}`);
+            onHide();
         } catch(err) {
             console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             };
+        } finally {
+            setStartedLoading(false);
         };
+    };
+
+    const resetForm = () => {
+        setCourseData({
+            title: "",
+            description: "",
+            image: "",
+            category: "",
+            price: "",
+            videoHours: "",
+            testCount: "",
+            articleCount: "",
+        });
+        setErrors({});
     };
 
 
@@ -106,6 +125,10 @@ const CourseCreateForm = ({onHide}) => {
 
         fetchCategories();
     }, []);
+
+    useEffect(() => {
+        resetForm();
+    }, [onHide])
 
     return (
        
@@ -140,7 +163,9 @@ const CourseCreateForm = ({onHide}) => {
                             value={description}
                             onChange={handleChange}
                             as="textarea"
-                            placeholder="Enter your course description" />
+                            placeholder="Enter your course description" 
+                            rows={4}                            
+                        />
                     </Form.Group>
                     {errors.description?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
@@ -264,15 +289,20 @@ const CourseCreateForm = ({onHide}) => {
                     ))}
                 </Row>
 
-                <div className='d-flex'>
+                <div className='d-flex mt-3 justify-content-center'>
                     <Button 
-                        className={styles.buttonSecondary}
-                        onClick={onHide}    
+                        className={`mr-3 ${styles.buttonSecondary}`}
+                        onClick={onHide}   
+                        type='reset' 
                     >
                         Discard changes
                     </Button>
-                    <Button className={`mr-3 ${styles.buttonPrimary}`} type="submit">
-                        Create course!
+                    <Button className={styles.buttonPrimary} type="submit">
+                        {!startedLoading ? (
+                            'Create course!'
+                        ) : (
+                            <Asset spinner size='sm' />
+                        )}
                     </Button>
                 </div>
             </Form>

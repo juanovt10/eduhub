@@ -82,14 +82,17 @@ const CourseFilter = ({ onFiltersApplied, onHide, mobile }) => {
     };
 
     const handleFilterReset = () => {
-        onHide();
         setSelectedCategories([]);
         setFilterVideos(false);
         setFilterArticles(false);
         setFilterTests(false);
         setMinRating(0);
-
+        
         onFiltersApplied({});
+        
+        if(mobile) {
+            onHide();
+        }
     }
 
     const filterForm = (

@@ -7,16 +7,18 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
+import Alert from 'react-bootstrap/Alert';
 import {
     SheetContent,
     SheetHeader,
     SheetTitle,
 } from "../../@/components/ui/sheet";
-import styles from '../../styles/ReviewEdit.module.css'
+import styles from '../../styles/EditCourse.module.css'
  
 const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
 
     const [categories, setCategories] = useState({}); 
+    const [errors, setErrors] = useState({});
     const [startedLoading, setStartedLoading] = useState(false);
     const [courseData, setCourseData] = useState({
         ...props
@@ -95,6 +97,11 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
             
         } catch (err) {
             console.log(err);
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            };
+        } finally {
+            setStartedLoading(false);
         };
     };
 
@@ -115,6 +122,11 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             type="text"
                         />
                     </Form.Group>
+                    {errors.title?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Row>
 
                 <Row>
@@ -125,12 +137,18 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             value={description}
                             onChange={handleChange}
                             as="textarea"
+                            rows={4}
                         />
                     </Form.Group>
+                    {errors.description?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Group as={Col}>
                         {image ? (
                             <>
                                 <figure>
@@ -151,10 +169,15 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             ref={imageInput}
                         />
                     </Form.Group>
+                    {errors.image?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col}>
+                    <Form.Group as={Col} xs={12} sm={6}>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
                             as="select"
@@ -168,8 +191,13 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             ))}
                         </Form.Control>
                     </Form.Group>
+                    {errors.category?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
 
-                    <Form.Group as={Col}>
+                    <Form.Group as={Col} xs={12} sm={6}>
                         <Form.Label>price</Form.Label>
                         <Form.Control
                             name="price"
@@ -178,10 +206,15 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             type="number"
                         />
                     </Form.Group>
+                    {errors.price?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Row>
 
                 <Row>
-                    <Form.Group as={Col}>
+                    <Form.Group as={Col} xs={12} sm={4}>
                         <Form.Label>Video hours</Form.Label>
                         <Form.Control
                             name="video_hours"
@@ -190,8 +223,13 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             type="number"
                         />
                     </Form.Group>
+                    {errors.videoHours?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
 
-                    <Form.Group as={Col}>
+                    <Form.Group as={Col} xs={12} sm={4}>
                         <Form.Label>Tests</Form.Label>
                         <Form.Control
                             name="test_count"
@@ -200,8 +238,13 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             type="number"
                         />
                     </Form.Group>
+                    {errors.testCount?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
 
-                    <Form.Group as={Col}>
+                    <Form.Group as={Col} xs={12} sm={4}>
                         <Form.Label>Articles</Form.Label>
                         <Form.Control
                             name="article_count"
@@ -210,21 +253,31 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                             type="number"
                         />
                     </Form.Group>
+                    {errors.articleCount?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                    ))}
                 </Row>
 
-                <Button className={`mr-2 mb-2 ${styles.buttonPrimary}`} type="submit">
-                    {!startedLoading ? (
-                        'Save changes'
-                    ) : (
-                        <Asset spinner size='sm' />
-                    )}
-                </Button>
-                <Button className={styles.buttonSecondary} onClick={onHide}>
-                    Discard Changes
-                </Button>
+                <div className='d-flex mt-3 justify-content-center'>
+                    <Button 
+                        className={`mr-3 ${styles.buttonSecondary}`}
+                        onClick={onHide}   
+                        type='reset' 
+                    >
+                        Discard changes
+                    </Button>
+                    <Button className={styles.buttonPrimary} type="submit">
+                        {!startedLoading ? (
+                            'Edit course'
+                        ) : (
+                            <Asset spinner size='sm' />
+                        )}
+                    </Button>
+                </div>
             </Form>
         </SheetContent>
-
     )
 }
 
