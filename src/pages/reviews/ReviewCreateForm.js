@@ -15,12 +15,11 @@ const ReviewCreateForm = (props) => {
     const [startLoadingSubmition, setStartLoadingSubmition] = useState(false);
     const [errors, setErrors] = useState({});
     const [reviewData, setReviewData] = useState({
-        title: "",
         content: "",
         rating: 0,
     });
 
-    const { title, content, rating} = reviewData;
+    const { content, rating} = reviewData;
 
     const handleChange = (event) => {
         setReviewData({
@@ -38,7 +37,6 @@ const ReviewCreateForm = (props) => {
         setStartLoadingSubmition(true);
         try {
             const { data } = await axiosRes.post('/ratings/', {
-                title,
                 content, 
                 rating, 
                 course,
@@ -65,22 +63,6 @@ const ReviewCreateForm = (props) => {
             <Row>
                 <h5 className='mb-3'>Let us know what you think about the course!</h5>
                 <Form onSubmit={handleSubmit}>
-                    <Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control 
-                                name="title"
-                                value={title}
-                                onChange={handleChange}
-                                type="text"
-                                placeholder="Enter course title" />
-                        </Form.Group>
-                        {errors.title?.map((message, idx) => (
-                            <Alert variant="warning" key={idx}>
-                                {message}
-                            </Alert>
-                        ))}
-                    </Row>
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Control 

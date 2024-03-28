@@ -19,6 +19,8 @@ import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 import { Sheet } from "../../@/components/ui/sheet";
 import styles from "../../styles/CoursePage.module.css";
+import { fetchMoreData } from '../../utils/utils';
+import { Button } from 'react-bootstrap';
 
 
 const CoursePage = () => {  
@@ -28,6 +30,7 @@ const CoursePage = () => {
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [moreReviewsHasLoaded, setMoreReviewsHasLoaded] = useState(false);
     const [ownerAlert, setOwnerAlert] =  useState(true);
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
@@ -78,9 +81,10 @@ const CoursePage = () => {
         };
 
         handleMount();
-    }, [course]);
+    }, [id]);
 
     const courseData = course.results[0];
+    console.log(courseData)
 
     return (
         <Container className={styles.mainContainer}>
@@ -236,16 +240,35 @@ const CoursePage = () => {
                                 )
                             )
                         )}
+
                         {reviews.results?.length ? (
-                            reviews.results.map((review) => (
-                                <Review
-                                    key={review.id}
-                                    fetchReviews={reFetchCourseReviews}
-                                    setCourse={setCourse}
-                                    setReviews={setReviews}
-                                    {...review}
-                                />
-                            ))
+                            <>
+                                {reviews.results.map((review) => (
+                                    <Review
+                                        key={review.id}
+                                        fetchReviews={reFetchCourseReviews}
+                                        setCourse={setCourse}
+                                        setReviews={setReviews}
+                                        {...review}
+                                    />
+                                ))}
+                                {reviews.next && (
+                                    <div className='my-5 d-flex justify-content-center align-items-center'>
+                                        <Button 
+                                            onClick={() => fetchMoreData(reviews, setReviews,
+                                                () => setMoreReviewsHasLoaded(true),
+                                                () => setMoreReviewsHasLoaded(false))}
+                                            className={`${styles.buttonPrimary}`}
+                                        >
+                                            {!moreReviewsHasLoaded ? (
+                                               'Load more reviews'
+                                            ) : (
+                                                <Asset spinner size='sm' />
+                                            )}
+                                        </Button>
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className={`my-4 ${styles.noReviewsDiv}`}>
                                 <p className='m-0'>No reviews yet</p>
