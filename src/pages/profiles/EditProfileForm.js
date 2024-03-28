@@ -80,7 +80,9 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
             );
 
             if (mode === 'create') {
+                onHide();
                 history.push(`/profiles/${userId}/`);
+                fetchProfileData();
             } else {
                 fetchProfileData();
                 onHide();

@@ -96,7 +96,6 @@ const ProfilePage = () => {
                 <Row>
                     <Col xs={12} className='d-flex mb-3 justify-contents-center align-items-center'>
                             <Profile fetchProfileData={fetchProfileData} {...profileData} />      
-
                     </Col>
                     {profileData.is_owner ? (
                         <Col lg={12}>
@@ -162,7 +161,6 @@ const ProfilePage = () => {
                         </>
                     )}
                 </Row>
-                
             ) : (
                 <Row>
                     <Col className='mt-5'>

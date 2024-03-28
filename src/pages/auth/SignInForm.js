@@ -52,7 +52,7 @@ const SignInForm = ({ showSuccess, dismissSuccess}) => {
                     state: { openProfileSheet: true }
                 });
             } else {
-                history.push('/');
+                history.goBack();
             };
 
         } catch(err) {
