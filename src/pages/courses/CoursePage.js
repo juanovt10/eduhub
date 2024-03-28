@@ -173,9 +173,12 @@ const CoursePage = () => {
 
                 <Row className='my-3'>
                     <span className={styles.courseOwner}>
-                        Created by: <Link className={styles.ownerLink} to={`/profiles/${courseData.profile_id}`}>{courseData.owner}</Link>
+                        Created by: <Link className={styles.ownerLink} to={`/profiles/${courseData.profile_id}`}>{courseData.owner}</Link> on {courseData.created_at}
                     </span>
-                    <span className={styles.courseOwner}>on {courseData.profile_id}</span>
+                </Row>
+
+                <Row className='mb-3'>
+                    <span className={styles.courseOwner}>Enrollments: {courseData.enrollments_count}</span>
                 </Row>
 
                 <Row className={`mb-5 ${styles.courseInfoContainer}`}>
@@ -261,7 +264,7 @@ const CoursePage = () => {
                                 {reviews.results.map((review) => (
                                     <Review
                                         key={review.id}
-                                        fetchReviews={reFetchCourseReviews}
+                                        fetchReviews={afterReviewSubmit}
                                         setCourse={setCourse}
                                         setReviews={setReviews}
                                         {...review}

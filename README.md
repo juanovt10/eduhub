@@ -161,6 +161,8 @@ The course model contains the author as a foreign key representing the user that
 
 #### Course (detail) page 
 
+- The course page is design to display all the i
+
 
 
 
