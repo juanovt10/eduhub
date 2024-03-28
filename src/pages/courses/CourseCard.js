@@ -46,34 +46,37 @@ const CourseCard = (props) => {
                     <span>${price}</span>
                     <span>{enrollments_count} Enrollments</span>
                 </div>
-                <div className='d-flex justify-content-center align-items-center my-3'>
-                    <Rating rating={overall_rating} /> ({ratings_count})
-                </div>
-                <div className='d-flex justify-content-evenly'>
-                    {video_hours > 0 &&
-                        <OverlayTrigger
-                            placement='top'
-                            overlay={<Tooltip>{video_hours} {video_hours > 1 ? "video hours" : 'video hour'}</Tooltip>}
-                        >
-                            <i className="fa-solid fa-video" title="Video Hours"></i>
-                        </OverlayTrigger>
-                    }
-                    {article_count > 0 && 
-                        <OverlayTrigger
-                            placement='top'
-                            overlay={<Tooltip>{article_count} {article_count > 1 ? 'articles' : 'article'}</Tooltip>}
-                        >
-                            <i className="fa-brands fa-readme" title="Articles"></i>
-                        </OverlayTrigger>
-                    }
-                    {test_count > 0 && 
-                        <OverlayTrigger
-                            placement='top'
-                            overlay={<Tooltip>{test_count} {test_count > 1 ? 'tests' : 'test'}</Tooltip>}
-                        >
-                            <i className="fa-solid fa-pen-to-square" title="Tests"></i>
-                        </OverlayTrigger>  
-                    }
+                <div className='d-flex justify-content-between align-items-center my-3'>
+                    <div className='d-flex justify-content-center align-items-center'>
+                        <Rating rating={overall_rating} /> ({ratings_count})
+                    </div>
+
+                    <div className='d-flex justify-content-center'>
+                        {video_hours > 0 &&
+                            <OverlayTrigger
+                                placement='top'
+                                overlay={<Tooltip>{video_hours} {video_hours > 1 ? "video hours" : 'video hour'}</Tooltip>}
+                            >
+                                <i className="fa-solid fa-video mr-2" title="Video Hours"></i>
+                            </OverlayTrigger>
+                        }
+                        {article_count > 0 && 
+                            <OverlayTrigger
+                                placement='top'
+                                overlay={<Tooltip>{article_count} {article_count > 1 ? 'articles' : 'article'}</Tooltip>}
+                            >
+                                <i className="fa-brands fa-readme mr-2" title="Articles"></i>
+                            </OverlayTrigger>
+                        }
+                        {test_count > 0 && 
+                            <OverlayTrigger
+                                placement='top'
+                                overlay={<Tooltip>{test_count} {test_count > 1 ? 'tests' : 'test'}</Tooltip>}
+                            >
+                                <i className="fa-solid fa-pen-to-square" title="Tests"></i>
+                            </OverlayTrigger>  
+                        }
+                    </div>
                 </div>
             </Card.Body>
             <Card.Footer className="text-center">

@@ -1,5 +1,5 @@
 .CompactCard {
-    max-width: 300px;
+    max-width: 350px;
     width: 100%;
     min-width: 250px; 
     margin: 15px;
@@ -21,7 +21,6 @@
 }
 
 .CategoryLabel {
-    /* Style for category label over the image */
     position: absolute;
     top: 10px;
     left: 10px;
@@ -33,24 +32,21 @@
 }
 
 .CompactDescription {
-    /* Control description length and styling */
     font-size: 0.9rem;
 }
 
 .CourseDetails {
-    /* Styling for the course details section */
     display: flex;
     justify-content: space-between;
 }
 
 .CompactCard .btn-primary {
-    /* Style for the 'Explore Course' button */
-    width: 100%; /* Full width within the footer */
+    width: 100%; 
     margin-top: 10px;
 }
 
 .Card.Footer {
-    padding: 0.5rem 1rem; /* Adjust footer padding */
+    padding: 0.5rem 1rem; 
 }
 
 .buttonPrimary {

@@ -5,10 +5,14 @@ import CourseCard from './CourseCard';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import styles from '../../styles/CoursesDisplay.module.css';
+import { Button } from 'react-bootstrap';
+import { fetchMoreData } from '../../utils/utils';
 
 const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
     const [coursesHasLoaded, setCoursesHasLoaded] = useState(false);
     const [courses, setCourses] = useState({ results: [] });
+    const [moreCoursesHasLoaded, setMoreCoursesHasLoaded] = useState(false);
+
 
     const fetchCourses = async () => {
         try {
@@ -55,11 +59,10 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
             {coursesHasLoaded ? (
                 <Row className='justify-content-flex-start'>
                     {courses.results?.length ? (
-                        courses.results.slice(0, isHomePage ? 3 : courses.results.length).map(course => (
+                        courses.results.slice(0, isHomePage ? 2 : courses.results.length).map(course => (
                             <Col
                                 xs={12}
-                                md={6}
-                                lg={4}
+                                md={courses.results?.length < 2 ? 12 : 6}
                                 className={`d-flex justify-content-center flex-wrap p-0 ${isHomePage ? styles.thirdHomeCourse : ""}`} key={course.id}
                             >
                                 <CourseCard {...course} setCourses={setCourses} />
@@ -72,17 +75,30 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
                             </Col>
                         </Row>
                     )}
+                    {courses.next && !isHomePage && (
+                        <div className='my-5 d-flex justify-content-center align-items-center'>
+                            <Button
+                                onClick={() => fetchMoreData(courses, setCourses,
+                                    () => setMoreCoursesHasLoaded(true),
+                                    () => setMoreCoursesHasLoaded(false))}
+                                className={`${styles.buttonPrimary}`}
+                            >
+                            {!moreCoursesHasLoaded ? (
+                                'Load more courses'
+                            ) : (
+                                <Asset spinner size='sm' />
+                            )}
+                            </Button>
+                        </div>
+                    )}
                 </Row>
             ) : (
-                
                 <Row>
                     <Col className='mt-5'>
                         <Asset spinner />
                     </Col>
                 </Row>
             )}
-
-
         </div>
     )
 }
