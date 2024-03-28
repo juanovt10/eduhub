@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { axiosReq } from '../../api/axiosDefaults';
-import { useCourseTitles } from '../../context/CourseTitleContext';
+import React, { useState } from 'react'
 import { useCurrentUser } from '../../context/CurrentUserContext';
 import Avatar from '../../components/Avatar';
 import Rating from '../../components/Rating';
 import ReviewEditForm from './ReviewEditForm';
 import ReviewDelete from './ReviewDelete';
 import Dropdown from '../../components/Dropdown';
-import Asset from '../../components/Asset';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Sheet } from "../../@/components/ui/sheet";
@@ -19,6 +16,7 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
     const {
         id,
         course,
+        course_title,
         owner,
         rating,
         profile_id,
@@ -30,13 +28,10 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-    const { getCourseTitle } = useCourseTitles();
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
         showDeleteSheet: false
     });
-    const [courseTitle, setCourseTitle] = useState('');
-    const [titleHasLoaded, setTitleHasLoaded] = useState(false);
 
     const handleSheetDisplay = (sheetType, bool) => {
         setShowSheet((prevSheet) => ({
@@ -53,23 +48,9 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
         1: 'Terrible',
     };
 
-    useEffect(() => {
-        if (profile) {
-            const fetchTitle = async () => {
-                const title = await getCourseTitle(course, axiosReq);
-                setCourseTitle(title);
-                setTitleHasLoaded(true);
-            };
-
-            fetchTitle();
-        } else {
-            setTitleHasLoaded(true);
-        };
-    }, [course, profile, getCourseTitle]);
 
     return (
         <div className={styles.reviewContainer}>
-            {titleHasLoaded ? (
                 <>
                     <Row className='mb-3'>
                         <Col className='d-flex align-items-center justify-content-between'>
@@ -121,16 +102,17 @@ const Review = ({fetchReviews, setCourse, setReviews, profile, ...props}) => {
                     </Row>
                     {profile && (
                         <Row className='ml-0 p-0'>
-                            <p>Course: <strong>{courseTitle}</strong></p>
+                            <p>
+                                Course: <Link className={styles.ownerLink} to={`/courses/${course}`}>
+                                    <strong>{course_title}</strong>
+                                </Link>
+                            </p>
                         </Row>
                     )}
                     <Row className='ml-0 p-0'>
                         <p>{content}</p>
                     </Row>
                 </>
-            ) : (
-                <Asset spinner size='sm' />
-            )}
         </div>
     )
 }
