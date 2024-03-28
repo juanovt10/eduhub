@@ -29,6 +29,7 @@ const CoursePage = () => {
     const currentUser = useCurrentUser();
     const [course, setCourse] = useState({ results: [] });
     const [reviews, setReviews] = useState({ results: [] });
+    const [reviewsOverview, setReviewsOverview] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
     const [moreReviewsHasLoaded, setMoreReviewsHasLoaded] = useState(false);
     const [ownerAlert, setOwnerAlert] =  useState(true);
@@ -65,14 +66,21 @@ const CoursePage = () => {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                    const [courseResponse, reviewsResponse] = await Promise.all([
+                    const [
+                        courseResponse,
+                        reviewsResponse,
+                        reviewsOverviewResponse
+                    ] = await Promise.all([
                     axiosReq.get(`/courses/${id}`),
-                    axiosReq.get(`/ratings/?course=${id}`)
+                    axiosReq.get(`/ratings/?course=${id}`),
+                    axiosReq.get(`/ratings/stats/${id}`)
                 ]);
                 const courseData = courseResponse.data;
                 const reviewsData = reviewsResponse.data;
+                const reviewsOverviewData = reviewsOverviewResponse.data;
                 setCourse({ results: [courseData]});
                 setReviews(reviewsData);
+                setReviewsOverview(reviewsOverviewData)
             } catch(err) {
                 console.log(err);
             } finally {
@@ -226,7 +234,7 @@ const CoursePage = () => {
                 </Row>
                 <Row>
                     <Col md={12} lg={5} className='mb-5'>
-                        <ReviewsOverview reviews={reviews.results} totalReviews={course.results[0].ratings_count} courseId={course.results[0].id} />
+                        <ReviewsOverview reviewsOverview={reviewsOverview} totalReviews={course.results[0].ratings_count} courseId={course.results[0].id} />
                     </Col>
                     <Col md={12} lg={7}>
                         {currentUser && (
