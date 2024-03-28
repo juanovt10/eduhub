@@ -73,13 +73,11 @@ const CoursesPage = () => {
                                 />
                             </Sheet>
                             <Sheet open={showSheet.showSortSheet} onOpenChange={setShowSheet}>
-                                <SheetContent className={styles.sheetContainer} side={'right'}>
-                                    <CourseSorting 
-                                        onSortingApplied={handleSorting}
-                                        onHide={() => handleSheetDisplay('showSortSheet', false)}
-                                        mobile
-                                    />                                    
-                                </SheetContent>
+                                <CourseSorting
+                                    onSortingApplied={handleSorting}
+                                    onHide={() => handleSheetDisplay('showSortSheet', false)}
+                                    mobile
+                                />                                    
                             </Sheet>
                         </div>
                         

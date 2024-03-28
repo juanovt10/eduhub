@@ -94,7 +94,7 @@ const CourseFilter = ({ onFiltersApplied, onHide, mobile }) => {
 
     const filterForm = (
         <>
-            <Accordion type="multiple" collapsible className={`mb-3 ${styles.filterAccordion}`}>
+            <Accordion type="multiple" collapsible className={`mb-3`}>
                 <AccordionItem value='item-2'>
                     <AccordionTrigger className={styles.AccordionCategory}>Resources</AccordionTrigger>
                     <AccordionContent>

@@ -10,7 +10,8 @@
     font-weight: 700;
 }
 
-.tabContainer a {
+.tabContainer a,
+.sheetContainer a {
     color: #fff;
     border: 1px solid transparent;
     border-radius: 10px;
@@ -18,14 +19,20 @@
 }
 
 .tabContainer a:link,
-.tabContainer a:visited {
+.tabContainer a:visited
+.sheetContainer a:link,
+.sheetContainer a:visited {
     color: #fff;
 }
 
 .tabContainer a:hover,
 .tabContainer a::after,
 .tabContainer a::before,
-.tabContainer a:focus {
+.tabContainer a:focus 
+.sheetContainer a:hover,
+.sheetContainer a::after,
+.sheetContainer a::before,
+.sheetContainer a:focus {
     color: #fff;
     border-radius: 10px;
 }
@@ -38,4 +45,29 @@
 
 .inactiveLink {
     background-color: transparent;
+}
+
+.sheetContainer {
+    background-color: #082641;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.sheetTitle {
+    color: white;
+    font-size: 30px;
+}
+
+.sheetForm {
+    width: 95%;
+}
+
+.editCourseSheetContainer {
+    width: 100%;
+    max-width: none;
+    padding-top: 5rem;
 }
