@@ -21,6 +21,7 @@ import { Sheet } from "../../@/components/ui/sheet";
 import styles from "../../styles/CoursePage.module.css";
 import { fetchMoreData } from '../../utils/utils';
 import { Button } from 'react-bootstrap';
+import NotFound from '../../components/NotFound';
 
 
 const CoursePage = () => {  
@@ -32,6 +33,7 @@ const CoursePage = () => {
     const [reviewsOverview, setReviewsOverview] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
     const [moreReviewsHasLoaded, setMoreReviewsHasLoaded] = useState(false);
+    const [notFound, setNotFound] = useState(false);
     const [ownerAlert, setOwnerAlert] =  useState(true);
     const [showSheet, setShowSheet] = useState({
         showEditSheet: false,
@@ -50,7 +52,9 @@ const CoursePage = () => {
             const response = await axiosReq.get(`/courses/${id}`);
             setCourse({ results: [response.data]});
         } catch (err) {
-
+            if (err.response && err.response.status === 404) {
+                setNotFound(true)
+            }
         };
     };
 
@@ -97,6 +101,14 @@ const CoursePage = () => {
     }, [id]);
 
     const courseData = course.results[0];
+
+    if (notFound) {
+        return (
+            <div>
+                <NotFound />
+            </div>
+        )
+    }
 
     return (
         <Container className={styles.mainContainer}>

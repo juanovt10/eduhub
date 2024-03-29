@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import styles from '../../styles/ProfilePage.module.css';
+import NotFound from '../../components/NotFound';
 
 
 const ProfilePage = () => {
@@ -22,6 +23,7 @@ const ProfilePage = () => {
     const [profileCoursesFilter, setProfileCoursesFilter] = useState({enrolled: true});
     const [profileLoader, setProfileLoader] = useState(false);
     const [moreReviewsHasLoaded, setMoreReviewsHasLoaded] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
 
     const fetchProfileReviews = async () => {
@@ -40,7 +42,9 @@ const ProfilePage = () => {
             const profileResponse = await axiosReq.get(`/profiles/${id}`);
             setProfileData(profileResponse.data);
         } catch (err) {
-
+            if (err.response && err.response.status === 404) {
+                setNotFound(true)
+            }
         } finally {
             setProfileLoader(false);
         };
@@ -86,6 +90,14 @@ const ProfilePage = () => {
             owner_username: profileData.owner,
         });
     };
+
+    if (notFound) {
+        return (
+            <div>
+                <NotFound />
+            </div>
+        )
+    }
 
 
     return (
