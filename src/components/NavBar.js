@@ -45,7 +45,7 @@ export const NavBar = () => {
             await axios.post('/dj-rest-auth/logout/');
             setCurrentUser(null);
         } catch(err) {
-            console.log(err);
+
         };
     };
 
@@ -56,7 +56,7 @@ export const NavBar = () => {
                     const userProfileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}`);
                     setProfileData(userProfileResponse.data);
                 } catch (err) {
-                    console.log(err);
+                    
                 }
             };
         };

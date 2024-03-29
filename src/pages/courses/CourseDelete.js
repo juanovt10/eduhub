@@ -23,7 +23,7 @@ const CourseDelete = ({id}) => {
             await axiosRes.delete(`/courses/${id}/`);
             history.push('/courses/');
         } catch (err) {
-            console.log(err);
+
         };
     };
 

@@ -24,7 +24,7 @@ const CoursesDisplay = ({ filters, sortKey, isHomePage }) => {
             setCourses(data);
             sortCourses(data.results);
         } catch(err) {
-            console.log(err);
+
         } finally {
             setCoursesHasLoaded(true);
         };

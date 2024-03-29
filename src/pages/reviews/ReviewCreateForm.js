@@ -54,11 +54,12 @@ const ReviewCreateForm = ({afterSubmit, ...props}) => {
                 ],
             }));
             if(afterSubmit){
-                console.log('aftersubmit triggered')                
                 afterSubmit();
             }
         } catch(err) {
-            console.log(err.response.data);
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            };
         };
     };
 

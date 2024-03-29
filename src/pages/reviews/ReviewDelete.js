@@ -34,10 +34,8 @@ const ReviewDelete = ({fetchReviews, setCourse, setReviews, id}) => {
                 }));
             };
 
-
             fetchReviews();
         } catch (err) {
-            console.log(err);
         };
     };
 

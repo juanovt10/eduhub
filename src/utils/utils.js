@@ -14,7 +14,7 @@ export const fetchMoreData = async (resource, setResources, onStartLoading, onFi
             }, prevResource.results)
         }))
     } catch (error) {
-        console.log(error)
+
     } finally {
         onFinishedLoading();
     }

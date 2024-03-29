@@ -32,7 +32,7 @@ const ProfilePage = () => {
             const profileReviews = reviewsResponse.data;
             setProfileReviews(profileReviews);
         } catch (err) {
-            console.log(err);
+
         };
     };
 
@@ -42,7 +42,7 @@ const ProfilePage = () => {
             const profileResponse = await axiosReq.get(`/profiles/${id}`);
             setProfileData(profileResponse.data);
         } catch (err) {
-            console.log(err);
+
         } finally {
             setProfileLoader(false);
         };
@@ -56,7 +56,7 @@ const ProfilePage = () => {
                     fetchProfileReviews(),
                 ]);
             } catch (err) {
-                console.log(err)
+
             };
         };
 

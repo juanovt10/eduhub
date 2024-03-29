@@ -42,7 +42,7 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
             });
             fetchReviews();
         } catch (err) {
-            console.log(err);
+            setErrors(err.response?.data);
         } finally {            
             onHide();
         };
@@ -63,6 +63,11 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
                         rows={3}
                     />
                 </Form.Group>
+                {errors.content?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                        {message}
+                    </Alert>
+                ))}
                 <Form.Group>
                     <RatingInput rating={rating} setRating={handleRatingChange} />
                 </Form.Group>

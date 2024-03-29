@@ -32,7 +32,6 @@ const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHi
             await axiosReq.post('/instructor_apply/', { application_text: content });
             setStartedLoading(false);
         } catch (err) {
-            console.log(err);
             setStartedLoading(false);
         } finally {            
             onApplicationSubmit();

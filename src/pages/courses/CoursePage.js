@@ -50,7 +50,7 @@ const CoursePage = () => {
             const response = await axiosReq.get(`/courses/${id}`);
             setCourse({ results: [response.data]});
         } catch (err) {
-            console.log(err);
+
         };
     };
 
@@ -59,7 +59,7 @@ const CoursePage = () => {
             const response = await axiosReq.get(`/ratings/?course=${id}`);
             setReviews(response.data);
         } catch (err) {
-            console.log(err);
+
         };
     };
 
@@ -68,7 +68,7 @@ const CoursePage = () => {
             const response = await axiosReq.get(`/ratings/stats/${id}`)
             setReviewsOverview(response.data);
         } catch (err) {
-            console.log(err)
+
         };
     };
 
@@ -87,7 +87,7 @@ const CoursePage = () => {
                     afterReviewSubmit()
                 ]);
             } catch(err) {
-                console.log(err);
+
             } finally {
                 setHasLoaded(true);
             };
@@ -97,7 +97,6 @@ const CoursePage = () => {
     }, [id]);
 
     const courseData = course.results[0];
-    console.log(courseData)
 
     return (
         <Container className={styles.mainContainer}>

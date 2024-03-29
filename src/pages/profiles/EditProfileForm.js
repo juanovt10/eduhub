@@ -33,9 +33,7 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
         try {
             const response = await axiosReq.get(`/profiles/${userId}/`);
             setProfileData(response.data);
-            console.log(response.data);
         } catch (err) {
-            console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             };
@@ -87,7 +85,6 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                 onHide();
             };
         } catch (err) {
-            console.log(err)
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             };

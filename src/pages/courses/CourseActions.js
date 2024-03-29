@@ -36,7 +36,7 @@ const CourseActions = (id) => {
                 wishList => wishList.course === courseId
             ));
         } catch (err) {
-            console.log(err)
+
         };
     };
 
@@ -50,7 +50,7 @@ const CourseActions = (id) => {
                 fetchActionsData();
             };
         } catch(err) {
-            console.log(err.response.data)
+
         } finally {
             setStartLoadingEnroll(false);
             setActionsState({ addedToWishList: false, enrolled: true })
@@ -69,7 +69,7 @@ const CourseActions = (id) => {
             };
             
         } catch(err) {
-            console.log(err)
+
         } finally {
             setStartLoadingWishList(false);
             setActionsState({ addedToWishList: true, enrolled: false })

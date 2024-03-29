@@ -62,7 +62,7 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
                 const response = await axios.get('https://eduhub-drf-api-8e84adf897cc.herokuapp.com/course-categories/');
                 setCategories(response.data);
             } catch(err) {
-                console.log(err);
+
             };
         };
 
@@ -74,8 +74,6 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
         e.preventDefault();
         setStartedLoading(true);
         const formData = new FormData();
-
-        console.log('trigger submit');
 
         formData.append('title', title);
         formData.append('description', description);
@@ -96,7 +94,6 @@ const CourseEditForm = ({onHide, refreshCourse, ...props}) => {
             refreshCourse();
             
         } catch (err) {
-            console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             };

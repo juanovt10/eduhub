@@ -29,7 +29,7 @@ const ProfileDelete = ({id}) => {
             setCurrentUser(null);
             history.push('/');
         } catch (err) {
-            console.log(err);
+
         };
     };
 

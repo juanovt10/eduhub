@@ -53,7 +53,7 @@ const Profile = ({fetchProfileData, ...props}) => {
                 const applied = applicationsResponse.data.results.some(app => app.owner === id);
                 setApplicationSubmitted(applied);
             } catch (err) {
-                console.log(err);
+
             };
         };
 

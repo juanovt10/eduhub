@@ -36,7 +36,7 @@ const CourseFilter = ({ onFiltersApplied, onHide, mobile }) => {
                 const response = await axios.get('https://eduhub-drf-api-8e84adf897cc.herokuapp.com/course-categories/');
                 setCategories(response.data.slice(1));
             } catch(err) {
-                console.log(err)
+
             } finally {
                 setCategoriesHasLoaded(true);
             };
