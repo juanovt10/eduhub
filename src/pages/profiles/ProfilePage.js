@@ -91,13 +91,13 @@ const ProfilePage = () => {
         });
     };
 
-    if (notFound) {
-        return (
-            <div>
-                <NotFound />
-            </div>
-        )
-    }
+    // if (notFound) {
+    //     return (
+    //         <div>
+    //             <NotFound />
+    //         </div>
+    //     )
+    // }
 
 
     return (

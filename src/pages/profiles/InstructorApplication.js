@@ -77,7 +77,7 @@ const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHi
                                 rows={5}
                             />
                         </Form.Group>
-                        {errors.applicationData.content?.map((message, idx) => (
+                        {errors.content?.map((message, idx) => (
                         <Alert variant="warning" key={idx}>
                             {message}
                         </Alert>

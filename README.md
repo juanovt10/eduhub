@@ -378,7 +378,7 @@ Testing was an integral part of the project development. A comprehensive testing
 4. Live website tested in Chrome, Safari and Mozila.
 
 ### Unfixed bugs
-- The "Edit profile" and "Edit course" forms throw an error if the image is not updated. This behavior should not occur since the images are attached to the form in both cases. However, due to time constraints, the bug could not be fixed.
+- None so far
 
 ### Future considerations
 
