@@ -112,6 +112,8 @@ const CourseCreateForm = ({onHide}) => {
     };
 
 
+    
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
