@@ -24,42 +24,26 @@ Eduhub is a website dedicated to enhancing learning through teaching. It has bee
 ### Audience
 Eduhub caters to two primary audiences: users seeking to grasp the basics of any topic from non-experts and individuals with intermediate knowledge aiming to broaden their understanding by teaching others.
 
-### User Goals
-- See exisiting courses 
-- Filter exisiting courses 
-- Sort exisiting courses 
-- Load more courses 
-- Load more reviews 
-- See all course information (including reviews and enrollments) 
-- Create courses (instructors only) 
-- Edit courses (instructors only) 
-- Delete courses (instructors only) 
-- See other profiles informatiobn 
-- Create user profile 
-- Edit user profile 
-- Delete user profile 
-- Create reviews 
-- Edit reviews 
-- Delete reviews 
-- Add courses to wish list 
-- Enroll in courses 
-- Apply for instructor status 
-- Navigate across the website 
-- Registration 
-- Log in 
-- Log out 
-- Learn about the website and see the FAQs 
-- See the feature courses in home page 
+### User Stories
+
+Please refer to the user stories [document](/src/assets/docs/user-stories.md) to see the user stories in detail. 
+
+You can also refer to the [Kanban board](https://github.com/users/juanovt10/projects/3) in Github
 
 
 ## Design
 
 ### Color scheme
 
-ADD SCREENSHOT
+The color scheme of the website was carefully chosen to create a dark gradient background using shades of dark grey and dark blue, providing a striking contrast with the white text color. A bright orange color was selected as the primary color for calls to action, while cyan was used as the secondary color to highlight different actions.
+
+![colorPalette](/src/assets/images-readme/colorPalette.png)
 
 ### Typography
 The elements on the website use the Roboto font, which enhances the professional appearance of an educational site.
+
+### Imagery
+The website exclusively uses PNG format logos as its images. These PNG files were sourced from a free logo maker powered by AI.
 
 ### Agile methodology
 Agile project management principles guided the development of this project, leveraging GitHub Projects as the primary software for tracking user stories. Utilizing the Kanban board task view, I crafted a comprehensive user story template that served as the foundation for all project-related narratives. Beyond capturing the core user stories, GitHub Projects played a pivotal role in efficiently monitoring and addressing bugs identified throughout the project's lifecycle.
@@ -71,6 +55,7 @@ ADD WIREFRAMES
 ### Database schema
 
 The database schema is available in the README file of the [Eduhub API Repository](https://github.com/juanovt10/eduhub-drf-react)
+
 
 ## Features
 
@@ -299,6 +284,7 @@ The main idea of this project is to provide a marketing frontend for a future LM
 - Notifications to inform the users when their instructor status is approved. 
 - Notifications for reviews, enrollments, and additions to wish lists.
 
+
 ## Testing
 
 ### Methodology 
@@ -387,6 +373,7 @@ More than just bugs, I want to use this section to outline things that I would h
 - Tailwind CSS: I only encountered Tailwind to use the [shadcn/ui](https://ui.shadcn.com/) components; however, when using it, I realized that even though Bootstrap classes help to add quick styling, it is significantly limited and inflexible. Tailwind provides a much larger amount of predefined classes, and when used in conjunction with the VS Code extension `Tailwind CSS IntelliSense`, it can streamline styling in complex React projects.
 - Have a better understanding of technologies behind the UI libraries: [shadcn/ui](https://ui.shadcn.com/) components are flexible in terms of styling and behavior, but these components are written in TypeScript, a technology that I am not very familiar with. This lack of knowledge and understanding led to problems when deploying the application due to differences in versions and their application. However, thanks to the Code Institute Tutor support, I was able to successfully deploy the project.
 - Check external libraries' dependencies: When I came across [shadcn/ui](https://ui.shadcn.com/), I jumped directly to installing them by following their detailed documentation. However, after the setup, I realized that these components are based on/come from [Radix](https://www.radix-ui.com/), another UI library that provides even more flexibility.
+
 
 ## Technologies used
 
@@ -508,9 +495,19 @@ web: serve -s build
 ## Credits
 
 ### Design
+This website was inspired by various available LMS and reviews websites. The following were used for inspiration: 
+
+- [LinkedIn Learning](https://learning.linkedin.com/)
+- [Coursera](https://www.coursera.org/)
+- [EdX](https://www.edx.org/)
+- [TripAdvisor](https://www.tripadvisor.com/)
 
 ### Code
 
+
+
 ### Media
+The logo imagery was sourced from a logo maker powered by AI, [My Free logo maker](https://myfreelogomaker.com/)
 
 ### Content
+Due to the nature of the web application, the content is provided by the users rather than by the web administrator, unless the administrators create posts themselves. Therefore, I used [ChatGPT]((https://chat.openai.com/)) to generate random profiles, posts, and comments to be able to populate the website with realistic content
