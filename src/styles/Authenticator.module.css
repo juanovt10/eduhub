@@ -100,7 +100,7 @@
 .tabs a::before,
 .tabs a:focus {
     color: #fff;
-    border-radius: none;
+    border-radius: 0;
     box-shadow: none;
     border: none;
 }
@@ -124,7 +124,7 @@
 }
 
 .linkDiv:hover {
-    border-radius: none;
+    border-radius: 0;
     border: none;
 }
 

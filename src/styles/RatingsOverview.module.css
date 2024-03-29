@@ -7,12 +7,7 @@
     height: 1.5rem;
     background-color: black;
 }
-
-.progressBarCustom .progress-bar {
-    background-color: red !important; /* Set your custom color */
-}
-
-    
+  
 .progressLabel {
     position: absolute;
     width: 100%;

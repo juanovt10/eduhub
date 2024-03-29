@@ -1,8 +1,10 @@
 # Eduhub Learning Platform
 
-Eduhub is a platform design for people that want to learn by teaching. Similar to ohter learning platforms, eduhub allows you to browse courses depending on the type of content you want to learn and allows you to find the best course for you depending on varius categories such as, but not limited to, budget, course cateogry, ratings, enrollment numbers, etc. The main difference is that this platform is design for not experts but people that are learning a topic to master it by creating courses and engage with the exisitng community. 
+Eduhub is a platform designed for people who want to learn through teaching. Similar to other learning platforms, Eduhub allows users to browse courses based on the type of content they wish to learn, helping them find the best course according to various categories, including but not limited to budget, course category, ratings, and enrollment numbers. The main distinction is that this platform is designed not for experts but for individuals who are learning a topic and aim to master it by creating courses and engaging with the existing community.
 
-Additionally, after signin up to the platform you have a profile page where you can manage the courses you have enroll to, added to your wish list and your existing reviews. 
+![responsiveTest](/src/assets/images-readme/responsiveTest.png)
+
+Click [here](https://eduhub-react-f1c98786bec1.herokuapp.com/) to see the live website.
 
 ## Table of contents
 
@@ -17,10 +19,10 @@ Additionally, after signin up to the platform you have a profile page where you 
 ## UX
 
 ### Site Purpose
-Eduhub is a site dedicated to enhance learning through teaching. Its been proven that mastery on a topic increases significantly by teaching to others and learning questions that otherwise would not be asked. Therefore, Eduhub provides a platform where user can learn topics and then tehy can apply to instructor status to create their own courses. 
+Eduhub is a website dedicated to enhancing learning through teaching. It has been proven that mastery of a topic increases significantly by teaching others and addressing questions that might not otherwise be asked. Therefore, Eduhub offers a platform where users can learn about various subjects and then apply for instructor status to create their own courses.
 
 ### Audience
-Eduhub focuses on two main audiences. Users that are looking to understand the basics of any topic comming from non-experts and it focus on mid-knowledge people that are looking to expand their knowledge by teaching others. 
+Eduhub caters to two primary audiences: users seeking to grasp the basics of any topic from non-experts and individuals with intermediate knowledge aiming to broaden their understanding by teaching others.
 
 ### User Goals
 - See exisiting courses 
@@ -57,11 +59,7 @@ Eduhub focuses on two main audiences. Users that are looking to understand the b
 ADD SCREENSHOT
 
 ### Typography
-
-The body of the elements on the website utilized the font Roboto.This selection enhances the professional appearance of an education site.
-
-### Imagery
-The imagery added to the courses and user profiles was source from free stock platform. 
+The elements on the website use the Roboto font, which enhances the professional appearance of an educational site.
 
 ### Agile methodology
 Agile project management principles guided the development of this project, leveraging GitHub Projects as the primary software for tracking user stories. Utilizing the Kanban board task view, I crafted a comprehensive user story template that served as the foundation for all project-related narratives. Beyond capturing the core user stories, GitHub Projects played a pivotal role in efficiently monitoring and addressing bugs identified throughout the project's lifecycle.
@@ -72,33 +70,27 @@ ADD WIREFRAMES
 
 ### Database schema
 
-The databse schema is composed of 5 models: user profile, course, ratings, wish list and enrollments. 
-
-When a new user signs up on the website, a user profile instance is automatically generated, utilizing a One-to-One Field with the username. Subsequently, the user is redirected to the home page where a modal style sheet welcomes them to the platform as request them to fill their profile. After the user creates their profile, this modal is never displayed again from them.
-
-The course model contains the author as a foreign key representing the user that created the course, followed by other character, text, integer and float fields.
-
-
+The database schema is available in the README file of the [Eduhub API Repository](https://github.com/juanovt10/eduhub-drf-react)
 
 ## Features
 
 ### Existing Features
 
 #### NavBar
-- On large screens, when the user is not signed in, the navbar only displays the brand logo, a button to direct the user to the courses page and a sign in button. 
+- On large screens, when the user is not signed in, the navbar displays only the brand logo, a button directing the user to the courses page, and a sign-in button.
 
 ![signOutNavbar](/src/assets/images-readme/navBarSignOut.png)
 
-- On large screens, when the user is signed in but is not an instructor, the navbar displays the brand logo, a button to direct the user to the courses page, a sign out button and a go to profile button.
+- On large screens, when the user is signed in but not an instructor, the navbar displays the brand logo, a button directing the user to the courses page, a sign-out button, and a go-to-profile button.
 
 ![signInNavBar](/src/assets/images-readme/navBarSignIn.png)
 
-- On large screens, when the user is signed in and the user is an instructor, the navbar displays the the same buttons as they display for non-instructor users plus a "create course" button for the user to create a course in any page they want. 
+- On large screens, when a signed-in user is an instructor, the navbar displays the same buttons as for non-instructor users, with the addition of a "create course" button, allowing the user to create a course from any page.
 
 ![signInInstructorNavBar](/src/assets/images-readme/navBarSignInInstructor.png)
 
 
-- On smaller screens, the navbar display the same buttons as for large screens, but it is collapsed into a burger menu, where then the options are stakced vertically. 
+- On smaller screens, the navbar displays the same buttons as on large screens, but they are collapsed into a burger menu. Within this menu, the options are stacked vertically.
 
 ![signOutNavbarCollapsed](/src/assets/images-readme/navBarSignOutCollapsed.png)
 ![signInNavbarCollapsed](/src/assets/images-readme/navBarSignInCollapsed.png)
@@ -106,7 +98,7 @@ The course model contains the author as a foreign key representing the user that
 
 #### Home page
 
-- It contains a hero section that has a catchy slogan and a brief explanation to the site. Below these, there are two call to action buttons, one to direct the user to the main page of the site, the course page, and a second one to move them to the about section below that explains the website further.
+- The homepage features a hero section with an engaging slogan and a concise introduction to the site. Below this, two call-to-action buttons are present: one directing users to the site's main page, the courses page, and the second leading to the about section, which provides further explanation of the website.
 
 ![heroSectionLg](/src/assets/images-readme/heroLg.png)
 ![heroSectionSm](/src/assets/images-readme/heroSm.png)
@@ -116,264 +108,285 @@ The course model contains the author as a foreign key representing the user that
 ![aboutSectionLg](/src/assets/images-readme/aboutLg.png)
 ![aboutSectionSm](/src/assets/images-readme/aboutSm.png)
 
-- The feature course seciton in the home page, displays the two courses with the bests ratings of the website. This can vary depending on the rating that users give to each courses. 
+- The featured courses section on the homepage showcases the two courses with the highest ratings on the website. These selections may change based on the ratings given by users to each course. 
 
 ![featureCoursesLg](/src/assets/images-readme/featuredCoursesLg.png)
 ![featureCoursesSm](/src/assets/images-readme/featuredCoursesSm.png)
 
-- Finally, the home page provides a FAQ section that addresses the main quesiton new and exsiting users may have regarding the website. 
+- Finally, the homepage includes a FAQ section that answers the most common questions new and existing users may have about the website.
 
 ![FAQsLg](/src/assets/images-readme/FAQsLg.png)
 ![FAQsSm](/src/assets/images-readme/FAQsSm.png)
 
 #### Courses Page
 
-- The courses page is design to display all the available courses in the website in Card layouts to briefly describe the course information. 
+- The courses page is designed to display all available courses on the website in card layouts, briefly describing the course information.
 
 ![coursesLg](/src/assets/images-readme/coursesLg.png)
 ![coursesSm](/src/assets/images-readme/coursesSm.png)
 
-- The course page has the feature to filter the courses in three categories: available resources (videos, articles or tests), course categories and ratings. The user can choose as many filters as desired, when the filters are applied, the course page fetch the courses with the specified filters. When the filters are restarted the course page fetches all courses again. 
+- The course page features filters in three categories: available resources (videos, articles, or tests), course categories, and ratings. Users can apply multiple filters as desired. When filters are applied, the page fetches courses matching the specified criteria. Resetting the filters triggers the page to fetch all courses again.
 
 ![filterCard](/src/assets/images-readme/filterCard.png)
 ![filterSheet](/src/assets/images-readme/filterSheet.png)
 
-- The course page has the feature to sort courses in 4 categories: rating, enrollment count, price and newest. When a sorting option is clicked, the page fetches the courses depending on the optioned selected and keeps the tab 'on' to provide feedback to the user what sorting has been applied. 
+- The course page offers sorting options in four categories: rating, enrollment count, price, and newest. When a sorting option is selected, the page fetches courses based on the chosen category, and the active sorting tab is highlighted to indicate the applied sorting to the user.
 
 ![sortingCard](/src/assets/images-readme/sortingCard.png)
 ![sortingSheet](/src/assets/images-readme/sortingSheet.png)
 
-- Each course is displayed in a card layout. The card contains the image of the course, title, a part of the description, the price, enrollment count, resources available and a link to explore the course in detail. The resources are layed out as icons, but they have an overlay trigger so when the user hovers or tabs the icon it displays the amount of resources available. 
+- Each course is presented in a card layout featuring the course image, title, a snippet of the description, price, enrollment count, available resources, and a link for detailed exploration. The resources are represented as icons with an overlay trigger that, when hovered over or tapped, displays the quantity of available resources. 
 
 ![courseCard](/src/assets/images-readme/courseCard.png)
 
-- As the API is design to fetch a limit amount of data to avoid high loading times, a button to display further resutls is added at the bottom of the courses to fetch further results. 
+- To manage data fetching and reduce loading times, the API is designed to retrieve a limited amount of data. Consequently, a button is provided at the bottom of the course listings to load additional results, allowing for progressive display of content.
 
 ![coursesPagination](/src/assets/images-readme/coursesPagination.png)
 
 #### Create course 
 
-- The create course feature is only available to users that have instructor status. As creating courses is one of the primary features of the website, instructor users can easily create courses regardless of their locaiton withing the website as the sheet containing the create courses form is embbeded in the navbar. 
+- The create course feature is exclusive to users with instructor status, emphasizing its significance as one of the website's core functions. Instructors have the convenience of creating courses from anywhere on the site, thanks to the create course form embedded within the navbar.
 
 ![signInInstructorNavBar](/src/assets/images-readme/navBarSignInInstructor.png)
 
-- The instructor will have to input all fields if they want to create a course. These include: title, description, image, cateogory (from a dropdown), cost, video hours, article count and test count. 
+- To create a course, instructors must complete all fields, including the title, description, image, category (selected from a dropdown menu), cost, video hours, article count, and test count.
 
 ![createCourseLg](/src/assets/images-readme/createCourseLg.png)
 ![createCourseSm](/src/assets/images-readme/createCourseSm.png)
 
-- If for whatever reason the user does not fill the fields correctly, the form will not be submitted and the alerts will be displayed indicating the field issue. 
+- If the user fails to fill in the fields correctly, the form will not submit, and alerts will appear indicating the issues with the specific fields.
 
 ![createCourseAlerts](/src/assets/images-readme/createCourseAlerts.png)
 
 #### Course (detail) page 
 
-- The course page is design to display all the relevant information about the course, including the complete description, reviews, resourses data and enrollments. 
+- The course page is designed to display all the relevant information about the course, including the complete description, reviews, resource data, and enrollments.
 
 ![courseDetailLg](/src/assets/images-readme/courseDetailLg.png)
 ![courseDetailSm1](/src/assets/images-readme/courseDetailSm1.png)
 ![courseDetailSm2](/src/assets/images-readme/courseDetailSm2.png)
 
-- Restrictions are applied to users that are not logged in. Threfore, a warning alert is displayed to inform the user if they want to take any action in the course they need to register first. 
+- Restrictions are applied to users who are not logged in. Therefore, a warning alert is displayed to inform the user that they need to register first if they want to take any action on the course.
 
 ![courseDetailLoggoutAlert](/src/assets/images-readme/courseDetailLoggedOutAlert.png)
 
-- The owner of the course also has an alert stating that they are the owners and where they cannot place a review, enroll nor add to wish list, they can edit or delete the course. 
+- The owner of the course receives an alert stating that they are the owner, and although they cannot leave a review, enroll, or add the course to their wish list, they can edit or delete the course.
 
 ![courseDetailOwnerAlert](/src/assets/images-readme/courseDetailOwnerAlert.png)
 
-- Even if the user does not use the links in the alert to edit or delete the course. There is an dropdown action menu on the top-left that allows the owner to open the edit course form or delete course. 
+- Even if the user does not utilize the links in the alert to edit or delete the course, there is a dropdown action menu on the top-left that allows the owner to open the edit course form or delete the course.
 
 ![courseOwnerActions](/src/assets/images-readme/courseOwnerActions.png)
 
-- When clicking the delete course action, a form opens confirming the course deletion action. 
+- When the "delete course" action is clicked, a form opens to confirm the course deletion action.
 
 ![courseDelete](/src/assets/images-readme/courseDelete.png)
 
-- When the user selects the edit course. A form similar to the create course form is displayed with the fields populated with the exisiting course information. 
+- When the user selects "edit course," a form similar to the create course form is displayed, with the fields populated with the existing course information.
 
 ![editCourseLg](/src/assets/images-readme/editCourseLg.png)
 ![editCourseSm](/src/assets/images-readme/editCourseSm.png)
 
-- If the user is logged in and is not the owner of the course, two options are displayed: add to wish list and enrollment.
+- If the user is logged in and is not the owner of the course, two options are displayed: "Add to Wish List" and "Enroll."
 
 ![courseActions](/src/assets/images-readme/courseActions.png)
 
-- If the user decides to add the course to the wish list, a feedback card will appear as soon the wish list request is processed stating that the course was successfully added to their wish list, where they can chekc in theri profile or they can enroll to the course straight away.
+- If the user decides to add the course to their wish list, a feedback card will appear as soon as the wish list request is processed, stating that the course was successfully added to their wish list. They can then check it in their profile or enroll in the course immediately.
 
 ![wishListFeedback](/src/assets/images-readme/wishListFeedback.png)
 
-- In the case the user decides to enroll direclty to the course, a similar card is displayed, but in this case there won't be any option to add the course to the wish list. The reson behind this is that if a user enrolls to a course they had in their wish list, this course is deleted from their wish list and added to their enrollments.
+- If the user decides to enroll directly in the course, a similar feedback card is displayed, but in this case, there won't be an option to add the course to the wish list. The reason is that if a user enrolls in a course that was on their wish list, the course is removed from their wish list and added to their enrollments.
 
 ![enrollmentFeedback](/src/assets/images-readme/enrollmentFeedback.png)
 
-- Another key feature of the course page is the reviews section. This is splited into three secions, the reviews overview, the reviews and the review create form. 
-    - Reviews overview displays the overall rating of the course, the total rewview count and 5 progress bars displaying how many reviews the course have in each specific rating.
+- Another key feature of the course page is the reviews section, which is split into three sections: the reviews overview, the reviews themselves, and the review creation form.
+    - The Reviews Overview displays the overall rating of the course and the total review count, along with five progress bars showing the number of reviews for each specific rating.
 
     ![reviewOverview](/src/assets/images-readme/reviewOverview.png)
 
-    - The review create form is displayed next to the reviews overview if the user has not place a review on that course 
+    - The review creation form is displayed next to the Reviews Overview if the user has not yet placed a review for that course.
 
     ![reviewForm](/src/assets/images-readme/reviewForm.png)
 
-    - All reviews are then displayed in the course seciton. The review includes the avatar of the user, user username, when the review was created and the review information.
+    - All reviews are displayed in the course section, including the user's avatar, username, the date the review was created, and the review content.
 
     ![reviews](/src/assets/images-readme/reviews.png)
 
-    - Similar to the course actions, each review will display the action menu to their owner. This menu is the same as the one for the courses, it can edit or delete the review. 
+    - Similar to the course actions, each review displays an action menu for the owner. This menu, identical to the one for courses, allows the owner to edit or delete the review.
 
     ![reviewEdit](/src/assets/images-readme/reviewEdit.png)
     ![reviewDelete](/src/assets/images-readme/reviewDelete.png)
 
-    - As it was done for the courses, the reviews are also paginated to avoid high loading times. If a course has more than 10 reviews, a button will be displayed to allow the user to load more reviews. 
+    - Similar to the courses, reviews are also paginated to prevent long loading times. If a course has more than 10 reviews, a button is provided to allow users to load additional reviews.
 
     ![reviewPagination](/src/assets/images-readme/reviewPagination.png)
 
 
 #### Registration
-- When the users are not logged in, they have varius limitations in the website, such as not being able to have a personalized profile nor take any actions on the courses. Threfore, in the navbar it is displayed a button "Join us" that will redirect the user to the authentication page. 
+- When users are not logged in, they face various limitations on the website, such as the inability to have a personalized profile or take actions on courses. Therefore, a "Join us" button is displayed in the navbar, directing users to the authentication page. 
 
-- The authentication page contains the sign up and sign in forms. The sign up form requests the user a unique username a password and to confirm the password. 
+- The authentication page contains the sign-up and sign-in forms. The sign-up form requests the user's unique username, password, and confirmation of the password.
 
 ![signUp](/src/assets/images-readme/signUp.png)
 
-- If the user does not fill the fields correctly, alerts will be displayed to provide feedback to the user.
+- If the user does not fill out the fields correctly, alerts will be displayed to provide feedback to the user.
 
 ![signUpAlerts](/src/assets/images-readme/signUpAlerts.png)
 
-- In the sign in form, the user is requested to input their credentials to log in.
+- In the sign-in form, the user is requested to input their credentials to log in.
 
 ![signIn](/src/assets/images-readme/signIn.png)
 
-- Similar to the sign up form, if the user credentails are not valid, alerts are displayed. 
+- Similar to the sign-up form, if the user's credentials are not valid, alerts are displayed.
 
 ![signInAlerts](/src/assets/images-readme/signInAlerts.png)
 
-- When the user signs up, it is redirected to the sign in form but a success alert is displayed to inform the user that the registration process was successful. 
+- When the user signs up, they are redirected to the sign-in form, and a success alert is displayed to inform the user that the registration process was successful.
 
 ![signUpSuccess](/src/assets/images-readme/signUpSuccess.png)
 
 #### User profile 
 
-- When a user successfully signs in for the first time a create profile form is displyed for the user to complete their profile information. 
+- When a user successfully signs in for the first time, a create profile form is displayed for the user to complete their profile information.
 
 ![createProfileLg](/src/assets/images-readme/createProfileLg.png)
 ![createProfileSm](/src/assets/images-readme/createProfileSm.png)
 
-- The user can fill the form or close it. However, if the form is not filled, each time the user signs in this form will be displayed. 
+- The user can fill out the form or close it. However, if the form is not filled out, each time the user signs in, this form will be displayed.
 
-- When the user fills the create from is then directed to their profile page where all the inforamtion is displayed. This includes the biography, avatar, preferred name, instructor status and the information about their reviews, wish lists and enrollments. 
+- When the user fills out the create form, they are then directed to their profile page where all the information is displayed. This includes the biography, avatar, preferred name, instructor status, and information about their reviews, wish lists, and enrollments.
 
 ![profileLg](/src/assets/images-readme/profileLg.png)
 ![profileSm](/src/assets/images-readme/profileSm.png)
 
-- In their profile the user has the access to edit and delete profile actions, similar to the reveiws and courses. 
+- In their profile, the user has access to edit and delete profile actions, similar to the reviews and courses.
 
 ![editProfileLg](/src/assets/images-readme/editProfileLg.png)
 ![editProfileSm](/src/assets/images-readme/editProfileSm.png)
 ![profileDelete](/src/assets/images-readme/profileDelete.png)
 
-- following the purpose of this site, is not only about learning from others but learn by teaching. therfore, new users will need to apply for instructor status using the cyan button in their profile. This will open an application form. 
+- Following the purpose of this site, which is not only about learning from others but also learning by teaching, new users will need to apply for instructor status using the cyan button in their profile. This will open an application form.
 
 ![instructorForm](/src/assets/images-readme/instructorForm.png)
 
-- After the user applies, it takes some time until the adminsitrator changes their profile to instructor profile. However, whislt the administrators approve, the button will still available but the user will get feedback that their applicaiton is being processed. 
+- After the user applies, it takes some time until the administrator changes their profile to an instructor profile. However, while the administrators approve, the button will still be available, but the user will receive feedback that their application is being processed.
 
 ![instructorFeedback](/src/assets/images-readme/instructorFeedback.png)
 
-- When a user is already an instructor, their profile looks slighly different. this includes a golden icon stating that theyr are instructors and, on top of wish list, enrollments and reviews, they can see the courses they have created. 
+- When a user is already an instructor, their profile looks slightly different. This includes a golden icon stating that they are instructors and, in addition to the wish list, enrollments, and reviews, they can see the courses they have created. 
 
 ![profileInstructorLg](/src/assets/images-readme/profileInstructorLg.png)
 ![profileInstructorSm](/src/assets/images-readme/profileInstructorSm.png)
 
-- When visiting other non-instrutor profiles, the user can only see the general information of the user but not details of ther wish list, enrollments or reviews. Here the dropdown nor instructor applicaiton buttons are rendered.
+- When visiting other non-instructor profiles, the user can only see the general information of the user but not details of their wish list, enrollments, or reviews. Here, the dropdown nor instructor application buttons are rendered.
 
 ![profileVisit](/src/assets/images-readme/profileVisit.png)
 
-- When visiting an instructor profile the user also cannot see details but they can see that this user is an instructor and if this user has creacted any courses, they can see them. 
+- When visiting an instructor profile, the user also cannot see details, but they can see that this user is an instructor and if this user has created any courses, they can see them.
 
 ![profileVisitInstructor](/src/assets/images-readme/profileVisitInstructor.png)
 
 
 #### Not exisit page
-- As the user is able to type any type of url in the browser. A noExisit page is displayed informing the user that this url does not exisit and they either can type another url or return to their previous url, where the link is added for them to return.
+- As the user is able to type any type of URL in the browser, a "Page Not Found" page is displayed, informing the user that this URL does not exist. They can either type another URL or return to their previous URL, where the link is added for them to return.
 
 ![notExist](/src/assets/images-readme/notExist.png)
 
 ### Future Features
-The main idea of this project is to provide a marketing front end for a future LMS. Therfore, the idea is for this project to evolve from a simple CRUD application to a intricate LMS where users can enroll in courses but can access content including videos, articles, tests. Also providing a dashboard where they can manage their learning. However, for the exisitng project I the following features could be implemented: 
+The main idea of this project is to provide a marketing frontend for a future LMS. Therefore, the idea is for this project to evolve from a simple CRUD application to an intricate LMS where users can enroll in courses and access content including videos, articles, and tests. It also involves providing a dashboard where they can manage their learning. However, for the existing project, the following features could be implemented:
 
-- A more intricate instructor application, including a CV input that can describe the users experience. 
-- Notificaitons to inform the users when they get their instructor status approved. 
-- Notifications when reveiws are placed, enrollments and added to wish lists. 
+- A more intricate instructor application, including a CV input that can describe the user's experience.
+- Notifications to inform the users when their instructor status is approved. 
+- Notifications for reviews, enrollments, and additions to wish lists.
 
 ## Testing
 
 ### Methodology 
-Testing was an integral part of the project development. A comprehensive testing approach was adopted, outlined below. This involved meticulous manual testing to ensure alignment with all user stories and acceptance criteria
+Testing was an integral part of the project development. A comprehensive testing approach was adopted, as outlined below. This involved meticulous manual testing to ensure alignment with all user stories and acceptance criteria.
 
 #### Home page
 
 | Test  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Navigation bar (user not authenticated) | Access the website without logging in, review the available links and click in all available links | All logged out links are displayed and successfully redirect the user to the desired pages | PASS |
-| Navigation bar (user authenticated) | Access the website and  log in, review the available links and click in all available links | All logged in links are displayed and successfully redirect the user to the desired pages | PASS |
-| Herp section links | Click 'learn more' and 'explore courses' buttons | Both buttons redirect the user to the desired pages | PASS | 
-| Home feature courses displayed | Check the courses displayed in the home page | The courses with the highest ratings are displayed | PASS |
-| Home FAQs | Click all FAQs in the accordion element | All accordion elements are behave as expected | PASS |
+| Navigation bar (user not authenticated) | Access the website without logging in, review the available links, and click on all available links | All logged-out links are displayed and successfully redirect the user to the desired pages | PASS |
+| Navigation bar (user authenticated) | Access the website and log in, review the available links, and click on all available links | All logged-in links are displayed and successfully redirect the user to the desired pages | PASS |
+| Hero section links | Click 'learn more' and 'explore courses' buttons | Both buttons redirect the user to the desired pages | PASS | 
+| Home feature courses displayed | Check the courses displayed on the home page | The courses with the highest ratings are displayed | PASS |
+| Home FAQs | Click all FAQs in the accordion element | All accordion elements behave as expected | PASS |
 
 #### Courses page
 | Test  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Filters functionality | Select specific filters, apply the filters and check the results | The courses displayed after the application of the filters match the filters selected | PASS |
-| Reset filters | Click the reset filter button | The courses are refecth without any filters | PASS |
-| Course sorting | Click in all four sorting options | The courses are successsfully sorted in the desired sorting | PASS |
-| Course card display | Check that cards are displayed in the correct way even when results are less than 2 | Courses are displayed in the correct way even if the results are less than 2 | PASS |
-| Load more courses | After the first 10 courses, click in the 'load more courses' button | After clicking the button, 10 more courses are loaded | PASS |
-| Course card link functionality | Click in different course cards and check if the redirection is correct | The 'explore course' button successfully redirect the user to the specific course | PASS |
+| Filters functionality | Select specific filters, apply the filters, and check the results | The courses displayed after applying the filters match the selected filters | PASS |
+| Reset filters | Click the reset filter button| The courses are refetched without any filters | PASS |
+| Course sorting | Click on all four sorting options | The courses are successfully sorted in the desired sorting | PASS |
+| Course card display | Check that cards are displayed correctly even when results are less than 2 | Courses are displayed correctly even if the results are less than 2 | PASS |
+| Load more courses | After the first 10 courses, click the 'load more courses' button | Clicking the button loads 10 more courses | PASS |
+| Course card link functionality | Click on different course cards and check if the redirection is correct | The 'explore course' button successfully redirects the user to the course | PASS |
 
 #### Course detail page
 | Test  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Course information display | Check if all the relevant information of the course is displayed | The owner, enrollment count, video hours, articles, tests and price are displayed successfully | PASS |
-| Authentication alert | Enter to a course without logging in | The user sees the danger alert and the course action buttons are not displayed | PASS |
-| Owner alert | Enter a course that that has been created with the same user | The user sees the warning alert and the course actions buttons and the craete review forms are not displayed | PASS |
-| Owner actions display | Enter a course that that has been created with the same user | The user sees the three dots dropdown and can access the edit and delete course options | PASS |
-| Edit course | As a course owner click in the edit course option and edit the course | The course is successfully edited | PASS |
-| Delete course | As a course owner click in the delete course option and delete the course | The course is successfully deleted and the user is redirected to the courses page | PASS |
-| Create review form | As a authorised user but not the owner of a course, access a course | The review create form is successfully rendered | PASS |
-| Create review functionality |  As a authorised user but not the owner of a course, access a course and leave a review | The form shows the loader but after the request is processed the from dissapears, the review appears below and teh review overview is updated | PASS | 
+| Course information display | Check if all the relevant information of the course is displayed | The owner, enrollment count, video hours, articles, tests, and price are displayed successfully | PASS |
+| Authentication alert | Enter a course without logging in | The user sees the danger alert, and the course action buttons are not displayed | PASS |
+| Owner alert |Enter a course that has been created with the same user | The user sees the warning alert, and the course actions buttons and the create review forms are not displayed | PASS |
+| Owner actions display | Enter a course that has been created with the same user | The user sees the three dots dropdown and can access the edit and delete course options | PASS |
+| Edit course | As a course owner, click on the edit course option and edit the course | The course is successfully edited | PASS |
+| Delete course | As a course owner, click on the delete course option and delete the course | The course is successfully deleted, and the user is redirected to the courses page | PASS |
+| Create review form | As an authorized user but not the owner of a course, access a course | The review create form is successfully rendered | PASS |
+| Create review functionality |  As an authorized user but not the owner of a course, access a course and leave a review | The form shows the loader, but after the request is processed, the form disappears, the review appears below, and the review overview is updated | PASS | 
 | Review actions | Access a course where a review has been placed | The review should display the dropdown menu with the edit and delete review actions | PASS | 
-| Review edit | Click in the review edit action and edit the reivew | The review is successfully edited, it is rendered in the course page and the reviews overviews update | PASS |
-| Review delete | Click in the review delete action and delete the reivew | The review is successfully deleted and the reviews overviews update | PASS |
-| Load more reviews | Access a course with more than 10 reviews and click the 'load more reviews' button | After clickin the button more reviews are loaded | PASS |
+| Review edit | Click on the review edit action and edit the review  | The review is successfully edited, it is rendered on the course page, and the reviews overviews update | PASS |
+| Review delete | Click on the review delete action and delete the review | The review is successfully deleted, and the reviews overviews update | PASS |
+| Load more reviews | Access a course with more than 10 reviews and click the 'load more reviews' button | After clicking the button, more reviews are loaded | PASS |
 
 #### Authentication page
 | Test  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Authentication rendered (no-authenticated) | As a logged out click in the 'join us' button | The signup and signin forms are successfully rendered | PASS |
-| Authentication redirection (authenticated) | As a logged in user try to access the authentication page my typing the /auth url | The user is redirected back to the home page | PASS |
-| Sign up form | Create a new user | The registration is successfull and the user is shown the sign in form with a success alert | PASS |
+| Authentication rendered (no-authenticated) | As a logged-out user, click on the 'join us' button | The signup and signin forms are successfully rendered | PASS |
+| Authentication redirection (authenticated) | As a logged-in user, try to access the authentication page by typing the /auth URL | The user is redirected back to the home page | PASS |
+| Sign up form | Create a new user | The registration is successful, and the user is shown the sign-in form with a success alert | PASS |
 | Sign in form | Sign in | The user is redirected to the page they were before the authentication request | PASS |
-| Authentication alerts | In both sign in and sign up forms fill the fields wrongly | Warning alerts are displayed | PASS |
+| Authentication alerts | In both the sign-in and sign-up forms, fill the fields incorrectly | Warning alerts are displayed | PASS |
 
 #### Profile page
 | Test  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
 | Profile creation render | Sign up and sign in to the site | The create profile form is displayed | PASS |
-| Profile creation functionality | Fill the fields and submit the from | If the fields are successfully filled, the user is redirected to their profile where they can see all their information. If the fields are not filled correctly, alerts are displayed | PASS |
-| Self profile view (no-instructor) | Access the user profile | All user information should be displayed, the become instructor button should be displaued, the options button should be displayed and the wish list, enrollment and reviews should be displayed | PASS | 
-| Self profile view (instructor) | Access the user profile as an instructor | All user information should be displayed, the gold instructor icon should be displayed the options button should be displayed and the your courses, wish list, enrollment and reviews should be displayed | PASS |
-| Edit profile | Click the edit profile option in the dropdown options | The form is rendered successfully with the fields prepopulated, if the form is submitted wrongly alerts are displayed and if is submitted successfully the profile refetches the new information | PASS |
-| Delete profile | Click the delete profile option in the dropdown options | The delete form is rendered and if clicked the user is deleted, logged out and then redirected to the home page | PASS |
-| Instructor applicaiton form | Access a self profile without instructor status and click the instructor icon is displayed in the cyan button | The applicaiton form is successfully displayed, and when submitted it closes | PASS |
-| Instructor applicaiton feedback | After submitting the application form, try again to click that button | The form is not rendered and a feedback message is rendered for the user to wait until the application is processed | PASS |
-| Visit non-istructor profile | Access another user profile that does not have the instructor status | All information of the user should be displayed with the exception of the instructor application and acitons buttons, details of which courses are in enrollments, wish lists or reviews | PASS |
-| Visit istructor profile | Access another user profile with instructor status | All the relevant information is displayed, the gold instructor icon is rendered and the instructor courses are displayed below | PASS |
+| Profile creation functionality | Fill the fields and submit the form | If the fields are successfully filled, the user is redirected to their profile where they can see all their information. If the fields are not filled correctly, alerts are displayed | PASS |
+| Self profile view (non-instructor) | Access the user profile | All user information should be displayed, the "Become Instructor" button should be displayed, the options button should be displayed, and the wish list, enrollment, and reviews should be displayed | PASS | 
+| Self profile view (instructor) | Access the user profile as an instructor | All user information should be displayed, the gold instructor icon should be displayed, the options button should be displayed, and the "Your Courses," wish list, enrollment, and reviews should be displayed | PASS |
+| Edit profile | Click the edit profile option in the dropdown options | The form is rendered successfully with the fields prepopulated. If the form is submitted wrongly, alerts are displayed, and if it is submitted successfully, the profile refetches the new information | PASS |
+| Delete profile | Click the delete profile option in the dropdown options | The delete form is rendered, and if clicked, the user is deleted, logged out, and then redirected to the home page | PASS |
+| Instructor applicaiton form | Access a self profile without instructor status and click the instructor icon displayed in the cyan button | The application form is successfully displayed, and when submitted, it closes | PASS |
+| Instructor applicaiton feedback | After submitting the application form, try again to click that button | The form is not rendered, and a feedback message is displayed for the user to wait until the application is processed | PASS |
+| Visit non-istructor profile | Access another user profile that does not have instructor status | All information of the user should be displayed, except for the instructor application and action buttons, and details of courses in enrollments, wish lists, or reviews | PASS |
+| Visit istructor profile | Access another user profile with instructor status | All relevant information is displayed, the gold instructor icon is rendered, and the instructor courses are displayed below | PASS |
 
 ### Validator testing 
 
-1. CSS 
+1. All CSS files passed teh [Jigsaw validator](https://jigsaw.w3.org/css-validator/) with no issues. The only errors/warnings raised where the Tailwind rules in the `index.css`. 
+
+![CSSvalidation](/src/assets/images-readme/CSSValidator.png)
+
+2. ESLINT stuff
+
+3. The page has excellent ratings in best practices and SEO. However, performance and accessbility can be inproved by applying the following recommnedations: 
+
+- Performances is affected due to the various CDNs such as React Bootstrap, Font Awseome and Google fonts. These could be replace by avoind CDN calls or even use other frameworks, such as [shadcn/ui](https://ui.shadcn.com/), where the components are written in TypeScript and live in the project itself. 
+- Accessiblity can improved by having a better contrast ratio in the colors used. 
+
+![lightHouseAssessment](/src/assets/images-readme/lightHouseAssessment.png)
+
+4. Live website tested in Chrome, Safari and Mozila.
+
+### Unfixed bugs
+More than just bugs, I want to use this section to outline things that I would have done differently to avoid specific issues that I encountered during this project.
+
+- Use flexible UI frameworks: Even though React Bootstrap is widely used in the industry, the lack of flexibility that the components have in terms of embedded JavaScript and CSS is significant. Overriding CSS styles requires a significant amount of work, and if the .module.css styling is used, it becomes even more complicated. Additionally, some components simply do not work, such as the accordion and hidden labels. This is the reason why I decided to implement the [shadcn/ui](https://ui.shadcn.com/) to implement the accordion, dropdown and the sheet component.
+- Tailwind CSS: I only encountered Tailwind to use the [shadcn/ui](https://ui.shadcn.com/) components; however, when using it, I realized that even though Bootstrap classes help to add quick styling, it is significantly limited and inflexible. Tailwind provides a much larger amount of predefined classes, and when used in conjunction with the VS Code extension `Tailwind CSS IntelliSense`, it can streamline styling in complex React projects.
+- Have a better understanding of technologies behind the UI libraries: [shadcn/ui](https://ui.shadcn.com/) components are flexible in terms of styling and behavior, but these components are written in TypeScript, a technology that I am not very familiar with. This lack of knowledge and understanding led to problems when deploying the application due to differences in versions and their application. However, thanks to the Code Institute Tutor support, I was able to successfully deploy the project.
+- Check external libraries' dependencies: When I came across [shadcn/ui](https://ui.shadcn.com/), I jumped directly to installing them by following their detailed documentation. However, after the setup, I realized that these components are based on/come from [Radix](https://www.radix-ui.com/), another UI library that provides even more flexibility.
 
 ## Technologies used
 
@@ -386,32 +399,32 @@ Testing was an integral part of the project development. A comprehensive testing
 
 ### Frameworks, Libraries and programs used
 
-- Google Fonts: For site fonts
-- Font Awesome: For site icons
-- GitPod: online IDE
-- GitHub: Store repository and version control
-- Am I responsive: For responsiveness display
-- Favicon: To provide icon in tab bar
-- Django Rest: Use to build the backend API
-- React-Bootstrap: Library of reusable components
-- Shadcn/ui: Library with more flexible components than React Bootstrap
-- Typescript: Only used to run the Shadcn/ui components
-- Tailwind CSS: Only used to run the Shadcn/ui components
-- ReactJS: To build the components that will compose the front end applicaiton 
+- [Google Fonts](https://fonts.google.com/)
+- [Font Awesome](https://fontawesome.com/)
+- [Gitpod](https://www.gitpod.io/)
+- [GitHub](https://www.gitpod.io/)
+- [Am I responsive](https://ui.dev/amiresponsive)
+- [Favicon](https://favicon.io/)
+- [Django Rest](https://www.django-rest-framework.org/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ReactJS](https://react.dev/)
 
 ## Components
 
-Multiple components were used through this project with the capability of reusability to avoid repeatitive tasks. 
+Multiple components were used throughout this project with the capability of reusability to avoid repetitive tasks.
 
-1. axiosDefaults.js: streamlined the API calls with the REST API
+1. axiosDefaults.js: streamlined the API calls with the REST API.
 2. Asset.js: mainly used to provide loading feedback to the client.
-3. Avatar.js: To display users profile images in the reviews, profile pages and navbar.
-4. Dropdown.js: user to provide edit and delete actions for courses, reviews and profiles. 
-5. Rating.js: The main focus of this project was to provide course overall ratings but also the rating of each review. This reusable component was key to display this information. 
-6. RatingInput.js: This component was used to interactively input the rating in a review. This component is located in the CreateReviewForm and EditReviewForm. 
-7. useClickToggle.js: component to hide the collapsable navbar elements when clicking anywhere else in the website
-8. useRedirect.js: component to redirect logged in users from the /auth URL.
-9. CourseDisplay.js: even though this component is related to the courses page, it is used in the home page, courses page and profile page to display courses depending on filtering and sorting. 
+3. Avatar.js: used to display users' profile images in the reviews, profile pages, and navbar.
+4. Dropdown.js: used to provide edit and delete actions for courses, reviews, and profiles.
+5. Rating.js: The main focus of this project was to provide overall course ratings but also the rating of each review. This reusable component was key to displaying this information.
+6. RatingInput.js: This component was used to interactively input the rating in a review. It is located in the CreateReviewForm.js and EditReviewForm.js.
+7. useClickToggle.js: a component to hide the collapsible navbar elements when clicking anywhere else on the website.
+8. useRedirect.js: a component to redirect logged-in users from the /auth URL.
+9. CourseDisplay.js: even though this component is related to the courses page, it is used on the home page, courses page, and profile page to display courses depending on filtering and sorting props provided. 
 
 ## Deployment
 
@@ -463,9 +476,9 @@ lucide-react
 }
 ```
 
-The key aspect here was to provide the correct basrUrl and paths to the components. initially the @ folder is palced in the root directory but then I moved it to the src directory where all the components are. 
+The key aspect here was to provide the correct `baseUrl` and paths to the components. Initially, the `@` folder was placed in the root directory, but then I moved it to the `src` directory where all the components are.
 
-5. Tailwind confiigurations were taken from each of the components used form the [shadcn/ui](https://ui.shadcn.com/). Each component has their own tailwind documentation. 
+5. Tailwind configurations were taken from each of the components used from the [shadcn/ui](https://ui.shadcn.com/).  Each component has its own Tailwind documentation.
 
 6. After all of these, just git add, commit and push the code to Github. 
 
@@ -473,10 +486,10 @@ The key aspect here was to provide the correct basrUrl and paths to the componen
 
 ### Connection with the API
 
-The API connection is done in the in the Heroku variables of the [DRF-API]. These variables are:
+The API connection is done in the in the Heroku variables of the [DRF-API](https://github.com/juanovt10/eduhub-drf-react). These variables are:
 
-- Key: CLIENT_ORIGIN | Value: https://eduhub-react-f1c98786bec1.herokuapp.com
-- Key: CLIENT_ORIGIN_DEV | Value: https://3000-juanovt10-eduhub-mz87b8ft0gq.ws-eu108.gitpod.io
+- Key: CLIENT_ORIGIN | Value: `deployed url`
+- Key: CLIENT_ORIGIN_DEV | Value: `local host`
 
 ### Deployment to Heroku
 1. In the package.json file under the scripts section add: 
