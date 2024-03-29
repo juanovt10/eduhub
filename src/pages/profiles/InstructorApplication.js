@@ -3,6 +3,7 @@ import { axiosReq } from '../../api/axiosDefaults';
 import Asset from '../../components/Asset';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import {
     SheetContent,
     SheetDescription,
@@ -15,6 +16,7 @@ const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHi
 
     const [applicationData, setApplicationData] = useState({content: ""});
     const [startedLoading, setStartedLoading] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (event) => {
         setApplicationData({
@@ -32,6 +34,9 @@ const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHi
             await axiosReq.post('/instructor_apply/', { application_text: content });
             setStartedLoading(false);
         } catch (err) {
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            };
             setStartedLoading(false);
         } finally {            
             onApplicationSubmit();
@@ -72,6 +77,11 @@ const InstructorApplication = ({ applicationSubmitted, onApplicationSubmit, onHi
                                 rows={5}
                             />
                         </Form.Group>
+                        {errors.applicationData.content?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                        ))}
                         <Button className={`w-100 ${styles.buttonPrimary}`} type="submit">
                             {!startedLoading ? (
                             'Send application'

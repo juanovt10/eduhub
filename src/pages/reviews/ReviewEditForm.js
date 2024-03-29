@@ -73,6 +73,11 @@ const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
                 <Form.Group>
                     <RatingInput rating={rating} setRating={handleRatingChange} />
                 </Form.Group>
+                {errors.rating?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                        {message}
+                    </Alert>
+                ))}
                 <Button className={`w-100 ${styles.buttonPrimary}`} type="submit">
                     {!startedLoading ? (
                         'Edit review'

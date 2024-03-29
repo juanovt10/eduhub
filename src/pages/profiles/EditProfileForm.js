@@ -8,6 +8,7 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import {
     SheetContent,
     SheetHeader,
@@ -72,7 +73,10 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
 
         formData.append('name', name);
         formData.append('bio', bio);
-        formData.append('image', imageInput.current.files[0]);
+
+        if (imageInput?.current?.files[0]) {
+            formData.append('image', imageInput.current.files[0]);
+        }
 
         try {
             await axiosReq.put(`/profiles/${userId}/`, formData);
@@ -115,6 +119,11 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                                 placeholder='enter your preferred name'
                             />
                         </Form.Group>
+                        {errors.name?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                        ))}
                         <Form.Group>
                             <Form.Label>Description</Form.Label>
                             <Form.Control
@@ -125,6 +134,11 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                                 placeholder='enter your profile description'
                             />
                         </Form.Group>
+                        {errors.bio?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                        ))}
                         <Form.Group>
                             {image ? (
                                 <>
@@ -145,6 +159,11 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                                 ref={imageInput}
                             />
                         </Form.Group>
+                        {errors.image?.map((message, idx) => (
+                        <Alert variant="warning" key={idx}>
+                            {message}
+                        </Alert>
+                        ))}
                         <div className='d-flex justify-content-center'>
                             <Button className={`mr-2 ${styles.buttonSecondary}`} onClick={onHide}>
                                 Discard changes
