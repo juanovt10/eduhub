@@ -1,0 +1,18 @@
+.pageContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.returnLink {
+    transition: all .3s ease;
+    color: #fff;
+    cursor: pointer;
+}
+
+.returnLink:hover {
+    color: #f5793b;
+}

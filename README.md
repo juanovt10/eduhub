@@ -246,25 +246,52 @@ The course model contains the author as a foreign key representing the user that
 
 ![signUpSuccess](/src/assets/images-readme/signUpSuccess.png)
 
-
 #### User profile 
 
+- When a user successfully signs in for the first time a create profile form is displyed for the user to complete their profile information. 
+
+![createProfileLg](/src/assets/images-readme/createProfileLg.png)
+![createProfileSm](/src/assets/images-readme/createProfileSm.png)
+
+- The user can fill the form or close it. However, if the form is not filled, each time the user signs in this form will be displayed. 
+
+- When the user fills the create from is then directed to their profile page where all the inforamtion is displayed. This includes the biography, avatar, preferred name, instructor status and the information about their reviews, wish lists and enrollments. 
+
+![profileLg](/src/assets/images-readme/profileLg.png)
+![profileSm](/src/assets/images-readme/profileSm.png)
+
+- In their profile the user has the access to edit and delete profile actions, similar to the reveiws and courses. 
+
+![editProfileLg](/src/assets/images-readme/editProfileLg.png)
+![editProfileSm](/src/assets/images-readme/editProfileSm.png)
+![profileDelete](/src/assets/images-readme/profileDelete.png)
+
+- following the purpose of this site, is not only about learning from others but learn by teaching. therfore, new users will need to apply for instructor status using the cyan button in their profile. This will open an application form. 
+
+![instructorForm](/src/assets/images-readme/instructorForm.png)
+
+- After the user applies, it takes some time until the adminsitrator changes their profile to instructor profile. However, whislt the administrators approve, the button will still available but the user will get feedback that their applicaiton is being processed. 
+
+![instructorFeedback](/src/assets/images-readme/instructorFeedback.png)
+
+- When a user is already an instructor, their profile looks slighly different. this includes a golden icon stating that theyr are instructors and, on top of wish list, enrollments and reviews, they can see the courses they have created. 
+
+![profileInstructorLg](/src/assets/images-readme/profileInstructorLg.png)
+![profileInstructorSm](/src/assets/images-readme/profileInstructorSm.png)
+
+- When visiting other non-instrutor profiles, the user can only see the general information of the user but not details of ther wish list, enrollments or reviews. Here the dropdown nor instructor applicaiton buttons are rendered.
+
+![profileVisit](/src/assets/images-readme/profileVisit.png)
+
+- When visiting an instructor profile the user also cannot see details but they can see that this user is an instructor and if this user has creacted any courses, they can see them. 
+
+![profileVisitInstructor](/src/assets/images-readme/profileVisitInstructor.png)
 
 
+#### Not exisit page
+- As the user is able to type any type of url in the browser. A noExisit page is displayed informing the user that this url does not exisit and they either can type another url or return to their previous url, where the link is added for them to return.
 
-
-
-    
-
-
-
-
-
-
-
-
-
-
+![notExist](/src/assets/images-readme/notExist.png)
 
 ### Future Features
 
@@ -297,30 +324,76 @@ The course model contains the author as a foreign key representing the user that
 
 ## Technologies used
 
+
 ### Programming languages
+- HTML5
+- CSS3
+- JavaScript
+- Python
+- SQL - Postgres
 
 ### Frameworks, Libraries and programs used
 
+- Google Fonts: For site fonts
+- Font Awesome: For site icons
+- GitPod: online IDE
+- GitHub: Store repository and version control
+- Am I responsive: For responsiveness display
+- Favicon: To provide icon in tab bar
+- Django Rest: Use to build the backend API
+- React-Bootstrap: Library of reusable components
+- Shadcn/ui: Library with more flexible components than React Bootstrap
+- Typescript: Only used to run the Shadcn/ui components
+- Tailwind CSS: Only used to run the Shadcn/ui components
+- ReactJS: To build the components that will compose the front end applicaiton 
+
+## Components
+
+Multiple components were used through this project with the capability of reusability to avoid repeatitive tasks. 
+
+1. axiosDefaults.js: streamlined the API calls with the REST API
+2. Asset.js: mainly used to provide loading feedback to the client.
+3. Avatar.js: To display users profile images in the reviews, profile pages and navbar.
+4. Dropdown.js: user to provide edit and delete actions for courses, reviews and profiles. 
+5. Rating.js: The main focus of this project was to provide course overall ratings but also the rating of each review. This reusable component was key to display this information. 
+6. RatingInput.js: This component was used to interactively input the rating in a review. This component is located in the CreateReviewForm and EditReviewForm. 
+7. useClickToggle.js: component to hide the collapsable navbar elements when clicking anywhere else in the website
+8. useRedirect.js: component to redirect logged in users from the /auth URL.
+9. CourseDisplay.js: even though this component is related to the courses page, it is used in the home page, courses page and profile page to display courses depending on filtering and sorting. 
 
 ## Deployment
 
-### Forking the Github repository 
+The site was deployed to Heroku. The steps to deploy are as follows:
 
-### Running the project locally
+1. Launch the gitpod workspace.
+2. Install ReactJS:
 
+```
+npx create-react-app . --use-npm
+npm start
+```
 
-### Deploying with Heroku
+3. Install the following dependencies:
 
-#### External database set up
+```
+react-bootstrap@1.6.3 bootstrap@4.6.0
+react-router-dom@5.3.0
+axios
+msw --save-dev
+jwt-decode
+-g eslint
+tailwindcss-animate
+class-variance-authority
+clsx
+tailwind-merge
+lucide-react
+@radix-ui/react-icons
+-D tailwindcss
+```
 
-#### External storage set up
+4. Tailwind and TypeScript configurations
+As mentioned in the secion above, Tailwind and TypeScript where used only to use the shadin/ui front end components.
 
-
-#### env.py file set up
-
-#### Heroku settings 
-
-#### Heroku deployment
 
 ## Credits
 

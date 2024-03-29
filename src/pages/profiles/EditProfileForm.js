@@ -62,13 +62,14 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
             URL.revokeObjectURL(image);
             setProfileData({
                 ...profileData,
-                image: URL.createObjectURL(e.target.files[0])
+                image: URL.createObjectURL(e.target.files[0]),
             });
         };
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitLoader(true);
         const formData = new FormData();
 
         formData.append('name', name);
@@ -76,10 +77,7 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
         formData.append('image', imageInput.current.files[0]);
 
         try {
-            const {data} = await axiosReq.put(
-                `/profiles/${userId}/`,
-                formData
-            );
+            await axiosReq.put(`/profiles/${userId}/`, formData);
 
             if (mode === 'create') {
                 onHide();
@@ -90,6 +88,11 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
             };
         } catch (err) {
             console.log(err)
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+            };
+        } finally {
+            setSubmitLoader(false);
         };
     };
 
@@ -138,9 +141,9 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                             ) : (
                                 <Form.Label>Image</Form.Label>
                             )}
-                            <Form.File
+                            <Form.File 
                                 id='image-upload'
-                                accpet='image/*'
+                                accept='image/*'
                                 onChange={handleChangeImage}
                                 ref={imageInput}
                             />
@@ -149,13 +152,24 @@ const EditProfileForm = ({ mode, fetchProfileData, onHide }) => {
                             <Button className={`mr-2 ${styles.buttonSecondary}`} onClick={onHide}>
                                 Discard changes
                             </Button>
-                            <Button className={`${styles.buttonPrimary}`} type='submit'>
-                                {!submitLoader ? (
-                                    'Edit profile'
-                                ) : (
-                                    <Asset spinner size='sm' />
-                                )}
-                            </Button>
+
+                            {mode === 'create' ? (
+                                <Button className={`${styles.buttonPrimary}`} type='submit'>
+                                    {!submitLoader ? (
+                                        'Create profile'  
+                                    ) : (
+                                        <Asset spinner size='sm' />
+                                    )}
+                                </Button>
+                            ) : (
+                                <Button className={`${styles.buttonPrimary}`} type='submit'>
+                                    {!submitLoader ? (
+                                        'Edit profile'  
+                                    ) : (
+                                        <Asset spinner size='sm' />
+                                    )}
+                                </Button>
+                            )}    
                         </div>
                     </Form>
 

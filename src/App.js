@@ -9,6 +9,7 @@ import CoursePage from './pages/courses/CoursePage';
 import CoursesPage from './pages/courses/CoursesPage';
 import ProfilePage from './pages/profiles/ProfilePage';
 import Authenticator from './pages/auth/Authenticator';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
               <Route exact path='/courses/:id' render={() => <CoursePage />} />
               <Route exact path='/auth' render={() => <Authenticator />} />
               <Route exact path='/profiles/:id' render={() => <ProfilePage />} />
-              <Route render={() => <p>Page not found!</p>} />
+              <Route render={() => <NotFound />} />
             </Switch>
           </div>
         </div>
