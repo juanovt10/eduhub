@@ -4,6 +4,7 @@ import RatingInput from '../../components/RatingInput'
 import Asset from '../../components/Asset';
 import Form from 'react-bootstrap/Form'; 
 import Button from 'react-bootstrap/Button'; 
+import Alert from 'react-bootstrap/Alert'; 
 import {
     SheetContent,
     SheetHeader,
@@ -15,6 +16,7 @@ import styles from '../../styles/ReviewEdit.module.css';
 const ReviewEditForm = ({onHide, fetchReviews, ...props}) => {
 
     const [reviewData, setReviewData] = useState({...props});
+    const [errors, setErrors] = useState({});
     const [startedLoading, setStartedLoading] = useState(false);
 
     const {id, title, rating, content} = reviewData;
