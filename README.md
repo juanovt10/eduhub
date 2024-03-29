@@ -22,26 +22,33 @@ Eduhub is a site dedicated to enhance learning through teaching. Its been proven
 ### Audience
 Eduhub focuses on two main audiences. Users that are looking to understand the basics of any topic comming from non-experts and it focus on mid-knowledge people that are looking to expand their knowledge by teaching others. 
 
-### Current User Goals
-- See exisiting courses
-- Filter exisiting courses
-- Sort exisiting courses
-- Load more courses
-- See all course information (including reviews and enrollments)
-- Create courses
-- Edit courses
-- Delete courses
-- Create their user profile
-- Edit the user profile 
+### User Goals
+- See exisiting courses 
+- Filter exisiting courses 
+- Sort exisiting courses 
+- Load more courses 
+- Load more reviews 
+- See all course information (including reviews and enrollments) 
+- Create courses (instructors only) 
+- Edit courses (instructors only) 
+- Delete courses (instructors only) 
+- See other profiles informatiobn 
+- Create user profile 
+- Edit user profile 
 - Delete user profile 
-- Create course reviews
-- Edit reviews
-- Delete reviews
-- Add courses to wish list
-- Enroll in courses
-- Apply for instructor status
+- Create reviews 
+- Edit reviews 
+- Delete reviews 
+- Add courses to wish list 
+- Enroll in courses 
+- Apply for instructor status 
+- Navigate across the website 
+- Registration 
+- Log in 
+- Log out 
+- Learn about the website and see the FAQs 
+- See the feature courses in home page 
 
-### Future User Goals
 
 ## Design
 
@@ -294,36 +301,81 @@ The course model contains the author as a foreign key representing the user that
 ![notExist](/src/assets/images-readme/notExist.png)
 
 ### Future Features
+The main idea of this project is to provide a marketing front end for a future LMS. Therfore, the idea is for this project to evolve from a simple CRUD application to a intricate LMS where users can enroll in courses but can access content including videos, articles, tests. Also providing a dashboard where they can manage their learning. However, for the exisitng project I the following features could be implemented: 
+
+- A more intricate instructor application, including a CV input that can describe the users experience. 
+- Notificaitons to inform the users when they get their instructor status approved. 
+- Notifications when reveiws are placed, enrollments and added to wish lists. 
 
 ## Testing
 
 ### Methodology 
+Testing was an integral part of the project development. A comprehensive testing approach was adopted, outlined below. This involved meticulous manual testing to ensure alignment with all user stories and acceptance criteria
 
 #### Home page
 
+| Test  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Navigation bar (user not authenticated) | Access the website without logging in, review the available links and click in all available links | All logged out links are displayed and successfully redirect the user to the desired pages | PASS |
+| Navigation bar (user authenticated) | Access the website and  log in, review the available links and click in all available links | All logged in links are displayed and successfully redirect the user to the desired pages | PASS |
+| Herp section links | Click 'learn more' and 'explore courses' buttons | Both buttons redirect the user to the desired pages | PASS | 
+| Home feature courses displayed | Check the courses displayed in the home page | The courses with the highest ratings are displayed | PASS |
+| Home FAQs | Click all FAQs in the accordion element | All accordion elements are behave as expected | PASS |
 
 #### Courses page
+| Test  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Filters functionality | Select specific filters, apply the filters and check the results | The courses displayed after the application of the filters match the filters selected | PASS |
+| Reset filters | Click the reset filter button | The courses are refecth without any filters | PASS |
+| Course sorting | Click in all four sorting options | The courses are successsfully sorted in the desired sorting | PASS |
+| Course card display | Check that cards are displayed in the correct way even when results are less than 2 | Courses are displayed in the correct way even if the results are less than 2 | PASS |
+| Load more courses | After the first 10 courses, click in the 'load more courses' button | After clicking the button, 10 more courses are loaded | PASS |
+| Course card link functionality | Click in different course cards and check if the redirection is correct | The 'explore course' button successfully redirect the user to the specific course | PASS |
 
 #### Course detail page
-
-#### Profile page
+| Test  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Course information display | Check if all the relevant information of the course is displayed | The owner, enrollment count, video hours, articles, tests and price are displayed successfully | PASS |
+| Authentication alert | Enter to a course without logging in | The user sees the danger alert and the course action buttons are not displayed | PASS |
+| Owner alert | Enter a course that that has been created with the same user | The user sees the warning alert and the course actions buttons and the craete review forms are not displayed | PASS |
+| Owner actions display | Enter a course that that has been created with the same user | The user sees the three dots dropdown and can access the edit and delete course options | PASS |
+| Edit course | As a course owner click in the edit course option and edit the course | The course is successfully edited | PASS |
+| Delete course | As a course owner click in the delete course option and delete the course | The course is successfully deleted and the user is redirected to the courses page | PASS |
+| Create review form | As a authorised user but not the owner of a course, access a course | The review create form is successfully rendered | PASS |
+| Create review functionality |  As a authorised user but not the owner of a course, access a course and leave a review | The form shows the loader but after the request is processed the from dissapears, the review appears below and teh review overview is updated | PASS | 
+| Review actions | Access a course where a review has been placed | The review should display the dropdown menu with the edit and delete review actions | PASS | 
+| Review edit | Click in the review edit action and edit the reivew | The review is successfully edited, it is rendered in the course page and the reviews overviews update | PASS |
+| Review delete | Click in the review delete action and delete the reivew | The review is successfully deleted and the reviews overviews update | PASS |
+| Load more reviews | Access a course with more than 10 reviews and click the 'load more reviews' button | After clickin the button more reviews are loaded | PASS |
 
 #### Authentication page
+| Test  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Authentication rendered (no-authenticated) | As a logged out click in the 'join us' button | The signup and signin forms are successfully rendered | PASS |
+| Authentication redirection (authenticated) | As a logged in user try to access the authentication page my typing the /auth url | The user is redirected back to the home page | PASS |
+| Sign up form | Create a new user | The registration is successfull and the user is shown the sign in form with a success alert | PASS |
+| Sign in form | Sign in | The user is redirected to the page they were before the authentication request | PASS |
+| Authentication alerts | In both sign in and sign up forms fill the fields wrongly | Warning alerts are displayed | PASS |
 
-
-### Testing user stories from UX section 
-
-#### All users
-
-#### Existing  Goals
-
-#### Future User Goals
-
+#### Profile page
+| Test  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Profile creation render | Sign up and sign in to the site | The create profile form is displayed | PASS |
+| Profile creation functionality | Fill the fields and submit the from | If the fields are successfully filled, the user is redirected to their profile where they can see all their information. If the fields are not filled correctly, alerts are displayed | PASS |
+| Self profile view (no-instructor) | Access the user profile | All user information should be displayed, the become instructor button should be displaued, the options button should be displayed and the wish list, enrollment and reviews should be displayed | PASS | 
+| Self profile view (instructor) | Access the user profile as an instructor | All user information should be displayed, the gold instructor icon should be displayed the options button should be displayed and the your courses, wish list, enrollment and reviews should be displayed | PASS |
+| Edit profile | Click the edit profile option in the dropdown options | The form is rendered successfully with the fields prepopulated, if the form is submitted wrongly alerts are displayed and if is submitted successfully the profile refetches the new information | PASS |
+| Delete profile | Click the delete profile option in the dropdown options | The delete form is rendered and if clicked the user is deleted, logged out and then redirected to the home page | PASS |
+| Instructor applicaiton form | Access a self profile without instructor status and click the instructor icon is displayed in the cyan button | The applicaiton form is successfully displayed, and when submitted it closes | PASS |
+| Instructor applicaiton feedback | After submitting the application form, try again to click that button | The form is not rendered and a feedback message is rendered for the user to wait until the application is processed | PASS |
+| Visit non-istructor profile | Access another user profile that does not have the instructor status | All information of the user should be displayed with the exception of the instructor application and acitons buttons, details of which courses are in enrollments, wish lists or reviews | PASS |
+| Visit istructor profile | Access another user profile with instructor status | All the relevant information is displayed, the gold instructor icon is rendered and the instructor courses are displayed below | PASS |
 
 ### Validator testing 
 
-## Technologies used
+1. CSS 
 
+## Technologies used
 
 ### Programming languages
 - HTML5
