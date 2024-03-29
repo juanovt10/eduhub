@@ -443,9 +443,54 @@ lucide-react
 -D tailwindcss
 ```
 
-4. Tailwind and TypeScript configurations
-As mentioned in the secion above, Tailwind and TypeScript where used only to use the shadin/ui front end components.
+4. TypeScript configurations: 
 
+```
+{
+    "compilerOptions": {
+        "target": "es2016", 
+        "jsx": "react",
+        "module": "commonjs",
+        "baseUrl": "src",
+        "paths": {
+            "@/components/*": ["src/@/components/*"]
+        },
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,  
+        "skipLibCheck": true
+    }
+}
+```
+
+The key aspect here was to provide the correct basrUrl and paths to the components. initially the @ folder is palced in the root directory but then I moved it to the src directory where all the components are. 
+
+5. Tailwind confiigurations were taken from each of the components used form the [shadcn/ui](https://ui.shadcn.com/). Each component has their own tailwind documentation. 
+
+6. After all of these, just git add, commit and push the code to Github. 
+
+7. Create an new app in Heroku, link the repository and deploy the branch.
+
+### Connection with the API
+
+The API connection is done in the in the Heroku variables of the [DRF-API]. These variables are:
+
+- Key: CLIENT_ORIGIN | Value: https://eduhub-react-f1c98786bec1.herokuapp.com
+- Key: CLIENT_ORIGIN_DEV | Value: https://3000-juanovt10-eduhub-mz87b8ft0gq.ws-eu108.gitpod.io
+
+### Deployment to Heroku
+1. In the package.json file under the scripts section add: 
+```
+"heroku-prebuild": "npm install -g serve",
+```
+
+2. Add Procfile in the root directory with the following contents: 
+```
+web: serve -s build
+```
+
+3. Git add, commit and push the changes to Github
+4. Redeploy the application in Heroku under the deploy tab. 
 
 ## Credits
 
