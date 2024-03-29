@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useCurrentUser } from '../../context/CurrentUserContext';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import { fetchMoreData } from '../../utils/utils';
@@ -16,7 +15,6 @@ import styles from '../../styles/ProfilePage.module.css';
 
 
 const ProfilePage = () => {
-    const currentUser = useCurrentUser();
     const { id } = useParams();
 
     const [profileData, setProfileData] = useState({});
@@ -88,6 +86,7 @@ const ProfilePage = () => {
             owner_username: profileData.owner,
         });
     };
+
 
     return (
         <Container className={styles.mainContainer}>

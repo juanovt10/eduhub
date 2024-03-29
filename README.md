@@ -28,7 +28,7 @@ Eduhub caters to two primary audiences: users seeking to grasp the basics of any
 
 Please refer to the user stories [document](/src/assets/docs/user-stories.md) to see the user stories in detail. 
 
-You can also refer to the [Kanban board](https://github.com/users/juanovt10/projects/3) in Github
+You can also refer to the [Kanban board](https://github.com/users/juanovt10/projects/3) in Github.
 
 
 ## Design
@@ -50,7 +50,9 @@ Agile project management principles guided the development of this project, leve
 
 ### Wireframes
 
-ADD WIREFRAMES
+The separate documents for the wireframes can be found here:
+- [Desktop wireframes](/src/assets/docs/wireframes.md)
+- [Mobile wireframes](/src/assets/docs/wireframes-mobile.md)
 
 ### Database schema
 
@@ -355,7 +357,16 @@ Testing was an integral part of the project development. A comprehensive testing
 
 ![CSSvalidation](/src/assets/images-readme/CSSValidator.png)
 
-2. ESLINT stuff
+2. All JavaScript files passed through [ESLint](https://eslint.org/). However, the following issues were raised but ignored for the reasons mentioned:
+
+- Props validation
+    - In TypeScript files, prop validations are redundant because TypeScript provides compile-time type checking, which is stricter than React's prop validation.
+    - Adding prop validation would introduce performance overhead to a project already impacted by CDN performance issues.
+    - Although the components are reused, most of them are reused in the same way; therefore, prop validation was ignored.
+- Use of `class` keyword rather than `className` for Font Awesome icons
+    - The initial CDN setup includes the standard HTML format. Due to time constraints, these will not be changed.
+- Use of aposthropgies `'` in html tags
+    - These are standard text characters 
 
 3. The page has excellent ratings in best practices and SEO. However, performance and accessbility can be inproved by applying the following recommnedations: 
 
@@ -367,7 +378,9 @@ Testing was an integral part of the project development. A comprehensive testing
 4. Live website tested in Chrome, Safari and Mozila.
 
 ### Unfixed bugs
-More than just bugs, I want to use this section to outline things that I would have done differently to avoid specific issues that I encountered during this project.
+- The "Edit profile" and "Edit course" forms throw an error if the image is not updated. This behavior should not occur since the images are attached to the form in both cases. However, due to time constraints, the bug could not be fixed.
+
+### Future considerations
 
 - Use flexible UI frameworks: Even though React Bootstrap is widely used in the industry, the lack of flexibility that the components have in terms of embedded JavaScript and CSS is significant. Overriding CSS styles requires a significant amount of work, and if the .module.css styling is used, it becomes even more complicated. Additionally, some components simply do not work, such as the accordion and hidden labels. This is the reason why I decided to implement the [shadcn/ui](https://ui.shadcn.com/) to implement the accordion, dropdown and the sheet component.
 - Tailwind CSS: I only encountered Tailwind to use the [shadcn/ui](https://ui.shadcn.com/) components; however, when using it, I realized that even though Bootstrap classes help to add quick styling, it is significantly limited and inflexible. Tailwind provides a much larger amount of predefined classes, and when used in conjunction with the VS Code extension `Tailwind CSS IntelliSense`, it can streamline styling in complex React projects.
@@ -504,10 +517,13 @@ This website was inspired by various available LMS and reviews websites. The fol
 
 ### Code
 
-
+- [Code Institue](https://codeinstitute.net/global/): This project draws inspiration from the Moments wealth through project, mainly focusing on the setup, reusable components, and deployment instructions.
+- [Code Institue](https://codeinstitute.net/global/) Tutor service: Sean helped me figure out a TypeScript version bug that was preventing me from deploying the website to Heroku.
+- [Martina Terlevic](https://github.com/SephTheOverwitch): As my mentor and constant support during this project and throughout the past year in this career transition.
+- [Fireship](https://www.youtube.com/@Fireship): For me, the best JavaScript YouTube channel out there. Thanks to their up-to-date updates, I was able to discover the [shadcn/ui](https://ui.shadcn.com/) library and was not afraid to set it up in my project.
 
 ### Media
-The logo imagery was sourced from a logo maker powered by AI, [My Free logo maker](https://myfreelogomaker.com/)
+The logo imagery was sourced from a logo maker powered by AI: [My Free logo maker.](https://myfreelogomaker.com/)
 
 ### Content
-Due to the nature of the web application, the content is provided by the users rather than by the web administrator, unless the administrators create posts themselves. Therefore, I used [ChatGPT]((https://chat.openai.com/)) to generate random profiles, posts, and comments to be able to populate the website with realistic content
+Due to the nature of the web application, the content is provided by the users rather than by /workspace/eduhub/src/apithe web administrator, unless the administrators create posts themselves. Therefore, I used [ChatGPT]((https://chat.openai.com/)) to generate random profiles, posts, and comments to be able to populate the website with realistic content

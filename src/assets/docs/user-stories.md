@@ -62,3 +62,6 @@
 2. As a **user** I can **see the featured courses** so that I **can see what are the courses with better ratings.** 
 
 3. As a **user** I can **see the FAQs** so that I **can see the answers of the most asked questions.** 
+
+
+Return to [README.md](../../../README.md)
